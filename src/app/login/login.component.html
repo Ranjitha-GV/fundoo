@@ -1,0 +1,22 @@
+<form [formGroup] = "LoginForm">
+    <div fxLayout="row" fxLayoutAlign="center center" class="rows">
+     <mat-card class = "card" fxFlex="30%">
+       <h1 align = left>
+         <span class = "f">F</span>
+        <span class = "u">u</span>
+        <span class = "n">n</span>
+        <span class = "d">d</span>
+        <span class = "o">o</span>
+        <span class = "oo">o</span>
+      </h1>
+    <h3 class = "hElement">Sign in </h3>
+    <p>to continue to Fundoo </p>
+      <mat-form-field>
+          <input matInput placeholder="Email ID or Username" name = "email" required>
+        </mat-form-field> <br> 
+        <p class = "parah">Not your computer? Use Guest mode to sign in privately</p>
+    <button mat-raised-button class = "nextButton" color="primary" (click)="next()">Next</button> <br> 
+    <a href="/registration">Create an account</a> 
+  </mat-card>
+</div>
+</form> 
