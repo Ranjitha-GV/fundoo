@@ -1,22 +1,30 @@
-<form [formGroup] = "LoginForm">
-    <div fxLayout="row" fxLayoutAlign="center center" class="rows">
-     <mat-card class = "card" fxFlex="30%">
-       <h1 align = left>
-         <span class = "f">F</span>
+<!-- <form [formGroup] = "LoginForm"> -->
+<!-- <div class="main" flexLayout = "row">
+    <div class="item-1" fxFlex="30%" flexLayout = "row" fxFlex.sm = "70" fxFlex.md = "50" fxFlex.lg = "30" fxFlex.xl = "10">  -->
+      <div align-content = "center" class="container"
+     fxLayout =  "row"
+     fxLayout.xs="row"
+     fxLayoutAlign="center center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+     <div fxFlex = "30" fxFlex.sm = "80" fxFlex.md = "60" fxFlex.lg = "50" fxFlex.xl = "30"></div> 
+     <div  fxFlex = "40" fxFlexOrder="3"></div>
+     <!-- <div  fxFlex = "33" fxFlexOrder="5">3</div> -->
+     <mat-card class = "card">
+       <h1 align = center>
+        <span class = "f">F</span>
         <span class = "u">u</span>
         <span class = "n">n</span>
         <span class = "d">d</span>
         <span class = "o">o</span>
         <span class = "oo">o</span>
       </h1>
-    <h3 class = "hElement">Sign in </h3>
-    <p>to continue to Fundoo </p>
-      <mat-form-field>
+    <p align = center class = "hElement">Sign in <span><p align = center>to continue to Fundoo </p></span></p>
+    
+      <mat-form-field class = "emailInput">
           <input matInput placeholder="Email ID or Username" name = "email" required>
-        </mat-form-field> <br> 
-        <p class = "parah">Not your computer? Use Guest mode to sign in privately</p>
+        </mat-form-field> <br> <br>
     <button mat-raised-button class = "nextButton" color="primary" (click)="next()">Next</button> <br> 
     <a href="/registration">Create an account</a> 
   </mat-card>
 </div>
-</form> 

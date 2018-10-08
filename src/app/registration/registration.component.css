@@ -1,0 +1,70 @@
+
+.card
+{
+    width: 450px;   
+    height: 600px;
+    align-items : center;
+}
+.f
+{
+    color: rgb(100, 158, 235);
+}
+.u{
+    color:yellow;
+}
+.n{
+    color:red;
+}
+.d{
+    color: rgb(100, 158, 235);
+    font-size: 35px;
+}
+.o{
+    color: green;
+}
+.oo{
+    color:red;
+}
+.hElement
+{
+    font-size: 20px;
+    color: black;
+}
+.username
+{
+    width:100%;
+}
+.para
+{
+    margin-top: -13px;
+    font-size: 10px;
+}
+.container
+{
+    /* margin-top:70px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width:100%;
+}
+.password
+{
+    margin-left: 20px;
+}
+.nextButton
+{
+    float: right;
+}
+.card2
+{
+    height: 60px;
+    width: 150px;
+    background-color: goldenrod;
+}
+.card3
+{
+    height: 60px;
+    width: 150px;
+    background-color: burlywood;   
+}

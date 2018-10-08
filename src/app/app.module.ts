@@ -11,8 +11,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
-
-
+import {MatIconModule} from '@angular/material/icon';
+import {GetServiceService} from './get-service.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -31,9 +32,12 @@ import {MatInputModule} from '@angular/material/input';
     FlexLayoutModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    HttpClientModule
+    
   ],
-  providers: [],
+  providers: [GetServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
