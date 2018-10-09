@@ -1,0 +1,62 @@
+<!-- <form [formGroup] = "LoginForm"> -->
+<!-- <div class="main" flexLayout = "row">
+    <div class="item-1" fxFlex="30%" flexLayout = "row" fxFlex.sm = "70" fxFlex.md = "50" fxFlex.lg = "30" fxFlex.xl = "10">  -->
+      <!-- <my-slide-panel> -->
+    <div *ngIf ='clickedDivState == "start"' >
+      <div align-content = "center" class="container"
+     fxLayout =  "row"
+     fxLayout.xs="row"
+     fxLayoutAlign="center center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+     <div fxFlex = "30" fxFlex.sm = "80" fxFlex.md = "60" fxFlex.lg = "50" fxFlex.xl = "30"></div> 
+     <div  fxFlex = "40" fxFlexOrder="3"></div>
+     <mat-card class = "card">
+       <h1 align = center>
+        <span class = "f">F</span>
+        <span class = "u">u</span>
+        <span class = "n">n</span>
+        <span class = "d">d</span>
+        <span class = "o">o</span>
+        <span class = "oo">o</span>
+      </h1>
+    <p align = center class = "hElement">Sign in <span><p align = center>to continue to Fundoo </p></span></p>
+      <mat-form-field class = "emailInput">
+          <input matInput placeholder="Email ID or Username" name = "email" required>
+        </mat-form-field> <br> <br>
+    <button mat-raised-button class = "nextButton" color="primary" (click)="changeDivState()">Next</button> <br> 
+    <a href="/registration">Create an account</a> 
+  </mat-card>
+</div>
+</div>
+
+<div [@EnterLeave]="'flyIn'" *ngIf = 'clickedDivState == "end"'>
+    <div align-content = "center" class="container"
+    fxLayout =  "row"
+    fxLayout.xs="row"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    fxLayoutGap.xs="0">
+    <div fxFlex = "30" fxFlex.sm = "80" fxFlex.md = "60" fxFlex.lg = "50" fxFlex.xl = "30"></div> 
+    <div  fxFlex = "40" fxFlexOrder="3"></div>
+    <mat-card class = "card">
+      <h1 align = center>
+       <span class = "f">F</span>
+       <span class = "u">u</span>
+       <span class = "n">n</span>
+       <span class = "d">d</span>
+       <span class = "o">o</span>
+       <span class = "oo">o</span>
+     </h1>
+   <p align = center class = "hElement">Sign in <span><p align = center>to continue to Fundoo </p></span></p>
+      <mat-form-field class = "password">
+           <input matInput placeholder="Password" type = "password" name = "password" required>
+           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+         </mat-form-field> <br> 
+         <div class = "dElement">Forgot Password</div>
+   <button mat-raised-button class = "nextButton" color="primary" (click)="changeDivState()">Login</button> <br> 
+   <!-- <a href="/registration">Create an account</a>  -->
+ </mat-card>
+</div>
+</div>
+<!-- </my-slide-panel> -->

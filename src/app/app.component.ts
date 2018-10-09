@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpService } from './services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fundoo';
+  records = {};
+  constructor(private myHttpService : HttpService){
+
+  }
   ngOnInit()
   {
-    
+    this.records = this.myHttpService.getConfig().subscribe(data => {
+      console.log('response',data);
+    })
   }
 }

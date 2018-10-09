@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+// import {ConfigService} from '@angular/forms'
 
 @Component({
   selector: 'app-registration',
@@ -19,9 +19,9 @@ export class RegistrationComponent implements OnInit {
 
   basic()
   {
+    this.router.navigateByUrl('/login');
     return {"data":[{"name": "basic"}]};
   }
-
   ngOnInit() {
   }
 
