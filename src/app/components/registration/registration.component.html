@@ -13,21 +13,21 @@
     <p align=l eft class="hElement">Create your Fundoo Account</p>
     <p align=l eft>Continue to Fundoo</p>
     <mat-form-field class="firstname">
-      <input matInput placeholder="Firstname" name="firstname" required>
+      <input matInput placeholder="Firstname" name="firstname" [(ngModel)]="model.firstname" #firstname="ngModel" required>
     </mat-form-field> &nbsp;
     <mat-form-field class="lastname">
-      <input matInput placeholder="Lastname" name="lastname" required>
+      <input matInput placeholder="Lastname" name="lastname" [(ngModel)]="model.lastname" #lastname="ngModel" required>
     </mat-form-field>
-
     <mat-form-field class="username">
-      <input matInput placeholder="Username@fundoo.com" name="username" required>
+      <input matInput placeholder="Email ID" type="email" name="email" [(ngModel)]="model.email" #email="ngModel" required>
     </mat-form-field> <br> <div class="para">You can use letters numbers and periods</div>
     <mat-form-field>
-      <input matInput placeholder="Password" name="password" required>
+      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
     </mat-form-field>
     <mat-form-field class="password">
-      <input matInput placeholder="Confirm Password" name="confirmPassword" [type]="hide ? 'password' : 'text'" required>
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <input matInput placeholder="Confirm Password" type="password" name="confirmPassword" [(ngModel)]="model.confirmPassword"
+        #confirmPassword="ngModel">
+      <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
     </mat-form-field>
     <div class="para"> Use 8 or more characters with a mix of letters, numbers & symbols</div> <br>
     <div fxLayout="row" fxLayoutAlign="space-between">
@@ -39,7 +39,7 @@
       </mat-card>
       <mat-card [@advanceani]="advanceset ? 'open' : 'closed'" class="card3" (click)="basicFunc()">
         <!-- <div>$1.89/Month</div> -->
-        <header class="header"><strong>Advance <i>($1.89/Month)</i></strong></header> <br>
+        <header class="header"><strong>Basic <i>($1.89/Month)</i></strong></header> <br>
         <i>Ability to add only title and description</i>
         <!-- <h5>{{basic}}</h5> -->
       </mat-card>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormGroup, FormControl } from '@angular/forms';
 
 
 
@@ -58,6 +59,7 @@ export class RegistrationComponent implements OnInit {
   advance: any;
   basicset = true;
   advanceset = true;
+  registrationForm : FormGroup;
   constructor(private router: Router, private myHttpService: HttpService) { }
 
   advanceFunc() {
@@ -75,11 +77,54 @@ export class RegistrationComponent implements OnInit {
       this.basic = data["data"].data[0].description;
     })
   }
-  next() {
-    this.router.navigateByUrl('/login');
-  }
-  ngOnInit() {
+  // next() {
+  //   this.router.navigateByUrl('/login');
+  // }
 
+model:any={};
+service:any;
+
+  next(){
+
+    console.log(this.model.firstname);
+    console.log(this.model.lastname);
+    console.log( this.model.email);
+    this.myHttpService
+        .addData('/user/userSignUp', {
+        "firstName": this.model.firstname,
+        "lastName": this.model.lastname,
+        "phoneNumber": "8867684833",
+        "service": "string",
+        "email": this.model.email ,
+        "emailVerified": true,
+        "password": this.model.password,
+        "username": this.model.email, 
+       "createdDate": "2018-10-09T06:35:12.617Z",
+      "modifiedDate": "2018-10-09T06:35:12.617Z",
+
+    })
+    .subscribe(
+      (data )=> {
+          console.log("POST Request is successful ", data);
+
+      },
+      error => {
+          console.log("Error", error);
+      })
+
+  }
+  
+
+  ngOnInit() 
+  {
+    // this.registrationForm = new FormGroup({
+    //   firstname : new FormControl(),
+    //   lastname : new FormControl(),
+    //   email : new FormControl(),
+    //   password : new FormControl(),
+    //   confirmPassword : new FormControl()
+    // });
+        
   }
 }
 

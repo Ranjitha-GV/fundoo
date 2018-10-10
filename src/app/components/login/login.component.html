@@ -22,7 +22,7 @@
       </h1>
     <p align = center class = "hElement">Sign in <span><p align = center>to continue to Fundoo </p></span></p>
       <mat-form-field class = "emailInput">
-          <input matInput placeholder="Email ID or Username" name = "email" required>
+          <input matInput placeholder="Email ID" name = "email" required>
         </mat-form-field> <br> <br>
     <button mat-raised-button class = "nextButton" color="primary" (click)="changeDivState()">Next</button> <br> 
     <a href="/registration">Create an account</a> 
@@ -50,8 +50,10 @@
      </h1>
    <p align = center class = "hElement">Sign in <span><p align = center>to continue to Fundoo </p></span></p>
       <mat-form-field class = "password">
-           <input matInput placeholder="Password" type = "password" name = "password" required>
-           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+           <!-- <input matInput placeholder="Password" type = "password" name = "password" [type]="hide ? 'password' : 'text'" required>
+           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
          </mat-form-field> <br> 
          <div class = "dElement">Forgot Password</div>
    <button mat-raised-button class = "nextButton" color="primary" (click)="next()">Login</button> <br> 
