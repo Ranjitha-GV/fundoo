@@ -10,7 +10,7 @@ float: right;
 }
 .emailInput
 {
-    width: 100%;
+    width: 290px;
 }
 
 .hElement
@@ -63,18 +63,11 @@ float: right;
     font-size: 12px;
 }
 
-
-:host {
-    display: block;
-    overflow: hidden; /* Hide everything that doesn't fit compoennt */
-  }
-  .parent {
-    height: 100%;
-    width: 200%;      /* Make the parent element to take up twice of the component's width */
-    display: flex;    /* Align all children in a row */
-     flex: 1;   /* Evenly divide width between children */
-  }
   .dElement
   {
       font-size: 12px;
+  }
+  .password
+  {
+      width: 290px;
   }
