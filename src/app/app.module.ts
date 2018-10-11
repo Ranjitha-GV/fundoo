@@ -15,8 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-// import {SlidePanelComponent} from './components/login/login.component';
-// import {AppComponents} from './components/login/login.component';
+
 
 
 

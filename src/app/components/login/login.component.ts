@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ChangeDetectionStrategy, Input } from '@angular/core';
+// import { ChangeDetectionStrategy, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormControl, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -27,12 +28,25 @@ export class LoginComponent implements OnInit {
   clickedDivState = 'start';
 
   changeDivState() {
-    this.clickedDivState = 'end';
+    console.log(this.email.value);
+    if (!this.email.invalid) {
+      this.clickedDivState = 'end';
+    }
+    else {
+      alert('Please fill in a valid email address!!');
+    }
+    // this.router.navigateByUrl('/registration');
   }
 
 
   constructor(private router: Router) { }
+  email = new FormControl('', [Validators.required, Validators.email]);
 
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'Email is Required' :
+      this.email.hasError('email') ? 'Not a valid email! Required format: abcd@gmail.com' :
+        '';
+  }
   next() {
     this.router.navigateByUrl('/registration');
   }
