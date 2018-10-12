@@ -14,7 +14,7 @@
       </h1>
       <p align=c enter class="hElement">Sign in <span><p align=c enter>to continue to Fundoo </p></span></p>
       <mat-form-field class="emailInput">
-        <input matInput placeholder="Email ID" name="email" [formControl]="email" required>
+        <input matInput placeholder="Email ID" [(ngModel)]="model.email" name="email" [formControl]="email" required>
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field> <br> <br>
       <button mat-raised-button class="nextButton" color="primary" (click)="changeDivState()">Next</button> <br>
@@ -39,13 +39,14 @@
       </h1>
       <p align=c enter class="hElement">Sign in <span><p align=c enter>to continue to Fundoo </p></span></p>
       <mat-form-field class="password">
-        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+        <input matInput placeholder="Enter your password" [formControl]="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$" required>
+        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         <!-- <input matInput placeholder="Password" type = "password" name = "password" [type]="hide ? 'password' : 'text'" required>
            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon> -->
       </mat-form-field> <br>
-      <div class="dElement">Forgot Password</div>
-      <button mat-raised-button class="nextButton" color="primary" (click)="next()">Login</button> <br>
+      <a class="dElement" href = "reset-password">Forgot Password?</a>
+      <button mat-raised-button class="nextButton" color="primary" (click)="login()">Login</button> <br>
       <!-- <a href="/registration">Create an account</a>  -->
     </mat-card>
   </div>

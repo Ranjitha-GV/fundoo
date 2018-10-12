@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class RegistrationComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
   lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
-  password = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9@!/& ]*')])
+  password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
+  confirmPassword = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
   getErrorMessagefirstName() {
     return this.firstname.hasError('required') ? 'First Name is Required' :
@@ -69,7 +71,14 @@ export class RegistrationComponent implements OnInit {
       this.password.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
         '';
   }
-  constructor(private router: Router, private myHttpService: HttpService) { }
+  getErrorMessageConfirmPassword() {
+    return this.confirmPassword.hasError('required') ? 'Password is Required' :
+      this.confirmPassword.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
+        '';
+
+  }
+
+  constructor(private router: Router, private myHttpService: HttpService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.records = this.myHttpService.getConfig().subscribe(data => {
@@ -78,7 +87,7 @@ export class RegistrationComponent implements OnInit {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);
       }
-     var value = data["data"].data.name;
+      var value = data["data"].data.name;
       console.log("cards are", this.cards);
     })
   }
@@ -87,7 +96,27 @@ export class RegistrationComponent implements OnInit {
   service: any;
 
   next() {
-
+    let pass = this.model.password;
+    let confirmPass = this.model.confirmPassword;
+    if (!this.firstname.invalid && !this.lastname.invalid) {
+      if (pass != confirmPass) {
+        this.snackBar.open("Password Mismatch", "failed", {
+          duration: 3000
+        })
+        return false;
+      }
+      else {
+        this.snackBar.open("Registration", "Successfull", {
+          duration: 3000
+        })
+      }
+    }
+    else {
+      this.snackBar.open("First name or Last name Invalid", "Failed", {
+        duration: 3000
+      })
+      return false;
+    }
     console.log(this.model.firstname);
     console.log(this.model.lastname);
     console.log(this.model.email);

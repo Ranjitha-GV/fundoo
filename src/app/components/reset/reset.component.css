@@ -1,0 +1,83 @@
+
+/* .card
+{
+    width: 450px;   
+    height: 600px;
+    align-items : center;
+} */
+.f
+{
+    color: rgb(100, 158, 235);
+}
+.u{
+    color:yellow;
+}
+.n{
+    color:red;
+}
+.d{
+    color: rgb(100, 158, 235);
+    font-size: 35px;
+}
+.o{
+    color: green;
+}
+.oo{
+    color:red;
+}
+.hElement
+{
+    font-size: 20px;
+    color: black;
+}
+.username
+{
+    width:380px;;
+}
+.para
+{
+    margin-top: -5px;
+    font-size: 10px;
+}
+.container
+{
+    /* margin-top:70px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width:100%;
+}
+.password
+{
+    margin-left: 20px;
+    width:347px;
+}
+.password1
+{
+    width:347px;
+}
+.nextButton
+{
+    float: right;
+}
+.card2
+{
+    /* height: 130px;
+    width: 290px; */
+    /* background: rgb(52, 152, 219); */
+    /* word-wrap: break-word;  */
+}
+.firstname
+{
+    width: 347px;
+}
+.lastname
+{
+    margin-left: 20px;
+    width:347px;
+}
+.username
+{
+    width:100%;
+}

@@ -21,5 +21,15 @@ export class HttpService {
     url = this.postUrl + url
     return this.http.get(url);
   }
+  resetPass(url,body)
+  {
+    url = this.postUrl+url;
+    return this.http.post(url,body);
+  }
+  loginPost(url,body)
+  {
+    url = this.postUrl+url;
+    return this.http.post(url,body);
+  }
 
 }

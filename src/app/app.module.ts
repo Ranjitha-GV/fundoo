@@ -15,6 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetComponent } from './components/reset/reset.component';
+
 
 
 
@@ -24,6 +28,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     LoginComponent,
     RegistrationComponent,
+    ResetPasswordComponent,
+    ResetComponent,
 
   ],
   imports: [
@@ -40,6 +46,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     HttpClientModule,
     FormsModule,
+    MatSnackBarModule
 
 
   ],

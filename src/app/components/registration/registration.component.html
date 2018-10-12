@@ -12,7 +12,6 @@
         <span class="oo">o</span>
       </h1>
       <p align=left class="hElement">Create your Fundoo Account</p>
-      <p align=left>Continue to Fundoo</p>
       <mat-form-field class="firstname">
         <input matInput placeholder="Firstname" name="firstname" minlength="3" [formControl]="firstname" [(ngModel)]="model.firstname"
           required>
@@ -29,14 +28,17 @@
       </mat-form-field> <br>
       <mat-form-field class="password1">
         <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password" minlength="8" [formControl]="password"
-          required>
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$" required>
         <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="password">
         <input matInput placeholder="Confirm Password" type="password" name="confirmPassword" [(ngModel)]="model.confirmPassword"
-          #confirmPassword="ngModel" required>
+          minlength="8" [formControl]="confirmPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$"
+          required>
+        <mat-error *ngIf="confirmPassword == password">{{getErrorMessageConfirmPassword()}}</mat-error>
+        <!-- <mat-error *ngIf = "confirmPassword.valid">{{passwordMismatch()}}</mat-error> -->
       </mat-form-field> <br>
-      <div class="para"> Use 8 or more characters with a mix of letters, numbers & symbols</div>
+      <div class="para"> Use 8 or more characters with atleast one capital letter, a mix of letters, numbers & symbols</div>
       <p><b><i>Packages</i></b></p>
       <div class="card2" fxLayout="row" fxLayoutAlign="space-between" fxLayout="row-wrap">
         <span *ngFor="let card of cards" style="padding : 20px;">
@@ -48,6 +50,7 @@
       </div><br>
       <a href="/login">Sign in</a>
       <button mat-raised-button class="nextButton" color="primary" (click)="next()">Submit</button> <br>
+      <p> </p>
     </mat-card>
   </form>
 </div>
