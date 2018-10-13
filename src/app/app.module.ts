@@ -18,6 +18,10 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetComponent } from './components/reset/reset.component';
+import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -30,6 +34,8 @@ import { ResetComponent } from './components/reset/reset.component';
     RegistrationComponent,
     ResetPasswordComponent,
     ResetComponent,
+    FundooNotesComponent,
+    HomeComponent,
 
   ],
   imports: [
@@ -46,7 +52,11 @@ import { ResetComponent } from './components/reset/reset.component';
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
 
 
   ],

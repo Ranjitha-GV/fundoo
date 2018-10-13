@@ -38,7 +38,8 @@ export class LoginComponent implements OnInit {
         duration: 2000
       })
     }
-    // this.router.navigateByUrl('/registration');
+    // this.model.email = ' ';
+    // this.model.password = ' ';
   }
 
   model: any = {};
@@ -47,17 +48,12 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
   getErrorMessage() {
-    return this.email.hasError('required') ? 'Email is Required' :
-      this.email.hasError('email') ? 'Not a valid email! Required format: abcd@gmail.com' :
+    return this.email.hasError('email') ? 'Not a valid email! Required format: abcd@gmail.com' :
         '';
   }
   getErrorMessagePassword() {
-    return this.password.hasError('required') ? 'Password is Required' :
-      this.password.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
+    return this.password.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
         '';
-  }
-  next() {
-    this.router.navigateByUrl('/registration');
   }
   login() {
     this.myHttpService.loginPost('/user/login', {
@@ -70,7 +66,7 @@ export class LoginComponent implements OnInit {
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
           })
-          this.router.navigateByUrl('/dashBoard');
+          this.router.navigateByUrl('/fundoo-notes');  
         },
         error => {
           console.log("Error", error);
@@ -78,6 +74,8 @@ export class LoginComponent implements OnInit {
             duration: 3000
           })
         })
+        this.model.email = '';
+        this.model.password = '';
   }
   ngOnInit() {
 

@@ -4,6 +4,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetComponent } from './components/reset/reset.component';
+import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.component';
+import { HomeComponent } from './components/home/home.component';
+
 
 
 const appRoutes: Routes = [
@@ -11,6 +14,8 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetComponent },
+  { path: 'fundoo-notes', component: FundooNotesComponent},
+  { path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/login', pathMatch:'full'}
 ]
 
