@@ -1,10 +1,3 @@
-
-/* .card
-{
-    width: 450px;   
-    height: 600px;
-    align-items : center;
-} */
 .f
 {
     color: rgb(100, 158, 235);
@@ -32,7 +25,7 @@
 }
 .username
 {
-    width:380px;;
+    width:380px;
 }
 .para
 {
@@ -48,12 +41,11 @@
     height: 100vh;
     width:100%;
 }
-.password
-{
-    margin-left: 20px;
-    width:347px;
-}
 .password1
+{
+    width:345px;
+}
+.password
 {
     width:347px;
 }
@@ -61,23 +53,4 @@
 {
     float: right;
 }
-.card2
-{
-    /* height: 130px;
-    width: 290px; */
-    /* background: rgb(52, 152, 219); */
-    /* word-wrap: break-word;  */
-}
-.firstname
-{
-    width: 347px;
-}
-.lastname
-{
-    margin-left: 20px;
-    width:347px;
-}
-.username
-{
-    width:100%;
-}
+

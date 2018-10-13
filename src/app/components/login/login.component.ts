@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
-import { MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from '../../services/http.service';
 
 
@@ -34,15 +34,15 @@ export class LoginComponent implements OnInit {
     }
     else {
 
-      this.snackBar.open("Login" , "failed" , {
-        duration:2000
+      this.snackBar.open("Login", "failed", {
+        duration: 2000
       })
     }
     // this.router.navigateByUrl('/registration');
   }
 
-model : any = {};
-  constructor(private router: Router, private snackBar : MatSnackBar,private myHttpService: HttpService) { }
+  model: any = {};
+  constructor(private router: Router, private snackBar: MatSnackBar, private myHttpService: HttpService) { }
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
@@ -59,26 +59,25 @@ model : any = {};
   next() {
     this.router.navigateByUrl('/registration');
   }
-  login()
-  {
-    this.myHttpService.loginPost('/user/login',{
-      "email" : this.model.email,
-      "password" : this.model.password
+  login() {
+    this.myHttpService.loginPost('/user/login', {
+      "email": this.model.email,
+      "password": this.model.password
     })
-    .subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        this.snackBar.open("Login successfull", "success", {
-          duration: 3000
+      .subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.snackBar.open("Login successfull", "success", {
+            duration: 3000
+          })
+          this.router.navigateByUrl('/dashBoard');
+        },
+        error => {
+          console.log("Error", error);
+          this.snackBar.open("Invalid email or password", "fail", {
+            duration: 3000
+          })
         })
-        // this.router.navigateByUrl('/registration');
-      },
-      error => {
-        console.log("Error", error);
-        this.snackBar.open("Invalid email or password", "fail", {
-          duration: 3000
-        })
-      })
   }
   ngOnInit() {
 
