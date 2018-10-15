@@ -6,7 +6,10 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ResetComponent } from './components/reset/reset.component';
 import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { NotesComponent } from './components/notes/notes.component';
+import { BinComponent } from './components/bin/bin.component'
+import { ArchiveComponent } from './components/archive/archive.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
 
 
 const appRoutes: Routes = [
@@ -15,7 +18,13 @@ const appRoutes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetComponent },
   { path: 'fundoo-notes', component: FundooNotesComponent},
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent,
+  children: [
+  { path: 'notes', component: NotesComponent},
+  { path: 'bin', component: BinComponent},
+  { path: 'archive', component: ArchiveComponent},
+  { path: 'reminder', component: ReminderComponent}
+]},
   { path: '', redirectTo: '/login', pathMatch:'full'}
 ]
 

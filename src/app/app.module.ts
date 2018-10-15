@@ -22,6 +22,13 @@ import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.com
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { NotesComponent } from './components/notes/notes.component';
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { BinComponent } from './components/bin/bin.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+
+
 
 
 
@@ -36,6 +43,10 @@ import { HomeComponent } from './components/home/home.component';
     ResetComponent,
     FundooNotesComponent,
     HomeComponent,
+    NotesComponent,
+    ReminderComponent,
+    BinComponent,
+    ArchiveComponent,
 
   ],
   imports: [
@@ -56,7 +67,8 @@ import { HomeComponent } from './components/home/home.component';
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule 
 
 
   ],
