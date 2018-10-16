@@ -1,5 +1,5 @@
 .sidenav-container {
-  height: 100%;
+  height: 90%;
   background-color: rgb(221, 221, 230);
 }
 
@@ -7,6 +7,7 @@
   width: 250px;
   margin-top: 65px;
   background-color: rgb(221, 221, 230);
+  overflow-y: scroll;
 
 }
 
@@ -19,6 +20,7 @@
 .heading
 {
   margin-left: 20px;
+  font-size: 25px;
 }
 .size
 {
@@ -30,10 +32,7 @@
 {
   margin-left: 20px;
 }
-.two 
-{
-  /* margin-left: 100px; */
-}
+
 .container
 {
     /* margin-top:100px; */
@@ -43,11 +42,15 @@
     height: 100vh;
     width:100%;
 }
-.three 
+.photo 
 {
-  /* margin-left: 110px; */
+  padding-top: 5px;
 }
 .four 
 {
   /* margin-left: 120px; */
+}
+.icons 
+{
+  padding-top: 10px;
 }

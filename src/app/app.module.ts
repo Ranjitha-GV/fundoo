@@ -52,7 +52,7 @@ import { ArchiveComponent } from './components/archive/archive.component';
   imports: [
 
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,      
     AppRoutingModule,
     ReactiveFormsModule,
     MatCardModule,
