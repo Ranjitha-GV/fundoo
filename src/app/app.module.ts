@@ -27,11 +27,8 @@ import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { BinComponent } from './components/bin/bin.component';
 import { ArchiveComponent } from './components/archive/archive.component';
-
-
-
-
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -68,7 +65,9 @@ import { ArchiveComponent } from './components/archive/archive.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule 
+    MatMenuModule ,
+    MatExpansionModule,
+    MatTooltipModule,
 
 
   ],

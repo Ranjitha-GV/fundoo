@@ -6,24 +6,24 @@
   <span class="heading"><i><b>F</b>undoo<b>N</b>otes</i></span>
   <div class="right">
     <form id="search">
-      <input #search type="search" placeholder=" Search" [ngClass]="{'filled':filled}" (click)="filled=true" (blur)="filled=search.value?true:false"
+      <input #search type="search" placeholder="Search" [ngClass]="{'filled':filled}" (click)="filled=true" (blur)="filled=search.value?true:false"
         style="margin-left: 25px;width: 700px; height: 35px;  opacity: 0.5">
     </form>
   </div>
-  <div fxFlex fxLayoutAlign="end" >
-    <div class = "icons">
-    <button mat-icon-button><span><mat-icon>refresh</mat-icon></span></button>
-    <button mat-icon-button><span><mat-icon>view_stream</mat-icon></span></button>
-    <button mat-icon-button><span><mat-icon>notifications_none</mat-icon></span></button>
-  </div>
+  <div fxFlex fxLayoutAlign="end">
+    <div class="icons">
+      <button mat-icon-button><span><mat-icon>refresh</mat-icon></span></button>
+      <button mat-icon-button><span><mat-icon>view_stream</mat-icon></span></button>
+      <button mat-icon-button><span><mat-icon>notifications_none</mat-icon></span></button>
+    </div>
     <!-- <button mat-icon-button ><span class = "four"><mat-icon>account_circle</mat-icon></span></button> -->
-   <div class = "photo">
-    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: bisque; color: black;">R</button>
-    <mat-menu #menu="matMenu" [overlapTrigger]="false">
-      <button mat-menu-item routerLink="/registration">Add Account</button>
-      <button mat-menu-item routerLink="/login">Sign Out</button>
-    </mat-menu>
-  </div>
+    <div class="photo">
+      <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: bisque; color: black;">R</button>
+      <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item routerLink="/registration">Add Account</button>
+        <button mat-menu-item routerLink="/login">Sign Out</button>
+      </mat-menu>
+    </div>
   </div>
 </mat-toolbar>
 
