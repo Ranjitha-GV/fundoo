@@ -18,9 +18,13 @@
   margin-right: 20%;
   margin-top: 2%;
 }
-.box
-{
-    /* border:currentColor; */
-    outline: none;
 
+.box {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Roboto Slab','Times New Roman',serif;
+    font-variant-ligatures: none;
+    outline: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }

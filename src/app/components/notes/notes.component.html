@@ -1,15 +1,17 @@
 <div>
   <mat-card class="expand" aria-placeholder="Take a Note">
     Take a note...
-    <div class = "list">
- <b> <mat-icon matTooltip="New List" matTooltipPosition = "above">list</mat-icon> </b> &nbsp;
- <b> <mat-icon matTooltip="New note with Image" matTooltipPosition = "above">insert_photo</mat-icon> </b> &nbsp;
- <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition = "above">create</mat-icon> </b>
+    <div class="list">
+      <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
+      <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
+      <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
     </div>
   </mat-card>
-  <div class = "title">
-  <mat-card>
-   <div contenteditable="true" aria-placeholder="Take a note"></div>
-  </mat-card>
-</div>
+  <div class="title">
+    <mat-card aria-placeholder="Take a note...">
+      <!-- <div contenteditable="true" aria-placeholder="Take a note"></div> -->
+      <div class="box">Take a note…</div>
+      <div contenteditable="true" aria-placeholder="Take a note" aria-multiline="true" role="textbox" aria-label="Note" class="box" tabindex="0"></div>
+    </mat-card>
+  </div>
 </div>
