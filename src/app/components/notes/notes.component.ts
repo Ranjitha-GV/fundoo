@@ -8,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class NotesComponent implements OnInit {
 
   constructor() { }
-  panelOpenState = false;
+  hide : any = 0;
+  move()
+  {
+    this.hide = 1;
+  }
+  back()
+  {
+    this.hide = 0;
+  }
   ngOnInit() {
   }
 

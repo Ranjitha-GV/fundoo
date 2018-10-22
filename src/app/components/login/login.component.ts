@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
           })
-          this.router.navigateByUrl('/fundoo-notes');  
+          this.router.navigateByUrl('/home');  
         },
         error => {
           console.log("Error", error);

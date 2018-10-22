@@ -14,7 +14,11 @@ export class FundooNotesComponent {
     .pipe(
       map(result => result.matches)
     );
-    
+    show : any = 0;
+   toggle()
+    {
+      this.show = 1;
+    }
   constructor(private breakpointObserver: BreakpointObserver) {}
   
   }

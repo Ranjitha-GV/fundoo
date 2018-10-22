@@ -29,6 +29,15 @@ import { BinComponent } from './components/bin/bin.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { CollabComponent } from './components/collab/collab.component';
+import { ColorComponent } from './components/color/color.component';
+import { PhotoComponent } from './components/photo/photo.component';
+import { ArchiveIconComponent } from './components/archive-icon/archive-icon.component';
+import { MoreComponent } from './components/more/more.component';
+import { ChildNotesComponent } from './components/child-notes/child-notes.component';
+import { Notes2Component } from './components/notes2/notes2.component';
+import { MainnotesComponent } from './components/mainnotes/mainnotes.component';
 
 
 @NgModule({
@@ -44,6 +53,15 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ReminderComponent,
     BinComponent,
     ArchiveComponent,
+    ToolbarComponent,
+    CollabComponent,
+    ColorComponent,
+    PhotoComponent,
+    ArchiveIconComponent,
+    MoreComponent,
+    ChildNotesComponent,
+    Notes2Component,
+    MainnotesComponent,
 
   ],
   imports: [

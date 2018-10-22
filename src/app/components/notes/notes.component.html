@@ -1,17 +1,34 @@
 <div>
-  <mat-card class="expand" aria-placeholder="Take a Note">
-    Take a note...
-    <div class="list">
-      <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
-      <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
-      <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
-    </div>
-  </mat-card>
-  <div class="title">
-    <mat-card aria-placeholder="Take a note...">
-      <!-- <div contenteditable="true" aria-placeholder="Take a note"></div> -->
-      <div class="box">Take a note…</div>
-      <div contenteditable="true" aria-placeholder="Take a note" aria-multiline="true" role="textbox" aria-label="Note" class="box" tabindex="0"></div>
+  <div *ngIf='hide == 0'>
+    <mat-card class="expand" aria-placeholder="Take a Note" (click)="move()">
+      Take a note...
+      <div class="list">
+        <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
+        <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
+        <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
+      </div>
     </mat-card>
+  </div>
+  <div *ngIf='hide == 1'>
+    <div class="title">
+      <mat-card class = "fit">
+        <div>
+          <img src = "../../../assets/images/pin.svg" matTooltip="Pin" class = "pin">
+        </div>
+        <div contenteditable="true" class="editable" data-text="Title"></div> <br>
+        <div contenteditable="true" class="edit" data-text="Take a note.."></div> <br> <br>
+        <div>
+          <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >
+       <app-toolbar></app-toolbar>
+       <app-collab></app-collab>
+       <app-color></app-color>
+       <app-photo></app-photo>
+       <app-archive-icon></app-archive-icon>
+       <app-more></app-more>
+        <span>  <button mat-button class = "close" type = submit (click) = "back()">Close</button> </span>
+      </div>
+      </div>
+      </mat-card>
+    </div>
   </div>
 </div>
