@@ -11,6 +11,7 @@ import { BinComponent } from './components/bin/bin.component'
 import { ArchiveComponent } from './components/archive/archive.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { AuthGuard } from './auth.guard';
 
 
 
@@ -20,13 +21,13 @@ const appRoutes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetComponent },
   {
-    path: 'home', component: HomeComponent,
+    path: 'home', component: HomeComponent,  canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'notes', pathMatch: 'full' },
       { path: 'notes', component: NotesComponent },
       { path: 'bin', component: BinComponent },
       { path: 'archive', component: ArchiveComponent },
-      { path: 'reminder', component: ReminderComponent },
+      { path: 'reminder', component: ReminderComponent },     
 
     ]
   },

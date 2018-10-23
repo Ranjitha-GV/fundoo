@@ -1,0 +1,28 @@
+<div fxLayout = "column" fxLayoutAlign = "center center" style = "margin-top: 40px;">
+      <mat-card *ngIf='hide == 0' aria-placeholder="Take a Note" (click)="move()">
+        Take a note...
+        <div class="list">
+          <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
+          <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
+          <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
+        </div>
+      </mat-card>
+        <mat-card *ngIf='hide == 1'>
+          <div>
+            <img src = "../../../assets/images/pin.svg" matTooltip="Pin" class = "pin">
+          </div>
+          <div id = "title" contenteditable="true" class="editable" data-text="Title"></div> <br>
+          <div id = "description" contenteditable="true" class="edit" data-text="Take a note.."></div> <br> <br>
+          <div>
+            <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >
+         <app-toolbar></app-toolbar>
+         <app-collab></app-collab>
+         <app-color></app-color>
+         <app-photo></app-photo>
+         <app-archive-icon></app-archive-icon>
+         <app-more></app-more>
+          <span>  <button mat-button class = "close" type = submit (click) = "back()">Close</button> </span>
+        </div>
+        </div>
+        </mat-card>
+  </div>

@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   hide = true;
   clickedDivState = 'start';
 
+  
+
   changeDivState() {
     console.log(this.email.value);
     if (!this.email.invalid) {
@@ -38,8 +40,6 @@ export class LoginComponent implements OnInit {
         duration: 2000
       })
     }
-    // this.model.email = ' ';
-    // this.model.password = ' ';
   }
 
   model: any = {};
@@ -66,7 +66,17 @@ export class LoginComponent implements OnInit {
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
           })
-          this.router.navigateByUrl('/home');  
+          localStorage.setItem('token',data['id']);
+          localStorage.setItem('firstname',data['firstName']);
+          localStorage.setItem('lastname',data['lastName']);
+          localStorage.setItem('email',data['email']);
+          localStorage.setItem('userId',data['userId']);
+          this.router.navigateByUrl('/home'); 
+          console.log(data['firstName']);
+          console.log(data['lastName']);
+          console.log(data['email']);
+          console.log(data['userId']);
+          console.log(data['id']); 
         },
         error => {
           console.log("Error", error);
@@ -78,6 +88,10 @@ export class LoginComponent implements OnInit {
         this.model.password = '';
   }
   ngOnInit() {
+    if(localStorage.getItem('token'))
+    {
+      this.router.navigateByUrl('/home');  
+    }
 
   }
 }

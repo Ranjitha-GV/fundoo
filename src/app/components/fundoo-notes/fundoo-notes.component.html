@@ -5,7 +5,7 @@
         <!-- *ngIf="isHandset$ | async"> -->
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span class="heading"><i><b>F</b>undoo<b>N</b>otes</i></span>
+      <span class="heading"><b>F</b>undoo<b>N</b>otes</span>
       <div class="right">
         <form id="search">
           <input #search type="search" placeholder="Search" [ngClass]="{'filled':filled}" (click)="filled=true" (blur)="filled=search.value?true:false"
@@ -14,16 +14,30 @@
       </div>
       <div fxFlex fxLayoutAlign="end">
         <div class="icons">
-          <button mat-icon-button><span><mat-icon>refresh</mat-icon></span></button>
-          <button mat-icon-button><span><mat-icon>view_stream</mat-icon></span></button>
-          <button mat-icon-button><span><mat-icon>notifications_none</mat-icon></span></button>
+          <button mat-icon-button matTooltip="Refresh"><span><mat-icon>refresh</mat-icon></span></button>
+          <button mat-icon-button matTooltip="List View"><span><mat-icon>view_stream</mat-icon></span></button>
+          <!-- <button mat-icon-button><span><mat-icon>notifications_none</mat-icon></span></button> -->
         </div>
-        <!-- <button mat-icon-button ><span class = "four"><mat-icon>account_circle</mat-icon></span></button> -->
         <div class="photo">
-          <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: bisque; color: black;">R</button>
+          <button mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" style="margin-left: 20px; background-color: bisque; color: black;">{{firstname | slice:0:1}}</button> 
           <mat-menu #menu="matMenu" [overlapTrigger]="false">
-            <button mat-menu-item routerLink="/registration">Add Account</button>
-            <button mat-menu-item routerLink="/login">Sign Out</button>
+            <div style="padding: 20px;">
+              <!-- <mat-card class = "photocard"> -->
+                  <div style = "float : right; margin-right: 20px;">
+                      <div>{{firstname}} {{lastname}}</div>
+                    <div>{{email}}</div>
+                  </div>
+                <div>
+                    <button mat-mini-fab [matMenuTriggerFor]="menu" style="margin-left: 20px; background-color: bisque; color: black; margin-left: -2px;">{{firstname | slice:0:1}}</button>
+                </div>
+                 <br>
+                <hr style = "width: 100%">
+                <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <button mat-stroked-button color = "primary" routerLink="/registration" class = "buttons">Add Account</button>  &nbsp;
+            <button mat-stroked-button color = "primary" (click) = "signout()" class = "buttons">Sign Out</button>
+          </div>
+        </div>
+          <!-- </mat-card> -->
           </mat-menu>
         </div>
       </div>

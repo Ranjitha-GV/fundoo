@@ -1,0 +1,66 @@
+mat-card 
+{
+  
+  opacity: 0.7;
+  cursor: text;
+  width: 40%;
+  padding: 12px;
+}
+
+.list 
+{
+    float:right;
+    cursor: pointer;  
+}
+
+.notes 
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+}
+.editable
+{
+    font-weight: bold;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+
+div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+    content: attr(data-placeholder);
+    float: left;
+    margin-left: 2px;
+    color: black;
+}
+.edit 
+{
+    /* font-weight: bold; */
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}
+.close 
+{
+    float: right;
+    margin-block-end: 25px;
+    
+}
+.pin
+{
+    float: right;
+}
+.tool 
+{
+    margin-bottom: -7%;
+}
