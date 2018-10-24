@@ -21,17 +21,15 @@ export class HttpService {
     url = this.postUrl + url
     return this.http.get(url);
   }
-  resetPass(url,body)
-  {
-    url = this.postUrl+url;
-    return this.http.post(url,body);
+  resetPass(url, body) {
+    url = this.postUrl + url;
+    return this.http.post(url, body);
   }
-  loginPost(url,body)
-  {
-    url = this.postUrl+url;
-    return this.http.post(url,body);
+  loginPost(url, body) {
+    url = this.postUrl + url;
+    return this.http.post(url, body);
   }
-  resetPost(name,input,access_token){
+  resetPost(name, input, access_token) {
     console.log(input);
     console.log(access_token)
     const httpOptions = {
@@ -40,7 +38,7 @@ export class HttpService {
         'Authorization': access_token
       })
     };
-    return this.http.post(this.postUrl+"/"+name,this.getFormUrlEncoded(input),httpOptions)
+    return this.http.post(this.postUrl + "/" + name, this.getFormUrlEncoded(input), httpOptions)
   }
   getFormUrlEncoded(toConvert) {
     const formBody = [];
@@ -51,30 +49,35 @@ export class HttpService {
     }
     return formBody.join('&');
   }
-  signoutPost(url,token)
-  {
-    url = this.postUrl+url;
+  signoutPost(url, token) {
+    url = this.postUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type' : 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': token
       })
-  };
-  return this.http.post(url,{},httpOptions);
-}
-postNotes(url,input,token)
-{
-  url = this.postUrl + url;
-  console.log(token);
-  
-  const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type' : 'application/x-www-form-urlencoded',
-      'Authorization': token
-    })
-};
-return this.http.post(url,this.getFormUrlEncoded(input),httpOptions);
-
-}
+    };
+    return this.http.post(url, {}, httpOptions);
+  }
+  postNotes(url, body, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
+      })
+    };
+    return this.http.post(url, this.getFormUrlEncoded(body), httpOptions);
+  }
+  getNotes(url, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.get(url, httpOptions);
+  }
 }
 

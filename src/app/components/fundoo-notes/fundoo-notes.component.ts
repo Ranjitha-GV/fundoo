@@ -25,9 +25,9 @@ export class FundooNotesComponent {
     {
       this.show = 1;
     }
-     token = localStorage.getItem('token')
 
   constructor(public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router : Router) {}
+  token = localStorage.getItem('token')
   signout()
     {
       console.log(this.token);
@@ -39,10 +39,10 @@ export class FundooNotesComponent {
             })
             localStorage.removeItem('token');
             this.router.navigateByUrl('/login');  
-      })
+      },
       error => {
         console.log("Error", error);
-      }
+      })
      
     }
      firstname: any;

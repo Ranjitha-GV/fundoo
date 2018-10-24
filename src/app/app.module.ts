@@ -35,7 +35,6 @@ import { ColorComponent } from './components/color/color.component';
 import { PhotoComponent } from './components/photo/photo.component';
 import { ArchiveIconComponent } from './components/archive-icon/archive-icon.component';
 import { MoreComponent } from './components/more/more.component';
-import { Notes2Component } from './components/notes2/notes2.component';
 import { MainnotesComponent } from './components/mainnotes/mainnotes.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth.guard';
@@ -60,7 +59,6 @@ import { AddnotesComponent } from './components/addnotes/addnotes.component';
     PhotoComponent,
     ArchiveIconComponent,
     MoreComponent,
-    Notes2Component,
     MainnotesComponent,
     AddnotesComponent,
 
