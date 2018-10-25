@@ -1,3 +1,21 @@
-<p>
-  bin works!
-</p>
+<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-around" style="margin-top: 20px; ">
+  <!-- <div align="center"><b>Notes in the Recycle Bin are deleted after 7 days.</b></div> <br> <br> -->
+    <div *ngFor='let note of card'>
+      <mat-card style = "margin-top: 15px;">
+        <div align="left">
+         <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
+          <div style="font-size: 15px;" [innerHTML]="note.description"></div>
+        </div>
+        <div>
+          <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
+            <!-- <app-toolbar style="padding: 5px;"></app-toolbar>
+            <app-collab style="padding: 5px;"></app-collab>
+            <app-color style="padding: 5px;"></app-color>
+            <app-photo style="padding: 5px;"></app-photo>
+            <app-archive-icon style="padding: 5px;"></app-archive-icon> -->
+            <app-more style="padding: 5px; float: left;" (eventEntry) = nextEntry($event)></app-more>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>

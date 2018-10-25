@@ -1,21 +1,20 @@
-<div  fxLayout= "row wrap" fxLayoutGap= "10px" fxLayoutAlign="space-between" style = "margin-top: 20px; ">
-  <div *ngFor = 'let i of notesArray'>
-  <mat-card align = "center" style="margin-top : 20px; width: 81%; margin-left: 3%; font-size: 5px; margin-bottom: 3%;">
-    <div align = "left">
-    <mat-card-title style="font-size: 20px;"><b>{{i.title}}</b></mat-card-title>
-    <mat-card-title style="font-size: 15px;">{{i.description}}</mat-card-title>
-  </div>
-    <div>
-        <div class = "tool" fxLayout="row" fxLayoutAlign="space-between">
-     <app-toolbar></app-toolbar>
-     <app-collab></app-collab>
-     <app-color></app-color>
-     <app-photo></app-photo>
-     <app-archive-icon></app-archive-icon>
-     <app-more></app-more>
-      <span>  <button mat-button class = "close" type = submit (click) = "back()">Close</button> </span>
-    </div>
-    </div>
-  </mat-card>
+<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between" style="margin-top: 20px; ">
+  <div *ngFor='let note of notesArray'>
+    <mat-card align="center" style="margin-top : 20px;margin-left: 3%; width: 81%; font-size: 5px; margin-bottom: 3%;" [style.backgroundColor]="note.color">
+      <div align="left">
+       <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
+        <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
+      </div>
+      <div>
+        <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
+          <app-toolbar style="padding: 5px;"></app-toolbar>
+          <app-collab style="padding: 5px;"></app-collab>
+          <app-color style="padding: 5px;" [color]="note"></app-color>
+          <app-photo style="padding: 5px;"></app-photo>
+          <app-archive-icon style="padding: 5px;" [archive] = "note"></app-archive-icon>
+          <app-more [notedetails]="note" style="padding: 5px;" (eventEntry) = nextEntry($event)></app-more>
+        </div>
+      </div>
+    </mat-card>
   </div>
 </div>

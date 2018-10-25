@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
 
 
 @Component({
@@ -16,17 +17,17 @@ export class MainnotesComponent implements OnInit {
   response : any;
   interval : any;
   @Input() notesArray;
+  @Output() addEntry = new EventEmitter();
   ngOnInit() {
-    // this.getNoteCard();
-    // this.getInterval();
+    
   }
-  
-    // getInterval()
-    // {
-    //   this.interval = setInterval(()=>
-    //   {
-    //     this.getNoteCard();
-    //   },1000);
-    // }
+  nextEntry(event)
+  {
+    if(event)
+    {
+      this.addEntry.emit({
 
+      })
+    }
+  }
 }

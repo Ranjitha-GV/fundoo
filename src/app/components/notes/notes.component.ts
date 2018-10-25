@@ -10,44 +10,37 @@ import { HttpService } from '../../services/http.service';
 export class NotesComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
-  response : any = [];
-  noteCard : any = [];
+  response: any = [];
+  noteCard: any = [];
 
   ngOnInit() {
 
     this.getNoteCard();
   }
   token = localStorage.getItem('token');
-  addNewEntry(event)
-  {
+  noteId = [];
+  addNewEntry(event) {
     console.log(event);
-    if(event)
-    {
-  
-    this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        this.response = data['data']['data'];
-          this.noteCard = this.response;
-        
-      },
-      error => {
-        console.log("Error", error);
-      })
+    if (event) {
+      this.getNoteCard();   
     }
   }
-  
-getNoteCard()
-  {
+
+  getNoteCard() {
+    this.noteCard = [];
     this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
         this.response = data['data']['data'];
-          this.noteCard = this.response;
-        
+        for (var i = data['data']['data'].length - 1; i >= 0; i--) {
+          if (data['data']['data'][i].isDeleted == false && data['data']['data'][i].isArchived == false) {
+            this.noteCard.push(data['data']['data'][i]);
+          }
+        }
+        console.log(this.noteCard);
       },
       error => {
         console.log("Error", error);
       })
-    }
+  }
 }

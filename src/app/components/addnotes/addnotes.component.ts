@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter,Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 
@@ -6,47 +6,40 @@ import { HttpService } from '../../services/http.service';
   selector: 'app-addnotes',
   templateUrl: './addnotes.component.html',
   styleUrls: ['./addnotes.component.css'],
-  outputs:['onNewEntryAdded']
+  outputs: ['onNewEntryAdded']
 
 })
 export class AddnotesComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
-  hide : any = 0;
+  hide: any = 0;
   token = localStorage.getItem('token');
-  newObject : any;
+  newObject: any;
   @Output() onNewEntryAdded = new EventEmitter();
 
-  move()
-  {
+  move() {
     this.hide = 1;
   }
-  back()
-  {
+  back() {
     this.hide = 0;
-    this.myHttpService.postNotes('/notes/addNotes',{
-      'title': document.getElementById('title').textContent,
-      'description':document.getElementById('description').textContent,
-      'labelIdList':'',
-      'checklist':'',
-      'isPined':'false'
+    this.myHttpService.postNotes('/notes/addNotes', {
+      'title': document.getElementById('title').innerHTML,
+      'description': document.getElementById('description').innerHTML,
+      'labelIdList': '',
+      'checklist': '',
+      'isPined': 'false'
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
-        //''''''''''''''''''''''''''''''''''''''''''''''//
-        // addNewEntry(): void {
-                 this.onNewEntryAdded.emit({
-                 })
-             //===========================//
-  },
-  error => {
-    console.log("Error", error);
-  })
-}
-
-
+        this.onNewEntryAdded.emit({
+        })
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
   ngOnInit() {
-    
+
   }
 
 }

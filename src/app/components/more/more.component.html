@@ -1,3 +1,8 @@
 <div  class="icons" fxLayout="row" fxLayoutAlign="space-between"> 
-<div matTooltip="More" class="space"> <i class="material-icons">more_vert</i></div>
+<div matTooltip="More" [matMenuTriggerFor]="menu" class="space"> <i class="material-icons">more_vert</i></div>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click) = "delete(notedetails.id)">Delete</button>
+    <button mat-menu-item>Add label</button>
+    <button mat-menu-item>Show checkboxes</button>
+  </mat-menu>
 </div>

@@ -1,9 +1,9 @@
-<app-addnotes (onNewEntryAdded)="addNewEntry($event)">
+<app-addnotes (onNewEntryAdded)="addNewEntry($event)" >
 
 </app-addnotes>
 
 <!-- <div fxFlex = "row wrap" fxLayoutAlign="space-between center" style = "margin-top: 20px;"> -->
 
-<app-mainnotes [notesArray] = "noteCard" ></app-mainnotes>
+<app-mainnotes [notesArray] = "noteCard" (addEntry) = "addNewEntry($event)"></app-mainnotes>
 
 <!-- </div> -->

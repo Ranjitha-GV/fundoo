@@ -79,5 +79,57 @@ export class HttpService {
     };
     return this.http.get(url, httpOptions);
   }
+
+  deleteNotes(url, body, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.post(url, body, httpOptions);
+  }
+  getTrash(url, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.get(url, httpOptions);
+  }
+  getArchive(url, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.get(url, httpOptions);
+  }
+  postArchive(url, body, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.post(url, body, httpOptions);
+  }
+  postColor(url, body, token) {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.post(url, body, httpOptions);
+  }
 }
+
 
