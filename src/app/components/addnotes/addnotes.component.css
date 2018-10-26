@@ -34,15 +34,14 @@ mat-card
     content:attr(data-text)
 }
 
-div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+/* div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
     content: attr(data-placeholder);
     float: left;
     margin-left: 2px;
     color: black;
-}
+} */
 .edit 
 {
-    /* font-weight: bold; */
     border: none;
     border-color: transparent;
     outline: none;

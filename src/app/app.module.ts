@@ -22,13 +22,13 @@ import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.com
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { BinComponent } from './components/bin/bin.component';
 import { ArchiveComponent } from './components/archive/archive.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { CollabComponent } from './components/collab/collab.component';
 import { ColorComponent } from './components/color/color.component';
@@ -39,6 +39,9 @@ import { MainnotesComponent } from './components/mainnotes/mainnotes.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth.guard';
 import { AddnotesComponent } from './components/addnotes/addnotes.component';
+import { UpdateComponent } from './components/update/update.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LabelComponent } from './components/label/label.component';
 
 @NgModule({
   declarations: [
@@ -61,12 +64,16 @@ import { AddnotesComponent } from './components/addnotes/addnotes.component';
     MoreComponent,
     MainnotesComponent,
     AddnotesComponent,
+    UpdateComponent,
+    LabelComponent,
+    
+    
 
   ],
   imports: [
 
     BrowserModule,
-    BrowserAnimationsModule,      
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -82,13 +89,15 @@ import { AddnotesComponent } from './components/addnotes/addnotes.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatMenuModule ,
+    MatMenuModule,
     MatExpansionModule,
     MatTooltipModule,
+    MatDialogModule
 
 
   ],
-  providers: [HttpService, AuthService,AuthGuard],
+  providers: [HttpService, AuthService, AuthGuard],
+  entryComponents: [UpdateComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

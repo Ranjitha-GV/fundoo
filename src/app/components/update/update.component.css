@@ -1,0 +1,22 @@
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
+}
+.editable
+{
+    font-weight: bold;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}
+.edit 
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}

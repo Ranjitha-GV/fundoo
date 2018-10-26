@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
+import { MatDialog } from '@angular/material';
+import { UpdateComponent } from '../update/update.component';
+import { preserveWhitespacesDefault } from '@angular/compiler';
 
 
 @Component({
@@ -10,7 +13,7 @@ import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
 })
 export class MainnotesComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService) { }
+  constructor(private myHttpService: HttpService, public dialog: MatDialog) { }
   array: any = [];
   token = localStorage.getItem('token');
   noteCard : any = [];
@@ -30,4 +33,20 @@ export class MainnotesComponent implements OnInit {
       })
     }
   }
+
+  openUpdateNotes(note): void {
+    const dialogRef = this.dialog.open(UpdateComponent, {
+      width: '800',
+      height : 'fit-content',
+      data: note
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.addEntry.emit({});
+      // this.animal = result;
+    });
+  }
+
+
 }

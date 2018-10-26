@@ -13,8 +13,8 @@ export class NotesComponent implements OnInit {
   response: any = [];
   noteCard: any = [];
 
-  ngOnInit() {
-
+  ngOnInit() 
+  {
     this.getNoteCard();
   }
   token = localStorage.getItem('token');
@@ -24,7 +24,7 @@ export class NotesComponent implements OnInit {
     if (event) {
       this.getNoteCard();   
     }
-  }
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
   getNoteCard() {
     this.noteCard = [];

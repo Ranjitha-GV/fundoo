@@ -6,6 +6,9 @@ import { HttpService } from '../../services/http.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { LabelComponent } from '../label/label.component';
+
 
 
 
@@ -26,7 +29,7 @@ export class FundooNotesComponent {
       this.show = 1;
     }
 
-  constructor(public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router : Router) {}
+  constructor(public dialog: MatDialog,public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router : Router) {}
   token = localStorage.getItem('token')
   signout()
     {
@@ -48,6 +51,20 @@ export class FundooNotesComponent {
      firstname: any;
      email: any;
      lastname: any;
+    
+
+     openDialog(): void {
+      const dialogRef = this.dialog.open(LabelComponent, {
+        width: '300px',
+        data: ''
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        // this.animal = result;
+      });
+    }
+    
 
     ngOnInit()
     {

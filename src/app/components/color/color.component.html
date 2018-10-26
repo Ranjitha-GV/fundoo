@@ -4,26 +4,26 @@
     <div style="overflow: hidden">
         <div>
             <button style="background-color: #fafafa; width:26px; height:26px; margin-right: 5px; margin-bottom: 3px;margin-left: 3px;"
-                mat-mini-fab (click)= "colors('#fafafa','')"></button>
-            <button style="background-color:#ff8a80; width:26px; height:26px;  margin-right: 5px" mat-mini-fab (click)= "colors('#ff8a80','')"></button>
-            <button style="background-color: #ffd180; width:26px; height:26px;  margin-right: 5px" mat-mini-fab (click)= "colors('#ffd180','')"></button>
-            <button style="background-color:#ffff8d; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#ffff8d','')"></button>
+                mat-mini-fab (click)= "colors('#fafafa')" (changeColor) = colorEntry($entry)></button>
+            <button style="background-color:#ff8a80; width:26px; height:26px;  margin-right: 5px"  mat-mini-fab (click)= "colors('#ff8a80')"></button>
+            <button style="background-color: #ffd180; width:26px; height:26px;  margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#ffd180')"></button>
+            <button style="background-color:#ffff8d; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#ffff8d')"></button>
         </div>
 
         <div>
             <button style="background-color:#ccff90; width:26px; height:26px;  margin-right: 5px; margin-bottom: 3px;margin-left: 3px;"
-                mat-mini-fab (click)= "colors('ccff90','')"></button>
-            <button style="background-color:#a7ffeb; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#a7ffeb','')"></button>
-            <button style="background-color: #80d8ff; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#80d8ff','')"></button>
-            <button style="background-color:#82b1ff; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#82b1ff','')"></button>
+                mat-mini-fab (click)= "colors('#ccff90')"></button>
+            <button style="background-color:#a7ffeb; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#a7ffeb')"></button>
+            <button style="background-color: #80d8ff; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#80d8ff')"></button>
+            <button style="background-color:#82b1ff; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#82b1ff')"></button>
         </div>
 
         <div>
             <button style="background-color:#b388ff; width:26px; height:26px; margin-right: 5px; margin-bottom: 3px;margin-left: 3px;"
-                mat-mini-fab (click)= "colors('#b388ff','')"></button>
-            <button style="background-color:#f8bbd0; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#f8bbd0','')"></button>
-            <button style="background-color:#d7ccc8; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#d7ccc8','')"></button>
-            <button style="background-color:#cfd8dc; width:26px; height:26px; margin-right: 5px" mat-mini-fab (click)= "colors('#cfd8dc','')"></button>
+                mat-mini-fab (click)= "colors('#b388ff')"></button>
+            <button style="background-color:#f8bbd0; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#f8bbd0')"></button>
+            <button style="background-color:#d7ccc8; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#d7ccc8')"></button>
+            <button style="background-color:#cfd8dc; width:26px; height:26px; margin-right: 5px" (changeColor) = colorEntry($entry) mat-mini-fab (click)= "colors('#cfd8dc')"></button>
         </div>
     </div>
 

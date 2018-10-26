@@ -1,0 +1,25 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-between">
+  <div align="center" style="" [style.backgroundColor]="data.color">
+    <div align="left" style="cursor: pointer; padding-right: 40px; padding-left: 40px; padding-top: 20px; padding-bottom: 20px;">
+      <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" data-text="" style="font-size: 20px;"
+          [innerHTML]="data.title"></div></b> <br>
+      <div mat-dialog-content contenteditable="true" class="edit" id="descriptionId" data-text="" style="font-size: 15px;" [innerHTML]="data.description"></div>
+      <br>
+    </div>
+    <!-- <div> -->
+    <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
+      <app-toolbar style="padding: 5px;"></app-toolbar>
+      <app-collab style="padding: 5px;"></app-collab>
+      <app-color style="padding: 5px;"></app-color>
+      <app-photo style="padding: 5px;"></app-photo>
+      <app-archive-icon style="padding: 5px;"></app-archive-icon>
+      <app-more style="padding: 5px;"></app-more>
+      <button mat-button class="close" type=s ubmit (click)="onNoClick(data.id)">Close</button>
+      <div>
+
+        
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>

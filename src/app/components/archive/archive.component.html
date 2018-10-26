@@ -1,6 +1,6 @@
 <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between" style="margin-top: 20px; ">
     <div *ngFor='let note of card'>
-      <mat-card align="center" style="margin-top : 20px;margin-left: 3%; width: 81%; font-size: 5px; margin-bottom: 3%;">
+      <mat-card align="center" style="margin-top : 20px;margin-left: 3%; width: 81%; font-size: 5px; margin-bottom: 3%;" [style.backgroundColor]="note.color">
         <div align="left">
          <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
           <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>

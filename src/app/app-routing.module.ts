@@ -12,6 +12,7 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AuthGuard } from './auth.guard';
+import { LabelComponent } from './components/label/label.component';
 
 
 
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
       { path: 'bin', component: BinComponent },
       { path: 'archive', component: ArchiveComponent },
       { path: 'reminder', component: ReminderComponent }, 
+      { path: 'label', component: LabelComponent },
       { path: '', redirectTo: 'notes', pathMatch: 'full' }    
 
     ]

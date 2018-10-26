@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -11,21 +11,21 @@ export class ArchiveIconComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   token = localStorage.getItem('token');
   @Input() archive;
+  @Output() archiveEmit = new EventEmitter();
   ngOnInit() {
   }
-  archivePost(archive)
-  {
+  archivePost(archive) {
     this.myHttpService.postArchive('/notes/archiveNotes',
-  {
-      "isArchived" : true,
-      "noteIdList" : [this.archive.id]
-  },this.token).subscribe(data => {
-    console.log("Post successful",data);
-  },
-  error => {
-    console.log("Error",error);
+      {
+        "isArchived": true,
+        "noteIdList": [this.archive.id]
+      }, this.token).subscribe(data => {
+        console.log("Post successful", data);
+        this.archiveEmit.emit({});
+      },
+        error => {
+          console.log("Error", error);
+        }
+      )
   }
-)
-  }
-
 }
