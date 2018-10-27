@@ -64,13 +64,28 @@ export class FundooNotesComponent {
         // this.animal = result;
       });
     }
-    
+    value = [];
+    label()
+    { 
+    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+     (data) => {
+       console.log("GET Request is successful ", data);
+       for(var i = 0; i < data['data'].length; i++)
+       {
+         this.value.push(data['data'][i]);
+       }
+       console.log(this.value);
+       
+ },
+ error => {
+   console.log("Error", error);
+ })
+ }
 
     ngOnInit()
     {
        this.firstname = localStorage.getItem('firstname');
        this.email = localStorage.getItem('email');
        this.lastname = localStorage.getItem('lastname');
-
-    }
+  }
 }

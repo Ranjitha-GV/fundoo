@@ -1,7 +1,8 @@
-<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-between" style="margin-top: 20px; ">
+<div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="space-between" style="margin-top: 20px; ">
   <div *ngFor='let note of notesArray'>
     <mat-card align="center" style="margin-top : 20px;margin-left: 3%; width: 81%; font-size: 5px; margin-bottom: 3%;" [style.backgroundColor]="note.color" >
       <div align="left" (click)="openUpdateNotes(note)" style = "cursor: pointer;">
+        <img src = "../../../assets/images/pin.svg" matTooltip="Pin" class = "pin" style = "float : right;">
        <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
         <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
       </div>

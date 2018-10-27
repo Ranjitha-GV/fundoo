@@ -1,8 +1,8 @@
 <div style = "padding: 30px;">
 <h3>Edit Label</h3>
-    <div mat-dialog-content class = "edit" contenteditable="true" data-text="Create new Label" ></div>
+    <div mat-dialog-content id = "labelId" class = "edit" contenteditable="true" data-text="Create new Label" ></div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Done</button>
+  <button mat-button (click)="addLabel()" class = "mat-button">Done</button>
 </div>
 </div>
 <!-- <app-addnotes></app-addnotes> -->

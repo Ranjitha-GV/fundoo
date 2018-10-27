@@ -13,11 +13,15 @@ export class ColorComponent implements OnInit {
   card =[];
   @Input() color;
   @Output() changeColor = new EventEmitter();
+  @Output() emitColor = new EventEmitter();
   ngOnInit() {
     
 }
 colors(id)
-{
+{ 
+  this.emitColor.emit(id);
+  if(this.color!=undefined)
+  {
 this.myHttpService.postColor('/notes/changesColorNotes',
     {
       "color": id,
@@ -27,6 +31,7 @@ this.myHttpService.postColor('/notes/changesColorNotes',
         console.log("POST Request is successful ", data);
         console.log(id);
         console.log(this.color.id);
+        localStorage.setItem('colorId',this.color.id);
         this.changeColor.emit({
 
         });
@@ -35,6 +40,7 @@ this.myHttpService.postColor('/notes/changesColorNotes',
         console.log("Error", error);
       })
   }
+}
   }
 
 

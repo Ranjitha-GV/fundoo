@@ -7,7 +7,7 @@
           <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
         </div>
       </mat-card>
-        <mat-card *ngIf='hide == 1'>
+        <mat-card *ngIf='hide == 1' [style.backgroundColor] = "color">
           <div>
             <img src = "../../../assets/images/pin.svg" matTooltip="Pin" class = "pin">
           </div>
@@ -17,7 +17,7 @@
             <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >
          <app-toolbar></app-toolbar>
          <app-collab></app-collab>
-         <app-color></app-color>
+         <app-color (emitColor) = colorsEntry($event)></app-color>
          <app-photo></app-photo>
          <app-archive-icon></app-archive-icon>
          <app-more></app-more>

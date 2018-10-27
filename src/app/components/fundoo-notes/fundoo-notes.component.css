@@ -1,6 +1,7 @@
 .sidenav-container {
   height:90%;
   background-color: rgb(221, 221, 230);
+  /* position: fixed; */
 }
 
 .sidenav {
@@ -8,11 +9,12 @@
   margin-top: 65px;
   background-color: rgb(221, 221, 230);
   overflow-y: scroll;
+  /* position: fixed; */
 
 }
 
 .mat-toolbar.mat-primary {
-  position: sticky;
+  /* position: fixed; */
   top: 0;
   background-color: rgb(254, 174, 1);
   color: black;

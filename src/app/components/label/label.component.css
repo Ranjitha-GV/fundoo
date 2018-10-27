@@ -11,3 +11,7 @@
     width: 100%;
     min-height: 20px;
 }
+.mat-button
+{
+    float : right;
+}

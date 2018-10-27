@@ -16,7 +16,7 @@ export class AddnotesComponent implements OnInit {
   token = localStorage.getItem('token');
   newObject: any;
   @Output() onNewEntryAdded = new EventEmitter();
-
+  color : any ;
   move() {
     this.hide = 1;
   }
@@ -27,16 +27,25 @@ export class AddnotesComponent implements OnInit {
       'description': document.getElementById('description').innerHTML,
       'labelIdList': '',
       'checklist': '',
-      'isPined': 'false'
+      'isPined': 'false',
+      'color': this.color
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
         this.onNewEntryAdded.emit({
         })
+        this.color = "#fafafa";
       },
       error => {
         console.log("Error", error);
+        this.color = "#fafafa"
       })
+
+  }
+  colorsEntry(event)
+  {
+    console.log(event);
+    this.color = event;
   }
   ngOnInit() {
 
