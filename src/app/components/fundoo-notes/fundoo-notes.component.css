@@ -1,23 +1,31 @@
 .sidenav-container {
-  height:90%;
+  height:auto;
+  width: auto;
   background-color: rgb(221, 221, 230);
   /* position: fixed; */
+  flex:1 0 auto;
+  margin-top: 60px;
+  overflow: auto;
 }
 
 .sidenav {
   width: 250px;
-  margin-top: 65px;
+  margin-top: 15px;
   background-color: rgb(221, 221, 230);
   overflow-y: scroll;
-  /* position: fixed; */
+  position: fixed;
+  margin-top: 57px;
 
 }
 
 .mat-toolbar.mat-primary {
-  /* position: fixed; */
+  position: fixed;
+  /* height:auto; */
+  /* width: auto;  */
   top: 0;
   background-color: rgb(254, 174, 1);
   color: black;
+  z-index: 2;
 }
 .heading
 {
