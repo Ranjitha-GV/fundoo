@@ -1,5 +1,10 @@
-[contentEditable=true]:empty:not(:focus):before{
+/* [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
+} */
+[contenteditable]:empty:before {
+    content: attr(data-placeholder);
+    color: grey;
+    display: inline-block;
 }
 
 .edit 
@@ -10,8 +15,33 @@
     word-wrap: break-word;
     width: 100%;
     min-height: 20px;
+    /* margin-left: 5px; */
 }
-.mat-button
+.button
 {
     float : right;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.icon
+{
+    cursor: pointer;
+}
+.val
+{
+    margin-top: 20px;
+}
+.name 
+{
+    margin-left: 5px;
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}
+.create
+{
+    float: right;
 }

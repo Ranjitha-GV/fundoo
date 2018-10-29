@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
-import { preserveWhitespacesDefault } from '@angular/compiler';
 
 
 @Component({

@@ -1,8 +1,23 @@
-<div style = "padding: 30px;">
-<h3>Edit Label</h3>
-    <div mat-dialog-content id = "labelId" class = "edit" contenteditable="true" data-text="Create new Label" ></div>
-<div mat-dialog-actions>
-  <button mat-button (click)="addLabel()" class = "mat-button">Done</button>
+<div style="padding: 30px; ">
+  <h3>Edit Label</h3>
+  <div  fxLayout="row" fxLayoutAlign="space-evenly start" class = "icon">
+  <mat-icon matTooltip="Remove" (click) = "close()">close</mat-icon>
+  <div>
+  <div mat-dialog-content id="labelId" class="edit" contenteditable="true" data-placeholder="Create new Label"></div>
 </div>
+<mat-icon matTooltip="Done">check</mat-icon>
+</div>
+<div fxLayout="column" class = "val">
+  <a mat-list-item>
+  <div *ngFor = "let val of value">
+    <mat-icon (click) = "labelDelete()">delete</mat-icon>
+    <span contenteditable="true" class = "name">{{val.label}}</span>
+    <mat-icon class = "create">create</mat-icon>
+  </div>
+</a>
+</div>
+  <div mat-dialog-actions class="button">
+    <button mat-button (click)="addLabel()">Done</button>
+  </div>
 </div>
 <!-- <app-addnotes></app-addnotes> -->

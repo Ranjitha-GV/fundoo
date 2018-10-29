@@ -130,16 +130,20 @@ export class HttpService {
     };
     return this.http.post(url, body, httpOptions);
   }
-  noteUpdate(url,body,token){
+  noteUpdate(url, body, token) {
     url = this.postUrl + url;
     const httpOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/x-www-form-urlencoded',
-      'Authorization' : token
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
       })
     };
-    return this.http.post(url,this.getFormUrlEncoded(body),httpOptions)
-    }
+    return this.http.post(url, this.getFormUrlEncoded(body), httpOptions)
+  }
+  deleteLabel(url, body) {
+    url = this.postUrl + url;
+    return this.http.delete(url, body);
+  }
 }
 
 

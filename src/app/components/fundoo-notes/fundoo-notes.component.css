@@ -20,8 +20,6 @@
 
 .mat-toolbar.mat-primary {
   position: fixed;
-  /* height:auto; */
-  /* width: auto;  */
   top: 0;
   background-color: rgb(254, 174, 1);
   color: black;
@@ -89,3 +87,8 @@
   padding-top: 80px;
   padding-bottom: 80px;
 } */
+
+.value
+{
+  margin-left: 5px;
+}
