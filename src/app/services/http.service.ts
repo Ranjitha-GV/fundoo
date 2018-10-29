@@ -8,7 +8,8 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
   configUrl = 'http://34.213.106.173/api/user/service';
-  postUrl = 'http://34.213.106.173/api'
+  postUrl = 'http://34.213.106.173/api';
+  token = localStorage.getItem('token');
   getConfig() {
     return this.http.get(this.configUrl);
   }
@@ -142,7 +143,24 @@ export class HttpService {
   }
   deleteLabel(url, body) {
     url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': this.token
+      })
+    }
     return this.http.delete(url, body);
+  }
+  editLabel(url,body)
+  {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': this.token
+      })
+    };
+    return this.http.post(url,body);
   }
 }
 

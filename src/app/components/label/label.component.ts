@@ -13,16 +13,19 @@ export class LabelComponent implements OnInit {
 
   constructor(private myHttpService : HttpService) { }
 
-    @Input() value;
+  value1 : any = [];
     onNoClick(): void {
-      // this.dialogRef.close();
     }
+    ngOnInit() 
+  {
+    this.delete(); 
+  }
     id = localStorage.getItem('userId')
     token = localStorage.getItem('token');
     addLabel() {
       this.myHttpService.postNotes('/noteLabels', {
         "label":document.getElementById('labelId').innerHTML,
-        "isDeleted" : true,
+        "isDeleted" : false,
         "userId": this.id
 
       }, this.token).subscribe(
@@ -35,8 +38,8 @@ export class LabelComponent implements OnInit {
           console.log("Error", error);
         })
     }
-    labelDelete() {
-      this.myHttpService.deleteLabel('/noteLabels/{id}/deleteNoteLabel', {
+    labelDelete(val) {
+      this.myHttpService.deleteLabel('/noteLabels/'+val+'/deleteNoteLabel', {
         "label":document.getElementById('labelId').innerHTML
       }).subscribe(
         (data) => {
@@ -48,26 +51,24 @@ export class LabelComponent implements OnInit {
           console.log("Error", error);
         })
     }
-
-  ngOnInit() 
-  {
-    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
-      (data) => {
-        console.log("GET Request is successful ", data);
-//         for(var i = 0; i < data['data'].length; i++ )
-// {
-//   if(data['data'][i].isDeleted == false)
-//   {
-//     this.value.push(data['data'][i].details);
-//   }
-// }
-        this.value = data['data'].details;
-        console.log(this.value);
-      },
-      error => {
-        console.log("Error", error);
-      })
-  }
+delete()
+{
+  this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+    (data) => {
+      console.log("GET Request is successful ", data);
+      
+    for(var i = 0; i < data['data']['details'].length; i++ )
+        {
+          if(data['data']['details'][i].isDeleted == false)
+          {
+            this.value1.push(data['data']['details'][i])
+          }
+        }
+      console.log(this.value1);
+    },
+    error => {
+      console.log("Error", error);
+    })
+}
   
-
 }

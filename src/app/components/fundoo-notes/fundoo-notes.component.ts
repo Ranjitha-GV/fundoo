@@ -68,17 +68,14 @@ export class FundooNotesComponent {
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("GET Request is successful ", data);
-// for(var i = 0; i < data['data'].length; i++ )
-// {
-//   console.log(i);
-//   if(data['data'][i].isDeleted == false)
-//   {
-//     console.log(data['data']['data'][i].label);
-//     this.value.push(data['data'][i].details);
-//   }
-// }
-
-        this.value = data['data'].details;
+        
+      for(var i = 0; i < data['data']['details'].length; i++ )
+          {
+            if(data['data']['details'][i].isDeleted == false)
+            {
+              this.value.push(data['data']['details'][i]);
+            }
+          }
         console.log(this.value);
       },
       error => {

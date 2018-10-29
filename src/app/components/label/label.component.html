@@ -9,8 +9,8 @@
 </div>
 <div fxLayout="column" class = "val">
   <a mat-list-item>
-  <div *ngFor = "let val of value">
-    <mat-icon (click) = "labelDelete()">delete</mat-icon>
+  <div *ngFor = "let val of value1">
+    <mat-icon (click) = "labelDelete(val.id)">delete</mat-icon>
     <span contenteditable="true" class = "name">{{val.label}}</span>
     <mat-icon class = "create">create</mat-icon>
   </div>
