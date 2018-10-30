@@ -1,21 +1,28 @@
 <div style="padding: 30px; ">
   <h3>Edit Label</h3>
-  <div  fxLayout="row" fxLayoutAlign="space-evenly start" class = "icon">
-  <mat-icon matTooltip="Remove" (click) = "close()">close</mat-icon>
-  <div>
-  <div mat-dialog-content id="labelId" class="edit" contenteditable="true" data-placeholder="Create new Label"></div>
-</div>
-<mat-icon matTooltip="Done">check</mat-icon>
-</div>
-<div fxLayout="column" class = "val">
-  <a mat-list-item>
-  <div *ngFor = "let val of value1">
-    <mat-icon (click) = "labelDelete(val.id)">delete</mat-icon>
-    <span contenteditable="true" class = "name">{{val.label}}</span>
-    <mat-icon class = "create">create</mat-icon>
+  <div fxLayout="row" fxLayoutAlign="space-evenly start" class="icon">
+    <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
+    <div>
+      <div mat-dialog-content class="edit" contenteditable="true" data-placeholder="Create new Label" #newLabel></div>
+    </div>
+    <mat-icon matTooltip="Done">check</mat-icon>
   </div>
-</a>
-</div>
+  <div fxLayout="column" class="val">
+    <a mat-list-item>
+      <div *ngFor="let val of value1">
+        <div *ngIf="show != val.id">
+          <mat-icon matTooltip="Delete Label" (click)="labelDelete(val.id)">delete</mat-icon>
+          <span contenteditable="false" class="name" id="label" [innerHTML]="val.label"></span>
+          <mat-icon matTooltip="Edit Label" (click)="edit2(val.id)" class="create">create</mat-icon>
+        </div>
+        <div *ngIf="show == val.id">
+          <mat-icon matTooltip="Delete Label" (click)="labelDelete(val.id)">delete</mat-icon>
+          <span contenteditable="true" class="name" [innerHTML]="val.label" #myLabel></span>
+          <mat-icon matTooltip="Edit Label" (click)="edit(val.id)" class="create">done</mat-icon>
+        </div>
+      </div>
+    </a>
+  </div>
   <div mat-dialog-actions class="button">
     <button mat-button (click)="addLabel()">Done</button>
   </div>

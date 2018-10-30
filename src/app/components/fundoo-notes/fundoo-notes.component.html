@@ -59,7 +59,7 @@
         <div *ngFor="let val of value">
           <a mat-list-item>
             <mat-icon>label_outline</mat-icon>
-          <div class = "value">{{val.label}}</div>
+          <div class = "value" [innerHTML] = "val.label"></div>
         </a>
         </div>
       </div>
