@@ -14,6 +14,7 @@ export class MoreComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   @Input() notedetails;
   @Output() eventEntry = new EventEmitter();
+  // value1 : any = [];
 
   ngOnInit() {
   }
@@ -28,6 +29,24 @@ export class MoreComponent implements OnInit {
         console.log("POST Request is successful ", data);
         this.eventEntry.emit({
         })
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
+  value1 = [];
+  addLabel()
+  {
+    // var value1 = [];
+    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+      (data) => {
+        console.log("GET Request is successful ", data);
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            this.value1.push(data['data']['details'][i])
+          }
+        }
+        console.log(this.value1);
       },
       error => {
         console.log("Error", error);

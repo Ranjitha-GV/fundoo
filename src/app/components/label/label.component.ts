@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Input, ElementRef, ViewChild } from '@angula
 import { FundooNotesComponent } from '../fundoo-notes/fundoo-notes.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpService } from '../../services/http.service';
+import { NullAstVisitor } from '@angular/compiler';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class LabelComponent implements OnInit {
   value1: any = [];
   @ViewChild('newLabel') newLabel: ElementRef;
   @ViewChild('myLabel') myLabel: ElementRef;
+  clear : any;
 
   onNoClick(): void {
   }
@@ -91,4 +93,8 @@ export class LabelComponent implements OnInit {
     this.show = id;
   }
 
+  close()
+  {
+     this.newLabel.nativeElement.innerHTML = ' ';
+  }
 }

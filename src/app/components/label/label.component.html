@@ -3,9 +3,9 @@
   <div fxLayout="row" fxLayoutAlign="space-evenly start" class="icon">
     <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
     <div>
-      <div mat-dialog-content class="edit" contenteditable="true" data-placeholder="Create new Label" #newLabel></div>
+      <input type = "text" class="edit" placeholder="Create new Label" #newLabel>
     </div>
-    <mat-icon matTooltip="Done">check</mat-icon>
+    <mat-icon matTooltip="Done" (click) = "addLabel()">check</mat-icon>
   </div>
   <div fxLayout="column" class="val">
     <a mat-list-item>

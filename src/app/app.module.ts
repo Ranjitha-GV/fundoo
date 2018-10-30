@@ -42,6 +42,8 @@ import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { UpdateComponent } from './components/update/update.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LabelComponent } from './components/label/label.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -66,8 +68,8 @@ import { LabelComponent } from './components/label/label.component';
     AddnotesComponent,
     UpdateComponent,
     LabelComponent,
-    
-    
+
+
 
   ],
   imports: [
@@ -92,7 +94,8 @@ import { LabelComponent } from './components/label/label.component';
     MatMenuModule,
     MatExpansionModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
 
 
   ],
