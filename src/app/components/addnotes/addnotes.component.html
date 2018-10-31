@@ -18,11 +18,14 @@
         <div *ngIf = "listing == 3">
           <hr>
           <div fxLayoutAlign = "center center">
-
-          <mat-icon> add </mat-icon> <span contenteditable="true" class="edit" id = "description" data-text="List"></span>
+          <mat-icon> add </mat-icon> 
+          <!-- <div *ngFor = "let key of save"> -->
+          <!-- <span contenteditable="true" class="edit" id = "description" data-text="List"></span> -->
+          <input (keydown)="onKeydown($event)" id = "description" class="edit" placeholder="List" [(ngModel)] = "keys" (click) = "keyPress(keys)">  
+          <!-- <mat-checkbox>hey</mat-checkbox> -->
+        <!-- </div> -->
          </div>
           <hr><br><br>
-            
         </div>
           <div>
             <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >

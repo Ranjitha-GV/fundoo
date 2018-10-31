@@ -3,7 +3,7 @@
   <div fxLayout="row" fxLayoutAlign="space-evenly start" class="icon">
     <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
     <div>
-      <input type = "text" class="edit" placeholder="Create new Label" #newLabel>
+      <span contenteditable="true" class="edit" data-placeholder="Create new Label" #newLabel></span>
     </div>
     <mat-icon matTooltip="Done" (click) = "addLabel()">check</mat-icon>
   </div>

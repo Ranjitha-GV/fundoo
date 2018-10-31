@@ -1,6 +1,6 @@
 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" style="margin-top: 20px; margin-bottom: 20px;  ">
   <div *ngFor='let note of notesArray' fxFlex="0 1 calc(30% - 32px)">
-    <mat-card align="center" style="margin-top: 20px;" [style.backgroundColor]="note.color">
+    <mat-card align="center" style="margin-top: 20px; width:auto;" [style.backgroundColor]="note.color">
       <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" style="float : right;">
         <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
@@ -10,7 +10,7 @@
         <div *ngFor="let index of note.noteLabels" class = "cancel">
           <mat-chip-list selected>
             <mat-chip><span [innerHTML]="index.label"> </span>
-              <mat-icon matChipRemove (click) = "remove(index.id,note.id)">cancel</mat-icon>
+              <mat-icon matChipRemove (click) = "$event.stopPropagation(); remove(index.id,note.id)">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
         </div>

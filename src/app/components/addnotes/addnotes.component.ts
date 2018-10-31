@@ -56,6 +56,17 @@ export class AddnotesComponent implements OnInit {
     console.log(event);
     this.color = event;
   }
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      console.log(event); 
+    }
+  }
+  save = [];
+  keyPress(keys)
+  {
+    this.save.push(keys);
+    console.log(this.save);
+  }
   ngOnInit() {
 
   }
