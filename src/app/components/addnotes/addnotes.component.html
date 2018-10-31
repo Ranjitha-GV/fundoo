@@ -2,7 +2,7 @@
       <mat-card *ngIf='hide == 0' aria-placeholder="Take a Note" (click)="move()">
         Take a note...
         <div class="list">
-          <b> <mat-icon matTooltip="New List" matTooltipPosition="above">list</mat-icon> </b> &nbsp;
+          <b> <mat-icon matTooltip="New List" matTooltipPosition="above" (click) = "list()">list</mat-icon> </b> &nbsp;
           <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
           <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
         </div>
@@ -12,7 +12,18 @@
             <img src = "../../../assets/images/pin.svg" matTooltip="Pin" class = "pin">
           </div>
           <div  contenteditable="true" class="editable" id = "title" data-text="Title"></div> <br>
+          <div *ngIf = "listing == 2">
           <div  contenteditable="true" class="edit" id = "description" data-text="Take a note.."></div> <br> <br>
+        </div>
+        <div *ngIf = "listing == 3">
+          <hr>
+          <div fxLayoutAlign = "center center">
+
+          <mat-icon> add </mat-icon> <span contenteditable="true" class="edit" id = "description" data-text="List"></span>
+         </div>
+          <hr><br><br>
+            
+        </div>
           <div>
             <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >
          <app-toolbar></app-toolbar>
@@ -25,4 +36,7 @@
         </div>
         </div>
         </mat-card>
+        <!-- <mat-card *ngIf='hide == 2'>
+          Simple card
+        </mat-card> -->
   </div>

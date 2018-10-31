@@ -11,7 +11,7 @@
     <a mat-list-item>
       <div *ngFor="let val of value1">
         <div *ngIf="show != val.id">
-          <mat-icon matTooltip="Delete Label" (click)="labelDelete(val.id)">delete</mat-icon>
+          <mat-icon matTooltip="Delete Label">label_outline</mat-icon>
           <span contenteditable="false" class="name" id="label" [innerHTML]="val.label"></span>
           <mat-icon matTooltip="Edit Label" (click)="edit2(val.id)" class="create">create</mat-icon>
         </div>

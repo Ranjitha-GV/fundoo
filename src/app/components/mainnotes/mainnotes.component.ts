@@ -45,6 +45,20 @@ export class MainnotesComponent implements OnInit {
       // this.animal = result;
     });
   }
-
+  remove(label, note)
+  {
+    this.myHttpService.postNotes('/notes/'+ note +'/addLabelToNotes/' + label + '/remove',
+    {
+      "noteId" : note,
+      "lableId" : label
+    },
+     this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ", data);
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
 
 }

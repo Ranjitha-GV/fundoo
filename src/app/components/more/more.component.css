@@ -12,3 +12,9 @@
 {
     margin-left: 10px;
 }
+.box
+{
+    overflow: hidden;
+    padding: 10px;
+    height: fit-content;
+}

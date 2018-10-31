@@ -5,9 +5,10 @@
     <button mat-menu-item [matMenuTriggerFor]="labelList" (click) = "addLabel()">Add label</button>
     <mat-menu #labelList = "matMenu" [overlapTrigger] = "false">
         <div *ngFor = "let index of value1" class = "check">
-            <mat-checkbox [innerHTML] = "index.label">Check me!</mat-checkbox>
+            <mat-checkbox (click) = "check(index.id)"><span [innerHTML]="index.label" class = "box"></span></mat-checkbox>
         </div>
       </mat-menu>
     <button mat-menu-item>Show checkboxes</button>
   </mat-menu>
 </div>
+

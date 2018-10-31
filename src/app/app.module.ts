@@ -43,6 +43,8 @@ import { UpdateComponent } from './components/update/update.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LabelComponent } from './components/label/label.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 
 @NgModule({
@@ -95,7 +97,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatExpansionModule,
     MatTooltipModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule
 
 
   ],

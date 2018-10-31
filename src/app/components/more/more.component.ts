@@ -14,11 +14,11 @@ export class MoreComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   @Input() notedetails;
   @Output() eventEntry = new EventEmitter();
+  token = localStorage.getItem('token');
   // value1 : any = [];
 
   ngOnInit() {
   }
-  token = localStorage.getItem('token');
   delete(id) {
     console.log(this.notedetails);
     this.myHttpService.deleteNotes('/notes/trashNotes', {
@@ -47,6 +47,21 @@ export class MoreComponent implements OnInit {
           }
         }
         console.log(this.value1);
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
+  check(label)
+  {
+    this.myHttpService.postNotes('/notes/'+ this.notedetails.id +'/addLabelToNotes/' + label + '/add',
+    {
+      "noteId" : this.notedetails.id,
+      "lableId" : label
+    },
+     this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ", data);
       },
       error => {
         console.log("Error", error);

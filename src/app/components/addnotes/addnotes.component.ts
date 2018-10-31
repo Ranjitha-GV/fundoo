@@ -13,12 +13,17 @@ export class AddnotesComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
   hide: any = 0;
+  listing: any = 2;
   token = localStorage.getItem('token');
   newObject: any;
   @Output() onNewEntryAdded = new EventEmitter();
   color : any ;
   move() {
     this.hide = 1;
+  }
+  list()
+  {
+    this.listing = 3;
   }
   back() {
     this.hide = 0;
@@ -35,10 +40,14 @@ export class AddnotesComponent implements OnInit {
         this.onNewEntryAdded.emit({
         })
         this.color = "#fafafa";
+        this.hide = 0;
+        this.listing = 2;
       },
       error => {
         console.log("Error", error);
-        this.color = "#fafafa"
+        this.color = "#fafafa";
+        this.hide = 0;
+        this.listing = 2;
       })
 
   }
