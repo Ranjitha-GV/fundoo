@@ -2,13 +2,17 @@
 <div matTooltip="More" [matMenuTriggerFor]="menu" class="space"> <i class="material-icons">more_vert</i></div>
 <mat-menu #menu="matMenu">
     <button mat-menu-item (click) = "delete(notedetails.id)">Delete</button>
-    <button mat-menu-item [matMenuTriggerFor]="labelList" (click) = "addLabel()">Add label</button>
+    <button mat-menu-item [matMenuTriggerFor]="labelList" (click) = "$event.stopPropagation(); addLabel()">Add label</button>
     <mat-menu #labelList = "matMenu" [overlapTrigger] = "false">
-        <div *ngFor = "let index of value1" class = "check">
-            <mat-checkbox (click) = "check(index.id)"><span [innerHTML]="index.label" class = "box"></span></mat-checkbox>
+      <div (click) = "$event.stopPropagation()">
+      <input type = "search" placeholder="Search" [(ngModel)]="search" class = "search">
+    </div>
+        <div *ngFor = "let index of value1  | searchFilter: search" class = "check" >
+            <mat-checkbox (click) = "$event.stopPropagation(); check(index.id)"><span [innerHTML]="index.label" class = "box"></span></mat-checkbox>
         </div>
       </mat-menu>
     <button mat-menu-item>Show checkboxes</button>
   </mat-menu>
 </div>
 
+  

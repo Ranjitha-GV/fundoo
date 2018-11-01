@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 
@@ -15,6 +15,9 @@ export class AddnotesComponent implements OnInit {
   hide: any = 0;
   listing: any = 2;
   token = localStorage.getItem('token');
+  id = localStorage.getItem('userId');
+  @ViewChild('newLabel') newLabel: ElementRef;
+
   newObject: any;
   @Output() onNewEntryAdded = new EventEmitter();
   color : any ;
@@ -51,22 +54,40 @@ export class AddnotesComponent implements OnInit {
       })
 
   }
+  addLabel() {
+    this.myHttpService.postNotes('/noteLabels', {
+      "label": this.newLabel.nativeElement.innerHTML,
+      "isDeleted": false,
+      "userId": this.id
+
+    }, this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ", data);
+        // this.delete();
+        // this.dialogRef.close();
+
+      },
+      error => {
+        console.log("Error", error);
+        // this.dialogRef.close();
+      })
+  }
   colorsEntry(event)
   {
     console.log(event);
     this.color = event;
   }
+  keys : any;
   onKeydown(event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || event.key === "letters" ) {
       console.log(event); 
+      this.save.push(this.keys);
+      //   "keys": "",
+      // "status": true
+    console.log(this.save);
     }
   }
   save = [];
-  keyPress(keys)
-  {
-    this.save.push(keys);
-    console.log(this.save);
-  }
   ngOnInit() {
 
   }

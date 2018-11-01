@@ -1,15 +1,19 @@
 <div style="padding: 30px; ">
   <h3>Edit Label</h3>
-  <div fxLayout="row" fxLayoutAlign="space-evenly start" class="icon">
+  <div fxLayout="row" fxLayoutAlign="space-between" class="icon">
+    <div fxFlex = 15>
     <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
-    <div>
+  </div>
+    <div fxFlex =65 >
       <span contenteditable="true" class="edit" data-placeholder="Create new Label" #newLabel></span>
     </div>
+    <div fxFlex = 15>
     <mat-icon matTooltip="Done" (click) = "addLabel()">check</mat-icon>
+  </div>
   </div>
   <div fxLayout="column" class="val">
     <a mat-list-item>
-      <div *ngFor="let val of value1">
+      <div *ngFor="let val of value1; trackBy:val?.id">
         <div *ngIf="show != val.id">
           <mat-icon matTooltip="Delete Label">label_outline</mat-icon>
           <span contenteditable="false" class="name" id="label" [innerHTML]="val.label"></span>
@@ -25,6 +29,7 @@
   </div>
   <div mat-dialog-actions class="button">
     <button mat-button (click)="addLabel()">Done</button>
+    <!-- <button mat-button [mat-dialog-close] = "res" id = "done">Done</button> -->
   </div>
 </div>
 <!-- <app-addnotes></app-addnotes> -->

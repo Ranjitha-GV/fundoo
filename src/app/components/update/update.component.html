@@ -1,11 +1,20 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between">
-  <div align="center" style="" [style.backgroundColor]="data.color">
-    <div align="left" style="cursor: pointer; padding-right: 40px; padding-left: 40px; padding-top: 20px; padding-bottom: 20px;">
+  <div align="center" [style.backgroundColor]="data.color">
+    <div align="left" style="cursor: pointer; padding-right: 40px; padding-left: 40px; padding-top: 20px; padding-bottom: 30px;">
       <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" data-text="" style="font-size: 20px;"
           [innerHTML]="data.title"></div></b> <br>
       <div mat-dialog-content contenteditable="true" class="edit" id="descriptionId" data-text="" style="font-size: 15px;" [innerHTML]="data.description"></div>
       <br>
     </div>
+    <div fxLayout="row">
+    <div *ngFor="let index of data.noteLabels" class = "cancel">
+      <mat-chip-list selected>
+        <mat-chip><span [innerHTML]="index.label"> </span>
+          <mat-icon matChipRemove (click) = "$event.stopPropagation(); remove(index.id)">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
     <!-- <div> -->
     <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
       <app-toolbar style="padding: 5px;"></app-toolbar>
@@ -13,7 +22,7 @@
       <app-color style="padding: 5px;"></app-color>
       <app-photo style="padding: 5px;"></app-photo>
       <app-archive-icon style="padding: 5px;"></app-archive-icon>
-      <app-more style="padding: 5px;"></app-more>
+      <app-more style="padding: 5px;" [notedetails] = "data"></app-more>
       <button mat-button class="close" type=s ubmit (click)="onNoClick(data.id)">Close</button>
       <div>
 

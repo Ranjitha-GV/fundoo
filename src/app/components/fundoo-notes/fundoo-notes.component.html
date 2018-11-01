@@ -56,7 +56,7 @@
             <hr>
             <div>
               <p style="margin-left: 10px;">Labels</p>
-              <div *ngFor="let val of value">
+              <div *ngFor="let val of value; trackBy:val?.id">
                 <a mat-list-item>
                   <mat-icon>label_outline</mat-icon>
                 <div class = "value" [innerHTML] = "val.label"></div>

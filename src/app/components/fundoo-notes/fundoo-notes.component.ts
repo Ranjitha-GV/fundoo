@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -30,6 +30,10 @@ export class FundooNotesComponent {
 
   constructor(public dialog: MatDialog, public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
   token = localStorage.getItem('token');
+  @ViewChild('newLabel') newLabel: ElementRef;
+  id = localStorage.getItem('userId')
+
+
   signout() {
     console.log(this.token);
     this.myHttpService.signoutPost('/user/logout', this.token).subscribe(
@@ -58,13 +62,15 @@ export class FundooNotesComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.label();
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
   value = [];
 
   label() {
+    // this.value = [];
+    let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("GET Request is successful ", data);
@@ -73,9 +79,10 @@ export class FundooNotesComponent {
           {
             if(data['data']['details'][i].isDeleted == false)
             {
-              this.value.push(data['data']['details'][i]);
+              tempArr.push(data['data']['details'][i]);
             }
           }
+          this.value = tempArr;
         console.log(this.value);
       },
       error => {

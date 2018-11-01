@@ -14,12 +14,13 @@ export class LabelComponent implements OnInit {
 
   public show;
 
-  constructor(private myHttpService: HttpService) { }
+  constructor(private myHttpService: HttpService, public dialogRef : MatDialogRef<FundooNotesComponent>) { }
 
   value1: any = [];
   @ViewChild('newLabel') newLabel: ElementRef;
   @ViewChild('myLabel') myLabel: ElementRef;
   clear : any;
+  res : string;
 
   onNoClick(): void {
   }
@@ -37,11 +38,13 @@ export class LabelComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
-        // this.onNewEntryAdded.emit({
-        // })
+        this.delete();
+        this.dialogRef.close();
+
       },
       error => {
         console.log("Error", error);
+        this.dialogRef.close();
       })
   }
   labelDelete(val) {
@@ -50,23 +53,25 @@ export class LabelComponent implements OnInit {
     }).subscribe(
       (data) => {
         console.log("DELETE Request is successful ", data);
-        // this.onNewEntryAdded.emit({
-        // })
+       this.delete();
       },
       error => {
         console.log("Error", error);
       })
   }
+
   delete() {
+    // this.value1 = [];
+    let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
-            this.value1.push(data['data']['details'][i])
+            tempArr.push(data['data']['details'][i])
           }
         }
-        console.log(this.value1);
+        this.value1 = tempArr;
       },
       error => {
         console.log("Error", error);
@@ -84,6 +89,7 @@ export class LabelComponent implements OnInit {
         (data) => {
           console.log("UPDATE Request is successful ", data);
           console.log(data);
+          this.delete();
         },
         error => {
           console.log("Error", error);

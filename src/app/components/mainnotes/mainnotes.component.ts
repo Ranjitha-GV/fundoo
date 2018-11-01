@@ -20,7 +20,7 @@ export class MainnotesComponent implements OnInit {
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();
   ngOnInit() {
-    
+    this.getlabels();
   }
   nextEntry(event)
   {
@@ -55,6 +55,28 @@ export class MainnotesComponent implements OnInit {
      this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
+        this.addEntry.emit({});
+
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
+  
+  getlabels()
+  {
+    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+      (data) => {
+        var value1 = [];
+        console.log("GET Request is successful ", data);
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            value1.push(data['data']['details'][i])
+          }
+        }
+        console.log(value1);
+        var noteLabels = value1;
+        console.log("I am notelabels",noteLabels);
       },
       error => {
         console.log("Error", error);

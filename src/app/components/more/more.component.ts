@@ -1,6 +1,7 @@
 
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-more',
@@ -15,7 +16,9 @@ export class MoreComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   @Input() notedetails;
   @Output() eventEntry = new EventEmitter();
+  @Output() checkEmit = new EventEmitter();
   token = localStorage.getItem('token');
+  search : any;
   // value1 : any = [];
 
   ngOnInit() {
@@ -35,12 +38,12 @@ export class MoreComponent implements OnInit {
         console.log("Error", error);
       })
   }
-  value1 = [];
+  value1 = null;
   addLabel()
   {
-    // var value1 = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
+        this.value1 = [];
         console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
@@ -63,6 +66,7 @@ export class MoreComponent implements OnInit {
      this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
+        this.eventEntry.emit({});
       },
       error => {
         console.log("Error", error);

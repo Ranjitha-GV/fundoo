@@ -1,16 +1,16 @@
 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" style="margin-top: 20px; margin-bottom: 20px;  ">
-  <div *ngFor='let note of notesArray' fxFlex="0 1 calc(30% - 32px)">
+  <div *ngFor='let note of notesArray; trackBy:note?.noteId' fxFlex="0 1 calc(30% - 32px)">
     <mat-card align="center" style="margin-top: 20px; width:auto;" [style.backgroundColor]="note.color">
       <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" style="float : right;">
         <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
         <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row">
         <div *ngFor="let index of note.noteLabels" class = "cancel">
           <mat-chip-list selected>
             <mat-chip><span [innerHTML]="index.label"> </span>
-              <mat-icon matChipRemove (click) = "$event.stopPropagation(); remove(index.id,note.id)">cancel</mat-icon>
+              <mat-icon matChipRemove (click) ="remove(index.id,note.id)">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
         </div>
@@ -22,7 +22,7 @@
           <app-color style="padding: 5px;" [color]="note" (changeColor)=nextEntry($event)></app-color>
           <app-photo style="padding: 5px;"></app-photo>
           <app-archive-icon style="padding: 5px;" [archive]="note" (archiveEmit)=nextEntry($event)></app-archive-icon>
-          <app-more [notedetails]="note" style="padding: 5px;" (eventEntry)=nextEntry($event)></app-more>
+          <app-more [notedetails]="note" style="padding: 5px;" (eventEntry)="nextEntry($event)"></app-more>
         </div>
       </div>
     </mat-card>
