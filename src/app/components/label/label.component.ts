@@ -24,6 +24,7 @@ export class LabelComponent implements OnInit {
   @ViewChild('myLabel') myLabel: ElementRef;
   clear : any;
   res : string;
+  // label : any;
 
   onNoClick(): void {
   }
@@ -33,6 +34,17 @@ export class LabelComponent implements OnInit {
   id = localStorage.getItem('userId')
   token = localStorage.getItem('token');
   addLabel() {
+   var label = this.newLabel.nativeElement.innerHTML
+   console.log(label)
+   for(var i =0; i<this.value1.length; i++)
+   {
+    if(this.value1[i].label == label)
+    {
+      console.log(this.value1[i]);
+      alert('duplicate data');
+      return false;
+    }
+  }
     this.myHttpService.postNotes('/noteLabels', {
       "label": this.newLabel.nativeElement.innerHTML,
       "isDeleted": false,
@@ -50,6 +62,8 @@ export class LabelComponent implements OnInit {
         this.dialogRef.close();
       })
   }
+ 
+
   labelDelete(val) {
     this.myHttpService.deleteLabel('/noteLabels/' + val + '/deleteNoteLabel', {
       "label": this.newLabel.nativeElement.innerHTML

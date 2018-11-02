@@ -27,6 +27,15 @@
          </div>
           <hr><br><br>
         </div>
+        <div *ngFor = "let index of add" class = "cancel">
+          <!-- <div *ngIf = "index.isDeleted == false"> -->
+          <mat-chip-list selected>
+            <mat-chip>{{index.label}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+         <!-- </div> -->
+        </div>
           <div>
             <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >
          <app-toolbar></app-toolbar>
@@ -34,7 +43,7 @@
          <app-color (emitColor) = colorsEntry($event)></app-color>
          <app-photo></app-photo>
          <app-archive-icon></app-archive-icon>
-         <app-more></app-more>
+         <app-more (addLabelEvent) = labelEvent($event)></app-more>
           <span>  <button mat-button class = "close" type = submit (click) = "back()">Close</button> </span>
         </div>
         </div>

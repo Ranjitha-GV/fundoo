@@ -33,7 +33,7 @@ export class AddnotesComponent implements OnInit {
     this.myHttpService.postNotes('/notes/addNotes', {
       'title': document.getElementById('title').innerHTML,
       'description': document.getElementById('description').innerHTML,
-      'labelIdList': '',
+      'labelIdList': JSON.stringify(this.array),
       'checklist': '',
       'isPined': 'false',
       'color': this.color
@@ -88,6 +88,23 @@ export class AddnotesComponent implements OnInit {
     }
   }
   save = [];
+  add = [];
+  array = [];
+  labelEvent(event)
+  {
+    if(this.add.indexOf(event)<0)
+    {
+      this.array.push(event.id);
+      this.add.push(event);
+      console.log(this.array);
+      console.log(this.add);
+    }
+    else
+    {
+      this.array.splice(this.array.indexOf(event),1);
+      this.add.splice(this.add.indexOf(event),1);
+    }
+  }
   ngOnInit() {
 
   }

@@ -17,6 +17,7 @@ export class MoreComponent implements OnInit {
   @Input() notedetails;
   @Output() eventEntry = new EventEmitter();
   @Output() checkEmit = new EventEmitter();
+  @Output() addLabelEvent = new EventEmitter();
   token = localStorage.getItem('token');
   search : any;
   // value1 : any = [];
@@ -57,14 +58,17 @@ export class MoreComponent implements OnInit {
         console.log("Error", error);
       })
   }
+  body : any;
   check(label)
   {
-    this.myHttpService.postNotes('/notes/'+ this.notedetails.id +'/addLabelToNotes/' + label + '/add',
-    {
+    console.log(label);
+    this.addLabelEvent.emit(label);
+    this.body = {
       "noteId" : this.notedetails.id,
-      "lableId" : label
-    },
-     this.token).subscribe(
+      "lableId" : label.id
+    }
+    this.myHttpService.postNotes('/notes/'+ this.notedetails.id +'/addLabelToNotes/' + label.id + '/add',
+    this.body,this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
         this.eventEntry.emit({});
