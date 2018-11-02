@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LabelComponent } from '../label/label.component';
+import { SearchService } from '../../services/search.service';
 
 
 
@@ -24,11 +25,12 @@ export class FundooNotesComponent {
       map(result => result.matches)
     );
   show: any = 0;
+  searchElement : any;
   toggle() {
     this.show = 1;
   }
 
-  constructor(public dialog: MatDialog, public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
+  constructor(public dialog: MatDialog, public data : SearchService, public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
   token = localStorage.getItem('token');
   @ViewChild('newLabel') newLabel: ElementRef;
   id = localStorage.getItem('userId')
@@ -88,6 +90,15 @@ export class FundooNotesComponent {
       error => {
         console.log("Error", error);
       })
+  }
+  searchEle()
+  {
+    this.router.navigate(['/home/search'])
+  }
+
+  keyPress()
+  {
+    this.data.changeMessage(this.searchElement);
   }
 
   ngOnInit() {

@@ -5,10 +5,10 @@
         </button>
         <span class="heading"><b>F</b>undoo<b>N</b>otes</span>
         <div class="right">
-          <form id="search">
-            <input #search type="search" placeholder="Search" [ngClass]="{'filled':filled}" (click)="filled=true" (blur)="filled=search.value?true:false"
-              style="margin-left: 25px;width: 700px; height: 35px;  opacity: 0.5">
-          </form>
+          <div class="searchBar">
+            <i class="material-icons">search </i>
+            <input class="searchIcon" type="input" placeholder="search" [(ngModel)] = "searchElement" name = "search" (click) = "searchEle()" (keydown) = "keyPress()">
+            </div>
         </div>
         <div fxFlex fxLayoutAlign="end">
           <div class="icons">

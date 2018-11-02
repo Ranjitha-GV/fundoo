@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
+import { SearchService } from '../../services/search.service';
 
 
 @Component({
@@ -11,12 +12,24 @@ import { UpdateComponent } from '../update/update.component';
 })
 export class MainnotesComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, public dialog: MatDialog) { }
+  constructor(private myHttpService: HttpService, public dialog: MatDialog, public data : SearchService) 
+  {
+    this.data.currentChipEvent.subscribe(
+      message=>{
+      console.log('I am emitted');
+      if(message)
+      {
+        this.addEntry.emit({
+        })
+      }
+    })
+   }
   array: any = [];
   token = localStorage.getItem('token');
   noteCard : any = [];
   response : any;
   interval : any;
+  @Input() searchElement;
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();
   ngOnInit() {
@@ -77,6 +90,8 @@ export class MainnotesComponent implements OnInit {
         console.log(value1);
         var noteLabels = value1;
         console.log("I am notelabels",noteLabels);
+        this.addEntry.emit({
+        })
       },
       error => {
         console.log("Error", error);

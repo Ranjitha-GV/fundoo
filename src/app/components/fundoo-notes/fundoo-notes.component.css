@@ -84,3 +84,32 @@
 {
   margin-left: 5px;
 }
+.searchBar{
+  background-color: rgb(235, 174, 22);
+  display: flex;
+  align-items: center;
+  height:46px;
+  width:699px;
+  color: black;
+  border-radius: 5px;
+  padding-left: 1%;
+  margin-left: 20px;
+  }
+  .searchIcon
+  {
+  height:41px;
+  width:693px;
+  color: black;
+  opacity: 1;
+  background-color: rgb(235, 174, 22);
+  border:0px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding-left: 1%;
+  display: flex;
+  margin-left: 10px;
+  }
+input:focus
+{
+  background-color: whitesmoke;
+}  

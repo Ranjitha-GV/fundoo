@@ -3,6 +3,8 @@ import { FundooNotesComponent } from '../fundoo-notes/fundoo-notes.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpService } from '../../services/http.service';
 import { NullAstVisitor } from '@angular/compiler';
+import { SearchService } from '../../services/search.service';
+
 
 
 @Component({
@@ -13,8 +15,9 @@ import { NullAstVisitor } from '@angular/compiler';
 export class LabelComponent implements OnInit {
 
   public show;
+  // SearchService: any;
 
-  constructor(private myHttpService: HttpService, public dialogRef : MatDialogRef<FundooNotesComponent>) { }
+  constructor(private myHttpService: HttpService, public dialogRef : MatDialogRef<FundooNotesComponent>,  public data : SearchService) { }
 
   value1: any = [];
   @ViewChild('newLabel') newLabel: ElementRef;
@@ -53,6 +56,7 @@ export class LabelComponent implements OnInit {
     }).subscribe(
       (data) => {
         console.log("DELETE Request is successful ", data);
+        this.data.changeChipEvent(true);
        this.delete();
       },
       error => {
@@ -72,6 +76,8 @@ export class LabelComponent implements OnInit {
           }
         }
         this.value1 = tempArr;
+        console.log(this.value1);
+        
       },
       error => {
         console.log("Error", error);

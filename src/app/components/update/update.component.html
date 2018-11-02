@@ -7,12 +7,14 @@
       <br>
     </div>
     <div fxLayout="row">
-    <div *ngFor="let index of data.noteLabels" class = "cancel">
+    <div *ngFor = "let index of data.noteLabels" class = "cancel">
+      <div *ngIf = "index.isDeleted == false">
       <mat-chip-list selected>
         <mat-chip><span [innerHTML]="index.label"> </span>
           <mat-icon matChipRemove (click) = "$event.stopPropagation(); remove(index.id)">cancel</mat-icon>
         </mat-chip>
       </mat-chip-list>
+    </div>
     </div>
   </div>
     <!-- <div> -->

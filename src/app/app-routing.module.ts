@@ -14,6 +14,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AuthGuard } from './auth.guard';
 import { LabelComponent } from './components/label/label.component';
 import { NewLabelComponent } from './new-label/new-label.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
       { path: 'reminder', component: ReminderComponent }, 
       { path: 'label', component: LabelComponent },
       { path: 'new-label', component: NewLabelComponent },
+      { path: 'search', component: SearchComponent },
       { path: '', redirectTo: 'notes', pathMatch: 'full' }    
 
     ]

@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" style="margin-top: 20px; margin-bottom: 20px;  ">
-  <div *ngFor='let note of notesArray; trackBy:note?.noteId' fxFlex="0 1 calc(30% - 32px)">
+  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId' fxFlex="0 1 calc(30% - 32px)">
     <mat-card align="center" style="margin-top: 20px; width:auto;" [style.backgroundColor]="note.color">
       <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
         <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" style="float : right;">
@@ -7,12 +7,14 @@
         <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
       </div>
       <div fxLayout="row">
-        <div *ngFor="let index of note.noteLabels" class = "cancel">
+        <div *ngFor = "let index of note.noteLabels" class = "cancel">
+          <div *ngIf = "index.isDeleted == false">
           <mat-chip-list selected>
             <mat-chip><span [innerHTML]="index.label"> </span>
               <mat-icon matChipRemove (click) ="remove(index.id,note.id)">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
+         </div>
         </div>
       </div>
       <div>

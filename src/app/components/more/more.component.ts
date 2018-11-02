@@ -49,7 +49,8 @@ export class MoreComponent implements OnInit {
           if (data['data']['details'][i].isDeleted == false) {
             this.value1.push(data['data']['details'][i])
           }
-        }
+        } 
+        var tempArr = this.value1 ;
         console.log(this.value1);
       },
       error => {
