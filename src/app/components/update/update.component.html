@@ -7,30 +7,26 @@
       <br>
     </div>
     <div fxLayout="row">
-    <div *ngFor = "let index of data.noteLabels" class = "cancel">
-      <div *ngIf = "index.isDeleted == false">
-      <mat-chip-list selected>
-        <mat-chip><span [innerHTML]="index.label"> </span>
-          <mat-icon matChipRemove (click) = "$event.stopPropagation(); remove(index.id)">cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
+      <div *ngFor="let index of data.noteLabels" class="cancel">
+        <div *ngIf="index.isDeleted == false">
+          <mat-chip-list selected>
+            <mat-chip><span [innerHTML]="index.label"> </span>
+              <mat-icon matChipRemove (click)="$event.stopPropagation(); remove(index.id)">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
-    <!-- <div> -->
     <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
       <app-toolbar style="padding: 5px;"></app-toolbar>
       <app-collab style="padding: 5px;"></app-collab>
       <app-color style="padding: 5px;"></app-color>
       <app-photo style="padding: 5px;"></app-photo>
       <app-archive-icon style="padding: 5px;"></app-archive-icon>
-      <app-more style="padding: 5px;" [notedetails] = "data"></app-more>
-      <button mat-button class="close" type=s ubmit (click)="onNoClick(data.id)">Close</button>
+      <app-more style="padding: 5px;" [notedetails]="data"></app-more>
+      <button mat-button class="close" type=submit (click)="onNoClick(data.id)">Close</button>
       <div>
-
-        
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </div>

@@ -15,6 +15,7 @@ export class MoreComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
   @Input() notedetails;
+  @Input() addArray;
   @Output() eventEntry = new EventEmitter();
   @Output() checkEmit = new EventEmitter();
   @Output() addLabelEvent = new EventEmitter();
@@ -63,6 +64,7 @@ export class MoreComponent implements OnInit {
   {
     console.log(label);
     this.addLabelEvent.emit(label);
+    // this.addArray = null;
     this.body = {
       "noteId" : this.notedetails.id,
       "lableId" : label.id
@@ -72,9 +74,11 @@ export class MoreComponent implements OnInit {
       (data) => {
         console.log("POST Request is successful ", data);
         this.eventEntry.emit({});
+        
       },
       error => {
         console.log("Error", error);
+        // this.addArray = null;
       })
   }
 }

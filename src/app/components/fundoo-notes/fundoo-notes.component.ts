@@ -11,8 +11,6 @@ import { LabelComponent } from '../label/label.component';
 import { SearchService } from '../../services/search.service';
 
 
-
-
 @Component({
   selector: 'app-fundoo-notes',
   templateUrl: './fundoo-notes.component.html',
@@ -26,6 +24,8 @@ export class FundooNotesComponent {
     );
   show: any = 0;
   searchElement : any;
+  @ViewChild('labelList') labelList: ElementRef;
+
   toggle() {
     this.show = 1;
   }
@@ -91,14 +91,25 @@ export class FundooNotesComponent {
         console.log("Error", error);
       })
   }
+  labelClick(labelList)
+  {
+    var labelList = labelList.label;
+    console.log('I am in fundoo')
+    this.router.navigate(['/home/label]'+labelList]);
+  }
   searchEle()
   {
-    this.router.navigate(['/home/search'])
+    this.router.navigate(['/home/search']);
   }
 
   keyPress()
   {
     this.data.changeMessage(this.searchElement);
+  }
+
+  listLabels()
+  {
+
   }
 
   ngOnInit() {

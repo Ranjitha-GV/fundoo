@@ -44,7 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LabelComponent } from './components/label/label.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
-import { NewLabelComponent } from './new-label/new-label.component';
+import { NewLabelComponent } from './components/new-label/new-label.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';
 

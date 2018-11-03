@@ -30,6 +30,7 @@ export class AddnotesComponent implements OnInit {
   }
   back() {
     this.hide = 0;
+    this.color = "#fafafa"
     this.myHttpService.postNotes('/notes/addNotes', {
       'title': document.getElementById('title').innerHTML,
       'description': document.getElementById('description').innerHTML,
@@ -45,12 +46,14 @@ export class AddnotesComponent implements OnInit {
         this.color = "#fafafa";
         this.hide = 0;
         this.listing = 2;
+        this.add = null;
       },
       error => {
         console.log("Error", error);
         this.color = "#fafafa";
         this.hide = 0;
         this.listing = 2;
+        this.add = null;
       })
 
   }

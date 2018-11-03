@@ -56,10 +56,10 @@
             <hr>
             <div>
               <p style="margin-left: 10px;">Labels</p>
-              <div *ngFor="let val of value; trackBy:val?.id">
+              <div  *ngFor="let val of value; trackBy:val?.id" (click) = "labelClick(val)">
                 <a mat-list-item>
                   <mat-icon>label_outline</mat-icon>
-                <div class = "value" [innerHTML] = "val.label"></div>
+                <div class = "value" [innerHTML] = "val.label" #labelList></div>
               </a>
               </div>
             </div>
