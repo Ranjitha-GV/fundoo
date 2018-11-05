@@ -57,11 +57,13 @@
             <div>
               <p style="margin-left: 10px;">Labels</p>
               <div  *ngFor="let val of value; trackBy:val?.id" (click) = "labelClick(val)">
+                  <div *ngIf = "val.isDeleted == false">
                 <a mat-list-item>
                   <mat-icon>label_outline</mat-icon>
-                <div class = "value" [innerHTML] = "val.label" #labelList></div>
+                <div class = "value" [innerHTML] = "val.label"></div>
               </a>
               </div>
+            </div>
             </div>
             <a mat-list-item (click)="openDialog()"><img src="../../../assets/images/label.svg"><span class="one">Add Label</span></a>
             <hr>

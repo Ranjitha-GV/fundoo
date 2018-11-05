@@ -19,22 +19,22 @@
           <hr>
           <div fxLayoutAlign = "center center">
           <mat-icon> add </mat-icon> 
-          <div *ngFor = "let key of save">
+          <!-- <div *ngFor = "let key of save"> -->
           <!-- <span contenteditable="true" class="edit" id = "description" data-text="List"></span> -->
           <input (keydown)="onKeydown($event)" id = "description" class="edit" placeholder="List" [(ngModel)] = "keys">  
           <!-- <mat-checkbox>hey</mat-checkbox> -->
-        </div>
+        <!-- </div> -->
          </div>
           <hr><br><br>
         </div>
         <div *ngFor = "let index of add" class = "cancel">
-          <!-- <div *ngIf = "index.isDeleted == false"> -->
+          <div *ngIf = "index.isDeleted == false">
           <mat-chip-list selected>
             <mat-chip>{{index.label}}
               <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
-         <!-- </div> -->
+         </div>
         </div>
           <div>
             <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >

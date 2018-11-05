@@ -28,7 +28,6 @@ export class NewLabelComponent implements OnInit {
   token  =  localStorage.getItem('token');
   getLabel(labelList)
   {
-    debugger;
     console.log(labelList);
     this.myHttpService.postNotes('/notes/getNotesListByLabel/'+ labelList,{}, this.token)
     .subscribe(

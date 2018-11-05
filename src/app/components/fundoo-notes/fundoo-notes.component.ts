@@ -95,7 +95,7 @@ export class FundooNotesComponent {
   {
     var labelList = labelList.label;
     console.log('I am in fundoo')
-    this.router.navigate(['/home/label]'+labelList]);
+    this.router.navigate(['/home/newlabel/'+labelList]);
   }
   searchEle()
   {
@@ -105,11 +105,6 @@ export class FundooNotesComponent {
   keyPress()
   {
     this.data.changeMessage(this.searchElement);
-  }
-
-  listLabels()
-  {
-
   }
 
   ngOnInit() {
