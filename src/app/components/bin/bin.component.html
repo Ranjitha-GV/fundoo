@@ -5,11 +5,18 @@
          <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
           <div style="font-size: 15px;" [innerHTML]="note.description"></div>
         </div>
-        <div>
           <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
-            <app-more style="padding: 5px; float: right;" (eventEntry) = nextEntry($event)></app-more>
+            <!-- <app-more style="padding: 5px; float: right;" (eventEntry) = nextEntry($event)></app-more> -->
+            <div class = "delete">
+                <div matTooltip="More" [matMenuTriggerFor]="menu" class="space"> <i class="material-icons">more_vert</i></div>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click) = "deleteForever(note)">Delete Forever</button>
+                    <button mat-menu-item >Restore</button>
+                  </mat-menu>
           </div>
         </div>
       </mat-card>
     </div>
   </div>
+
+  

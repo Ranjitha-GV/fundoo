@@ -29,11 +29,13 @@ export class MainnotesComponent implements OnInit {
   noteCard : any = [];
   response : any;
   interval : any;
+  toggle = false;
   @Input() searchElement;
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();
   ngOnInit() {
     this.getlabels();
+    this.gridList();
   }
   nextEntry(event)
   {
@@ -44,7 +46,14 @@ export class MainnotesComponent implements OnInit {
       })
     }
   }
-
+  gridList()
+  {
+    this.data.currentGridEvent.subscribe(message =>{
+      console.log('i am in grid');
+      console.log(message);
+     this.toggle = message;
+    })
+  }
   openUpdateNotes(note): void {
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '800',
@@ -55,7 +64,6 @@ export class MainnotesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.addEntry.emit({});
-      // this.animal = result;
     });
   }
   remove(label, note)
@@ -69,7 +77,6 @@ export class MainnotesComponent implements OnInit {
       (data) => {
         console.log("POST Request is successful ", data);
         this.addEntry.emit({});
-
       },
       error => {
         console.log("Error", error);

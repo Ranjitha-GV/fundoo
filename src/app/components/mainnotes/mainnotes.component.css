@@ -11,3 +11,12 @@
 {
     display: flex;
 }
+
+.grid
+{
+    width: 900px;
+}
+.list
+{
+    /* width:250px; */
+}

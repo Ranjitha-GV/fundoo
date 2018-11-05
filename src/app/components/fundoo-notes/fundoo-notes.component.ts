@@ -24,6 +24,7 @@ export class FundooNotesComponent {
     );
   show: any = 0;
   searchElement : any;
+  public grid = 0;
   @ViewChild('labelList') labelList: ElementRef;
 
   toggle() {
@@ -105,6 +106,16 @@ export class FundooNotesComponent {
   keyPress()
   {
     this.data.changeMessage(this.searchElement);
+  }
+  view()
+  {
+    this.grid = 1;
+    this.data.changeGridEvent(true);
+  }
+  viewClose()
+  {
+    this.grid = 0;
+    this.data.changeGridEvent(false);
   }
 
   ngOnInit() {

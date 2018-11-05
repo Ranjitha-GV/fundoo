@@ -13,12 +13,13 @@
         <div fxFlex fxLayoutAlign="end">
           <div class="icons">
             <button mat-icon-button matTooltip="Refresh"><span><mat-icon>refresh</mat-icon></span></button>
-            <button mat-icon-button matTooltip="List View"><span><mat-icon>view_stream</mat-icon></span></button>
-          </div>
+            <button mat-icon-button matTooltip="List View" (click)="view()" *ngIf = "grid == 0"><span><mat-icon>view_stream</mat-icon></span></button>
+              <button mat-icon-button matTooltip="Grid View" (click)="viewClose()" *ngIf = "grid == 1"><span><mat-icon>view_module</mat-icon></span></button>
+        </div>
           <div class="photo">
             <button mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" style="margin-left: 20px; background-color: bisque; color: black;">{{firstname
               | slice:0:1}}</button>
-            <mat-menu #menu="matMenu" [overlapTrigger]="false">
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" style = "margin-top: 10px;">
               <div style="padding: 20px;">
                 <div style="float : right; margin-right: 20px;">
                   <div>{{firstname}} {{lastname}}</div>
