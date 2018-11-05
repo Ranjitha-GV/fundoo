@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-bin',
@@ -8,10 +9,12 @@ import { HttpService } from '../../services/http.service';
 })
 export class BinComponent implements OnInit {
   card = [];
-  constructor(private myHttpService: HttpService) { }
+  constructor(private myHttpService: HttpService, private data : SearchService) { }
   token = localStorage.getItem('token');
+  toggle = false;
   ngOnInit() {
     this.delete();
+    this.gridList();
   }
   delete()
   {
@@ -46,6 +49,14 @@ export class BinComponent implements OnInit {
       error => {
         console.log("Error", error);
       })
+  }
+  gridList()
+  {
+    this.data.currentGridEvent.subscribe(message =>{
+      console.log('i am in grid');
+      console.log(message);
+     this.toggle = message;
+    })
   }
 }
 

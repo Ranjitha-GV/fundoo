@@ -14,9 +14,9 @@
 
 .grid
 {
-    width: 900px;
+    /* width: 900px; */
 }
 .list
 {
-    /* width:250px; */
+    width:1000px;
 }

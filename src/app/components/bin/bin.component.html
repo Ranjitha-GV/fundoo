@@ -1,5 +1,6 @@
-<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-around" style="margin-top: 20px; ">
-    <div *ngFor='let note of card'>
+<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-around" style="margin-left: 60px; margin-top: 20px; margin-bottom: 20px;">
+    <div *ngFor='let note of card' fxFlex="0 1 calc(30% - 32px)">
+      <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card style = "margin-top: 15px; width: 70%">
         <div align="left">
          <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
@@ -16,6 +17,7 @@
           </div>
         </div>
       </mat-card>
+      </div>
     </div>
   </div>
 

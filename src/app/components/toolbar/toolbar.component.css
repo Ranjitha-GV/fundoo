@@ -1,5 +1,13 @@
 .icons 
 {
     float: left;
+    cursor: pointer;
 }
-
+.reminder
+{
+    margin-left: 10px;
+}
+.code
+{
+    margin-left: 10px;
+}

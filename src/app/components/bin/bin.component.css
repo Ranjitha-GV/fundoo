@@ -1,8 +1,17 @@
 .delete
 {
     float: right;
+    margin-top: 10px;
 }
 .space 
 {
     cursor: pointer;
+}
+.list
+{
+    width: 1000px;
+}
+.grid
+{
+    /* width: 250px; */
 }
