@@ -25,7 +25,7 @@ export class ArchiveIconComponent implements OnInit {
       },
         error => {
           console.log("Error", error);
-        }
-      )
+        })
   }
+ 
 }

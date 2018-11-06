@@ -29,7 +29,7 @@ export class MainnotesComponent implements OnInit {
   noteCard : any = [];
   response : any;
   interval : any;
-  toggle = false;
+  toggle = true;
   @Input() searchElement;
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();

@@ -1,10 +1,10 @@
 <div  class="icons" fxLayout="row" fxLayoutAlign="space-between"> 
     <div matTooltip="Remind Me" class="space" [matMenuTriggerFor]="menu"> <i class="material-icons">touch_app</i></div>
-    <mat-menu #menu="matMenu">
-        <div class = "reminder">Reminder:</div> 
+    <mat-menu #menu="matMenu" class = "menu">
+        <div class = "reminder" (click)="reminder()">Reminder:</div> 
         <hr>
       <div><button mat-menu-item >Later Today<span class = "code">20:00</span></button></div>  
        <div><button mat-menu-item >Tomorrow<span class = "code">08:00</span></button></div> 
-        <div><button mat-menu-item >Next Week<span class = "code">Mon,08:00</span></button></div>
+        <div><button mat-menu-item >Next Week<span class = "coding">Mon,08:00</span></button></div>
       </mat-menu>
 </div>

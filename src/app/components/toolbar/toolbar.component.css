@@ -9,5 +9,13 @@
 }
 .code
 {
-    margin-left: 10px;
+    float: right;
+}
+.menu
+{
+    width: 300px;
+}
+.coding
+{
+    margin-left: 30px;
 }

@@ -20,7 +20,7 @@
       </div>
       <div>
         <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
-          <app-toolbar style="padding: 5px;"></app-toolbar>
+          <app-toolbar [reminderValue] = "note" style="padding: 5px;"></app-toolbar>
           <app-collab style="padding: 5px;"></app-collab>
           <app-color style="padding: 5px;" [color]="note" (changeColor)=nextEntry($event)></app-color>
           <app-photo style="padding: 5px;"></app-photo>

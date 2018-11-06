@@ -110,12 +110,12 @@ export class FundooNotesComponent {
   view()
   {
     this.grid = 1;
-    this.data.changeGridEvent(true);
+    this.data.changeGridEvent(false);
   }
   viewClose()
   {
     this.grid = 0;
-    this.data.changeGridEvent(false);
+    this.data.changeGridEvent(true);
   }
 
   ngOnInit() {

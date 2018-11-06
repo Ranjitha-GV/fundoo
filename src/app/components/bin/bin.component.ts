@@ -11,7 +11,7 @@ export class BinComponent implements OnInit {
   card = [];
   constructor(private myHttpService: HttpService, private data : SearchService) { }
   token = localStorage.getItem('token');
-  toggle = false;
+  toggle = true;
   ngOnInit() {
     this.delete();
     this.gridList();
@@ -32,7 +32,23 @@ export class BinComponent implements OnInit {
         console.log("Error", error);
       })
   }
-
+  restore(note)
+  {
+    console.log(note);
+    var id = note.id
+    console.log(id);
+    this.myHttpService.deleteNotes('/notes/trashNotes', {
+      "isDeleted": false,
+      "noteIdList": [id]
+    }, this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ", data);
+        this.delete();
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
   deleteForever(note)
   {
     var id = note.id
