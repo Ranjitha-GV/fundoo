@@ -6,8 +6,8 @@
   <div class="right">
     <div class="searchBar">
       <i class="material-icons">search </i>
-      <input class="searchIcon" type="input" placeholder="search" [(ngModel)]="searchElement" 
-      name="search" (click)="searchEle()" (keydown)="keyPress()">
+      <input class="searchIcon" type="input" placeholder="search" [(ngModel)]="searchElement" name="search" (click)="searchEle()"
+        (keydown)="keyPress()">
     </div>
   </div>
   <div fxFlex fxLayoutAlign="end">
@@ -15,55 +15,72 @@
       <button mat-icon-button matTooltip="Refresh"><span><mat-icon>refresh</mat-icon></span>
       </button>
       <button mat-icon-button matTooltip="List View" (click)="view()" *ngIf="grid == 0">
-      <span><mat-icon>view_stream</mat-icon></span></button>
+        <span><mat-icon>view_stream</mat-icon></span></button>
       <button mat-icon-button matTooltip="Grid View" (click)="viewClose()" *ngIf="grid == 1">
-      <span><mat-icon>view_module</mat-icon></span></button>
+        <span><mat-icon>view_module</mat-icon></span></button>
     </div>
     <div class="photo">
-      <button mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" 
-      class="name">{{firstname | slice:0:1}}</button>
-      <mat-menu #menu="matMenu" [overlapTrigger]="false" style="margin-top: 10px;">
+      <!-- <button mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" class="name">{{firstname |
+        slice:0:1}}</button> -->
+        <button class="profilebutton">
+            <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" style="float:left ;width:100px;height:100px;border-radius: 20%">
+          </button>
+      <!-- <mat-menu #menu="matMenu" [overlapTrigger]="false" style="margin-top: 10px;">
         <div style="padding: 20px;">
-              <div>
-                  <button mat-mini-fab [matMenuTriggerFor]="menu" class="firstName">
-                  {{firstname | slice:0:1}}</button>
-                </div>
-          <div class = "email">
+          <div>
+            <button mat-mini-fab [matMenuTriggerFor]="menu" class="firstName">
+              {{firstname | slice:0:1}}</button>
+          </div>
+          <div class="email">
             <div>{{firstname}} {{lastname}}</div>
             <div>{{email}}</div>
           </div>
           <br>
           <hr style="width: 100%">
           <div fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-stroked-button color="primary" routerLink="/registration" 
-            class="buttons">Add Account</button>
+            <button mat-stroked-button color="primary" routerLink="/registration" class="buttons">Add Account</button>
             &nbsp;
-            <button mat-stroked-button color="primary" (click)="signout()" 
-            class="buttons">Sign Out</button>
+            <button mat-stroked-button color="primary" (click)="signout()" class="buttons">Sign Out</button>
           </div>
         </div>
-      </mat-menu>
+      </mat-menu> -->
+      <mat-menu class="mat-menu" #menu="matMenu" [overlapTrigger]="false">
+          <div class="signout">
+            <span fxLayout="row" fxLayoutGap="15px">
+
+              <button class="profilebutton">
+                <img src="{{img}}" style="float:left ;width:100px;height:100px;border-radius: 50%">
+              </button>
+              <p class="name_onscreen">{{firstName }}&nbsp;{{lastName}} </p>
+            </span>
+            <p class="mail"> {{email}}</p>
+          </div>
+          <hr>
+          <h4>upload pic</h4>
+          <input type="file" (change)=onFileSelected($event)>
+          <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button>
+          <button class="signup_button" mat-raised-button color="primary" style="float:right" 
+                  (click)="signout()">Logout</button>
+        </mat-menu>
     </div>
   </div>
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
   <div fxlayout=r ow fxLayoutAlign="center center"></div>
-  <div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" 
-  fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayoutGap.xs="0">
   </div>
   <div fxFlex="50" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
-  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-  [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
       <a mat-list-item routerLink="/home/notes"><img src="../../../assets/images/notes.svg">
-      <span class="one">Notes</span></a>
+        <span class="one">Notes</span></a>
       <a mat-list-item routerLink="/home/reminder"><img src="../../../assets/images/reminder.svg">
-      <span class="one">Reminder</span></a>
+        <span class="one">Reminder</span></a>
       <a mat-list-item routerLink="/home/archive"><img src="../../../assets/images/archive.svg">
-      <span class="one">Archive</span></a>
+        <span class="one">Archive</span></a>
       <hr>
       <div>
         <p style="margin-left: 10px;">Labels</p>
@@ -77,10 +94,10 @@
         </div>
       </div>
       <a mat-list-item (click)="openDialog()"><img src="../../../assets/images/label.svg">
-      <span class="one">Add Label</span></a>
+        <span class="one">Add Label</span></a>
       <hr>
       <a mat-list-item routerLink="/home/bin"><img src="../../../assets/images/bin.svg">
-      <span class="one">Trash</span></a>
+        <span class="one">Trash</span></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

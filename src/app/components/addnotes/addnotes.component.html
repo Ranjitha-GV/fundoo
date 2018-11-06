@@ -12,20 +12,21 @@
       <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
     </div>
     <div contenteditable="true" class="editable" id="title" data-text="Title"></div> <br>
-    <div *ngIf="listing == 2">
+    <div *ngIf="listing">
       <div contenteditable="true" class="edit" id="description" data-text="Take a note.."></div> <br> <br>
     </div>
-    <div *ngIf="listing == 3">
-      <hr>
-      <div fxLayoutAlign="center center">
-        <mat-icon> add </mat-icon>
-        <!-- <div *ngFor = "let key of save"> -->
-        <!-- <span contenteditable="true" class="edit" id = "description" data-text="List"></span> -->
-        <input (keydown)="onKeydown($event)" id="description" class="edit" placeholder="List" [(ngModel)]="keys">
-        <!-- <mat-checkbox>hey</mat-checkbox> -->
-        <!-- </div> -->
+    <div *ngIf="!listing" id="title" autofocus #description style = "margin-bottom: 20px;">
+      <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row" style = "margin-bottom: 5px;">
+        <mat-checkbox fxFlex="5%"></mat-checkbox>
+        <input fxFlex="90" *ngIf="!listing" class="inputNote1" id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
+        <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" style = "cursor: pointer;">cancel</mat-icon>
       </div>
-      <hr><br><br>
+      <mat-divider></mat-divider>
+      <div class="check" fxLayout="row" id="title" id="note" autofocus #description>
+        <mat-icon fxFlex="5%">add</mat-icon>
+        <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()">
+      </div>
+      <mat-divider></mat-divider>
     </div>
     <div *ngFor="let index of add" class="cancel">
       <div *ngIf="index.isDeleted == false">

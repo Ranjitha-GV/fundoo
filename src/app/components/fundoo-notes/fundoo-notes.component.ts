@@ -111,6 +111,34 @@ export class FundooNotesComponent {
     this.grid = 0;
     this.data.changeGridEvent(true);
   }
+  selectedFile = null;
+  ProfilePath;
+ onFileSelected(event){
+this.selectedFile=event.path[0].files[0];
+console.log(event.target.value);
+this.ProfilePath=event.target.value;
+console.log(this.selectedFile.name);
+ }
+ image={};
+ public image2=localStorage.getItem('imageUrl');
+ img="http://34.213.106.173/"+this.image2;
+ onUpload(){
+  var token=localStorage.getItem('token');
+  
+  const uploadData = new FormData();
+  uploadData.append('file', this.selectedFile, this.selectedFile.name);
+   this.myHttpService.httpAddImage('/user/uploadProfileImage',uploadData,token).subscribe(res=>{
+     console.log("url: ", res['status'].imageUrl )
+     
+     
+    
+     console.log(this.ProfilePath);
+   },error=>{
+     console.log(error);
+     
+   })
+
+ }
 
   ngOnInit() {
     this.firstname = localStorage.getItem('firstname');

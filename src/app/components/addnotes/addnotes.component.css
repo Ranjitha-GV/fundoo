@@ -58,3 +58,12 @@ mat-card
 {
     margin-bottom: -7%;
 }
+.checkBox
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+    word-wrap: break-word;
+    width: 100%;
+    min-height: 20px;
+}
