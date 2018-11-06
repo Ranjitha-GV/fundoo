@@ -9,37 +9,30 @@ import { HttpService } from '../../services/http.service';
 })
 export class NewLabelComponent implements OnInit {
 
-  constructor( private route : ActivatedRoute, private myHttpService : HttpService) { }
+  constructor(private route: ActivatedRoute, private myHttpService: HttpService) { }
 
   labelArray = [];
   labelList;
+  token = localStorage.getItem('token');
 
-  ngOnInit() 
-  {
-    console.log('I am in new-label');
+  ngOnInit() {
     this.route.params.subscribe(
-      (params:Params) => {
+      (params: Params) => {
         this.labelList = params['labelList'];
         this.getLabel(this.labelList);
 
       }
     )
   }
-  token  =  localStorage.getItem('token');
-  getLabel(labelList)
-  {
-    console.log(labelList);
-    this.myHttpService.postNotes('/notes/getNotesListByLabel/'+ labelList,{}, this.token)
-    .subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        this.labelArray = data['data'].data;
-        console.log(this.labelArray);
-        
-      },
-      error => {
-        console.log("Error", error);
-      })
+  getLabel(labelList) {
+    this.myHttpService.postNotes('/notes/getNotesListByLabel/' + labelList, {}, this.token)
+      .subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.labelArray = data['data'].data;
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
-
 }

@@ -6,7 +6,7 @@ import { HttpService } from '../../services/http.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { LabelComponent } from '../label/label.component';
 import { SearchService } from '../../services/search.service';
 
@@ -22,20 +22,27 @@ export class FundooNotesComponent {
     .pipe(
       map(result => result.matches)
     );
+
   show: any = 0;
-  searchElement : any;
+  searchElement: any;
   public grid = 0;
+  firstname: any;
+  email: any;
+  lastname: any;
+  value = [];
+  token = localStorage.getItem('token');
+  id = localStorage.getItem('userId');
   @ViewChild('labelList') labelList: ElementRef;
+  @ViewChild('newLabel') newLabel: ElementRef;
+
+  constructor(public dialog: MatDialog, public data: SearchService, public route:
+    ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver:
+      BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
+
 
   toggle() {
     this.show = 1;
   }
-
-  constructor(public dialog: MatDialog, public data : SearchService, public route: ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver: BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
-  token = localStorage.getItem('token');
-  @ViewChild('newLabel') newLabel: ElementRef;
-  id = localStorage.getItem('userId')
-
 
   signout() {
     console.log(this.token);
@@ -53,10 +60,6 @@ export class FundooNotesComponent {
       })
 
   }
-  firstname: any;
-  email: any;
-  lastname: any;
-
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelComponent, {
@@ -66,54 +69,45 @@ export class FundooNotesComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       this.label();
-      console.log('The dialog was closed');
     });
   }
-  value = [];
 
   label() {
-    // this.value = [];
     let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         console.log("GET Request is successful ", data);
-        
-      for(var i = 0; i < data['data']['details'].length; i++ )
-          {
-            if(data['data']['details'][i].isDeleted == false)
-            {
-              tempArr.push(data['data']['details'][i]);
-            }
+        for (var i = 0; i < data['data']['details'].length; i++) {
+          if (data['data']['details'][i].isDeleted == false) {
+            tempArr.push(data['data']['details'][i]);
           }
-          this.value = tempArr;
-        console.log(this.value);
+        }
+        this.value = tempArr;
       },
       error => {
         console.log("Error", error);
       })
   }
-  labelClick(labelList)
-  {
+
+  labelClick(labelList) {
     var labelList = labelList.label;
-    console.log('I am in fundoo')
-    this.router.navigate(['/home/newlabel/'+labelList]);
+    this.router.navigate(['/home/newlabel/' + labelList]);
   }
-  searchEle()
-  {
+
+  searchEle() {
     this.router.navigate(['/home/search']);
   }
 
-  keyPress()
-  {
+  keyPress() {
     this.data.changeMessage(this.searchElement);
   }
-  view()
-  {
+
+  view() {
     this.grid = 1;
     this.data.changeGridEvent(false);
   }
-  viewClose()
-  {
+  
+  viewClose() {
     this.grid = 0;
     this.data.changeGridEvent(true);
   }

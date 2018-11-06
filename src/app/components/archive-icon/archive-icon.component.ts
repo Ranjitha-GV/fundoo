@@ -12,8 +12,10 @@ export class ArchiveIconComponent implements OnInit {
   token = localStorage.getItem('token');
   @Input() archive;
   @Output() archiveEmit = new EventEmitter();
+
   ngOnInit() {
   }
+
   archivePost(archive) {
     this.myHttpService.postArchive('/notes/archiveNotes',
       {
@@ -27,5 +29,4 @@ export class ArchiveIconComponent implements OnInit {
           console.log("Error", error);
         })
   }
- 
 }

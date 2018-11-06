@@ -9,20 +9,19 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(public myHttpService : HttpService, public data : SearchService) { }
+  constructor(public myHttpService: HttpService, public data: SearchService) { }
   token = localStorage.getItem('token');
   response = [];
   noteCard = [];
-  searchElement : any;
+  searchElement: any;
 
-  ngOnInit() 
-  {
-    this.data.currentMessage.subscribe(message =>{
+  ngOnInit() {
+    this.data.currentMessage.subscribe(message => {
       this.searchElement = message;
     })
     this.getNoteCard();
   }
- 
+
   getNoteCard() {
     this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
       (data) => {
@@ -34,7 +33,6 @@ export class SearchComponent implements OnInit {
             this.noteCard.push(data['data']['data'][i]);
           }
         }
-        console.log(this.noteCard);
       },
       error => {
         console.log("Error", error);

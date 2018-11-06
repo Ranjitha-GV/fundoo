@@ -13,5 +13,15 @@
 }
 .grid
 {
-    /* width: 250px; */
+    
+}
+.bin 
+{
+    margin-top: 15px; 
+}
+.trash 
+{
+    margin-left: 60px; 
+    margin-top: 20px; 
+    margin-bottom: 20px;
 }

@@ -11,12 +11,29 @@
 {
     display: flex;
 }
-
+.cardsStyle 
+{
+    margin-top: 20px; 
+    width:fixed;
+}
 .grid
 {
-    /* width: 900px; */
+
+}
+.main 
+{
+    margin-top: 20px; 
+    margin-bottom: 20px;
 }
 .list
 {
     width:1000px;
+}
+.pin
+{
+    float : right;
+}
+.mainStyle 
+{
+    padding: 5px;
 }

@@ -1,6 +1,5 @@
 mat-card 
 {
-  
   opacity: 0.7;
   cursor: text;
   width: 40%;
@@ -20,6 +19,7 @@ mat-card
     outline: none;
     word-wrap: break-word;
 }
+
 .editable
 {
     font-weight: bold;
@@ -30,16 +30,11 @@ mat-card
     width: 100%;
     min-height: 20px;
 }
+
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
 
-/* div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
-    content: attr(data-placeholder);
-    float: left;
-    margin-left: 2px;
-    color: black;
-} */
 .edit 
 {
     border: none;

@@ -8,15 +8,15 @@ import { HttpService } from '../../services/http.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private myHttpService : HttpService) { }
-  @Input()  reminderValue;
+  constructor(private myHttpService: HttpService) { }
+  @Input() reminderValue;
+  token = localStorage.getItem('token');
 
   ngOnInit() {
   }
-  token = localStorage.getItem('token');
-  reminder()
-  { 
-    this.myHttpService.postNotes('/notes/'+this.reminderValue.id+'/addUpdateReminderNotes', {
+
+  reminder() {
+    this.myHttpService.postNotes('/notes/' + this.reminderValue.id + '/addUpdateReminderNotes', {
       "title": this.reminderValue.title,
       "description": this.reminderValue.title,
       "reminder": [
@@ -26,10 +26,9 @@ export class ToolbarComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
-
       },
       error => {
         console.log("Error", error);
-      }) 
+      })
   }
 }

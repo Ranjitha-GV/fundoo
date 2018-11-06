@@ -13,38 +13,36 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ResetPasswordComponent implements OnInit {
 
   constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
+
   email = new FormControl('', [Validators.required, Validators.email]);
+  model: any = {};
 
   getErrorMessage() {
     return this.email.hasError('required') ? 'Email is Required' :
       this.email.hasError('email') ? 'Not a valid email! Required format: abcd@gmail.com' :
         '';
   }
-  model: any = {};
   reset() {
     if (!this.email.invalid) {
       this.myHttpService.resetPass('/user/reset', {
         "email": this.model.email,
       })
-      .subscribe(
-        (data) => {
-          console.log("POST Request is successful ", data);
-          this.snackBar.open("Email Sent to your mail", "Reset password using the sent link", {
-            duration: 3000
-          })
+        .subscribe(
+          (data) => {
+            console.log("POST Request is successful ", data);
+            this.snackBar.open("Email Sent to your mail", "Reset password using the sent link", {
+              duration: 3000
+            })
 
-        },
-        error => {
-          console.log("Error", error);
-          this.snackBar.open("Invalid email address", "Reset failed", {
-            duration: 3000
+          },
+          error => {
+            console.log("Error", error);
+            this.snackBar.open("Invalid email address", "Reset failed", {
+              duration: 3000
+            })
           })
-        })
-      
-      console.log(this.model.email);
     }
-    else
-    {
+    else {
       this.snackBar.open("Please do not leave email field empty", "Email required", {
         duration: 3000
       })

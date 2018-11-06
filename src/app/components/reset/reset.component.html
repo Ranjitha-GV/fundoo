@@ -1,4 +1,5 @@
-<div align-content="center" class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="10px"
+<div align-content="center" class="container" fxLayout="row" fxLayout.xs="row" 
+fxLayoutAlign="center center" fxLayoutGap="10px"
   fxLayoutGap.xs="0">
   <div fxFlex="30" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>
   <div fxFlex="40" fxFlexOrder="3"></div>
@@ -13,18 +14,24 @@
     </h1>
     <p class="hElement">Reset your password here</p>
     <mat-form-field class="password1">
-      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password" [type]="hide1 ? 'password' : 'text'" minlength="8" [formControl]="password"
-        required>
-        <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <input matInput placeholder="Password" type="password" name="password" 
+      [(ngModel)]="model.password" [type]="hide1 ? 'password' : 'text'" minlength="8" 
+      [formControl]="password" required>
+      <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
       <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
-    </mat-form-field> <br> 
+    </mat-form-field> <br>
     <mat-form-field class="password">
-      <input matInput placeholder="Confirm Password" type="password" name="confirmPassword" [type]="hide ? 'password' : 'text'" [(ngModel)]="model.confirmPassword"
-        minlength="8" [formControl]="confirmPassword" required>
-        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error *ngIf="confirmPassword.invalid">{{getErrorMessageConfirmPassword()}}</mat-error>
+      <input matInput placeholder="Confirm Password" type="password" name="confirmPassword" 
+      [type]="hide ? 'password' : 'text'" [(ngModel)]="model.confirmPassword" minlength="8" 
+      [formControl]="confirmPassword" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+      <mat-error *ngIf="confirmPassword.invalid">{{getErrorMessageConfirmPassword()}}
+      </mat-error>
     </mat-form-field> <br>
     <a href="login">Sign in</a>
-    <button mat-raised-button class="nextButton" color="primary" (click)="reset()">Submit</button> <br>
+    <button mat-raised-button class="nextButton" color="primary" (click)="reset()">
+    Submit</button> <br>
   </mat-card>
 </div>

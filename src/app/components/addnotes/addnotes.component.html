@@ -1,51 +1,51 @@
-<div fxLayout = "column" fxLayoutAlign = "center center" style = "margin-top: 40px;">
-      <mat-card *ngIf='hide == 0' aria-placeholder="Take a Note" (click)="move()">
-        Take a note...
-        <div class="list">
-          <b> <mat-icon matTooltip="New List" matTooltipPosition="above" (click) = "list()">list</mat-icon> </b> &nbsp;
-          <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
-          <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
-        </div>
-      </mat-card>
-        <mat-card *ngIf='hide == 1' [style.backgroundColor] = "color">
-          <div>
-            <img src = "../../../assets/images/pin.svg" matTooltip="Pin" class = "pin">
-          </div>
-          <div  contenteditable="true" class="editable" id = "title" data-text="Title"></div> <br>
-          <div *ngIf = "listing == 2">
-          <div  contenteditable="true" class="edit" id = "description" data-text="Take a note.."></div> <br> <br>
-        </div>
-        <div *ngIf = "listing == 3">
-          <hr>
-          <div fxLayoutAlign = "center center">
-          <mat-icon> add </mat-icon> 
-          <!-- <div *ngFor = "let key of save"> -->
-          <!-- <span contenteditable="true" class="edit" id = "description" data-text="List"></span> -->
-          <input (keydown)="onKeydown($event)" id = "description" class="edit" placeholder="List" [(ngModel)] = "keys">  
-          <!-- <mat-checkbox>hey</mat-checkbox> -->
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-top: 40px;">
+  <mat-card *ngIf='hide == 0' aria-placeholder="Take a Note" (click)="move()">
+    Take a note...
+    <div class="list">
+      <b> <mat-icon matTooltip="New List" matTooltipPosition="above" (click)="list()">list</mat-icon> </b> &nbsp;
+      <b> <mat-icon matTooltip="New note with Image" matTooltipPosition="above">insert_photo</mat-icon> </b> &nbsp;
+      <b> <mat-icon matTooltip="New note with Drawing" matTooltipPosition="above">create</mat-icon> </b>
+    </div>
+  </mat-card>
+  <mat-card *ngIf='hide == 1' [style.backgroundColor]="color">
+    <div>
+      <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
+    </div>
+    <div contenteditable="true" class="editable" id="title" data-text="Title"></div> <br>
+    <div *ngIf="listing == 2">
+      <div contenteditable="true" class="edit" id="description" data-text="Take a note.."></div> <br> <br>
+    </div>
+    <div *ngIf="listing == 3">
+      <hr>
+      <div fxLayoutAlign="center center">
+        <mat-icon> add </mat-icon>
+        <!-- <div *ngFor = "let key of save"> -->
+        <!-- <span contenteditable="true" class="edit" id = "description" data-text="List"></span> -->
+        <input (keydown)="onKeydown($event)" id="description" class="edit" placeholder="List" [(ngModel)]="keys">
+        <!-- <mat-checkbox>hey</mat-checkbox> -->
         <!-- </div> -->
-         </div>
-          <hr><br><br>
-        </div>
-        <div *ngFor = "let index of add" class = "cancel">
-          <div *ngIf = "index.isDeleted == false">
-          <mat-chip-list selected>
-            <mat-chip>{{index.label}}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-         </div>
-        </div>
-          <div>
-            <div class = "tool" fxLayout="row" fxLayoutAlign="space-between" >
-         <app-toolbar></app-toolbar>
-         <app-collab></app-collab>
-         <app-color (emitColor) = colorsEntry($event)></app-color>
-         <app-photo></app-photo>
-         <app-archive-icon></app-archive-icon>
-         <app-more [addArray] = "add" (addLabelEvent) = labelEvent($event)></app-more>
-          <span>  <button mat-button class = "close" type = submit (click) = "back()">Close</button> </span>
-        </div>
-        </div>
-        </mat-card>
-  </div>
+      </div>
+      <hr><br><br>
+    </div>
+    <div *ngFor="let index of add" class="cancel">
+      <div *ngIf="index.isDeleted == false">
+        <mat-chip-list selected>
+          <mat-chip>{{index.label}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    <div>
+      <div class="tool" fxLayout="row" fxLayoutAlign="space-between">
+        <app-toolbar></app-toolbar>
+        <app-collab></app-collab>
+        <app-color (emitColor)=colorsEntry($event)></app-color>
+        <app-photo></app-photo>
+        <app-archive-icon></app-archive-icon>
+        <app-more [addArray]="add" (addLabelEvent)=labelEvent($event)></app-more>
+        <span> <button mat-button class="close" type=submit (click)="back()">Close</button> </span>
+      </div>
+    </div>
+  </mat-card>
+</div>

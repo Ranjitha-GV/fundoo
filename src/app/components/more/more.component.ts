@@ -20,13 +20,16 @@ export class MoreComponent implements OnInit {
   @Output() checkEmit = new EventEmitter();
   @Output() addLabelEvent = new EventEmitter();
   token = localStorage.getItem('token');
-  search : any;
-  // value1 : any = [];
+  search: any;
+  value1 = null;
+  body: any;
+
+
 
   ngOnInit() {
   }
+
   delete(id) {
-    console.log(this.notedetails);
     this.myHttpService.deleteNotes('/notes/trashNotes', {
       "isDeleted": true,
       "noteIdList": [this.notedetails.id]
@@ -40,9 +43,8 @@ export class MoreComponent implements OnInit {
         console.log("Error", error);
       })
   }
-  value1 = null;
-  addLabel()
-  {
+
+  addLabel() {
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         this.value1 = [];
@@ -51,34 +53,28 @@ export class MoreComponent implements OnInit {
           if (data['data']['details'][i].isDeleted == false) {
             this.value1.push(data['data']['details'][i])
           }
-        } 
-        var tempArr = this.value1 ;
-        console.log(this.value1);
+        }
+        var tempArr = this.value1;
       },
       error => {
         console.log("Error", error);
       })
   }
-  body : any;
-  check(label)
-  {
-    console.log(label);
+
+  check(label) {
     this.addLabelEvent.emit(label);
-    // this.addArray = null;
     this.body = {
-      "noteId" : this.notedetails.id,
-      "lableId" : label.id
+      "noteId": this.notedetails.id,
+      "lableId": label.id
     }
-    this.myHttpService.postNotes('/notes/'+ this.notedetails.id +'/addLabelToNotes/' + label.id + '/add',
-    this.body,this.token).subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        this.eventEntry.emit({});
-        
-      },
-      error => {
-        console.log("Error", error);
-        // this.addArray = null;
-      })
+    this.myHttpService.postNotes('/notes/' + this.notedetails.id + '/addLabelToNotes/' + label.id + '/add',
+      this.body, this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.eventEntry.emit({});
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
 }

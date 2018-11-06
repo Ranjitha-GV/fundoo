@@ -44,11 +44,14 @@ export class RegistrationComponent implements OnInit {
   basicset = true;
   advanceset = true;
   cards = [];
+  model: any = {};
+  service: any;
   registrationForm: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
   lastname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
-  password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
+  password = new FormControl('', [Validators.required,
+  Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
   confirmPassword = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
   getErrorMessagefirstName() {
@@ -78,7 +81,8 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  constructor(private router: Router, private myHttpService: HttpService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private myHttpService: HttpService, private snackBar:
+    MatSnackBar) { }
 
   ngOnInit() {
     this.records = this.myHttpService.getConfig().subscribe(data => {
@@ -88,12 +92,8 @@ export class RegistrationComponent implements OnInit {
         this.cards.push(data["data"].data[i]);
       }
       var value = data["data"].data.name;
-      console.log("cards are", this.cards);
     })
   }
-
-  model: any = {};
-  service: any;
 
   next() {
     let pass = this.model.password;
@@ -142,7 +142,6 @@ export class RegistrationComponent implements OnInit {
         error => {
           console.log("Error", error);
         })
-    // this.router.navigateByUrl('/login');
   }
 
   selectCards(card) {
@@ -155,8 +154,6 @@ export class RegistrationComponent implements OnInit {
       this.cards[i].select = false;
     }
   }
-
-
 }
 
 

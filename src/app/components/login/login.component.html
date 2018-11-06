@@ -1,5 +1,6 @@
 <div *ngIf='clickedDivState == "start"'>
-  <div align-content="center" class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="10px"
+  <div align-content="center" class="container" fxLayout="row" fxLayout.xs="row" 
+  fxLayoutAlign="center center" fxLayoutGap="10px"
     fxLayoutGap.xs="0">
     <div fxFlex="30" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>
     <div fxFlex="40" fxFlexOrder="3"></div>
@@ -12,19 +13,23 @@
         <span class="o">o</span>
         <span class="oo">o</span>
       </h1>
-      <p align=c enter class="hElement">Sign in <span><p align=c enter>to continue to Fundoo </p></span></p>
+      <p align=c enter class="hElement">Sign in <span><p align=center>to continue to Fundoo 
+      </p></span></p>
       <mat-form-field class="emailInput">
-        <input matInput placeholder="Email ID" [(ngModel)]="model.email" name="email" [formControl]="email">
+        <input matInput placeholder="Email ID" [(ngModel)]="model.email" name="email" 
+        [formControl]="email">
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field> <br> <br>
-      <button mat-raised-button class="nextButton" color="primary" (click)="changeDivState()">Next</button> <br>
+      <button mat-raised-button class="nextButton" color="primary" (click)="changeDivState()">
+      Next</button> <br>
       <a href="/registration">Create an account</a>
     </mat-card>
   </div>
 </div>
 
 <div [@EnterLeave]="'flyIn'" *ngIf='clickedDivState == "end"'>
-  <div align-content="center" class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="10px"
+  <div align-content="center" class="container" fxLayout="row" fxLayout.xs="row" 
+  fxLayoutAlign="center center" fxLayoutGap="10px"
     fxLayoutGap.xs="0">
     <div fxFlex="30" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>
     <div fxFlex="40" fxFlexOrder="3"></div>
@@ -37,15 +42,18 @@
         <span class="o">o</span>
         <span class="oo">o</span>
       </h1>
-      <p align=c enter class="hElement">Sign in <span><p align=c enter>to continue to Fundoo </p></span></p>
+      <p class="hElement">Sign in <span><p>to continue to Fundoo </p></span></p>
       <mat-form-field class="password">
-        <input matInput placeholder="Enter your password" [formControl]="password" [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'"
-pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$">
+        <input matInput placeholder="Enter your password" [formControl]="password" 
+        [(ngModel)]="model.password" [type]="hide ? 'password' : 'text'"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$">
         <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
-        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
       </mat-form-field> <br>
       <a class="dElement" href="reset-password">Forgot Password?</a>
-      <button mat-raised-button class="nextButton" color="primary" (click)="login()">Login</button> <br>
+      <button mat-raised-button class="nextButton" color="primary" (click)="login()">
+      Login</button> <br>
     </mat-card>
   </div>
 </div>

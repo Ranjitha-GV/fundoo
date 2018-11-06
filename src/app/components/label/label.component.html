@@ -5,7 +5,8 @@
     <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
   </div>
     <div fxFlex =65 >
-      <span contenteditable="true" class="edit" data-placeholder="Create new Label" #newLabel></span>
+      <span contenteditable="true" class="edit" data-placeholder="Create new Label" 
+      #newLabel></span>
     </div>
     <div fxFlex = 15>
     <mat-icon matTooltip="Done" (click) = "addLabel()">check</mat-icon>
@@ -16,8 +17,10 @@
       <div *ngFor="let val of value1; trackBy:val?.id">
         <div *ngIf="show != val.id">
           <mat-icon matTooltip="Delete Label">label_outline</mat-icon>
-          <span contenteditable="false" class="name" id="label" [innerHTML]="val.label"></span>
-          <mat-icon matTooltip="Edit Label" (click)="edit2(val.id)" class="create">create</mat-icon>
+          <span contenteditable="false" class="name" id="label" [innerHTML]="val.label">
+          </span>
+          <mat-icon matTooltip="Edit Label" (click)="edit2(val.id)" class="create">create
+          </mat-icon>
         </div>
         <div *ngIf="show == val.id">
           <mat-icon matTooltip="Delete Label" (click)="labelDelete(val.id)">delete</mat-icon>
@@ -29,7 +32,5 @@
   </div>
   <div mat-dialog-actions class="button">
     <button mat-button (click)="addLabel()">Done</button>
-    <!-- <button mat-button [mat-dialog-close] = "res" id = "done">Done</button> -->
   </div>
 </div>
-<!-- <app-addnotes></app-addnotes> -->

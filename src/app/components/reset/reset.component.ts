@@ -11,10 +11,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./reset.component.css']
 })
 export class ResetComponent implements OnInit {
+
+  constructor(private myHttpService: HttpService, public route: ActivatedRoute, 
+  private snackBar: MatSnackBar) { }
+
   resetForm: FormGroup;
   model: any = {};
   hide = true;
   hide1 = true;
+  public accessToken = this.route.snapshot.params.forgotToken;
+  public input = new FormData();
   password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
   confirmPassword = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
@@ -28,8 +34,6 @@ export class ResetComponent implements OnInit {
       this.confirmPassword.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
         '';
   }
-  public input = new FormData();
-  // Add your values in here 
   reset() {
     let pass = this.model.password;
     let confirmPass = this.model.confirmPassword;
@@ -52,16 +56,12 @@ export class ResetComponent implements OnInit {
       return;
     }
     this.input.append('newPassword', this.model.password);
-    console.log(this.input)
     this.myHttpService.resetPost("/user/reset-password", body, this.accessToken).subscribe(response => {
       console.log("successfull", response);
     }, error => {
       console.log("failed", error)
     })
-    console.log("accessToken", this.accessToken)
   }
-  constructor(private myHttpService: HttpService, public route: ActivatedRoute, private snackBar: MatSnackBar) { }
-  public accessToken = this.route.snapshot.params.forgotToken;
 
   ngOnInit() {
   }

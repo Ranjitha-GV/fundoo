@@ -12,52 +12,49 @@ import { SearchService } from '../../services/search.service';
 })
 export class MainnotesComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, public dialog: MatDialog, public data : SearchService) 
-  {
+  constructor(private myHttpService: HttpService, public dialog: MatDialog, public data: SearchService) {
     this.data.currentChipEvent.subscribe(
-      message=>{
-      console.log('I am emitted');
-      if(message)
-      {
-        this.addEntry.emit({
-        })
-      }
-    })
-   }
+      message => {
+        console.log('I am emitted');
+        if (message) {
+          this.addEntry.emit({
+          })
+        }
+      })
+  }
   array: any = [];
   token = localStorage.getItem('token');
-  noteCard : any = [];
-  response : any;
-  interval : any;
+  noteCard: any = [];
+  response: any;
+  interval: any;
   toggle = true;
   @Input() searchElement;
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();
+
   ngOnInit() {
     this.getlabels();
     this.gridList();
   }
-  nextEntry(event)
-  {
-    if(event)
-    {
+
+  nextEntry(event) {
+    if (event) {
       this.addEntry.emit({
 
       })
     }
   }
-  gridList()
-  {
-    this.data.currentGridEvent.subscribe(message =>{
-      console.log('i am in grid');
-      console.log(message);
-     this.toggle = message;
+
+  gridList() {
+    this.data.currentGridEvent.subscribe(message => {
+      this.toggle = message;
     })
   }
+
   openUpdateNotes(note): void {
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '800',
-      height : 'fit-content',
+      height: 'fit-content',
       data: note
     });
 
@@ -66,25 +63,24 @@ export class MainnotesComponent implements OnInit {
       this.addEntry.emit({});
     });
   }
-  remove(label, note)
-  {
-    this.myHttpService.postNotes('/notes/'+ note +'/addLabelToNotes/' + label + '/remove',
-    {
-      "noteId" : note,
-      "lableId" : label
-    },
-     this.token).subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        this.addEntry.emit({});
+
+  remove(label, note) {
+    this.myHttpService.postNotes('/notes/' + note + '/addLabelToNotes/' + label + '/remove',
+      {
+        "noteId": note,
+        "lableId": label
       },
-      error => {
-        console.log("Error", error);
-      })
+      this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.addEntry.emit({});
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
-  
-  getlabels()
-  {
+
+  getlabels() {
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         var value1 = [];
@@ -94,9 +90,6 @@ export class MainnotesComponent implements OnInit {
             value1.push(data['data']['details'][i])
           }
         }
-        console.log(value1);
-        var noteLabels = value1;
-        console.log("I am notelabels",noteLabels);
         this.addEntry.emit({
         })
       },

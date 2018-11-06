@@ -14,37 +14,33 @@ import { SearchService } from '../../services/search.service';
 })
 export class LabelComponent implements OnInit {
 
+  constructor(private myHttpService: HttpService, public dialogRef:
+    MatDialogRef<FundooNotesComponent>, public data: SearchService) { }
+
   public show;
-  // SearchService: any;
-
-  constructor(private myHttpService: HttpService, public dialogRef : MatDialogRef<FundooNotesComponent>,  public data : SearchService) { }
-
   value1: any = [];
   @ViewChild('newLabel') newLabel: ElementRef;
   @ViewChild('myLabel') myLabel: ElementRef;
-  clear : any;
-  res : string;
-  // label : any;
+  clear: any;
+  res: string;
+  id = localStorage.getItem('userId')
+  token = localStorage.getItem('token');
 
   onNoClick(): void {
   }
+
   ngOnInit() {
     this.delete();
   }
-  id = localStorage.getItem('userId')
-  token = localStorage.getItem('token');
+
   addLabel() {
-   var label = this.newLabel.nativeElement.innerHTML
-   console.log(label)
-   for(var i =0; i<this.value1.length; i++)
-   {
-    if(this.value1[i].label == label)
-    {
-      console.log(this.value1[i]);
-      alert('duplicate data');
-      return false;
+    var label = this.newLabel.nativeElement.innerHTML
+    for (var i = 0; i < this.value1.length; i++) {
+      if (this.value1[i].label == label) {
+        alert('duplicate data');
+        return false;
+      }
     }
-  }
     this.myHttpService.postNotes('/noteLabels', {
       "label": this.newLabel.nativeElement.innerHTML,
       "isDeleted": false,
@@ -62,7 +58,6 @@ export class LabelComponent implements OnInit {
         this.dialogRef.close();
       })
   }
- 
 
   labelDelete(val) {
     this.myHttpService.deleteLabel('/noteLabels/' + val + '/deleteNoteLabel', {
@@ -71,7 +66,7 @@ export class LabelComponent implements OnInit {
       (data) => {
         console.log("DELETE Request is successful ", data);
         this.data.changeChipEvent(true);
-       this.delete();
+        this.delete();
       },
       error => {
         console.log("Error", error);
@@ -79,7 +74,6 @@ export class LabelComponent implements OnInit {
   }
 
   delete() {
-    // this.value1 = [];
     let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
@@ -91,7 +85,7 @@ export class LabelComponent implements OnInit {
         }
         this.value1 = tempArr;
         console.log(this.value1);
-        
+
       },
       error => {
         console.log("Error", error);
@@ -108,7 +102,6 @@ export class LabelComponent implements OnInit {
       this.token).subscribe(
         (data) => {
           console.log("UPDATE Request is successful ", data);
-          console.log(data);
           this.delete();
         },
         error => {
@@ -119,8 +112,7 @@ export class LabelComponent implements OnInit {
     this.show = id;
   }
 
-  close()
-  {
-     this.newLabel.nativeElement.innerHTML = ' ';
+  close() {
+    this.newLabel.nativeElement.innerHTML = ' ';
   }
 }

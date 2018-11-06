@@ -1,34 +1,38 @@
-<div  class = "container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" style="margin-top: 20px; margin-bottom: 20px;">
-  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId' fxFlex="0 1 calc(30% - 32px)">
+<div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="main">
+  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId' 
+  fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-    <mat-card align="center" style="margin-top: 20px; width:fixed;" [style.backgroundColor]="note.color">
-      <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
-        <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin" style="float : right;">
-        <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
-        <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
-      </div>
-      <div fxLayout="row">
-        <div *ngFor = "let index of note.noteLabels" class = "cancel">
-          <div *ngIf = "index.isDeleted == false">
-          <mat-chip-list selected>
-            <mat-chip><span [innerHTML]="index.label"> </span>
-              <mat-icon matChipRemove (click) ="remove(index.id,note.id)">cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
-         </div>
+      <mat-card align="center" class="cardsStyle" [style.backgroundColor]="note.color">
+        <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
+          <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
+          <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
+          <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
         </div>
-      </div>
-      <div>
-        <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
-          <app-toolbar [reminderValue] = "note" style="padding: 5px;"></app-toolbar>
-          <app-collab style="padding: 5px;"></app-collab>
-          <app-color style="padding: 5px;" [color]="note" (changeColor)=nextEntry($event)></app-color>
-          <app-photo style="padding: 5px;"></app-photo>
-          <app-archive-icon style="padding: 5px;" [archive]="note" (archiveEmit)=nextEntry($event)></app-archive-icon>
-          <app-more [notedetails]="note" style="padding: 5px;" (eventEntry)="nextEntry($event)"></app-more>
+        <div fxLayout="row">
+          <div *ngFor="let index of note.noteLabels" class="cancel">
+            <div *ngIf="index.isDeleted == false">
+              <mat-chip-list selected>
+                <mat-chip><span [innerHTML]="index.label"> </span>
+                  <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
+                  </mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
         </div>
-      </div>
-    </mat-card>
-  </div>
+        <div>
+          <div class="tool" fxLayout="row" fxLayoutAlign="space-between center" 
+          class="mainStyle">
+            <app-toolbar [reminderValue]="note"></app-toolbar>
+            <app-collab></app-collab>
+            <app-color [color]="note" (changeColor)=nextEntry($event)></app-color>
+            <app-photo></app-photo>
+            <app-archive-icon [archive]="note" (archiveEmit)=nextEntry($event)>
+            </app-archive-icon>
+            <app-more [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
+          </div>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </div>

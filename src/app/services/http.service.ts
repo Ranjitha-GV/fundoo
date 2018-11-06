@@ -151,8 +151,7 @@ export class HttpService {
     }
     return this.http.delete(url, body);
   }
-  editLabel(url,body)
-  {
+  editLabel(url, body) {
     url = this.postUrl + url;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -160,7 +159,7 @@ export class HttpService {
         'Authorization': this.token
       })
     };
-    return this.http.post(url,body);
+    return this.http.post(url, body);
   }
 }
 

@@ -17,15 +17,18 @@ export class AddnotesComponent implements OnInit {
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
   @ViewChild('newLabel') newLabel: ElementRef;
-
   newObject: any;
+  save = [];
+  add = [];
+  array = [];
+  keys: any;
   @Output() onNewEntryAdded = new EventEmitter();
-  color : any ;
+  color: any;
+
   move() {
     this.hide = 1;
   }
-  list()
-  {
+  list() {
     this.listing = 3;
   }
   back() {
@@ -66,46 +69,29 @@ export class AddnotesComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
-        // this.delete();
-        // this.dialogRef.close();
-
       },
       error => {
         console.log("Error", error);
-        // this.dialogRef.close();
       })
   }
-  colorsEntry(event)
-  {
-    console.log(event);
+  colorsEntry(event) {
     this.color = event;
   }
-  keys : any;
+ 
   onKeydown(event) {
-    if (event.key === "Enter" || event.key === "letters" ) {
-      console.log(event); 
+    if (event.key === "Enter" || event.key === "letters") {
       this.save.push(this.keys);
-      //   "keys": "",
-      // "status": true
-    console.log(this.save);
     }
   }
-  save = [];
-  add = [];
-  array = [];
-  labelEvent(event)
-  {
-    if(this.add.indexOf(event)<0)
-    {
+
+  labelEvent(event) {
+    if (this.add.indexOf(event) < 0) {
       this.array.push(event.id);
       this.add.push(event);
-      console.log(this.array);
-      console.log(this.add);
     }
-    else
-    {
-      this.array.splice(this.array.indexOf(event),1);
-      this.add.splice(this.add.indexOf(event),1);
+    else {
+      this.array.splice(this.array.indexOf(event), 1);
+      this.add.splice(this.add.indexOf(event), 1);
     }
   }
   ngOnInit() {

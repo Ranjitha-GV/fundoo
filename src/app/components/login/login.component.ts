@@ -24,10 +24,16 @@ import { HttpService } from '../../services/http.service';
   ]
 })
 export class LoginComponent implements OnInit {
+
+  constructor(private router: Router, private snackBar: MatSnackBar, private myHttpService:
+    HttpService) { }
+
   hide = true;
   clickedDivState = 'start';
-
-  
+  model: any = {};
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required,
+  Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
   changeDivState() {
     console.log(this.email.value);
@@ -42,18 +48,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  model: any = {};
-  constructor(private router: Router, private snackBar: MatSnackBar, private myHttpService: HttpService) { }
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
-
   getErrorMessage() {
     return this.email.hasError('email') ? 'Not a valid email! Required format: abcd@gmail.com' :
-        '';
+      '';
   }
   getErrorMessagePassword() {
     return this.password.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
-        '';
+      '';
   }
   login() {
     this.myHttpService.loginPost('/user/login', {
@@ -66,17 +67,12 @@ export class LoginComponent implements OnInit {
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
           })
-          localStorage.setItem('token',data['id']);
-          localStorage.setItem('firstname',data['firstName']);
-          localStorage.setItem('lastname',data['lastName']);
-          localStorage.setItem('email',data['email']);
-          localStorage.setItem('userId',data['userId']);
-          this.router.navigateByUrl('/home'); 
-          console.log(data['firstName']);
-          console.log(data['lastName']);
-          console.log(data['email']);
-          console.log(data['userId']);
-          console.log(data['id']); 
+          localStorage.setItem('token', data['id']);
+          localStorage.setItem('firstname', data['firstName']);
+          localStorage.setItem('lastname', data['lastName']);
+          localStorage.setItem('email', data['email']);
+          localStorage.setItem('userId', data['userId']);
+          this.router.navigateByUrl('/home');
         },
         error => {
           console.log("Error", error);
@@ -84,13 +80,12 @@ export class LoginComponent implements OnInit {
             duration: 3000
           })
         })
-        this.model.email = '';
-        this.model.password = '';
+    this.model.email = '';
+    this.model.password = '';
   }
   ngOnInit() {
-    if(localStorage.getItem('token'))
-    {
-      this.router.navigateByUrl('/home');  
+    if (localStorage.getItem('token')) {
+      this.router.navigateByUrl('/home');
     }
 
   }

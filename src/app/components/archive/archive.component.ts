@@ -9,25 +9,25 @@ import { SearchService } from '../../services/search.service';
 })
 export class ArchiveComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, private data : SearchService) { }
+  constructor(private myHttpService: HttpService, private data: SearchService) { }
   card = [];
   toggle = true;
   @Output() addEntry = new EventEmitter();
   token = localStorage.getItem('token');
+
   ngOnInit() {
     this.gridList();
     this.getArchive();
-    
   }
-  getArchive()
-  {
+
+  getArchive() {
     this.myHttpService.getTrash('/notes/getArchiveNotesList', this.token).subscribe(
       (data) => {
         this.card = [];
         console.log("GET Request is successful ", data);
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isArchived == true && data['data']['data'][i].isDeleted == false) {
-          this.card.push(data['data']['data'][i]);
+            this.card.push(data['data']['data'][i]);
           }
         }
       },
@@ -35,10 +35,7 @@ export class ArchiveComponent implements OnInit {
         console.log("Error", error);
       })
   }
-  unarchive(note)
-  {
-    // var id = note.id
-    console.log(note);
+  unarchive(note) {
     this.myHttpService.postArchive('/notes/archiveNotes',
       {
         "isArchived": false,
@@ -51,18 +48,13 @@ export class ArchiveComponent implements OnInit {
           console.log("Error", error);
         })
   }
-  gridList()
-  {
-    this.data.currentGridEvent.subscribe(message =>{
-      console.log('i am in grid');
-      console.log(message);
-     this.toggle = message;
+  gridList() {
+    this.data.currentGridEvent.subscribe(message => {
+      this.toggle = message;
     })
   }
-  nextEntry(event)
-  {
-    if(event)
-    {
+  nextEntry(event) {
+    if (event) {
       this.getArchive();
     }
   }

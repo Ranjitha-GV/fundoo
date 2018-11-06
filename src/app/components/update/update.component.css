@@ -25,3 +25,11 @@
     margin-bottom: 10px;
     margin-left: 3px;
 }
+.update 
+{
+    cursor: pointer; 
+    padding-right: 40px; 
+    padding-left: 40px; 
+    padding-top: 20px; 
+    padding-bottom: 30px;
+}

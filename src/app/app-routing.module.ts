@@ -25,16 +25,16 @@ const appRoutes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetComponent },
   {
-    path: 'home', component: HomeComponent, canActivate : [AuthGuard],
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard],
     children: [
       { path: 'notes', component: NotesComponent },
       { path: 'bin', component: BinComponent },
       { path: 'archive', component: ArchiveComponent },
-      { path: 'reminder', component: ReminderComponent }, 
+      { path: 'reminder', component: ReminderComponent },
       { path: 'label', component: LabelComponent },
       { path: 'newlabel/:labelList', component: NewLabelComponent },
       { path: 'search', component: SearchComponent },
-      { path: '', redirectTo: 'notes', pathMatch: 'full' }    
+      { path: '', redirectTo: 'notes', pathMatch: 'full' }
 
     ]
   },
