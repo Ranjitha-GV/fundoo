@@ -16,10 +16,12 @@
       <div contenteditable="true" class="edit" id="description" data-text="Take a note.."></div> <br> <br>
     </div>
     <div *ngIf="!listing" id="title" autofocus #description style = "margin-bottom: 20px;">
-      <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row" style = "margin-bottom: 5px;">
+      <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row" 
+            style = "margin-bottom: 5px;">
         <mat-checkbox fxFlex="5%"></mat-checkbox>
         <input fxFlex="90" *ngIf="!listing" class="inputNote1" id="note" [(ngModel)]=data.data (keydown)="editing($event.data)">
-        <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete" style = "cursor: pointer;">cancel</mat-icon>
+        <mat-icon fxFlex="4%" (click)=ondelete(data) matTooltip="Delete"
+               style = "cursor: pointer;">cancel</mat-icon>
       </div>
       <mat-divider></mat-divider>
       <div class="check" fxLayout="row" id="title" id="note" autofocus #description>
@@ -45,8 +47,10 @@
         <app-photo></app-photo>
         <app-archive-icon></app-archive-icon>
         <app-more [addArray]="add" (addLabelEvent)=labelEvent($event)></app-more>
-        <span> <button mat-button class="close" type=submit (click)="back()">Close</button> </span>
+        <span> 
+          <button mat-button class="close" type=submit (click)="back()">Close</button> 
+        </span>
       </div>
     </div>
-  </mat-card>
+  </mat-card> 
 </div>

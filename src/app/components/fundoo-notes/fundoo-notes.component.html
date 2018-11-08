@@ -5,9 +5,9 @@
   <span class="heading"><b>F</b>undoo<b>N</b>otes</span>
   <div class="right">
     <div class="searchBar">
-      <i class="material-icons">search </i>
-      <input class="searchIcon" type="input" placeholder="search" [(ngModel)]="searchElement" name="search" (click)="searchEle()"
-        (keydown)="keyPress()">
+      <i class="material-icons">search</i>
+      <input class="searchIcon" type="input" placeholder="search" [(ngModel)]="searchElement" 
+      name="search" (click)="searchEle()" (keydown)="keyPress()">
     </div>
   </div>
   <div fxFlex fxLayoutAlign="end">
@@ -28,7 +28,7 @@
           <div class="signout">
             <span fxLayout="row" fxLayoutGap="15px">
               <button class="profilebutton">
-                <img src="{{img}}" class = "image">
+                <div (change)=onFileSelected($event)><img src="{{img}}" class = "image" ></div>
               </button>
               <p class="screen">{{firstName }} {{lastName}} </p>
             </span>
@@ -52,7 +52,7 @@
 
 <mat-sidenav-container class="sidenav-container">
   <div fxlayout=r ow fxLayoutAlign="center center"></div>
-  <div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" 
+  <div class="container" fxLayout="row" fxLayout.xs="r ow" fxLayoutAlign="center center" 
   fxLayoutGap="10px" fxLayoutGap.xs="0">
   </div>
   <div fxFlex="50" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>
