@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -11,17 +11,18 @@ export class ToolbarComponent implements OnInit {
   constructor(private myHttpService: HttpService) { }
   @Input() reminderValue;
   token = localStorage.getItem('token');
+  show = 0;
+  @Output() reminderEmit = new EventEmitter();
+  currentDate = new Date();
 
   ngOnInit() {
   }
 
   reminder() {
-    this.myHttpService.postNotes('/notes/' + this.reminderValue.id + '/addUpdateReminderNotes', {
-      "title": this.reminderValue.title,
-      "description": this.reminderValue.title,
-      "reminder": [
-        "2018-11-06T05:19:44.492Z"
-      ]
+    this.myHttpService.postArchive('/notes/addUpdateReminderNotes', {
+      "noteIdList": [this.reminderValue.id],
+      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+        this.currentDate.getDate(), 8, 0, 0, 0)
 
     }, this.token).subscribe(
       (data) => {
@@ -29,6 +30,34 @@ export class ToolbarComponent implements OnInit {
       },
       error => {
         console.log("Error", error);
+      })
+  }
+
+  addTomReminder() {
+    this.myHttpService.postArchive('/notes/addUpdateReminderNotes',
+      {
+        "noteIdList": [this.reminderValue.id],
+        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+          this.currentDate.getDate() + 1, 8, 0, 0, 0)
+      }, this.token).subscribe(data => {
+        this.show = 1;
+        console.log('POST is successfull ', data);
+        this.reminderEmit.emit({
+        })
+      })
+  }
+
+  addWeekReminder() {
+    this.myHttpService.postArchive('/notes/addUpdateReminderNotes',
+      {
+        "noteIdList": [this.reminderValue.id],
+        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+          this.currentDate.getDate() + 7, 8, 0, 0, 0)
+      }, this.token).subscribe(data => {
+        this.show = 1;
+        console.log('POST is successfull ', data);
+        this.reminderEmit.emit({
+        })
       })
   }
 }

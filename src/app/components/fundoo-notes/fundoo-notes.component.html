@@ -20,47 +20,29 @@
         <span><mat-icon>view_module</mat-icon></span></button>
     </div>
     <div class="photo">
-      <!-- <button mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" class="name">{{firstname |
-        slice:0:1}}</button> -->
-        <button class="profilebutton">
-            <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" style="float:left ;width:100px;height:100px;border-radius: 20%">
+        <button class="profilebutton3">
+            <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" style="float:left ;width:50px;height:50px;border-radius: 100%">
           </button>
-      <!-- <mat-menu #menu="matMenu" [overlapTrigger]="false" style="margin-top: 10px;">
-        <div style="padding: 20px;">
-          <div>
-            <button mat-mini-fab [matMenuTriggerFor]="menu" class="firstName">
-              {{firstname | slice:0:1}}</button>
-          </div>
-          <div class="email">
-            <div>{{firstname}} {{lastname}}</div>
-            <div>{{email}}</div>
-          </div>
-          <br>
-          <hr style="width: 100%">
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-stroked-button color="primary" routerLink="/registration" class="buttons">Add Account</button>
-            &nbsp;
-            <button mat-stroked-button color="primary" (click)="signout()" class="buttons">Sign Out</button>
-          </div>
-        </div>
-      </mat-menu> -->
       <mat-menu class="mat-menu" #menu="matMenu" [overlapTrigger]="false">
           <div class="signout">
             <span fxLayout="row" fxLayoutGap="15px">
-
               <button class="profilebutton">
-                <img src="{{img}}" style="float:left ;width:100px;height:100px;border-radius: 50%">
+                <img src="{{img}}" style="float:left ;width:50px;height:50px;border-radius: 100%; padding: 10px;">
               </button>
-              <p class="name_onscreen">{{firstName }}&nbsp;{{lastName}} </p>
+              <p class="screen">{{firstName }}&nbsp;{{lastName}} </p>
             </span>
-            <p class="mail"> {{email}}</p>
+            <p class="screen"> {{email}}</p>
           </div>
+          <div> 
+          <!-- <div class = "pic"><b>Upload profile</b></div> -->
+        </div>
+        <div class = "but">
+          <input type="file" (change)=onFileSelected($event) class = "choose" >
           <hr>
-          <h4>upload pic</h4>
-          <input type="file" (change)=onFileSelected($event)>
-          <button type="button" (click)="onUpload()" mat-raised-button color="primary"> upload</button>
-          <button class="signup_button" mat-raised-button color="primary" style="float:right" 
+          <button type="button" (click)="onUpload()" mat-raised-button color="disabled">Upload</button>
+          <button class="signup_button" mat-raised-button color="disabled" style="float:right" 
                   (click)="signout()">Logout</button>
+                </div>
         </mat-menu>
     </div>
   </div>

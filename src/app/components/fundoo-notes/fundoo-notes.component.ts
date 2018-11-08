@@ -32,6 +32,8 @@ export class FundooNotesComponent {
   value = [];
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
+  selectedFile = null;
+  ProfilePath;
   @ViewChild('labelList') labelList: ElementRef;
   @ViewChild('newLabel') newLabel: ElementRef;
 
@@ -111,8 +113,7 @@ export class FundooNotesComponent {
     this.grid = 0;
     this.data.changeGridEvent(true);
   }
-  selectedFile = null;
-  ProfilePath;
+  
  onFileSelected(event){
 this.selectedFile=event.path[0].files[0];
 console.log(event.target.value);
@@ -129,10 +130,6 @@ console.log(this.selectedFile.name);
   uploadData.append('file', this.selectedFile, this.selectedFile.name);
    this.myHttpService.httpAddImage('/user/uploadProfileImage',uploadData,token).subscribe(res=>{
      console.log("url: ", res['status'].imageUrl )
-     
-     
-    
-     console.log(this.ProfilePath);
    },error=>{
      console.log(error);
      

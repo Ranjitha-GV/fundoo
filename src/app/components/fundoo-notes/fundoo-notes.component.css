@@ -136,12 +136,21 @@ input:focus
   margin-bottom: 10px;
 }
 .profilebutton{
-  width:100px; 
-  height:100px; 
+  width:50px; 
+  height:50px; 
   border: none;
  border-radius: 50%;
  background:white;
  
+}
+.profilebutton3{
+  width:50px; 
+  height:50px; 
+  border: none;
+ border-radius: 50%;
+ background: transparent;
+ outline:none;
+ background:rgb(235, 174, 22);
 }
 .profilebutton2{
   width:50px; 
@@ -150,5 +159,24 @@ input:focus
  border-radius: 50%;
  background: transparent;
  outline:none;
- 
+ padding: 30px;  
+}
+.screen
+{
+  margin-left: 20px;
+  float: left;
+}
+.pic
+{
+  float: left;
+}
+.but 
+{
+  padding: 10px;
+  margin-top: 20%;
+}
+.choose
+{
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
