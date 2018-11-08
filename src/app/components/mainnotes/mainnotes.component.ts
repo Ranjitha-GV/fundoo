@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../core/services/data/search.service';
 
 
 @Component({

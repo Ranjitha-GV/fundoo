@@ -20,6 +20,17 @@
             </div>
           </div>
         </div>
+        <div fxLayout="row">
+            <!-- <div *ngFor="let note of notesArray" class="cancel"> -->
+              <!-- <div *ngIf="note.isDeleted == false"> -->
+                <mat-chip-list selected>
+                  <mat-chip><span [innerHTML]="note.reminder"></span>
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              <!-- </div> -->
+            <!-- </div> -->
+          </div>
         <div>
           <div class="tool" fxLayout="row" fxLayoutAlign="space-between center" 
           class="mainStyle">

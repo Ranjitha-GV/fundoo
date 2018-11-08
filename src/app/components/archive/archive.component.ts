@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../services/http.service';
-import { SearchService } from '../../services/search.service';
+import { HttpService } from '../../core/services/http/http.service';
+import { SearchService } from '../../core/services/data/search.service';
 
 @Component({
   selector: 'app-archive',

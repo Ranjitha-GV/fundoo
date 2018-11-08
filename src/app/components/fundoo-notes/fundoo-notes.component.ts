@@ -2,13 +2,13 @@ import { Component, Output, EventEmitter, ElementRef, ViewChild } from '@angular
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material';
 import { LabelComponent } from '../label/label.component';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../core/services/data/search.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class FundooNotesComponent {
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
   selectedFile = null;
-  ProfilePath;
+  Profile;
   @ViewChild('labelList') labelList: ElementRef;
   @ViewChild('newLabel') newLabel: ElementRef;
 
@@ -115,26 +115,22 @@ export class FundooNotesComponent {
   }
   
  onFileSelected(event){
-this.selectedFile=event.path[0].files[0];
-console.log(event.target.value);
-this.ProfilePath=event.target.value;
-console.log(this.selectedFile.name);
+   this.selectedFile=event.path[0].files[0];
+   this.Profile=event.target.value;
  }
  image={};
  public image2=localStorage.getItem('imageUrl');
  img="http://34.213.106.173/"+this.image2;
- onUpload(){
+
+ upload(){
   var token=localStorage.getItem('token');
-  
   const uploadData = new FormData();
   uploadData.append('file', this.selectedFile, this.selectedFile.name);
    this.myHttpService.httpAddImage('/user/uploadProfileImage',uploadData,token).subscribe(res=>{
      console.log("url: ", res['status'].imageUrl )
    },error=>{
-     console.log(error);
-     
+     console.log(error);  
    })
-
  }
 
   ngOnInit() {

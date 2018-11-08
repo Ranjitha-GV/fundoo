@@ -21,15 +21,16 @@
     </div>
     <div class="photo">
         <button class="profilebutton3">
-            <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" matTooltip="{{firstname}} {{lastname}}" style="float:left ;width:50px;height:50px;border-radius: 100%">
+            <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" 
+            matTooltip="{{firstname}} {{lastname}}" class = "profile">
           </button>
       <mat-menu class="mat-menu" #menu="matMenu" [overlapTrigger]="false">
           <div class="signout">
             <span fxLayout="row" fxLayoutGap="15px">
               <button class="profilebutton">
-                <img src="{{img}}" style="float:left ;width:50px;height:50px;border-radius: 100%; padding: 10px;">
+                <img src="{{img}}" class = "image">
               </button>
-              <p class="screen">{{firstName }}&nbsp;{{lastName}} </p>
+              <p class="screen">{{firstName }} {{lastName}} </p>
             </span>
             <p class="screen"> {{email}}</p>
           </div>
@@ -39,9 +40,10 @@
         <div class = "but">
           <input type="file" (change)=onFileSelected($event) class = "choose" >
           <hr>
-          <button type="button" (click)="onUpload()" mat-raised-button color="disabled">Upload</button>
-          <button class="signup_button" mat-raised-button color="disabled" style="float:right" 
-                  (click)="signout()">Logout</button>
+          <button type="button" (click)="upload()" mat-raised-button color="disabled">
+          Upload</button>
+          <button class="signup_button" mat-raised-button color="disabled" 
+          style="float:right" (click)="signout()">Logout</button>
                 </div>
         </mat-menu>
     </div>
@@ -50,11 +52,13 @@
 
 <mat-sidenav-container class="sidenav-container">
   <div fxlayout=r ow fxLayoutAlign="center center"></div>
-  <div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+  <div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" 
+  fxLayoutGap="10px" fxLayoutGap.xs="0">
   </div>
   <div fxFlex="50" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
+  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
       <a mat-list-item routerLink="/home/notes"><img src="../../../assets/images/notes.svg">

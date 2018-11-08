@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../../app/core/services/logger/logger.service';
+
 
 
 @Component({
@@ -63,7 +65,8 @@ export class LoginComponent implements OnInit {
     })
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
+          // console.log("POST Request is successful ", data);
+          LoggerService.log("POST Request is successful ", data);
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
           })
@@ -86,7 +89,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     if (localStorage.getItem('token')) {
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/home');     
     }
 
   }

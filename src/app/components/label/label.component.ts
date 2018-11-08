@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject, Input, ElementRef, ViewChild } from '@angular/core';
 import { FundooNotesComponent } from '../fundoo-notes/fundoo-notes.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HttpService } from '../../services/http.service';
+import { HttpService } from '../../core/services/http/http.service';
 import { NullAstVisitor } from '@angular/compiler';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../core/services/data/search.service';
 
 
 

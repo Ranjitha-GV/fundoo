@@ -5,16 +5,15 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpService } from './services/http.service';
+import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetComponent } from './components/reset/reset.component';
@@ -36,7 +35,7 @@ import { PhotoComponent } from './components/photo/photo.component';
 import { ArchiveIconComponent } from './components/archive-icon/archive-icon.component';
 import { MoreComponent } from './components/more/more.component';
 import { MainnotesComponent } from './components/mainnotes/mainnotes.component';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './core/services/authGaurd/auth.service';
 import { AuthGuard } from './auth.guard';
 import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { UpdateComponent } from './components/update/update.component';
@@ -45,8 +44,9 @@ import { LabelComponent } from './components/label/label.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { NewLabelComponent } from './components/new-label/new-label.component';
-import { SearchPipe } from './pipe/search.pipe';
+import { SearchPipe } from '../app/core/pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';
+import { LoggerService } from '../app/core/services/logger/logger.service';
 
 
 
@@ -76,9 +76,6 @@ import { SearchComponent } from './components/search/search.component';
     NewLabelComponent,
     SearchPipe,
     SearchComponent,
-
-
-
   ],
   imports: [
 
@@ -105,10 +102,8 @@ import { SearchComponent } from './components/search/search.component';
     MatDialogModule,
     MatCheckboxModule,
     MatChipsModule
-
-
   ],
-  providers: [HttpService, AuthService, AuthGuard],
+  providers: [HttpService, AuthService, AuthGuard, LoggerService],
   entryComponents: [UpdateComponent],
   bootstrap: [AppComponent]
 })
