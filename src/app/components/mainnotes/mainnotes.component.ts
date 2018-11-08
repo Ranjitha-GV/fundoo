@@ -8,7 +8,7 @@ import { SearchService } from '../../core/services/data/search.service';
 @Component({
   selector: 'app-mainnotes',
   templateUrl: './mainnotes.component.html',
-  styleUrls: ['./mainnotes.component.css']
+  styleUrls: ['./mainnotes.component.scss']
 })
 export class MainnotesComponent implements OnInit {
 

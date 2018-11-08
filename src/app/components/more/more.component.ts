@@ -1,12 +1,10 @@
-
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
-import { delay } from 'q';
 
 @Component({
   selector: 'app-more',
   templateUrl: './more.component.html',
-  styleUrls: ['./more.component.css'],
+  styleUrls: ['./more.component.scss'],
   outputs: ['onNewEntryAdded']
 
 })

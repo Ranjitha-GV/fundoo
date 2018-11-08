@@ -6,28 +6,21 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule, 
+MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule, MatExpansionModule,
+MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
 import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { HomeComponent } from './components/home/home.component';
-import { MatMenuModule } from '@angular/material/menu';
 import { NotesComponent } from './components/notes/notes.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { BinComponent } from './components/bin/bin.component';
 import { ArchiveComponent } from './components/archive/archive.component';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { CollabComponent } from './components/collab/collab.component';
 import { ColorComponent } from './components/color/color.component';
@@ -36,13 +29,10 @@ import { ArchiveIconComponent } from './components/archive-icon/archive-icon.com
 import { MoreComponent } from './components/more/more.component';
 import { MainnotesComponent } from './components/mainnotes/mainnotes.component';
 import { AuthService } from './core/services/authGaurd/auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './core/services/authGaurd/auth.guard';
 import { AddnotesComponent } from './components/addnotes/addnotes.component';
 import { UpdateComponent } from './components/update/update.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { LabelComponent } from './components/label/label.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatChipsModule } from '@angular/material/chips';
 import { NewLabelComponent } from './components/new-label/new-label.component';
 import { SearchPipe } from '../app/core/pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';

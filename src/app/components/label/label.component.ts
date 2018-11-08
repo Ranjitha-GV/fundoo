@@ -10,7 +10,7 @@ import { SearchService } from '../../core/services/data/search.service';
 @Component({
   selector: 'app-label',
   templateUrl: './label.component.html',
-  styleUrls: ['./label.component.css']
+  styleUrls: ['./label.component.scss']
 })
 export class LabelComponent implements OnInit {
 

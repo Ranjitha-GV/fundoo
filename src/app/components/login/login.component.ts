@@ -11,7 +11,7 @@ import { LoggerService } from '../../../app/core/services/logger/logger.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
   animations: [
     trigger('EnterLeave', [
       state('flyIn', style({ transform: 'translateX(0)' })),

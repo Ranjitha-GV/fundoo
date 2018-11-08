@@ -11,7 +11,7 @@ import { BinComponent } from './components/bin/bin.component'
 import { ArchiveComponent } from './components/archive/archive.component';
 import { ReminderComponent } from './components/reminder/reminder.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './core/services/authGaurd/auth.guard';
 import { LabelComponent } from './components/label/label.component';
 import { NewLabelComponent } from './components/new-label/new-label.component';
 import { SearchComponent } from './components/search/search.component';

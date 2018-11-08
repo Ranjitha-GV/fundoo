@@ -14,7 +14,7 @@ import { SearchService } from '../../core/services/data/search.service';
 @Component({
   selector: 'app-fundoo-notes',
   templateUrl: './fundoo-notes.component.html',
-  styleUrls: ['./fundoo-notes.component.css']
+  styleUrls: ['./fundoo-notes.component.scss']
 })
 export class FundooNotesComponent {
 

@@ -5,7 +5,7 @@ import { SearchService } from '../../core/services/data/search.service';
 @Component({
   selector: 'app-bin',
   templateUrl: './bin.component.html',
-  styleUrls: ['./bin.component.css']
+  styleUrls: ['./bin.component.scss']
 })
 export class BinComponent implements OnInit {
   card = [];

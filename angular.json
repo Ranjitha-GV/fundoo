@@ -28,9 +28,7 @@
               },
               "src/styles.css"
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -131,5 +129,10 @@
       }
     }
   },
-  "defaultProject": "fundoo"
+  "defaultProject": "fundoo",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

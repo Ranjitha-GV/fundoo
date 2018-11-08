@@ -1,11 +1,12 @@
 import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 
 @Component({
   selector: 'app-addnotes',
   templateUrl: './addnotes.component.html',
-  styleUrls: ['./addnotes.component.css'],
+  styleUrls: ['./addnotes.component.scss'],
   outputs: ['onNewEntryAdded']
 
 })
@@ -26,7 +27,7 @@ export class AddnotesComponent implements OnInit {
   dataArray = [];
   keys: any;
   @Output() onNewEntryAdded = new EventEmitter();
-  color: any;
+  color = "#fafafa";
 
   move() {
     this.hide = 1;
@@ -36,7 +37,6 @@ export class AddnotesComponent implements OnInit {
   }
   back() {
     this.hide = 0;
-    this.color = "#fafafa";
     this.listing = !this.listing;
     this.myHttpService.postNotes('/notes/addNotes', {
       'title': document.getElementById('title').innerHTML,
@@ -47,7 +47,8 @@ export class AddnotesComponent implements OnInit {
       'color': this.color
     }, this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
+        // console.log("POST Request is successful ", data);
+        LoggerService.log(this.color);
         this.onNewEntryAdded.emit({
         })
         this.color = "#fafafa";
