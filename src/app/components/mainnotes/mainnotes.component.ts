@@ -15,7 +15,6 @@ export class MainnotesComponent implements OnInit {
   constructor(private myHttpService: HttpService, public dialog: MatDialog, public data: SearchService) {
     this.data.currentChipEvent.subscribe(
       message => {
-        console.log('I am emitted');
         if (message) {
           this.addEntry.emit({
           })

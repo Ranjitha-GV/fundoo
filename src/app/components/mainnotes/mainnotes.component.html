@@ -1,45 +1,44 @@
-<div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center" class="main">
-  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId' 
-  fxFlex="0 1 calc(30% - 32px)">
-    <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card align="center" class="cardsStyle" [style.backgroundColor]="note.color">
-        <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
-          <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
-          <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
-          <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
-        </div>
-        <div fxLayout="row">
-          <div *ngFor="let index of note.noteLabels" class="cancel">
-            <div *ngIf="index.isDeleted == false">
-              <mat-chip-list selected>
-                <mat-chip><span [innerHTML]="index.label"> </span>
-                  <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
-                  </mat-icon>
-                </mat-chip>
-              </mat-chip-list>
-            </div>
+<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" fxLayoutAlign="center" class="main">
+    <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
+      <div [ngClass]="{'grid':toggle,'list':!toggle}">
+        <mat-card align="center" class="cardsStyle" [style.backgroundColor]="note.color">
+          <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
+            <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
+            <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
+            <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
           </div>
-        </div>
-        <div fxLayout="row">
+          <div fxLayout="row">
+            <div *ngFor="let index of note.noteLabels" class="cancel">
+              <div *ngIf="index.isDeleted == false">
                 <mat-chip-list selected>
-                  <mat-chip><span [innerHTML]="note.reminder"></span>
-                    <mat-icon matChipRemove>cancel</mat-icon>
+                  <mat-chip><span [innerHTML]="index.label"> </span>
+                    <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
+                    </mat-icon>
                   </mat-chip>
                 </mat-chip-list>
+              </div>
+            </div>
           </div>
-        <div>
-          <div class="tool" fxLayout="row" fxLayoutAlign="space-between center" 
-          class="mainStyle">
-            <app-toolbar [reminderValue]="note"></app-toolbar>
-            <app-collab></app-collab>
-            <app-color [color]="note" (changeColor)=nextEntry($event)></app-color>
-            <app-photo></app-photo>
-            <app-archive-icon [archive]="note" (archiveEmit)=nextEntry($event)>
-            </app-archive-icon>
-            <app-more [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
+          <div fxLayout="row">
+                  <mat-chip-list selected>
+                    <mat-chip><span [innerHTML]="note.reminder"></span>
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+            </div>
+          <div>
+            <div class="tool" fxLayout="row" fxLayoutAlign="space-between center" 
+            class="mainStyle">
+              <app-toolbar [reminderValue]="note"></app-toolbar>
+              <app-collab></app-collab>
+              <app-color [color]="note" (changeColor)=nextEntry($event)></app-color>
+              <app-photo></app-photo>
+              <app-archive-icon [archive]="note" (archiveEmit)=nextEntry($event)>
+              </app-archive-icon>
+              <app-more [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
+            </div>
           </div>
-        </div>
-      </mat-card>
+        </mat-card>
+      </div>
     </div>
   </div>
-</div>

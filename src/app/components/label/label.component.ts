@@ -84,8 +84,6 @@ export class LabelComponent implements OnInit {
           }
         }
         this.value1 = tempArr;
-        console.log(this.value1);
-
       },
       error => {
         console.log("Error", error);

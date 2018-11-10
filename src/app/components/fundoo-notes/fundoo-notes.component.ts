@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material';
 import { LabelComponent } from '../label/label.component';
 import { SearchService } from '../../core/services/data/search.service';
+import { environment } from '../../../environments/environment'
+import { CropImageComponent } from '../crop-image/crop-image.component'
 
 
 @Component({
@@ -29,6 +31,8 @@ export class FundooNotesComponent {
   firstname: any;
   email: any;
   lastname: any;
+  // public message : string;
+  public pic;
   value = [];
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
@@ -113,25 +117,42 @@ export class FundooNotesComponent {
     this.grid = 0;
     this.data.changeGridEvent(true);
   }
-  
- onFileSelected(event){
-   this.selectedFile=event.path[0].files[0];
-   this.Profile=event.target.value;
- }
- image={};
- public image2=localStorage.getItem('imageUrl');
- img="http://34.213.106.173/"+this.image2;
 
- upload(){
-  var token=localStorage.getItem('token');
-  const uploadData = new FormData();
-  uploadData.append('file', this.selectedFile, this.selectedFile.name);
-   this.myHttpService.httpAddImage('/user/uploadProfileImage',uploadData,token).subscribe(res=>{
-     console.log("url: ", res['status'].imageUrl )
-   },error=>{
-     console.log(error);  
-   })
- }
+
+public image2 = localStorage.getItem('imageUrl');
+img = environment.apiUrl + this.image2;
+
+onFileUpload(event) {
+var token = localStorage.getItem('token');
+this.profileCropOpen(event);
+
+this.selectedFile = event.path[0].files[0];
+const uploadData = new FormData();
+uploadData.append('file', this.selectedFile, this.selectedFile.name);
+}
+image = {};
+
+clickLabel(labelsList) {
+var labelsList = labelsList.label;
+this.router.navigate(['/home/label/' + labelsList])
+}
+profileCropOpen(data): void { 
+const dialogRefPic = this.dialog.open(CropImageComponent, {
+width: '450px',
+data: data
+});
+
+dialogRefPic.afterClosed().subscribe(result => {
+console.log('The dialog was closed');
+this.data.currentMsg.subscribe(message => this.pic = message)
+console.log("pic", this.pic);
+if (this.pic == true) {
+this.image2 = localStorage.getItem('imageUrl');
+this.img = environment.apiUrl + this.image2;
+}
+
+});
+}
 
   ngOnInit() {
     this.firstname = localStorage.getItem('firstname');

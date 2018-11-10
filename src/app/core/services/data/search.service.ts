@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,9 @@ export class SearchService {
   private gridEvent = new Subject<boolean>();
   currentGridEvent = this.gridEvent.asObservable();
 
+  private msgSource = new BehaviorSubject(false);
+  currentMsg = this.msgSource.asObservable();
+
   constructor() { }
 
   changeMessage(message: string) {
@@ -27,6 +30,10 @@ export class SearchService {
 
   changeGridEvent(message: boolean) {
     this.gridEvent.next(message);
+  }
+
+  changeMsg(message: boolean) {
+    this.msgSource.next(message);
   }
 
 }

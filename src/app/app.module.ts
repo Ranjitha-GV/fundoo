@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -37,6 +37,8 @@ import { NewLabelComponent } from './components/new-label/new-label.component';
 import { SearchPipe } from '../app/core/pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LoggerService } from '../app/core/services/logger/logger.service';
+import { CropImageComponent } from './components/crop-image/crop-image.component';
+import { ImageCropperModule } from 'ngx-image-cropper'
 
 
 
@@ -66,6 +68,7 @@ import { LoggerService } from '../app/core/services/logger/logger.service';
     NewLabelComponent,
     SearchPipe,
     SearchComponent,
+    CropImageComponent,
   ],
   imports: [
 
@@ -91,10 +94,12 @@ import { LoggerService } from '../app/core/services/logger/logger.service';
     MatTooltipModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    ImageCropperModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService],
-  entryComponents: [UpdateComponent],
-  bootstrap: [AppComponent]
+  entryComponents: [UpdateComponent, CropImageComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

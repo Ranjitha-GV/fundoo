@@ -8,7 +8,7 @@
 }
 
 .sidenav {
-  width: 250px;
+  width: 260px;
   margin-top: 15px;
   background-color: rgb(221, 221, 230);
   overflow-y: auto;
@@ -26,8 +26,13 @@
 }
 .heading
 {
-  margin-left: 20px;
+  margin-left: 10px;
   font-size: 25px;
+}
+.right 
+{
+  padding-top: 13px;
+  margin-left: 10px;
 }
 .size
 {
@@ -55,7 +60,7 @@
 }
 .icons 
 {
-  padding-top: 10px;
+  padding-top: 15px;
 }
 .buttons 
 {
@@ -75,8 +80,15 @@
   background-color:lightgoldenrodyellow ;
 
 }
+.profile-pic 
+{
+  background-color: black;
+  float: right;
+  color: white;
+  text-transform: uppercase;
+}
 
-.value
+.value 
 {
   margin-left: 5px;
 }
@@ -87,7 +99,7 @@
   display: flex;
   align-items: center;
   height:46px;
-  width:699px;
+  width:599px;
   color: black;
   border-radius: 5px;
   padding-left: 1%;
