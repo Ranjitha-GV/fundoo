@@ -31,8 +31,8 @@ export class FundooNotesComponent {
   firstname: any;
   email: any;
   lastname: any;
-  // public message : string;
   public pic;
+  image = {};
   value = [];
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
@@ -130,7 +130,6 @@ this.selectedFile = event.path[0].files[0];
 const uploadData = new FormData();
 uploadData.append('file', this.selectedFile, this.selectedFile.name);
 }
-image = {};
 
 clickLabel(labelsList) {
 var labelsList = labelsList.label;

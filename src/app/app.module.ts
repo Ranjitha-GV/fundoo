@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule, 
 MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule, MatExpansionModule,
-MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule } from '@angular/material';
+MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +38,11 @@ import { SearchPipe } from '../app/core/pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LoggerService } from '../app/core/services/logger/logger.service';
 import { CropImageComponent } from './components/crop-image/crop-image.component';
-import { ImageCropperModule } from 'ngx-image-cropper'
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { PopOverComponent } from './components/pop-over/pop-over.component';
+import { LabelpopComponent } from './components/labelpop/labelpop.component';
+import { DeletePopComponent } from './components/delete-pop/delete-pop.component';
+
 
 
 
@@ -69,6 +73,9 @@ import { ImageCropperModule } from 'ngx-image-cropper'
     SearchPipe,
     SearchComponent,
     CropImageComponent,
+    PopOverComponent,
+    LabelpopComponent,
+    DeletePopComponent,
   ],
   imports: [
 
@@ -95,10 +102,13 @@ import { ImageCropperModule } from 'ngx-image-cropper'
     MatDialogModule,
     MatCheckboxModule,
     MatChipsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService],
-  entryComponents: [UpdateComponent, CropImageComponent],
+  entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
+  LabelpopComponent, DeletePopComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

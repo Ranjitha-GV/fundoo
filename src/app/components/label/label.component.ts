@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpService } from '../../core/services/http/http.service';
 import { NullAstVisitor } from '@angular/compiler';
 import { SearchService } from '../../core/services/data/search.service';
+import { LabelpopComponent } from '../labelpop/labelpop.component';
 
 
 
@@ -15,7 +16,7 @@ import { SearchService } from '../../core/services/data/search.service';
 export class LabelComponent implements OnInit {
 
   constructor(private myHttpService: HttpService, public dialogRef:
-    MatDialogRef<FundooNotesComponent>, public data: SearchService) { }
+    MatDialogRef<FundooNotesComponent>, public data: SearchService, public dialog : MatDialog) { }
 
   public show;
   value1: any = [];
@@ -28,6 +29,32 @@ export class LabelComponent implements OnInit {
 
   onNoClick(): void {
   }
+
+  openDialog(note): void {
+    const dialogRef = this.dialog.open(LabelpopComponent, {
+    width: 'fit-content',
+    height:'fit-content'
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true)
+      {      
+        this.myHttpService.deleteLabel('/noteLabels/' + note + '/deleteNoteLabel', {
+          "label": this.newLabel.nativeElement.innerHTML
+        }).subscribe(
+          (data) => {
+            console.log("DELETE Request is successful ", data);
+            this.data.changeChipEvent(true);
+            this.delete();
+          },
+          error => {
+            console.log("Error", error);
+          })
+        }
+    });
+  }
+
+  
 
   ngOnInit() {
     this.delete();
@@ -60,17 +87,7 @@ export class LabelComponent implements OnInit {
   }
 
   labelDelete(val) {
-    this.myHttpService.deleteLabel('/noteLabels/' + val + '/deleteNoteLabel', {
-      "label": this.newLabel.nativeElement.innerHTML
-    }).subscribe(
-      (data) => {
-        console.log("DELETE Request is successful ", data);
-        this.data.changeChipEvent(true);
-        this.delete();
-      },
-      error => {
-        console.log("Error", error);
-      })
+    this.openDialog(val);
   }
 
   delete() {

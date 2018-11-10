@@ -1,0 +1,15 @@
+<div class="content">
+  <div mat-dialog-title [innerHtml]="data.title">
+  </div>
+  <div mat-dialog-content [innerHtml]="data.description">
+  </div>
+  <div mat-dialog-actions>
+    <mat-icon style="cursor: pointer;float:right" matTooltip="More" aria-label="more" [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
+    <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+      <div style="padding:10px" fxLayout="column">
+        <button mat-button (click)="deleteForever(data)">Delete Forever</button>
+        <button mat-button (click)=" restore(data) ">Restore</button>
+      </div>
+    </mat-menu>
+  </div>
+</div>

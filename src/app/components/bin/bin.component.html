@@ -2,7 +2,7 @@
   <div *ngFor='let note of card' fxFlex="0 1 calc(30% - 32px)">
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card class="bin" [style.backgroundColor]="note.color">
-        <div align="left">
+        <div align="left" (click) = "openDialog(note)">
           <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
           <div style="font-size: 15px;" [innerHTML]="note.description"></div>
         </div>

@@ -26,24 +26,27 @@
             <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" 
             matTooltip="{{firstname}} {{lastname}}" class = "profile">
           </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menuCard">
 
             <div fxLayoutAlign="row wrap">
             <div fxFlex=20>
             <button (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
             (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
-            mat-mini-fab class="profile-pic">
+            mat-mini-fab class="profilePic">
             </button>
             <input style="display:none" (click) = "$event.stopPropagation()" class="image"
             type="file" (change)="onFileUpload($event)" #selectFile>
+            </div> 
+            <div>
+            <mat-content fxFlex class="content"><b>
+            {{firstname | titlecase}} {{lastname | titlecase}}</b> {{email}} </mat-content>
             </div>
-            <mat-content fxFlex class="contentstyle" style="margin-top:5px;float:left" ><b>
-            {{firstname | titlecase}} {{lastname | titlecase}}</b> </mat-content>
-            </div><br>
-            <mat-content class="contentstyle">{{email}}</mat-content><hr>
+          </div> <br>
+            <hr>
+            <hr>
             <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
-            <button fxFlex class="addaccount" routerLink="/signup">Add account</button>
-            <button fxFlex class="logout" (click)="signout()">Log out </button></div>
+            <button mat-button color = "link"  fxFlex class="account" routerLink="/registration">Add Account</button>
+            <button  mat-button color = "link" fxFlex class="logout" (click)="signout()">Sign Out</button></div>
             </mat-menu>
     </div>
   </div>

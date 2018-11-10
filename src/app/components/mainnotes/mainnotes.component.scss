@@ -14,12 +14,14 @@
 .cardsStyle 
 {
     margin-top: 20px;
-    // margin-left: 5px;
     width:263px;
+
 }
 .grid
 {
-
+    margin-top: 20px;
+    width:323px;
+    word-wrap: break-word;
 }
 .main 
 {
@@ -28,7 +30,8 @@
 }
 .list
 {
-    width:1000px;
+    margin-top: 20px;
+    width:900px;
 }
 .pin
 {
@@ -36,5 +39,9 @@
 }
 .mainStyle 
 {
-    padding: 5px;
+    margin-left: 15px;
+}
+.reminder 
+{
+    margin-bottom: 10px;
 }

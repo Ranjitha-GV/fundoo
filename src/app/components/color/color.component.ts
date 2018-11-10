@@ -10,7 +10,21 @@ export class ColorComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
   token = localStorage.getItem('token');
-  colorsArray = ['#fafafa', '#ff8a80', '#ffd180', '#ffff8d', '#ccff90', '#a7ffeb', '#80d8ff', '#82b1ff', '#b388ff', '#f8bbd0', '#d7ccc8', '#cfd8dc']
+  colorsArray = [[{ 'color': '#ffffff', 'name': 'White' },
+  { 'color': '#f28b82', 'name': 'Red' },
+  { 'color': '#fbbc04', 'name': 'Orange' },
+  { 'color': '#fff475', 'name': 'Yellow' }],
+
+  [{ 'color': '#ccff90', 'name': 'Green' },
+  { 'color': '#a7ffeb', 'name': 'Teal' },
+  { 'color': '#cbf0f8', 'name': 'Blue' },
+  { 'color': '#aecbfa', 'name': 'Dark blue' }],
+
+  [{ 'color': '#d7aefb', 'name': 'Purple' },
+  { 'color': '#fdcfe8', 'name': 'Pink' },
+  { 'color': '#e6c9a8', 'name': 'Brown' },
+  { 'color': '#e8eaed', 'name': 'Gray' }]]
+
   card = [];
   @Input() color;
   @Output() changeColor = new EventEmitter();
@@ -19,7 +33,7 @@ export class ColorComponent implements OnInit {
   ngOnInit() {
   }
 
-  colors(id) {
+  colorChange(id) {
     this.emitColor.emit(id);
     if (this.color != undefined) {
       this.myHttpService.postColor('/notes/changesColorNotes',

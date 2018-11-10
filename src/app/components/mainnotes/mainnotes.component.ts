@@ -3,6 +3,7 @@ import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { SearchService } from '../../core/services/data/search.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 
 @Component({
@@ -91,6 +92,23 @@ export class MainnotesComponent implements OnInit {
         }
         this.addEntry.emit({
         })
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
+  reminderDelete(note)
+  {
+    var id = note.id;
+    LoggerService.log('reminder note id is',id);
+    this.myHttpService.postArchive('/notes/removeReminderNotes',
+    {
+      "noteIdList": [id]
+    },
+    this.token).subscribe(
+      (data) => {
+        console.log("POST Request is successful ", data);
+        this.addEntry.emit({});
       },
       error => {
         console.log("Error", error);

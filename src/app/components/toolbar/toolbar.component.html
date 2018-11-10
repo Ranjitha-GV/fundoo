@@ -1,6 +1,7 @@
 <div class="icons" fxLayout="row" fxLayoutAlign="space-between">
   <div matTooltip="Remind Me" class="space" [matMenuTriggerFor]="menu">
     <i class="material-icons">touch_app</i></div>
+    <!-- <div *ngIf = "show == 0"> -->
   <mat-menu #menu="matMenu" class="menu">
     <div class="reminder">Reminder:</div>
     <hr>
@@ -10,5 +11,19 @@
     </span></button></div>
     <div><button mat-menu-item (click) = "addWeekReminder()">Next Week<span class="coding">
     Mon,08:00</span></button></div>
+    <div><button mat-menu-item (click) = "addWeekReminder()"><mat-icon>query_builder
+    </mat-icon>Select Date and Time</button></div>
   </mat-menu>
+<!-- </div> -->
+  <!-- <div *ngIf = "show == 1"> -->
+  <mat-menu #menu="matMenu" class="menu">
+      <div><button mat-menu-item (click) = "addWeekReminder()"><mat-icon>keyboard_backspace
+        </mat-icon>Select Date and Time</button></div>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" class = "edit">
+  <mat-datepicker-toggle matSuffix [for]="picker">
+    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+  </mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+    </mat-menu>
+  <!-- </div> -->
 </div>

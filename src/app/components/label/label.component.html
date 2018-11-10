@@ -5,8 +5,8 @@
     <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
   </div>
     <div fxFlex =65 >
-      <span contenteditable="true" class="edit" data-placeholder="Create new Label" 
-      #newLabel></span>
+      <div contenteditable="true" class="edit" data-placeholder="Create new Label" 
+      #newLabel></div>
     </div>
     <div fxFlex = 15>
     <mat-icon matTooltip="Done" (click) = "addLabel()">check</mat-icon>
@@ -16,9 +16,14 @@
     <a mat-list-item>
       <div *ngFor="let val of value1; trackBy:val?.id">
         <div *ngIf="show != val.id">
-          <mat-icon matTooltip="Delete Label">label_outline</mat-icon>
+          <div fxFlex = 15 class = "lock">
+          <mat-icon class = "icon-unlock">label_outline</mat-icon>
+          <mat-icon matTooltip="Delete Label" class = "icon-lock" (click)="labelDelete(val.id);">delete</mat-icon>
+        </div>
+        <div fxFlex = 75>
           <span contenteditable="false" class="name" id="label" [innerHTML]="val.label">
           </span>
+        </div>
           <mat-icon matTooltip="Edit Label" (click)="edit2(val.id)" class="create">create
           </mat-icon>
         </div>

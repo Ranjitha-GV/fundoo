@@ -8,7 +8,7 @@
 }
 
 .sidenav {
-  width: 260px;
+  width: 230px;
   margin-top: 15px;
   background-color: rgb(221, 221, 230);
   overflow-y: auto;
@@ -80,9 +80,9 @@
   background-color:lightgoldenrodyellow ;
 
 }
-.profile-pic 
+.profilePic 
 {
-  background-color: black;
+  background-color: white;
   float: right;
   color: white;
   text-transform: uppercase;
@@ -208,4 +208,29 @@ input:focus
   height:50px;
   border-radius: 100%; 
   padding: 10px;
+}
+.content
+{
+  margin-left: 20px;
+  margin-top:5px;
+  float:right;
+}
+.menuCard 
+{
+  padding: 20px;
+}
+.account 
+{
+  margin-left: 10px;
+  padding: 5px;
+}
+.logout 
+{
+  margin-right: 10px; 
+}
+.mat-mini-fab
+{
+    padding: 25px;
+    margin-left: 20px;
+    // margin-top: 10px;
 }

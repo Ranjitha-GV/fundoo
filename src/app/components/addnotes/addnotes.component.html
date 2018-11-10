@@ -45,31 +45,16 @@
         </mat-chip-list>
       </div>
     </div>
-    <!-- <div>
-      <div class="tool" fxLayout="row" fxLayoutAlign="space-between">
-          <div fxShow="true" fxHide.xs="true">
-        <app-toolbar ></app-toolbar>
+    <div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <app-toolbar></app-toolbar>
         <app-collab></app-collab>
         <app-color (emitColor)=colorsEntry($event)></app-color>
         <app-photo></app-photo>
         <app-archive-icon></app-archive-icon>
         <app-more [addArray]="add" (addLabelEvent)=labelEvent($event)></app-more>
-      </div>
         <span> 
           <button mat-button class="close" type=submit (click)="back()">Close</button> 
         </span>
       </div>
-    </div> -->
-      <div class="tool" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-between">
-       <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25> <app-toolbar ></app-toolbar></div>
-       <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25> <app-collab ></app-collab></div>
-        <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25><app-color (emitColor)=colorsEntry($event) ></app-color></div>
-        <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25><app-photo ></app-photo></div>
-       <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25> <app-archive-icon ></app-archive-icon></div>
-        <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25><app-more [addArray]="add" (addLabelEvent)=labelEvent($event) ></app-more></div>
-        <div fxLayout="row" fxFlex = 10 fxFlex.xs = 25> 
-          <button mat-button class="close" type=submit (click)="back()">Close</button> 
-        </div>
-      </div>
-  </mat-card> 
-</div>
+    </div>

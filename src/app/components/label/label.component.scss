@@ -43,3 +43,11 @@
 {
     float: right;
 }
+
+.lock:hover .icon-unlock,
+.lock .icon-lock {
+display: none;
+}
+.lock:hover .icon-lock {
+display: inline;
+}

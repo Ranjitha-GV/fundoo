@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { SearchService } from '../../core/services/data/search.service';
+import { EventEmitter } from 'events';
+import { PopOverComponent } from '../pop-over/pop-over.component';
+import { MatDialog } from '@angular/material';
+import { DeletePopComponent } from '../delete-pop/delete-pop.component';
 
 @Component({
   selector: 'app-bin',
@@ -9,14 +13,52 @@ import { SearchService } from '../../core/services/data/search.service';
 })
 export class BinComponent implements OnInit {
   card = [];
-  constructor(private myHttpService: HttpService, private data: SearchService) { }
+  constructor(private myHttpService: HttpService, private data: SearchService,
+  public dialog : MatDialog) { }
   token = localStorage.getItem('token');
+  @Output() getTrashList = new EventEmitter();
   toggle = true;
 
   ngOnInit() {
     this.delete();
     this.gridList();
   }
+
+
+openDialog(note): void {
+  const dialogRef = this.dialog.open(PopOverComponent, {
+  width: 'fit-content',
+  height:'fit-content',
+  data: note
+  });
+  
+  dialogRef.afterClosed().subscribe(result => {
+    this.delete();
+  });
+  }
+
+  openDeleteDialog(note): void {
+    const dialogRef = this.dialog.open(DeletePopComponent, {
+    width: 'fit-content',
+    height:'fit-content',
+    data: note
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      var id = note.id
+      this.myHttpService.deleteNotes('/notes/deleteForeverNotes',
+        {
+          "isDeleted": false,
+          "noteIdList": [id]
+        }, this.token).subscribe(
+          (data) => {
+            console.log("POST Request is successful ", data);
+            this.delete();
+          },
+          error => {
+            console.log("Error", error);
+          })    });
+    }
 
   delete() {
     this.myHttpService.getTrash('/notes/getTrashNotesList', this.token).subscribe(
@@ -50,19 +92,7 @@ export class BinComponent implements OnInit {
   }
 
   deleteForever(note) {
-    var id = note.id
-    this.myHttpService.deleteNotes('/notes/deleteForeverNotes',
-      {
-        "isDeleted": false,
-        "noteIdList": [id]
-      }, this.token).subscribe(
-        (data) => {
-          console.log("POST Request is successful ", data);
-          this.delete();
-        },
-        error => {
-          console.log("Error", error);
-        })
+    this.openDeleteDialog(note);
   }
 
   gridList() {

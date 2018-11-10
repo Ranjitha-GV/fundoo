@@ -27,6 +27,8 @@ export class ToolbarComponent implements OnInit {
     }, this.token).subscribe(
       (data) => {
         console.log("POST Request is successful ", data);
+        this.reminderEmit.emit({
+        })
       },
       error => {
         console.log("Error", error);
@@ -48,6 +50,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   addWeekReminder() {
+    this.show = 1;
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminderValue.id],
