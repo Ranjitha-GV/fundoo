@@ -114,5 +114,17 @@ export class MainnotesComponent implements OnInit {
         console.log("Error", error);
       })
   }
+  checkBox(checkList,note) {
+
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    // this.modifiedCheckList = checkList;
+    // this.updatelist(note.id);
+  }
 
 }

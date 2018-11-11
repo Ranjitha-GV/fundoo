@@ -19,12 +19,15 @@ export class AddnotesComponent implements OnInit {
   id = localStorage.getItem('userId');
   @ViewChild('newLabel') newLabel: ElementRef;
   newObject: any;
+  dataArrayCheck = [];
   save = [];
   add = [];
   array = [];
+  checked = false;
   public i=0;
   data;
   dataArray = [];
+  status = "open";
   keys: any;
   @Output() onNewEntryAdded = new EventEmitter();
   color = "#fafafa";
@@ -36,6 +39,8 @@ export class AddnotesComponent implements OnInit {
     this.listing = !this.listing;
   }
   back() {
+    if(this.checked == false)
+    {
     this.hide = 0;
     this.listing = !this.listing;
     this.myHttpService.postNotes('/notes/addNotes', {
@@ -63,9 +68,46 @@ export class AddnotesComponent implements OnInit {
         this.listing = !this.listing;
         this.add = null;
       })
+    }
+    else
+    {
+      this.dataArrayCheck = [];
+      for(var i=0;i<this.dataArray.length;i++){
+        if(this.dataArray[i].isChecked==true){
+         this.status="close"
+        }
+        var apiObj={
+          "itemName":this.dataArray[i].data,
+          "status":this.status
+        }
+        this.dataArrayCheck.push(apiObj)
+        this.status="open"
+      }
+      console.log(this.dataArrayCheck);
 
+      this.myHttpService.postNotes('/notes/addNotes', {
+        'title': document.getElementById('title').innerHTML,
+        'labelIdList': JSON.stringify(this.array),
+        'checklist': JSON.stringify(this.dataArrayCheck),
+        'isPined': 'false',
+        'color': this.color
+      }, this.token).subscribe(
+        (data) => {
+          LoggerService.log('POST success', data);
+          this.hide = 0;
+          this.checked = false;
+          this.onNewEntryAdded.emit({
+          })
+
+        },
+        error => {
+          console.log("Error", error);
+          this.hide = 0;
+        })
+    }
   }
   addLabel() {
+  
     this.myHttpService.postNotes('/noteLabels', {
       "label": this.newLabel.nativeElement.innerHTML,
       "isDeleted": false,
@@ -78,7 +120,8 @@ export class AddnotesComponent implements OnInit {
       error => {
         console.log("Error", error);
       })
-  }
+    
+}
   colorsEntry(event) {
     this.color = event;
   }
@@ -109,7 +152,20 @@ enter(){
       "data":this.data
     }
     this.dataArray.push(obj);
-    this.data=null
+    this.data=null;
+    console.log(this.dataArray);
+    // this.myHttpService.postNotes('/noteLabels', {
+    //   "label": this.newLabel.nativeElement.innerHTML,
+    //   "isDeleted": false,
+    //   "userId": this.id
+
+    // }, this.token).subscribe(
+    //   (data) => {
+    //     console.log("POST Request is successful ", data);
+    //   },
+    //   error => {
+    //     console.log("Error", error);
+    //   })
     
   }
 }

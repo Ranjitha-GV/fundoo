@@ -16,7 +16,7 @@
     </div>
     <div contenteditable="true" class="editable" id="title" data-text="Title"></div> <br>
     <div *ngIf="listing">
-      <div contenteditable="true" class="edit" id="description" data-text="Take a note..">
+      <div contenteditable="true" class="edit" id="description" data-text="Take a note.." (click) = "checked = false">
       </div> <br> <br>
     </div>
     <div *ngIf="!listing" id="title" autofocus #description style = "margin-bottom: 20px;">
@@ -32,7 +32,7 @@
       <div class="check" fxLayout="row" id="title" id="note" autofocus #description>
         <mat-icon fxFlex="5%">add</mat-icon>
         <input id="note" [(ngModel)]=data fxFlex="95%" class="inputNote" 
-        [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()">
+        [(ngModel)]=data.data placeholder="list item" (keydown.enter)="enter()" (click) = "checked = true">
       </div>
       <mat-divider></mat-divider>
     </div>

@@ -7,6 +7,22 @@
             <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
             <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
           </div>
+          <!-- *************************************** -->
+          <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
+              <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
+              (click)=checkBox(checklist,note)></mat-checkbox>
+              <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+              [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
+                (click)="open(note)" [style.backgroundColor]="note.color">
+             </div>
+            
+              <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
+              <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
+               (click)=checkBox(checklist,note)></mat-checkbox>
+              <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
+               (click)="open(note)">{{checklist.itemName}}</del>
+            </div>
+            <!-- ************************************************* -->
           <div fxLayout="row">
             <div *ngFor="let index of note.noteLabels" class="cancel">
               <div *ngIf="index.isDeleted == false">

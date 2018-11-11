@@ -50,7 +50,6 @@ export class ToolbarComponent implements OnInit {
   }
 
   addWeekReminder() {
-    this.show = 1;
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminderValue.id],
@@ -63,4 +62,9 @@ export class ToolbarComponent implements OnInit {
         })
       })
   }
+  enter()
+  {
+  this.show = 1;
+  }
+
 }
