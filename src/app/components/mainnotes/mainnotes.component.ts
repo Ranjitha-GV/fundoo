@@ -23,6 +23,7 @@ export class MainnotesComponent implements OnInit {
       })
   }
   array: any = [];
+  public modifiedList;
   token = localStorage.getItem('token');
   noteCard: any = [];
   response: any;
@@ -114,6 +115,19 @@ export class MainnotesComponent implements OnInit {
         console.log("Error", error);
       })
   }
+  update(id)
+  {
+  var apiData={
+    "itemName": this.modifiedList.itemName,
+    "status":this.modifiedList.status
+}
+var url = "/notes/" +id+ "/checklist/" + this.modifiedList.id + "/update";
+this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
+  console.log(response);
+  // this.archiveEvent.emit();
+
+})
+  }
   checkBox(checkList,note) {
 
     if (checkList.status == "open") {
@@ -123,8 +137,24 @@ export class MainnotesComponent implements OnInit {
       checkList.status = "open"
     }
     console.log(checkList);
-    // this.modifiedCheckList = checkList;
-    // this.updatelist(note.id);
-  }
+    this.modifiedList = checkList;
+    this.update(note.id);
 
+  }
+  pin(id)
+{
+  this.myHttpService.postArchive('/notes/pinUnpinNotes',
+  {
+    "noteIdList": [id],
+    "isPined" : true
+  },
+  this.token).subscribe(
+    (data) => {
+      console.log("POST Request is successful ", data);
+      this.addEntry.emit({});
+    },
+    error => {
+      console.log("Error", error);
+    })
+}
 }

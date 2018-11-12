@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { SearchService } from '../../core/services/data/search.service';
 
@@ -12,6 +12,7 @@ export class ArchiveComponent implements OnInit {
   constructor(private myHttpService: HttpService, private data: SearchService) { }
   card = [];
   toggle = true;
+  @Input() noteDetails;
   @Output() addEntry = new EventEmitter();
   token = localStorage.getItem('token');
 
@@ -58,6 +59,19 @@ export class ArchiveComponent implements OnInit {
       this.getArchive();
     }
   }
+  checkBox(checkList,note) {
+
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    // this.modifiedCheckList = checkList;
+    // this.updatelist(note.id);
+  }
+
 }
 
 

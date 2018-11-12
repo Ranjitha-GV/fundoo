@@ -42,6 +42,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { PopOverComponent } from './components/pop-over/pop-over.component';
 import { LabelpopComponent } from './components/labelpop/labelpop.component';
 import { DeletePopComponent } from './components/delete-pop/delete-pop.component';
+import { PinComponent } from './components/pin/pin.component';
 
 
 
@@ -76,6 +77,7 @@ import { DeletePopComponent } from './components/delete-pop/delete-pop.component
     PopOverComponent,
     LabelpopComponent,
     DeletePopComponent,
+    PinComponent,
   ],
   imports: [
 

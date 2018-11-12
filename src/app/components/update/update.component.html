@@ -3,10 +3,39 @@
     <div align="left" class = "update">
       <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" 
       data-text="" style="font-size: 20px;" [innerHTML]="data.title"></div></b> <br>
-      <div mat-dialog-content contenteditable="true" class="edit" id="descriptionId" 
+      <div mat-dialog-content contenteditable="true" *ngIf = "!checklist" class="edit" id="descriptionId" 
       data-text="" style="font-size: 15px;" [innerHTML]="data.description"></div>
       <br>
     </div>
+    <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+    
+      <mat-checkbox fxFlex="10%" *ngIf="check.status=='open'&& !check.isDeleted" 
+      (click)=checkBox(check)></mat-checkbox>
+      <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
+      [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open'">
+      <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
+      *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+    </div>
+  
+      <mat-divider *ngIf="checklist"></mat-divider>
+      <div fxLayout="row" *ngIf="checklist">
+        <mat-icon fxFlex="5%" *ngIf="!adding">add</mat-icon>
+        <mat-checkbox *ngIf="adding" [(ngModel)]=addCheck  color="primary"></mat-checkbox>
+        <input   fxFlex="95%" class="note" placeholder="List Item" 
+        [ngStyle]="{'background-color':data.color}" [(ngModel)]=newList (keydown)=addList($event)/>
+      </div>
+      <mat-divider *ngIf="checklist"></mat-divider>
+     
+      <div class="note" *ngFor="let check of tempArray" fxLayout="row">
+        <mat-checkbox fxFlex="10%" checked=true *ngIf="check.status=='close'&& !check.isDeleted"
+         (click)=checkBox(check)></mat-checkbox>
+        <input [(ngModel)]=check.itemName class="note" style="text-decoration: line-through;"
+         fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
+        [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
+        <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
+         *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+  </div>
+
     <div fxLayout="row">
       <div *ngFor="let index of data.noteLabels" class="cancel">
         <div *ngIf="index.isDeleted == false">
@@ -26,7 +55,7 @@
       <app-photo style="padding: 5px;"></app-photo>
       <app-archive-icon style="padding: 5px;"></app-archive-icon>
       <app-more style="padding: 5px;" [notedetails]="data"></app-more>
-      <button mat-button class="close" type=submit (click)="onNoClick(data.id)">
+      <button mat-button class="close" type=submit (click)="onNoClick()">
       Close</button>
       <div>
       </div>

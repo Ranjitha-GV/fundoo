@@ -52,7 +52,6 @@ export class AddnotesComponent implements OnInit {
       'color': this.color
     }, this.token).subscribe(
       (data) => {
-        // console.log("POST Request is successful ", data);
         LoggerService.log(this.color);
         this.onNewEntryAdded.emit({
         })
@@ -80,7 +79,7 @@ export class AddnotesComponent implements OnInit {
           "itemName":this.dataArray[i].data,
           "status":this.status
         }
-        this.dataArrayCheck.push(apiObj)
+        this.dataArrayCheck.push(apiObj);
         this.status="open"
       }
       console.log(this.dataArrayCheck);
@@ -93,16 +92,22 @@ export class AddnotesComponent implements OnInit {
         'color': this.color
       }, this.token).subscribe(
         (data) => {
+          this.dataArray = [];
           LoggerService.log('POST success', data);
           this.hide = 0;
           this.checked = false;
+          this.color = "#fafafa";
+          this.listing = !this.listing;
           this.onNewEntryAdded.emit({
           })
 
         },
         error => {
+          this.dataArray = [];
           console.log("Error", error);
           this.hide = 0;
+          this.color = "#fafafa";
+          this.listing = !this.listing;
         })
     }
   }
@@ -154,19 +159,6 @@ enter(){
     this.dataArray.push(obj);
     this.data=null;
     console.log(this.dataArray);
-    // this.myHttpService.postNotes('/noteLabels', {
-    //   "label": this.newLabel.nativeElement.innerHTML,
-    //   "isDeleted": false,
-    //   "userId": this.id
-
-    // }, this.token).subscribe(
-    //   (data) => {
-    //     console.log("POST Request is successful ", data);
-    //   },
-    //   error => {
-    //     console.log("Error", error);
-    //   })
-    
   }
 }
 ondelete(deletedObj){
