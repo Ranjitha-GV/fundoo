@@ -2,7 +2,7 @@
     <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
       <div [ngClass]="{'grid':toggle,'list':!toggle}">
         <mat-card align="center" [style.backgroundColor]="note.color">
-            <app-pin class="pin" (click) = "pin(note.id)"></app-pin>
+            <app-pin [pinArray] = "note" (pinEmit) = "nextEntry($event)" class = "pin"></app-pin>
           <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
             <!-- <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin"> -->
             <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
@@ -59,4 +59,3 @@
         </mat-card>
       </div>
     </div>
-  </div>

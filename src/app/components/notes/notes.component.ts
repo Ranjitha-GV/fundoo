@@ -14,14 +14,17 @@ export class NotesComponent implements OnInit {
   noteCard: any = [];
   token = localStorage.getItem('token');
   noteId = [];
+  notePinedCard = [];
 
   ngOnInit() {
     this.getNoteCard();
+    this.getNotes();
   }
 
   addNewEntry(event) {
     if (event) {
       this.getNoteCard();
+      this.getNotes();
     }
   }
 
@@ -33,8 +36,25 @@ export class NotesComponent implements OnInit {
         this.response = data['data']['data'];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isDeleted == false && 
-          data['data']['data'][i].isArchived == false) {
+          data['data']['data'][i].isArchived == false && data['data']['data'][i].isPined == false) {
             this.noteCard.push(data['data']['data'][i]);
+          }
+        }
+      },
+      error => {
+        console.log("Error", error);
+      })
+  }
+  getNotes() {
+    this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
+      (data) => {
+        this.notePinedCard = [];
+        console.log("POST Request is successful ", data);
+        this.response = data['data']['data'];
+        for (var i = data['data']['data'].length - 1; i >= 0; i--) {
+          if (data['data']['data'][i].isDeleted == false && 
+          data['data']['data'][i].isArchived == false && data['data']['data'][i].isPined == true) {
+            this.notePinedCard.push(data['data']['data'][i]);
           }
         }
       },

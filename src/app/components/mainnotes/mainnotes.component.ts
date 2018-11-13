@@ -29,6 +29,9 @@ export class MainnotesComponent implements OnInit {
   response: any;
   interval: any;
   toggle = true;
+  notesPinedCard = [];
+  show = 0;
+  notesCards = [];
   @Input() searchElement;
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();
@@ -139,19 +142,40 @@ export class MainnotesComponent implements OnInit {
     this.update(note.id);
 
   }
-  pin(id) {
-    this.myHttpService.postArchive('/notes/pinUnpinNotes',
-      {
-        "noteIdList": [id],
-        "isPined": true
-      },
-      this.token).subscribe(
-        (data) => {
-          console.log("POST Request is successful ", data);
-          this.addEntry.emit({});
-        },
-        error => {
-          console.log("Error", error);
-        })
-  }
+  // pin(id) {
+  //   this.show = 1;
+  //   this.myHttpService.postArchive('/notes/pinUnpinNotes',
+  //     {
+  //       "noteIdList": [id],
+  //       "isPined": true
+  //     },
+  //     this.token).subscribe(
+  //       (data) => {
+  //         console.log("POST pin Request is successful ", data);
+  //         this.addEntry.emit({});
+
+  //       },
+  //       error => {
+  //         console.log("Error", error);
+  //       })
+  // }
+
+  // unPin(id)
+  // {
+  //   this.myHttpService.postArchive('/notes/pinUnpinNotes',
+  //     {
+  //       "noteIdList": [id],
+  //       "isPined": false
+  //     },
+  //     this.token).subscribe(
+  //       (data) => {
+  //         console.log("POST unpin Request is successful ", data);
+  //         this.show = 0;
+  //         this.addEntry.emit({});
+
+  //       },
+  //       error => {
+  //         console.log("Error", error);
+  //       })
+  // }
 }

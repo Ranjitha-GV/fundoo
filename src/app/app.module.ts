@@ -8,7 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule, 
 MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule, MatExpansionModule,
-MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, 
+MatNativeDateModule, MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -106,7 +107,8 @@ import { PinComponent } from './components/pin/pin.component';
     MatChipsModule,
     ImageCropperModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 

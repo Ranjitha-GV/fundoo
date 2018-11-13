@@ -2,7 +2,8 @@
     <!-- <div *ngIf = "show == 0"> -->
   <div matTooltip="Remind Me" class="space" [matMenuTriggerFor]="menu">
     <i class="material-icons">touch_app</i></div>
-  <mat-menu #menu="matMenu" class="menu">
+  <mat-menu #menu="matMenu" >
+      <div *ngIf = "show == 0" class="menu"> 
     <div class="reminder">Reminder:</div>
     <hr>
     <div><button mat-menu-item (click) = "reminder()">Later Today<span class="code">20:00
@@ -11,19 +12,33 @@
     </span></button></div>
     <div><button mat-menu-item (click) = "addWeekReminder()">Next Week<span class="coding">
     Mon,08:00</span></button></div>
-    <div><button mat-menu-item [matMenuTriggerFor]="date" (click) = "addWeekReminder(); enter();"><mat-icon>query_builder
+    <div><button mat-menu-item (click) = "$event.stopPropagation(); enter();"><mat-icon>query_builder
     </mat-icon>Select Date and Time</button></div>
+    </div>
+
+
+
+    <div *ngIf = "show == 1" class = "menuDown">
+        <div><button mat-menu-item (click) = "$event.stopPropagation(); enterAfter();"><mat-icon>keyboard_backspace
+          </mat-icon>Select Date and Time</button></div>
+          <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" class = "edit">
+    <mat-datepicker-toggle matSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+        <mat-form-field (click) = "$event.stopPropagation()">
+            <mat-select [(value)]="selected">
+              <mat-option *ngFor = "let time of reminders" [value] = "time.viewTime" class = "option">
+                  <div fxFlex = 35>{{time.period}}</div>
+                  <div fxFlex = 40></div>
+                  <div fxFlex = 35>{{time.viewTime}}</div>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+
   </mat-menu>
-<!-- </div> -->
-  <!-- <div *ngIf = "show == 1"> -->
-  <mat-menu #date="matMenu" class="menu">
-      <div><button mat-menu-item ><mat-icon>keyboard_backspace
-        </mat-icon>Select Date and Time</button></div>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" class = "edit">
-  <mat-datepicker-toggle matSuffix [for]="picker">
-    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-  </mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-    </mat-menu>
-  <!-- </div> -->
 </div>
+

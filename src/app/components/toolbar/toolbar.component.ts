@@ -18,6 +18,16 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  reminders = [
+    { value: '', period: 'Morning', viewTime: '8:00 AM'},
+    { value: '', period: 'Afternoon', viewTime: '1:00 PM'},
+    { value: '', period: 'Evening', viewTime: '6:00 PM'},
+    { value: '', period: 'Night', viewTime: '8:00 PM'}
+
+  ]
+
+  
+
   reminder() {
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes', {
       "noteIdList": [this.reminderValue.id],
@@ -62,9 +72,14 @@ export class ToolbarComponent implements OnInit {
         })
       })
   }
+
   enter()
   {
   this.show = 1;
+  }
+  enterAfter()
+  {
+    this.show = 0;
   }
 
 }
