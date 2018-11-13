@@ -18,6 +18,7 @@ export class BinComponent implements OnInit {
   token = localStorage.getItem('token');
   @Output() getTrashList = new EventEmitter();
   toggle = true;
+  public modifiedList;
 
   ngOnInit() {
     this.delete();
@@ -99,6 +100,19 @@ openDialog(note): void {
     this.data.currentGridEvent.subscribe(message => {
       this.toggle = message;
     })
+  }
+  checkBox(checkList,note) {
+
+    if (checkList.status == "open") {
+      checkList.status = "close"
+    }
+    else {
+      checkList.status = "open"
+    }
+    console.log(checkList);
+    this.modifiedList = checkList;
+    // this.update(note.id);
+
   }
 }
 

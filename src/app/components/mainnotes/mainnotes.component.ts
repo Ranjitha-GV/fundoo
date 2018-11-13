@@ -98,37 +98,35 @@ export class MainnotesComponent implements OnInit {
         console.log("Error", error);
       })
   }
-  reminderDelete(note)
-  {
+  reminderDelete(note) {
     var id = note.id;
-    LoggerService.log('reminder note id is',id);
+    LoggerService.log('reminder note id is', id);
     this.myHttpService.postArchive('/notes/removeReminderNotes',
-    {
-      "noteIdList": [id]
-    },
-    this.token).subscribe(
-      (data) => {
-        console.log("POST Request is successful ", data);
-        this.addEntry.emit({});
+      {
+        "noteIdList": [id]
       },
-      error => {
-        console.log("Error", error);
-      })
+      this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.addEntry.emit({});
+        },
+        error => {
+          console.log("Error", error);
+        })
   }
-  update(id)
-  {
-  var apiData={
-    "itemName": this.modifiedList.itemName,
-    "status":this.modifiedList.status
-}
-var url = "/notes/" +id+ "/checklist/" + this.modifiedList.id + "/update";
-this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
-  console.log(response);
-  // this.archiveEvent.emit();
+  update(id) {
+    var apiData = {
+      "itemName": this.modifiedList.itemName,
+      "status": this.modifiedList.status
+    }
+    var url = "/notes/" + id + "/checklist/" + this.modifiedList.id + "/update";
+    this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
+      console.log(response);
+      // this.archiveEvent.emit();
 
-})
+    })
   }
-  checkBox(checkList,note) {
+  checkBox(checkList, note) {
 
     if (checkList.status == "open") {
       checkList.status = "close"
@@ -141,20 +139,19 @@ this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe
     this.update(note.id);
 
   }
-  pin(id)
-{
-  this.myHttpService.postArchive('/notes/pinUnpinNotes',
-  {
-    "noteIdList": [id],
-    "isPined" : true
-  },
-  this.token).subscribe(
-    (data) => {
-      console.log("POST Request is successful ", data);
-      this.addEntry.emit({});
-    },
-    error => {
-      console.log("Error", error);
-    })
-}
+  pin(id) {
+    this.myHttpService.postArchive('/notes/pinUnpinNotes',
+      {
+        "noteIdList": [id],
+        "isPined": true
+      },
+      this.token).subscribe(
+        (data) => {
+          console.log("POST Request is successful ", data);
+          this.addEntry.emit({});
+        },
+        error => {
+          console.log("Error", error);
+        })
+  }
 }

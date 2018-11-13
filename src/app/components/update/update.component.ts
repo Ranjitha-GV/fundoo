@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MainnotesComponent } from '../mainnotes/mainnotes.component';
 import { HttpService } from '../../core/services/http/http.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 export interface DialogData {
   title: string;
@@ -23,13 +24,15 @@ export class UpdateComponent implements OnInit {
   token = localStorage.getItem('token');
   @Input() notedetails;
   @Input() label;
+  @Output() emitEvent = new EventEmitter();
   public checklist =  false;
   public modifiedCheckList;
   tempArray = [];
 
   onNoClick(): void {
     if(this.checklist==false){
-    this.myHttpService.postColor('/notes/updateNotes', {
+      LoggerService.log('i am in update');
+    this.myHttpService.noteUpdate('/notes/updateNotes', {
       "noteId": [this.data.id],
       "title": document.getElementById('titleId').innerHTML,
       "description": document.getElementById('descriptionId').innerHTML
@@ -37,10 +40,13 @@ export class UpdateComponent implements OnInit {
     }, this.token).subscribe(data => {
       console.log('response', data);
       this.dialogRef.close();
-    })
-    this.dialogRef.close();
-  }
-
+      // this.emitEvent.emit();
+    },
+  error => {
+    LoggerService.log('POST unsuccessfull',error);
+  })
+  this.dialogRef.close();
+}
 else{
       var apiData={
         "itemName": this.modifiedCheckList.itemName,
@@ -49,14 +55,15 @@ else{
     var url = "/notes/" +this.data['id']+ "/checklist/" + this.modifiedCheckList.id + "/update";
     this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
       console.log(response);
-      // this.archiveEvent.emit();
+      this.dialogRef.close();
+      // this.emitEvent.emit();
 
-    })
-    }
+    },
     error => {
       console.log(error);
-    }
+    })
   }
+}
   public removedList;
   removeList(checklist){
     console.log(checklist)
