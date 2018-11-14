@@ -28,7 +28,6 @@ export class CropImageComponent implements OnInit {
     img = environment.apiUrl + this.image2;
     onUpload() {
         var token = localStorage.getItem('token');
-        console.log(this.croppedImage);
         const uploadData = new FormData();
         uploadData.append('file', this.croppedImage);
         this.httpService.httpAddImage('/user/uploadProfileImage', uploadData, token).subscribe(res => {

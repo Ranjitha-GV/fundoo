@@ -9,7 +9,7 @@
             <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
           </div>
           <!-- *************************************** -->
-          <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
+          <div class="notes" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
               <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
               (click)=checkBox(checklist,note)></mat-checkbox>
               <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-          <div fxLayout="row" class = "reminder">
+          <!-- <div fxLayout="row" class = "reminder">
               <div *ngFor = "let index of note.reminder; trackBy:index?.id">
                   <mat-chip-list selected>
                     <mat-chip><span>{{index | date}},{{index | date: 'shortTime'}}</span>
@@ -44,7 +44,19 @@
                     </mat-chip>
                   </mat-chip-list>
                 </div>
+            </div> -->
+            <div fxLayout="row" class="reminder">
+              <div *ngIf="note.reminder.length!=0">
+                <mat-chip-list>
+                  <mat-chip>
+                    <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>{{note.reminder | date:'medium'}}
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
             </div>
+
           <div>
             <div class="tool" fxLayout="row">
               <app-toolbar class="mainStyle" [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>

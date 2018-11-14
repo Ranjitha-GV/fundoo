@@ -1,5 +1,4 @@
 <div class="icons" fxLayout="row" fxLayoutAlign="space-between">
-    <!-- <div *ngIf = "show == 0"> -->
   <div matTooltip="Remind Me" class="space" [matMenuTriggerFor]="menu">
     <i class="material-icons">touch_app</i></div>
   <mat-menu #menu="matMenu" >
@@ -28,16 +27,30 @@
     </mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-        <mat-form-field (click) = "$event.stopPropagation()">
-            <mat-select [(value)]="selected">
-              <mat-option *ngFor = "let time of reminders" [value] = "time.viewTime" class = "option">
-                  <div fxFlex = 35>{{time.period}}</div>
-                  <div fxFlex = 40></div>
-                  <div fxFlex = 35>{{time.viewTime}}</div>
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-    </div>
+  <div fxLayout="row">
+    <mat-form-field (click)="$event.stopPropagation()">
+        <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" [(ngModel)]="reminderBody.time">
+    </mat-form-field>
+        <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" class="timeSet">keyboard_arrow_down</mat-icon>
+    
+</div>
+<mat-menu #Menu [overlapTrigger]=false>
+<div fxLayout="column" *ngFor="let timeIndex of reminders">
+        <button mat-button (click)="reminderBody.time = timeIndex.viewTime" (click)="$event.stopPropagation()" placeholder="">
+                
+                <div fxFlex="35" >{{timeIndex.period}}</div>
+                <div fxFlex="70"></div>
+                <div fxFlex="35">{{timeIndex.viewTime}}</div>
+                
+        </button>
+</div>
+<div>
+    <button mat-button (click)="$event.stopPropagation()">Custom Time</button>
+</div>
+</mat-menu>
+<div><button mat-button (click)="customReminder(reminderBody.date.value,reminderBody.time)">Save</button></div>
+
+</div>
 
   </mat-menu>
 </div>

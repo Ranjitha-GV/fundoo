@@ -33,12 +33,10 @@ export class MoreComponent implements OnInit {
       "noteIdList": [this.notedetails.id]
     }, this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
         this.eventEntry.emit({
         })
       },
       error => {
-        console.log("Error", error);
       })
   }
 
@@ -46,7 +44,6 @@ export class MoreComponent implements OnInit {
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         this.value1 = [];
-        console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             this.value1.push(data['data']['details'][i])
@@ -55,7 +52,6 @@ export class MoreComponent implements OnInit {
         var tempArr = this.value1;
       },
       error => {
-        console.log("Error", error);
       })
   }
 
@@ -68,11 +64,9 @@ export class MoreComponent implements OnInit {
     this.myHttpService.postNotes('/notes/' + this.notedetails.id + '/addLabelToNotes/' + label.id + '/add',
       this.body, this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
           this.eventEntry.emit({});
         },
         error => {
-          console.log("Error", error);
         })
   }
 }

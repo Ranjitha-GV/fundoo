@@ -25,7 +25,6 @@ export class ArchiveComponent implements OnInit {
     this.myHttpService.getTrash('/notes/getArchiveNotesList', this.token).subscribe(
       (data) => {
         this.card = [];
-        console.log("GET Request is successful ", data);
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isArchived == true && data['data']['data'][i].isDeleted == false) {
             this.card.push(data['data']['data'][i]);
@@ -33,7 +32,6 @@ export class ArchiveComponent implements OnInit {
         }
       },
       error => {
-        console.log("Error", error);
       })
   }
   unarchive(note) {
@@ -42,11 +40,9 @@ export class ArchiveComponent implements OnInit {
         "isArchived": false,
         "noteIdList": [note]
       }, this.token).subscribe(data => {
-        console.log("Post successful", data);
         this.getArchive();
       },
         error => {
-          console.log("Error", error);
         })
   }
   gridList() {
@@ -67,7 +63,6 @@ export class ArchiveComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    console.log(checkList);
     // this.modifiedCheckList = checkList;
     // this.updatelist(note.id);
   }

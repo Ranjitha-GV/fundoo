@@ -43,12 +43,10 @@ export class LabelComponent implements OnInit {
           "label": this.newLabel.nativeElement.innerHTML
         }).subscribe(
           (data) => {
-            console.log("DELETE Request is successful ", data);
             this.data.changeChipEvent(true);
             this.delete();
           },
           error => {
-            console.log("Error", error);
           })
         }
     });
@@ -75,13 +73,11 @@ export class LabelComponent implements OnInit {
 
     }, this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
         this.delete();
         this.dialogRef.close();
 
       },
       error => {
-        console.log("Error", error);
         this.dialogRef.close();
       })
   }
@@ -94,7 +90,6 @@ export class LabelComponent implements OnInit {
     let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
-        console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             tempArr.push(data['data']['details'][i])
@@ -103,7 +98,6 @@ export class LabelComponent implements OnInit {
         this.value1 = tempArr;
       },
       error => {
-        console.log("Error", error);
       })
   }
   edit(val) {
@@ -116,11 +110,9 @@ export class LabelComponent implements OnInit {
       },
       this.token).subscribe(
         (data) => {
-          console.log("UPDATE Request is successful ", data);
           this.delete();
         },
         error => {
-          console.log("Error", error);
         })
   }
   edit2(id) {

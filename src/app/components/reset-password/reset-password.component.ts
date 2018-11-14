@@ -29,14 +29,12 @@ export class ResetPasswordComponent implements OnInit {
       })
         .subscribe(
           (data) => {
-            console.log("POST Request is successful ", data);
             this.snackBar.open("Email Sent to your mail", "Reset password using the sent link", {
               duration: 3000
             })
 
           },
           error => {
-            console.log("Error", error);
             this.snackBar.open("Invalid email address", "Reset failed", {
               duration: 3000
             })

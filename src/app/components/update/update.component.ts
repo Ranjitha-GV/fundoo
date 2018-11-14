@@ -28,6 +28,11 @@ export class UpdateComponent implements OnInit {
   public checklist =  false;
   public modifiedCheckList;
   tempArray = [];
+  public adding=false;
+  public addCheck=false;
+  public status="open";
+  public newList;
+  public newData;
 
   onNoClick(): void {
     if(this.checklist==false){
@@ -38,12 +43,9 @@ export class UpdateComponent implements OnInit {
       "description": document.getElementById('descriptionId').innerHTML
 
     }, this.token).subscribe(data => {
-      console.log('response', data);
       this.dialogRef.close();
-      // this.emitEvent.emit();
     },
   error => {
-    LoggerService.log('POST unsuccessfull',error);
   })
   this.dialogRef.close();
 }
@@ -54,19 +56,15 @@ else{
     }
     var url = "/notes/" +this.data['id']+ "/checklist/" + this.modifiedCheckList.id + "/update";
     this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
-      console.log(response);
       this.dialogRef.close();
-      // this.emitEvent.emit();
 
     },
     error => {
-      console.log(error);
     })
   }
 }
   public removedList;
   removeList(checklist){
-    console.log(checklist)
     this.removedList=checklist;
     this.removeCheckList()
   }
@@ -74,7 +72,6 @@ else{
     var url = "/notes/" + this.data['id']+ "/checklist/" + this.removedList.id + "/remove";
 
     this.myHttpService.postColor(url,null,this.token).subscribe((response)=>{
-      console.log(response);
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
           this.tempArray.splice(i,1)
@@ -82,11 +79,7 @@ else{
       }
     })
   }
-  public adding=false;
-  public addCheck=false;
-  public status="open";
-  public newList;
-  public newData;
+  
 
   addList(event){
     if(this.newList!=""){

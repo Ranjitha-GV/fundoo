@@ -33,11 +33,8 @@ export class PopOverComponent implements OnInit {
             "noteIdList": [id]
           }, this.token).subscribe(
             (data) => {
-              console.log("POST Request is successful ", data);
-              // this.delete();
             },
             error => {
-              console.log("Error", error);
             })
         
        }
@@ -50,11 +47,8 @@ export class PopOverComponent implements OnInit {
       "noteIdList": [id]
     }, this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
-        // this.delete();
       },
       error => {
-        console.log("Error", error);
       })
   }
 

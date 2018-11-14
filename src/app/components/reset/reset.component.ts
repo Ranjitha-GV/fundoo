@@ -52,14 +52,11 @@ export class ResetComponent implements OnInit {
       "newPassword": this.model.password
     }
     if (this.model.password.length == 0) {
-      console.log("please enter the password");
       return;
     }
     this.input.append('newPassword', this.model.password);
     this.myHttpService.resetPost("/user/reset-password", body, this.accessToken).subscribe(response => {
-      console.log("successfull", response);
     }, error => {
-      console.log("failed", error)
     })
   }
 

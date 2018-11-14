@@ -42,14 +42,12 @@ export class ColorComponent implements OnInit {
           "noteIdList": [this.color.id]
         }, this.token).subscribe(
           (data) => {
-            console.log("POST Request is successful ", data);
             localStorage.setItem('colorId', this.color.id);
             this.changeColor.emit({
 
             });
           },
           error => {
-            console.log("Error", error);
           })
     }
   }

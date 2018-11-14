@@ -86,7 +86,6 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.records = this.myHttpService.getConfig().subscribe(data => {
-      console.log('response', data);
       for (var i = 0; i < data["data"].data.length; i++) {
         data["data"].data[i].select = false;
         this.cards.push(data["data"].data[i]);
@@ -117,9 +116,6 @@ export class RegistrationComponent implements OnInit {
       })
       return false;
     }
-    console.log(this.model.firstname);
-    console.log(this.model.lastname);
-    console.log(this.model.email);
     this.myHttpService
       .addData('/user/userSignUp', {
         "firstName": this.model.firstname,
@@ -136,11 +132,9 @@ export class RegistrationComponent implements OnInit {
       })
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
 
         },
         error => {
-          console.log("Error", error);
         })
   }
 

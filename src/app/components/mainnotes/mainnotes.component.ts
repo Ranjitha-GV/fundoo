@@ -63,7 +63,6 @@ export class MainnotesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.addEntry.emit({});
     });
   }
@@ -76,11 +75,9 @@ export class MainnotesComponent implements OnInit {
       },
       this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
           this.addEntry.emit({});
         },
         error => {
-          console.log("Error", error);
         })
   }
 
@@ -88,7 +85,6 @@ export class MainnotesComponent implements OnInit {
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
         var value1 = [];
-        console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             value1.push(data['data']['details'][i])
@@ -98,7 +94,6 @@ export class MainnotesComponent implements OnInit {
         })
       },
       error => {
-        console.log("Error", error);
       })
   }
   reminderDelete(note) {
@@ -110,11 +105,9 @@ export class MainnotesComponent implements OnInit {
       },
       this.token).subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
           this.addEntry.emit({});
         },
         error => {
-          console.log("Error", error);
         })
   }
   update(id) {
@@ -124,8 +117,6 @@ export class MainnotesComponent implements OnInit {
     }
     var url = "/notes/" + id + "/checklist/" + this.modifiedList.id + "/update";
     this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
-      console.log(response);
-      // this.archiveEvent.emit();
 
     })
   }
@@ -137,45 +128,8 @@ export class MainnotesComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    console.log(checkList);
     this.modifiedList = checkList;
     this.update(note.id);
 
   }
-  // pin(id) {
-  //   this.show = 1;
-  //   this.myHttpService.postArchive('/notes/pinUnpinNotes',
-  //     {
-  //       "noteIdList": [id],
-  //       "isPined": true
-  //     },
-  //     this.token).subscribe(
-  //       (data) => {
-  //         console.log("POST pin Request is successful ", data);
-  //         this.addEntry.emit({});
-
-  //       },
-  //       error => {
-  //         console.log("Error", error);
-  //       })
-  // }
-
-  // unPin(id)
-  // {
-  //   this.myHttpService.postArchive('/notes/pinUnpinNotes',
-  //     {
-  //       "noteIdList": [id],
-  //       "isPined": false
-  //     },
-  //     this.token).subscribe(
-  //       (data) => {
-  //         console.log("POST unpin Request is successful ", data);
-  //         this.show = 0;
-  //         this.addEntry.emit({});
-
-  //       },
-  //       error => {
-  //         console.log("Error", error);
-  //       })
-  // }
 }

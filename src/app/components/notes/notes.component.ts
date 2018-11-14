@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 
 
@@ -15,6 +15,7 @@ export class NotesComponent implements OnInit {
   token = localStorage.getItem('token');
   noteId = [];
   notePinedCard = [];
+  @Input() notedetails;
 
   ngOnInit() {
     this.getNoteCard();
@@ -32,7 +33,6 @@ export class NotesComponent implements OnInit {
     this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
       (data) => {
         this.noteCard = [];
-        console.log("POST Request is successful ", data);
         this.response = data['data']['data'];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isDeleted == false && 
@@ -42,14 +42,12 @@ export class NotesComponent implements OnInit {
         }
       },
       error => {
-        console.log("Error", error);
       })
   }
   getNotes() {
     this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
       (data) => {
         this.notePinedCard = [];
-        console.log("POST Request is successful ", data);
         this.response = data['data']['data'];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isDeleted == false && 
@@ -59,7 +57,6 @@ export class NotesComponent implements OnInit {
         }
       },
       error => {
-        console.log("Error", error);
       })
   }
 }

@@ -22,11 +22,9 @@ export class ArchiveIconComponent implements OnInit {
         "isArchived": true,
         "noteIdList": [this.archive.id]
       }, this.token).subscribe(data => {
-        console.log("Post successful", data);
         this.archiveEmit.emit({});
       },
         error => {
-          console.log("Error", error);
         })
   }
 }

@@ -25,14 +25,12 @@ export class NewLabelComponent implements OnInit {
     )
   }
   getLabel(labelList) {
-    this.myHttpService.postNotes('/notes/getNotesListByLabel/' + labelList, {}, this.token)
+    this.myHttpService.postArchive('/notes/getNotesListByLabel/' + labelList, {}, this.token)
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
           this.labelArray = data['data'].data;
         },
         error => {
-          console.log("Error", error);
         })
   }
 }

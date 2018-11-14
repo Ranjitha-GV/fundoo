@@ -52,7 +52,6 @@ export class AddnotesComponent implements OnInit {
       'color': this.color
     }, this.token).subscribe(
       (data) => {
-        LoggerService.log(this.color);
         this.onNewEntryAdded.emit({
         })
         this.color = "#fafafa";
@@ -61,7 +60,6 @@ export class AddnotesComponent implements OnInit {
         this.add = null;
       },
       error => {
-        console.log("Error", error);
         this.color = "#fafafa";
         this.hide = 0;
         this.listing = !this.listing;
@@ -82,7 +80,6 @@ export class AddnotesComponent implements OnInit {
         this.dataArrayCheck.push(apiObj);
         this.status="open"
       }
-      console.log(this.dataArrayCheck);
 
       this.myHttpService.postNotes('/notes/addNotes', {
         'title': document.getElementById('title').innerHTML,
@@ -93,7 +90,6 @@ export class AddnotesComponent implements OnInit {
       }, this.token).subscribe(
         (data) => {
           this.dataArray = [];
-          LoggerService.log('POST success', data);
           this.hide = 0;
           this.checked = false;
           this.color = "#fafafa";
@@ -104,7 +100,6 @@ export class AddnotesComponent implements OnInit {
         },
         error => {
           this.dataArray = [];
-          console.log("Error", error);
           this.hide = 0;
           this.color = "#fafafa";
           this.listing = !this.listing;
@@ -120,10 +115,8 @@ export class AddnotesComponent implements OnInit {
 
     }, this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
       },
       error => {
-        console.log("Error", error);
       })
     
 }
@@ -151,38 +144,31 @@ export class AddnotesComponent implements OnInit {
 enter(){
   this.i++;
   if(this.data!=null){
-    console.log(event,"keydown");
     var obj={
       "index":this.i,
       "data":this.data
     }
     this.dataArray.push(obj);
     this.data=null;
-    console.log(this.dataArray);
   }
 }
 ondelete(deletedObj){
-  console.log("ondelete function runnig");
   for(var i=0;i<this.dataArray.length;i++){
     if(deletedObj.index==this.dataArray[i].index){
       this.dataArray.splice(i,1);
       break;
     }
   }
-  console.log(this.dataArray);
 }
 
 editing(event,edited){
 
   if(event.code=="Enter"){
-    console.log("enter pressed");
     for(var i=0;i<this.dataArray.length;i++){
       if(edited.index==this.dataArray[i].index){
         this.dataArray[i].data==edited.data
       }
-    }
-    console.log(this.dataArray);
-    
+    }    
   }
 }
 

@@ -26,12 +26,10 @@ export class PinComponent implements OnInit {
       },
       this.token).subscribe(
         (data) => {
-          console.log("POST pin Request is successful ", data);
           this.pinEmit.emit({});
 
         },
         error => {
-          console.log("Error", error);
         })
   }
 
@@ -45,13 +43,10 @@ export class PinComponent implements OnInit {
       },
       this.token).subscribe(
         (data) => {
-          console.log("POST unpin Request is successful ", data);
-          // this.show = 0;
           this.pinEmit.emit({});
 
         },
         error => {
-          console.log("Error", error);
         })
   }
 

@@ -33,6 +33,7 @@ export class FundooNotesComponent {
   lastname: any;
   public pic;
   image = {};
+  public names = 'fundoo';
   value = [];
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
@@ -54,7 +55,6 @@ export class FundooNotesComponent {
     console.log(this.token);
     this.myHttpService.signoutPost('/user/logout', this.token).subscribe(
       (data) => {
-        console.log("POST Request is successful ", data);
         this.snackBar.open("Logout successfull", "success", {
           duration: 3000
         })
@@ -62,7 +62,6 @@ export class FundooNotesComponent {
         this.router.navigateByUrl('/login');
       },
       error => {
-        console.log("Error", error);
       })
 
   }
@@ -82,7 +81,6 @@ export class FundooNotesComponent {
     let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
       (data) => {
-        console.log("GET Request is successful ", data);
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             tempArr.push(data['data']['details'][i]);
@@ -91,7 +89,6 @@ export class FundooNotesComponent {
         this.value = tempArr;
       },
       error => {
-        console.log("Error", error);
       })
   }
 
@@ -142,15 +139,17 @@ data: data
 });
 
 dialogRefPic.afterClosed().subscribe(result => {
-console.log('The dialog was closed');
 this.data.currentMsg.subscribe(message => this.pic = message)
-console.log("pic", this.pic);
 if (this.pic == true) {
 this.image2 = localStorage.getItem('imageUrl');
 this.img = environment.apiUrl + this.image2;
 }
 
 });
+}
+nameChange(names)
+{
+  this.names = names;
 }
 
   ngOnInit() {

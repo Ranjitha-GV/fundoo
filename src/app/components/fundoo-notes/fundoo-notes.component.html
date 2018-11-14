@@ -2,7 +2,7 @@
   <button fxFlex=5 type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span class="heading"><b>F</b>undoo</span>
+  <span class="heading">{{names}}</span>
   <div class="right">
       <i class="material-icons" fxShow="true" fxHide.xl = "true" fxHide.lg = "true" fxHide.md = "true" fxHide.xs="false" fxHide.sm="false">search</i>
   </div>
@@ -22,17 +22,24 @@
         <span><mat-icon>view_module</mat-icon></span></button>
     </div>
     <div class="photo">
-        <button class="profilebutton3">
+        <button *ngIf = "image2 != ''" class="profilebutton3">
             <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" 
             matTooltip="{{firstname}} {{lastname}}" class = "profile">
           </button>
-        <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menuCard">
-
+          <button *ngIf = "image2 == ''" class="newName" mat-mini-fab 
+          [matMenuTriggerFor]="menu">
+          {{firstname | slice:0:1}}
+          </button>
+          <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menuCard">
             <div fxLayoutAlign="row wrap">
             <div fxFlex=20>
-            <button (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+            <button *ngIf = "image2 != ''" (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
             (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
             mat-mini-fab class="profilePic">
+            </button>
+            <button *ngIf = "image2 == ''" (click) = "$event.stopPropagation()" 
+            (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
+            mat-mini-fab class="newName">{{firstname | slice:0:1}}
             </button>
             <input style="display:none" (click) = "$event.stopPropagation()" class="image"
             type="file" (change)="onFileUpload($event)" #selectFile>
@@ -63,18 +70,18 @@
   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home/notes"><img src="../../../assets/images/notes.svg">
+      <a mat-list-item routerLink="/home/notes" (click) = "nameChange('fundoo')"><img src="../../../assets/images/notes.svg">
         <span class="one">Notes</span></a>
-      <a mat-list-item routerLink="/home/reminder"><img src="../../../assets/images/reminder.svg">
+      <a mat-list-item routerLink="/home/reminder" (click) = "nameChange('Reminder')"><img src="../../../assets/images/reminder.svg">
         <span class="one">Reminder</span></a>
-      <a mat-list-item routerLink="/home/archive"><img src="../../../assets/images/archive.svg">
+      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')"><img src="../../../assets/images/archive.svg">
         <span class="one">Archive</span></a>
       <hr>
       <div>
         <p style="margin-left: 10px;">Labels</p>
         <div *ngFor="let val of value; trackBy:val?.id" (click)="labelClick(val)">
           <div *ngIf="val.isDeleted == false">
-            <a mat-list-item>
+            <a mat-list-item (click) = "nameChange(val.label)">
               <mat-icon>label_outline</mat-icon>
               <div class="value" [innerHTML]="val.label"></div>
             </a>
@@ -84,8 +91,8 @@
       <a mat-list-item (click)="openDialog()"><img src="../../../assets/images/label.svg">
         <span class="one">Add Label</span></a>
       <hr>
-      <a mat-list-item routerLink="/home/bin"><img src="../../../assets/images/bin.svg">
-        <span class="one">Trash</span></a>
+      <a mat-list-item routerLink="/home/bin" (click) = "nameChange('Bin')"><img src="../../../assets/images/bin.svg">
+        <span class="one">Bin</span></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

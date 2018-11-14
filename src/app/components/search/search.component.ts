@@ -26,7 +26,6 @@ export class SearchComponent implements OnInit {
     this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
       (data) => {
         this.noteCard = [];
-        console.log("POST Request is successful ", data);
         this.response = data['data']['data'];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
           if (data['data']['data'][i].isDeleted == false && data['data']['data'][i].isArchived == false) {
@@ -35,7 +34,6 @@ export class SearchComponent implements OnInit {
         }
       },
       error => {
-        console.log("Error", error);
       })
   }
 }

@@ -25,3 +25,9 @@ body { margin: 0; font-family: 'Roboto', sans-serif; }
 {
     padding: 100px;
 }
+
+
+.mat-mini-fab[_ngcontent-c2] 
+{
+  padding: 25px !important;
+}

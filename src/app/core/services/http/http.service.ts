@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class HttpService {
   configUrl = 'http://34.213.106.173/api/user/service';
   postUrl = 'http://34.213.106.173/api';
   token = localStorage.getItem('token');
+  // finalUrl = environment.baseUrl;
   getConfig() {
     return this.http.get(this.configUrl);
   }
@@ -101,6 +103,17 @@ export class HttpService {
     };
     return this.http.get(url, httpOptions);
   }
+  getReminders(url,token)
+  {
+    url = this.postUrl + url;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': token
+      })
+    };
+    return this.http.get(url, httpOptions);
+  }
   getArchive(url, token) {
     url = this.postUrl + url;
     const httpOptions = {
@@ -172,6 +185,20 @@ export class HttpService {
     };
     return this.http.post(url,body,httpOptions)
   }
+  
+        
+getReminder(url,token){
+  url = this.postUrl + url;
+          console.log(token);
+          var httpOptions={
+            headers:new HttpHeaders({
+             
+             'Authorization':token
+            })
+          };
+          return this.http.get(url,httpOptions)
+        }
+
 }
 
 

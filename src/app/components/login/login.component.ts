@@ -65,8 +65,6 @@ export class LoginComponent implements OnInit {
     })
       .subscribe(
         (data) => {
-          // console.log("POST Request is successful ", data);
-          LoggerService.log("POST Request is successful ", data);
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
           })
@@ -79,7 +77,6 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/home');
         },
         error => {
-          console.log("Error", error);
           this.snackBar.open("Invalid email or password", "fail", {
             duration: 3000
           })
