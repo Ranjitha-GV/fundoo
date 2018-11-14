@@ -1,11 +1,11 @@
 <app-addnotes (onNewEntryAdded)="addNewEntry($event)" ></app-addnotes>
-<!-- <div *ngIf = "notePinedCard.length != 0">
+<div *ngIf = "notePinedCard.length != 0">
     <h4 class = "pinClass">Pinned</h4>
 <app-mainnotes [notesArray] = "notePinedCard" (addEntry) = "addNewEntry($event)"></app-mainnotes>
 <h4  class = "pinClass">Others</h4>
 <app-mainnotes [notesArray] = "noteCard" (addEntry) = "addNewEntry($event)"></app-mainnotes>
-</div> -->
-<!-- <div *ngIf = "notePinedCard.length == 0"> -->
+</div>
+<div *ngIf = "notePinedCard.length == 0">
 <app-mainnotes [notesArray] = "notePinedCard" (addEntry) = "addNewEntry($event)"></app-mainnotes>
 <app-mainnotes [notesArray] = "noteCard" (addEntry) = "addNewEntry($event)"></app-mainnotes>
-<!-- </div> -->
+</div>
