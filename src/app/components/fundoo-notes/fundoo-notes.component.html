@@ -32,10 +32,10 @@
           </button>
           <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menuCard">
             <div fxLayoutAlign="row wrap">
-            <div fxFlex=20>
+            <div fxFlex=30>
             <button *ngIf = "image2 != ''" (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
             (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
-            mat-mini-fab class="profilePic">
+            mat-mini-fab class="profilePic">Change
             </button>
             <button *ngIf = "image2 == ''" (click) = "$event.stopPropagation()" 
             (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
@@ -44,7 +44,7 @@
             <input style="display:none" (click) = "$event.stopPropagation()" class="image"
             type="file" (change)="onFileUpload($event)" #selectFile>
             </div> 
-            <div>
+            <div fxFlex = 60>
             <mat-content fxFlex class="content"><b>
             {{firstname | titlecase}} {{lastname | titlecase}}</b> {{email}} </mat-content>
             </div>

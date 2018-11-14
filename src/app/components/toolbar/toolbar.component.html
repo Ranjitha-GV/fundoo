@@ -30,8 +30,8 @@
   <div fxLayout="row">
     <mat-form-field (click)="$event.stopPropagation()">
         <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" [(ngModel)]="reminderBody.time">
-    </mat-form-field>
-        <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" class="timeSet">keyboard_arrow_down</mat-icon>
+        <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" class="arrow">keyboard_arrow_down</mat-icon>
+      </mat-form-field>
     
 </div>
 <mat-menu #Menu [overlapTrigger]=false>
