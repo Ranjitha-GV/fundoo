@@ -1,10 +1,12 @@
+                <!-- ********************ToolBar***********************  -->
 <mat-toolbar color="primary" fxLayout='row' fxLayout.xs="row" fxLayoutGap="30px" fxLayoutGap.xs="20px">
   <button fxFlex=5 type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span class="heading">{{names}}</span>
   <div class="right">
-      <i class="material-icons" fxShow="true" fxHide.xl = "true" fxHide.lg = "true" fxHide.md = "true" fxHide.xs="false" fxHide.sm="false" (click)="searchEle()">search</i>
+      <i class="material-icons" fxShow="true" fxHide.xl = "true" fxHide.lg = "true" 
+        fxHide.md = "true" fxHide.xs="false" fxHide.sm="false" (click)="searchEle()">search</i>
   </div>
     <div class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="true" fxHide.md = "false">
       <i class="material-icons" fxShow="true" fxHide.xs="false" fxHide.sm="false">search</i>
@@ -30,37 +32,40 @@
           [matMenuTriggerFor]="menu">
           {{firstname | slice:0:1}}
           </button>
-          <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menuCard">
+          <mat-menu #menu="matMenu" [overlapTrigger]="false" class="menuCard">
             <div fxLayoutAlign="row wrap">
-            <div fxFlex=30>
-            <button *ngIf = "image2 != ''" (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-            (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
-            mat-mini-fab class="profilePic">
-            <div class = "change">Change</div>
-            </button>
-            <button *ngIf = "image2 == ''" (click) = "$event.stopPropagation()" 
-            (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
-            mat-mini-fab class="newName">{{firstname | slice:0:1}}
-            <div class = "change">Change</div>
-            </button>
-            <input style="display:none" (click) = "$event.stopPropagation()" class="image"
-            type="file" (change)="onFileUpload($event)" #selectFile>
-            </div> 
-            <div fxFlex = 60>
-            <mat-content fxFlex class="content"><b>
-            {{firstname | titlecase}} {{lastname | titlecase}}</b> {{email}} </mat-content>
-            </div>
-          </div> <br>
+              <div fxFlex=30>
+                <button *ngIf="image2 != ''" (click)="$event.stopPropagation()" 
+                  [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
+                  (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}" mat-mini-fab class="profilePic">
+                  <div class="change">Change</div>
+                </button>
+                <button *ngIf="image2 == ''" (click)="$event.stopPropagation()" 
+                  (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
+                  mat-mini-fab class="newName">{{firstname | slice:0:1}}
+                  <div class="change">Change</div>
+                </button>
+                <input style="display:none" (click)="$event.stopPropagation()" class="image" 
+                  type="file" (change)="onFileUpload($event)" #selectFile>
+              </div>
+              <div fxFlex=60>
+                <mat-content fxFlex class="content"><b>
+                    {{firstname | titlecase}} {{lastname | titlecase}}</b> {{email}} </mat-content>
+              </div>
+            </div> <br>
             <hr>
             <hr>
             <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
-            <button mat-button color = "link"  fxFlex class="account" routerLink="/registration">Add Account</button>
-            <button  mat-button color = "link" fxFlex class="logout" (click)="signout()">Sign Out</button></div>
-            </mat-menu>
+              <button mat-button color="link" fxFlex class="account" routerLink="/registration">
+                Add Account</button>
+              <button mat-button color="link" fxFlex class="logout" (click)="signout()">
+                Sign Out</button></div>
+        </mat-menu>
     </div>
   </div>
 </mat-toolbar>
-
+                  <!--**************************************************************-->
+                  <!-- ***********************Side-Nav-Bar**************************-->
 <mat-sidenav-container class="sidenav-container">
   <div fxlayout=r ow fxLayoutAlign="center center"></div>
   <div class="container" fxLayout="row" fxLayout.xs="r ow" fxLayoutAlign="center center" 
@@ -101,6 +106,8 @@
     <router-outlet> </router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+                  <!--**************************************************************-->
+
 
 
 
