@@ -1,0 +1,15 @@
+.profileBut 
+{
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.cropper 
+{
+    padding: 10px;
+    overflow-y: hidden;
+}
+::ng-deep.mat-dialog-container 
+{
+    overflow: hidden;
+}

@@ -31,6 +31,8 @@ export class AddnotesComponent implements OnInit {
   keys: any;
   @Output() onNewEntryAdded = new EventEmitter();
   color = "#fafafa";
+  reminderArray = [];
+  reminderVal;
 
   move() {
     this.hide = 1;
@@ -49,7 +51,8 @@ export class AddnotesComponent implements OnInit {
       'labelIdList': JSON.stringify(this.array),
       'checklist': '',
       'isPined': 'false',
-      'color': this.color
+      'color': this.color,
+      'reminder': this.reminderVal
     }, this.token).subscribe(
       (data) => {
         this.onNewEntryAdded.emit({
@@ -86,7 +89,8 @@ export class AddnotesComponent implements OnInit {
         'labelIdList': JSON.stringify(this.array),
         'checklist': JSON.stringify(this.dataArrayCheck),
         'isPined': 'false',
-        'color': this.color
+        'color': this.color,
+        'reminder': this.reminderVal
       }, this.token).subscribe(
         (data) => {
           this.dataArray = [];
@@ -172,8 +176,21 @@ editing(event,edited){
   }
 }
 
+reminderEntry(event)
+{
+    this.reminderVal = event;
+    this.reminderArray.push(event);
+}
+note ={
+  'id':''
+}
+
+reminderDelete(note) {
+  this.reminderArray=[];
+}
+
   ngOnInit() {
 
   }
-
+  
 }

@@ -86,7 +86,9 @@
   height:80px; 
   background-color: white;
   float: right;
-  color: white;
+  color: black;
+  text-align: bottom;
+  font-size: 10px;
   text-transform: uppercase;
 
 }
@@ -217,6 +219,7 @@ input:focus
   margin-left: 20px;
   margin-top:5px;
   float:right;
+  word-wrap: break-word;
 }
 .menuCard 
 {
@@ -250,6 +253,13 @@ input:focus
 .menuCard::ng-deep.mat-menu-content:not(:empty) {
 
   width: 500px;
+}
+
+.change
+{
+  margin-top: 52px;
+  color: black;
+  font-size: 10px;
 }
 
 

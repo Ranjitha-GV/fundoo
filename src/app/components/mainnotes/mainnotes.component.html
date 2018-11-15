@@ -45,11 +45,23 @@
                   </mat-chip-list>
                 </div>
             </div> -->
-            <div fxLayout="row" class="reminder">
+            <div *ngIf = "remind(note.reminder[0])" fxLayout="row" class="reminder">
               <div *ngIf="note.reminder.length!=0">
                 <mat-chip-list>
                   <mat-chip>
                     <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>{{note.reminder | date:'medium'}}
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+
+            <div *ngIf = "!remind(note.reminder[0])" fxLayout="row" class="reminder">
+              <div *ngIf="note.reminder.length!=0">
+                <mat-chip-list>
+                  <mat-chip>
+                    <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>{{note.reminder | date:'medium'}}</del>
                     <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                       cancel</mat-icon>
                   </mat-chip>

@@ -4,7 +4,7 @@
   </button>
   <span class="heading">{{names}}</span>
   <div class="right">
-      <i class="material-icons" fxShow="true" fxHide.xl = "true" fxHide.lg = "true" fxHide.md = "true" fxHide.xs="false" fxHide.sm="false">search</i>
+      <i class="material-icons" fxShow="true" fxHide.xl = "true" fxHide.lg = "true" fxHide.md = "true" fxHide.xs="false" fxHide.sm="false" (click)="searchEle()">search</i>
   </div>
     <div class="searchBar" fxShow="true" fxHide.xs="true" fxHide.sm="true" fxHide.md = "false">
       <i class="material-icons" fxShow="true" fxHide.xs="false" fxHide.sm="false">search</i>
@@ -35,11 +35,13 @@
             <div fxFlex=30>
             <button *ngIf = "image2 != ''" (click) = "$event.stopPropagation()" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
             (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
-            mat-mini-fab class="profilePic">Change
+            mat-mini-fab class="profilePic">
+            <div class = "change">Change</div>
             </button>
             <button *ngIf = "image2 == ''" (click) = "$event.stopPropagation()" 
             (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
             mat-mini-fab class="newName">{{firstname | slice:0:1}}
+            <div class = "change">Change</div>
             </button>
             <input style="display:none" (click) = "$event.stopPropagation()" class="image"
             type="file" (change)="onFileUpload($event)" #selectFile>

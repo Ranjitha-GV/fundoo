@@ -40,6 +40,19 @@ export class MainnotesComponent implements OnInit {
     this.getlabels();
     this.gridList();
   }
+  remind(time)
+  {
+    var currentReminder = new Date().getTime();
+    var val = new Date(time).getTime();
+    if(val > currentReminder)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
 
   nextEntry(event) {
     if (event) {

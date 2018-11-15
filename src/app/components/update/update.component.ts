@@ -153,6 +153,20 @@ else{
     this.modifiedCheckList=checkList;
     this.onNoClick();
   }
+  reminderDelete(note) {
+    var id = note.id;
+    LoggerService.log('reminder note id is', id);
+    this.myHttpService.postArchive('/notes/removeReminderNotes',
+      {
+        "noteIdList": [id]
+      },
+      this.token).subscribe(
+        (data) => {
+          // this.addEntry.emit({});
+        },
+        error => {
+        })
+  }
 
   ngOnInit() {
     if (this.data['noteCheckLists'].length>0){

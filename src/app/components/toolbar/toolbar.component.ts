@@ -15,6 +15,8 @@ export class ToolbarComponent implements OnInit {
   body;
   show = 0;
   @Output() reminderEmit = new EventEmitter();
+  @Output() emitReminder = new EventEmitter();
+
   currentDate = new Date();
 
   ngOnInit() {
@@ -31,10 +33,12 @@ export class ToolbarComponent implements OnInit {
   
 
   reminder() {
+    let date1 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+    this.currentDate.getDate(), 8, 0, 0, 0);
+    this.emitReminder.emit(date1);
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes', {
       "noteIdList": [this.reminderValue.id],
-      "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-        this.currentDate.getDate(), 8, 0, 0, 0)
+      "reminder":date1
 
     }, this.token).subscribe(
       (data) => {
@@ -46,11 +50,13 @@ export class ToolbarComponent implements OnInit {
   }
 
   addTomReminder() {
+    var date2 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+    this.currentDate.getDate() + 1, 8, 0, 0, 0);
+    this.emitReminder.emit(date2);
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminderValue.id],
-        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-          this.currentDate.getDate() + 1, 8, 0, 0, 0)
+        "reminder": date2
       }, this.token).subscribe(data => {
         this.show = 1;
         this.reminderEmit.emit({
@@ -59,11 +65,13 @@ export class ToolbarComponent implements OnInit {
   }
 
   addWeekReminder() {
+    var date3 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+    this.currentDate.getDate() + 7, 8, 0, 0, 0);
+    this.emitReminder.emit(date3);
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes',
       {
         "noteIdList": [this.reminderValue.id],
-        "reminder": new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-          this.currentDate.getDate() + 7, 8, 0, 0, 0)
+        "reminder": date3
       }, this.token).subscribe(data => {
         this.show = 1;
         this.reminderEmit.emit({
@@ -79,44 +87,52 @@ export class ToolbarComponent implements OnInit {
     
     timing.match('^[0-2][0-3]:[0-5][0-9]$');
     
-    // if(timing=='8:00 AM'){
-    //   this.body = {
-    //     "noteIdList": [this.reminderValue.id],
-    //     "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0)
-    //   }
-    //   this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
+    if(timing=='8:00 AM'){
+      let date4 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0, 0);
+      this.emitReminder.emit(date4);
+      this.body = {
+        "noteIdList": [this.reminderValue.id],
+        "reminder": date4
+      }
+      this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
        
-    //     this.reminderEmit.emit({});
-    //   })
-    // }else if(timing=='1:00 PM'){
-    //   this.body = {
-    //     "noteIdList": [this.reminderValue.id],
-    //     "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0)
-    //   }
-    //   this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
+        this.reminderEmit.emit({});
+      })
+    }else if(timing=='1:00 PM'){
+      let date5 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 13, 0, 0, 0);
+      this.emitReminder.emit(date5);
+      this.body = {
+        "noteIdList": [this.reminderValue.id],
+        "reminder": date5
+      }
+      this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
         
-    //     this.reminderEmit.emit({});
-    //   })
-    // }else if(timing=='6:00 PM'){
-    //   this.body = {
-    //     "noteIdList": [this.reminderValue.id],
-    //     "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0)
-    //   }
-    //   this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
+        this.reminderEmit.emit({});
+      })
+    }else if(timing=='6:00 PM'){
+      let date6 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 18, 0, 0, 0);
+      this.emitReminder.emit(date6);
+      this.body = {
+        "noteIdList": [this.reminderValue.id],
+        "reminder": date6
+      }
+      this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
        
-    //     this.reminderEmit.emit({})
-    //   })
-    // }else if(timing=='9:00 PM'){
-    //   this.body = {
-    //     "noteIdList": [this.reminderValue.id],
-    //     "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0)
-    //   }
-    //   this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
+        this.reminderEmit.emit({})
+      })
+    }else if(timing=='9:00 PM'){
+      let date7 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 21, 0, 0, 0);
+      this.emitReminder.emit(date7);
+      this.body = {
+        "noteIdList": [this.reminderValue.id],
+        "reminder": date7
+      }
+      this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
         
-    //     this.reminderEmit.emit({})
-    //   })
-    // }else 
-    // if(timing==this.reminderBody.time){
+        this.reminderEmit.emit({})
+      })
+    }else 
+    if(timing==this.reminderBody.time){
       var x;
       var splitTime=this.reminderBody.time.split("",8);
       var hour= Number(splitTime[0]+splitTime[1]);
@@ -124,18 +140,22 @@ export class ToolbarComponent implements OnInit {
       var ampm = (splitTime[6]+splitTime[7]);
      
       if(ampm=='AM' || ampm=='am'){
+        var date8 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0);
+        this.emitReminder.emit(date8);
         this.body = {
           "noteIdList": [this.reminderValue.id],
-          "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0)
+          "reminder": date8
         }
         this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
           
           this.reminderEmit.emit({})
         })
       }else if(ampm=='PM' || ampm=='pm'){
+        let date9 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0);
+        this.emitReminder.emit(date9);
         this.body = {
           "noteIdList": [this.reminderValue.id],
-          "reminder": new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0)
+          "reminder": date9
         }
         this.myHttpService.postArchive('/notes/addUpdateReminderNotes', this.body, this.token).subscribe((data) => {
         
@@ -143,9 +163,7 @@ export class ToolbarComponent implements OnInit {
         })
       }     
     }
-  // }
-
-
+  }
   enter()
   {
   this.show = 1;

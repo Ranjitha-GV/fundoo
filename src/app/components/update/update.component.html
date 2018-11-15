@@ -48,8 +48,21 @@
         </div>
       </div>
     </div>
+
+    <div fxLayout="row" class="reminder">
+      <div *ngIf="data.reminder.length!=0">
+        <mat-chip-list>
+          <mat-chip>
+            <mat-icon (click)="reminderDelete(data)">query_builder</mat-icon>{{data.reminder | date:'medium'}}
+            <mat-icon (click)="$event.stopPropagation(); reminderDelete(data)">
+              cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    
     <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
-      <app-toolbar style="padding: 5px;"></app-toolbar>
+      <app-toolbar style="padding: 5px;" [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
       <app-collab style="padding: 5px;"></app-collab>
       <app-color style="padding: 5px;"></app-color>
       <app-photo style="padding: 5px;"></app-photo>

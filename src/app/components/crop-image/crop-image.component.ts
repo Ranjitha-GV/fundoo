@@ -38,4 +38,8 @@ export class CropImageComponent implements OnInit {
         }, error => {
         })
     }
+    cancel()
+    {
+        this.dialogRefPic.close();
+    }
 }
