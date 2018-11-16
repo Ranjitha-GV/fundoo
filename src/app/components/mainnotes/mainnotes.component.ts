@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { SearchService } from '../../core/services/data/search.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { Router } from '@angular/router';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 
 @Component({
@@ -13,7 +15,8 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 })
 export class MainnotesComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, public dialog: MatDialog, public data: SearchService) {
+  constructor(private myHttpService: HttpService, public dialog: MatDialog, public data: SearchService,
+    private router : Router) {
     this.data.currentChipEvent.subscribe(
       message => {
         if (message) {
@@ -37,6 +40,7 @@ export class MainnotesComponent implements OnInit {
   @Output() addEntry = new EventEmitter();
   currentDate = new Date();
   today = new Date();
+  @ViewChild(ToolbarComponent) childMenu: ToolbarComponent;
   tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),this.currentDate.getDate()+1)
 
 
@@ -149,4 +153,9 @@ export class MainnotesComponent implements OnInit {
     this.update(note.id);
 
   }
+  labelNav(labelsList)
+  {
+    LoggerService.log(labelsList);
+    this.router.navigate(['/home/newlabel/' + labelsList]);
+ }
 }

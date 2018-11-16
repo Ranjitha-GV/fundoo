@@ -28,10 +28,10 @@
             <div *ngFor="let index of note.noteLabels" class="cancel">
               <div *ngIf="index.isDeleted == false">
                 <mat-chip-list selected>
-                  <mat-chip><span [innerHTML]="index.label"> </span>
+                  <mat-chip><span [innerHTML]="index.label" (click) = "labelNav(index.label)"> </span>
                     <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
                     </mat-icon>
-                  </mat-chip>
+                  </mat-chip>     
                 </mat-chip-list>
               </div>
             </div>
@@ -44,7 +44,10 @@
                <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')">
                   <mat-chip-list>
                   <mat-chip>
-                    <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>Today, {{note.reminder | date:'shortTime'}}
+                    <mat-icon [matMenuTriggerFor]="childMenu?.menu">
+                      query_builder</mat-icon>Today, {{note.reminder | date:'shortTime'}}
+                      <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
+                       style = "color: rgb(223, 223, 223)"></app-toolbar>
                     <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                       cancel</mat-icon>
                   </mat-chip>
@@ -53,7 +56,9 @@
               <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')">
                 <mat-chip-list>
                     <mat-chip>
-                      <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>Tomorrow, {{note.reminder | date:'shortTime'}}
+                      <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon>Tomorrow, {{note.reminder | date:'shortTime'}}
+                      <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
+                      style = "color: rgb(223, 223, 223)"></app-toolbar>
                       <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                         cancel</mat-icon>
                     </mat-chip>
@@ -62,7 +67,9 @@
                 <div *ngIf = "(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
                     <mat-chip-list>
                       <mat-chip>
-                        <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>{{note.reminder | date:'medium'}}
+                        <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon>{{note.reminder | date:'medium'}}
+                        <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
+                        style = "color: rgb(223, 223, 223)"></app-toolbar>
                         <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                           cancel</mat-icon>
                       </mat-chip>
@@ -78,7 +85,9 @@
                   <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')">
                       <mat-chip-list>
                       <mat-chip>
-                        <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>Today, {{note.reminder | date:'shortTime'}}</del>
+                        <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon><del>Today, {{note.reminder | date:'shortTime'}}</del>
+                        <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
+                       style = "color: rgb(223, 223, 223)"></app-toolbar>
                         <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                           cancel</mat-icon>
                       </mat-chip>
@@ -87,7 +96,9 @@
                   <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')">
                     <mat-chip-list>
                         <mat-chip>
-                          <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>Tomorrow, {{note.reminder | date:'shortTime'}}</del>
+                          <mat-icon ([matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon><del>Tomorrow, {{note.reminder | date:'shortTime'}}</del>
+                          <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
+                          style = "color: rgb(223, 223, 223)"></app-toolbar>
                           <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                             cancel</mat-icon>
                         </mat-chip>
@@ -95,8 +106,10 @@
                     </div>
                     <div *ngIf = "(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
                         <mat-chip-list>
-                          <mat-chip>
-                            <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>{{note.reminder | date:'medium'}}</del>
+                          <mat-chip >
+                            <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon><del>{{note.reminder | date:'medium'}}</del>
+                            <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
+                            style = "color: rgb(223, 223, 223)"></app-toolbar>
                             <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                               cancel</mat-icon>
                           </mat-chip>

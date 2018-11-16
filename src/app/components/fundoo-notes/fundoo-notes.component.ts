@@ -120,7 +120,7 @@ export class FundooNotesComponent {
 onUpload(event) {
 this.profileCropOpen(event);
 
-this.selectedFile = event.path[0].files[0];
+this.selectedFile = event.path[0].files[0];  
 const uploadData = new FormData();
 uploadData.append('file', this.selectedFile, this.selectedFile.name);
 }
