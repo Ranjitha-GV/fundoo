@@ -12,6 +12,7 @@ export class ReminderComponent implements OnInit {
   constructor(private myHttpService : HttpService) { }
   reminderArray = [];
   token = localStorage.getItem('token');
+  itemsNew;
 
   ngOnInit() {
     this.reminders();
@@ -21,7 +22,10 @@ export class ReminderComponent implements OnInit {
     this.myHttpService.getReminders('/notes/getReminderNotesList', this.token).subscribe((data) =>
   {
       this.reminderArray = data['data'].data;
-  },
+      this.reminderArray.sort((a: any, b: any) =>
+      new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
+  );
+},
 error =>
 {
 })

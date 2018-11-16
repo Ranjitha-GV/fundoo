@@ -4,11 +4,10 @@
         <mat-card align="center" [style.backgroundColor]="note.color">
             <app-pin [pinArray] = "note" (pinEmit) = "nextEntry($event)" class = "pin"></app-pin>
           <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
-            <!-- <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin"> -->
             <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
             <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
           </div>
-          <!-- *************************************** -->
+          <!-- ********************CheckList******************* -->
           <div class="notes" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
               <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
               (click)=checkBox(checklist,note)></mat-checkbox>
@@ -36,39 +35,74 @@
               </div>
             </div>
           </div>
-          <!-- <div fxLayout="row" class = "reminder">
-              <div *ngFor = "let index of note.reminder; trackBy:index?.id">
-                  <mat-chip-list selected>
-                    <mat-chip><span>{{index | date}},{{index | date: 'shortTime'}}</span>
-                      <mat-icon matChipRemove (click) = "reminderDelete(note)">cancel</mat-icon>
-                    </mat-chip>
-                  </mat-chip-list>
-                </div>
-            </div> -->
+
             <div *ngIf = "remind(note.reminder[0])" fxLayout="row" class="reminder">
               <div *ngIf="note.reminder.length!=0">
-                <mat-chip-list>
+                  <div *ngFor="let index of note.reminder">
+               <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')">
+                  <mat-chip-list>
                   <mat-chip>
-                    <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>{{note.reminder | date:'medium'}}
+                    <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>Today, {{note.reminder | date:'shortTime'}}
                     <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                       cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
+              </div>
+              <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')">
+                <mat-chip-list>
+                    <mat-chip>
+                      <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>Tomorrow, {{note.reminder | date:'shortTime'}}
+                      <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                        cancel</mat-icon>
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+                <div *ngIf = "(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
+                    <mat-chip-list>
+                      <mat-chip>
+                        <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon>{{note.reminder | date:'medium'}}
+                        <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                          cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                  </div>
               </div>
             </div>
 
             <div *ngIf = "!remind(note.reminder[0])" fxLayout="row" class="reminder">
               <div *ngIf="note.reminder.length!=0">
-                <mat-chip-list>
-                  <mat-chip>
-                    <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>{{note.reminder | date:'medium'}}</del>
-                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
-                      cancel</mat-icon>
-                  </mat-chip>
-                </mat-chip-list>
+                  <div *ngFor="let index of note.reminder">
+                  <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')">
+                      <mat-chip-list>
+                      <mat-chip>
+                        <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>Today, {{note.reminder | date:'shortTime'}}</del>
+                        <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                          cancel</mat-icon>
+                      </mat-chip>
+                    </mat-chip-list>
+                  </div>
+                  <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')">
+                    <mat-chip-list>
+                        <mat-chip>
+                          <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>Tomorrow, {{note.reminder | date:'shortTime'}}</del>
+                          <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                            cancel</mat-icon>
+                        </mat-chip>
+                      </mat-chip-list>
+                    </div>
+                    <div *ngIf = "(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
+                        <mat-chip-list>
+                          <mat-chip>
+                            <mat-icon (click)="reminderDelete(note)">query_builder</mat-icon><del>{{note.reminder | date:'medium'}}</del>
+                            <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                              cancel</mat-icon>
+                          </mat-chip>
+                        </mat-chip-list>
+                      </div>
+                      </div>
+                      </div>
               </div>
-            </div>
-
           <div>
             <div class="tool" fxLayout="row">
               <app-toolbar class="mainStyle" [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>

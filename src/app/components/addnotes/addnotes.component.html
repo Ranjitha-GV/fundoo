@@ -36,21 +36,42 @@
       <div *ngIf="index.isDeleted == false">
         <mat-chip-list selected>
           <mat-chip>{{index.label}}
-            <mat-icon matChipRemove>cancel</mat-icon>
+            <mat-icon matChipRemove (click) = "remove()">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
       </div>
     </div>
-  <div *ngIf = "reminderArray.length != 0">
-    <div *ngFor="let index of reminderArray" class="cancel">
+    <div *ngFor="let index of reminderArray">
+
+      <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')" class="cancel">
         <mat-chip-list selected>
-          <mat-chip>{{index | date:'medium'}}
+          <mat-chip>Today, {{index | date:'shortTime'}}
             <mat-icon (click)="$event.stopPropagation(); reminderDelete()">
               cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
-    </div>
   </div>
+
+  <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')"  class="cancel">
+    <mat-chip-list selected>
+      <mat-chip>Tomorrow, {{index | date:'shortTime'}}
+        <mat-icon (click)="$event.stopPropagation(); reminderDelete()">
+          cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+</div>
+
+<div *ngIf = "(tomorrow | date:'shortDate') != (index | date:'shortDate') && (today | date:'shortDate') != (index | date:'shortDate')" class="cancel">
+  <mat-chip-list selected>
+    <mat-chip>{{index | date:'medium'}}
+      <mat-icon (click)="$event.stopPropagation(); reminderDelete()">
+        cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+    </div>
+    
+    
     <div>
       <div fxLayout="row" fxLayoutAlign="space-between">
         <app-toolbar [reminderValue]="note" (emitReminder) = "reminderEntry($event)"></app-toolbar>

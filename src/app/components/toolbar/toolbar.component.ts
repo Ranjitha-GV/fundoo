@@ -34,7 +34,7 @@ export class ToolbarComponent implements OnInit {
 
   reminder() {
     let date1 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-    this.currentDate.getDate(), 8, 0, 0, 0);
+    this.currentDate.getDate(), 20, 0, 0, 0);
     this.emitReminder.emit(date1);
     this.myHttpService.postArchive('/notes/addUpdateReminderNotes', {
       "noteIdList": [this.reminderValue.id],

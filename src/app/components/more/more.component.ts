@@ -57,9 +57,20 @@ export class MoreComponent implements OnInit {
 
   check(label) {
     this.addLabelEvent.emit(label);
-    this.body = {
-      "noteId": this.notedetails.id,
-      "lableId": label.id
+    if(this.notedetails == undefined)
+    {
+      this.notedetails = '';
+      this.body = {
+        "noteId": '',
+        "lableId": label.id
+      }
+    }
+      else
+      {
+        this.body = {
+          "noteId": this.notedetails.id,
+          "lableId": label.id
+      }
     }
     this.myHttpService.postNotes('/notes/' + this.notedetails.id + '/addLabelToNotes/' + label.id + '/add',
       this.body, this.token).subscribe(

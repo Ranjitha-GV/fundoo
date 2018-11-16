@@ -35,6 +35,10 @@ export class MainnotesComponent implements OnInit {
   @Input() searchElement;
   @Input() notesArray;
   @Output() addEntry = new EventEmitter();
+  currentDate = new Date();
+  today = new Date();
+  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),this.currentDate.getDate()+1)
+
 
   ngOnInit() {
     this.getlabels();

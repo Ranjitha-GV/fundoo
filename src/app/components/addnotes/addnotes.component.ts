@@ -33,6 +33,10 @@ export class AddnotesComponent implements OnInit {
   color = "#fafafa";
   reminderArray = [];
   reminderVal;
+  reminderNew;
+  currentDate = new Date();
+  today = new Date();
+  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),this.currentDate.getDate()+1)
 
   move() {
     this.hide = 1;
@@ -41,6 +45,11 @@ export class AddnotesComponent implements OnInit {
     this.listing = !this.listing;
   }
   back() {
+    this.reminderNew = '';
+    if(this.reminderVal != undefined)
+    {
+      this.reminderNew = this.reminderVal; 
+    }
     if(this.checked == false)
     {
     this.hide = 0;
@@ -52,21 +61,25 @@ export class AddnotesComponent implements OnInit {
       'checklist': '',
       'isPined': 'false',
       'color': this.color,
-      'reminder': this.reminderVal
+      'reminder': this.reminderNew
     }, this.token).subscribe(
       (data) => {
         this.onNewEntryAdded.emit({
         })
         this.color = "#fafafa";
+        this.array = [];
+        this.reminderArray = [];
         this.hide = 0;
         this.listing = !this.listing;
-        this.add = null;
-      },
+        this.add = [];
+  },
       error => {
         this.color = "#fafafa";
+        this.reminderArray = [];
+        this.array = [];
         this.hide = 0;
         this.listing = !this.listing;
-        this.add = null;
+        this.add = [];
       })
     }
     else
@@ -90,20 +103,25 @@ export class AddnotesComponent implements OnInit {
         'checklist': JSON.stringify(this.dataArrayCheck),
         'isPined': 'false',
         'color': this.color,
-        'reminder': this.reminderVal
+        'reminder': this.reminderNew 
       }, this.token).subscribe(
         (data) => {
           this.dataArray = [];
+          this.array = [];
+          this.reminderArray = [];
           this.hide = 0;
           this.checked = false;
           this.color = "#fafafa";
           this.listing = !this.listing;
+          this.reminderVal = '';
           this.onNewEntryAdded.emit({
           })
 
         },
         error => {
           this.dataArray = [];
+          this.reminderArray = [];
+          this.array = [];
           this.hide = 0;
           this.color = "#fafafa";
           this.listing = !this.listing;
@@ -135,9 +153,12 @@ export class AddnotesComponent implements OnInit {
   }
 
   labelEvent(event) {
+    console.log('i am event',event)
     if (this.add.indexOf(event) < 0) {
+      console.log(event)
       this.array.push(event.id);
       this.add.push(event);
+      
     }
     else {
       this.array.splice(this.array.indexOf(event), 1);
@@ -186,7 +207,15 @@ note ={
 }
 
 reminderDelete(note) {
-  this.reminderArray=[];
+  this.reminderArray.pop();
+  this.reminderVal = '';
+  this.reminderNew = '';
+}
+remove()
+{
+  this.add.pop();
+  this.array.pop();
+
 }
 
   ngOnInit() {
