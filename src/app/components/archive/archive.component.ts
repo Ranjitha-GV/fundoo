@@ -20,7 +20,7 @@ export class ArchiveComponent implements OnInit {
     this.gridList();
     this.getArchive();
   }
-
+/**Hitting API to get archive notes*/
   getArchive() {
     this.myHttpService.getTrash('/notes/getArchiveNotesList', this.token).subscribe(
       (data) => {
@@ -34,6 +34,7 @@ export class ArchiveComponent implements OnInit {
       error => {
       })
   }
+/**Hitting API to unarchive notes */
   unarchive(note) {
     this.myHttpService.postArchive('/notes/archiveNotes',
       {
@@ -45,16 +46,19 @@ export class ArchiveComponent implements OnInit {
         error => {
         })
   }
+/**To toggle CSS for grid and list in archive component */
   gridList() {
     this.data.currentGridEvent.subscribe(message => {
       this.toggle = message;
     })
   }
+/**Event emitter*/
   nextEntry(event) {
     if (event) {
       this.getArchive();
     }
   }
+/**To change status of checklist*/
   checkBox(checkList,note) {
 
     if (checkList.status == "open") {
@@ -63,10 +67,9 @@ export class ArchiveComponent implements OnInit {
     else {
       checkList.status = "open"
     }
-    // this.modifiedCheckList = checkList;
+    // this.modifiedList = checkList;
     // this.updatelist(note.id);
   }
-
 }
 
 

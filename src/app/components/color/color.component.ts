@@ -10,7 +10,8 @@ export class ColorComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
   token = localStorage.getItem('token');
-  colorsArray = [[{ 'color': '#ffffff', 'name': 'White' },
+  colorsArray = 
+  [[{ 'color': '#ffffff', 'name': 'White' },
   { 'color': '#f28b82', 'name': 'Red' },
   { 'color': '#fbbc04', 'name': 'Orange' },
   { 'color': '#fff475', 'name': 'Yellow' }],
@@ -32,7 +33,7 @@ export class ColorComponent implements OnInit {
 
   ngOnInit() {
   }
-
+/**Hitting API to change color of notes */
   colorChange(id) {
     this.emitColor.emit(id);
     if (this.color != undefined) {

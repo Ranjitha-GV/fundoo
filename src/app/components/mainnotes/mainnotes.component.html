@@ -1,4 +1,4 @@
-<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" fxLayoutAlign="center" class="main">
+<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" fxLayoutAlign="center" class="main" fxFlex.sm = 100 fxFlex.xs = 100>
     <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
       <div [ngClass]="{'grid':toggle,'list':!toggle}">
         <mat-card align="center" [style.backgroundColor]="note.color">
@@ -23,6 +23,7 @@
                (click)="open(note)">{{checklist.itemName}}</del>
             </div>
             <!-- ************************************************* -->
+            <!--*********************Labels***********************-->
           <div fxLayout="row">
             <div *ngFor="let index of note.noteLabels" class="cancel">
               <div *ngIf="index.isDeleted == false">
@@ -35,7 +36,8 @@
               </div>
             </div>
           </div>
-
+          <!--******************************************************-->
+          <!--*******************Reminders**************************-->
             <div *ngIf = "remind(note.reminder[0])" fxLayout="row" class="reminder">
               <div *ngIf="note.reminder.length!=0">
                   <div *ngFor="let index of note.reminder">
@@ -104,6 +106,7 @@
                       </div>
               </div>
           <div>
+            <!--************************************************************-->
             <div class="tool" fxLayout="row">
               <app-toolbar class="mainStyle" [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
               <app-collab class="mainStyle"></app-collab>

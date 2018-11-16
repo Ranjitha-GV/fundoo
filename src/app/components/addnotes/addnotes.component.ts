@@ -36,14 +36,17 @@ export class AddnotesComponent implements OnInit {
   reminderNew;
   currentDate = new Date();
   today = new Date();
-  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),this.currentDate.getDate()+1)
-
+  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+   this.currentDate.getDate()+1)
+/**Function to hide and show Note Division */
   move() {
     this.hide = 1;
   }
+/**Function to hide and show checklist and notes */
   list() {
     this.listing = !this.listing;
   }
+/**Hitting add notes API */
   back() {
     this.reminderNew = '';
     if(this.reminderVal != undefined)
@@ -70,7 +73,7 @@ export class AddnotesComponent implements OnInit {
         this.array = [];
         this.reminderArray = [];
         this.hide = 0;
-        this.listing = !this.listing;
+        this.listing = !this.listing;  
         this.add = [];
   },
       error => {
@@ -128,6 +131,7 @@ export class AddnotesComponent implements OnInit {
         })
     }
   }
+/**Hitting Post Notes API */
   addLabel() {
   
     this.myHttpService.postNotes('/noteLabels', {
@@ -142,16 +146,17 @@ export class AddnotesComponent implements OnInit {
       })
     
 }
+/**Catching Color event to change color while adding notes */
   colorsEntry(event) {
     this.color = event;
   }
- 
+/**KeyDown function to enter checklist */
   onKeydown(event) {
     if (event.key === "Enter" || event.key === "letters") {
       this.save.push(this.keys);
     }
   }
-
+/**Catching Label event */
   labelEvent(event) {
     console.log('i am event',event)
     if (this.add.indexOf(event) < 0) {
@@ -165,7 +170,7 @@ export class AddnotesComponent implements OnInit {
       this.add.splice(this.add.indexOf(event), 1);
     }
   }
-  
+/**Enter functionality */
 enter(){
   this.i++;
   if(this.data!=null){
@@ -177,6 +182,7 @@ enter(){
     this.data=null;
   }
 }
+/**Deleting input from the checklist field  */
 ondelete(deletedObj){
   for(var i=0;i<this.dataArray.length;i++){
     if(deletedObj.index==this.dataArray[i].index){
@@ -185,7 +191,7 @@ ondelete(deletedObj){
     }
   }
 }
-
+/**Editing checklist content */
 editing(event,edited){
 
   if(event.code=="Enter"){
@@ -196,7 +202,7 @@ editing(event,edited){
     }    
   }
 }
-
+/**Catching reminder entry event */
 reminderEntry(event)
 {
     this.reminderVal = event;
@@ -205,19 +211,19 @@ reminderEntry(event)
 note ={
   'id':''
 }
-
+/**Removing reminders from the addnotes division */
 reminderDelete(note) {
   this.reminderArray.pop();
   this.reminderVal = '';
   this.reminderNew = '';
 }
+/**Removing labels from the addnotes division */
 remove()
 {
   this.add.pop();
   this.array.pop();
 
 }
-
   ngOnInit() {
 
   }

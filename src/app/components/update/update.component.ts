@@ -79,7 +79,6 @@ else{
       }
     })
   }
-  
 
   addList(event){
     if(this.newList!=""){
@@ -110,17 +109,14 @@ else{
       console.log(response['data'].details);
       
       this.tempArray.push(response['data'].details)
-
-      console.log(this.tempArray)
-
     })
   }
   }
-  editing(editedList,event){
+  editing(edited,event){
       
-    console.log(editedList);
+    console.log(edited);
     if(event.code=="Enter"){
-    this.modifiedCheckList=editedList;
+    this.modifiedCheckList=edited;
     this.onNoClick();
     }
     
@@ -135,7 +131,6 @@ else{
       this.token).subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
-
         },
         error => {
           console.log("Error", error);
@@ -158,11 +153,10 @@ else{
     LoggerService.log('reminder note id is', id);
     this.myHttpService.postArchive('/notes/removeReminderNotes',
       {
-        "noteIdList": [id]
+        "noteIdList": [id]   
       },
-      this.token).subscribe(
+      this.token).subscribe( 
         (data) => {
-          // this.addEntry.emit({});
         },
         error => {
         })

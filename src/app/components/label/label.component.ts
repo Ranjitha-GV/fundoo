@@ -51,9 +51,7 @@ export class LabelComponent implements OnInit {
         }
     });
   }
-
   
-
   ngOnInit() {
     this.delete();
     this.addLabel();

@@ -23,6 +23,7 @@
       <button mat-icon-button matTooltip="Grid View" (click)="viewClose()" *ngIf="grid == 1">
         <span><mat-icon>view_module</mat-icon></span></button>
     </div>
+    <!--***************Upload Profile Picture*****************-->
     <div class="photo">
         <button *ngIf = "image2 != ''" class="profilebutton3">
             <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" 
@@ -46,7 +47,7 @@
                   <div class="change">Change</div>
                 </button>
                 <input style="display:none" (click)="$event.stopPropagation()" class="image" 
-                  type="file" (change)="onFileUpload($event)" #selectFile>
+                  type="file" (change)="onUpload($event)" #selectFile>
               </div>
               <div fxFlex=60>
                 <mat-content fxFlex class="content"><b>
@@ -62,6 +63,7 @@
                 Sign Out</button></div>
         </mat-menu>
     </div>
+    <!--***********************************************************-->
   </div>
 </mat-toolbar>
                   <!--**************************************************************-->
@@ -81,8 +83,6 @@
         <span class="one">Notes</span></a>
       <a mat-list-item routerLink="/home/reminder" (click) = "nameChange('Reminder')"><img src="../../../assets/images/reminder.svg">
         <span class="one">Reminder</span></a>
-      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')"><img src="../../../assets/images/archive.svg">
-        <span class="one">Archive</span></a>
       <hr>
       <div>
         <p style="margin-left: 10px;">Labels</p>
@@ -98,6 +98,8 @@
       <a mat-list-item (click)="openDialog()"><img src="../../../assets/images/label.svg">
         <span class="one">Add Label</span></a>
       <hr>
+      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')"><img src="../../../assets/images/archive.svg">
+        <span class="one">Archive</span></a>
       <a mat-list-item routerLink="/home/bin" (click) = "nameChange('Bin')"><img src="../../../assets/images/bin.svg">
         <span class="one">Bin</span></a>
     </mat-nav-list>

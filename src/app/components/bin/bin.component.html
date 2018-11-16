@@ -6,7 +6,7 @@
           <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
           <div style="font-size: 15px;" [innerHTML]="note.description"></div>
         </div>
-
+        <!--*****************Checklists*******************-->
         <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
           (click)=checkBox(checklist,note)></mat-checkbox>
@@ -22,7 +22,7 @@
            (click)="open(note)">{{checklist.itemName}}</del>
         </div>
 
-        
+        <!--********************************************-->
         <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
           <div class="delete">
             <div matTooltip="More" [matMenuTriggerFor]="menu" class="space"> 

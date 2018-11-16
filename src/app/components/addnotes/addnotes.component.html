@@ -15,6 +15,7 @@
       <div contenteditable="true" class="edit" id="description" data-text="Take a note.." (click) = "checked = false">
       </div> <br> <br>
     </div>
+    <!-- **********CheckList********* -->
     <div *ngIf="!listing" id="title" autofocus #description style = "margin-bottom: 20px;">
       <div class="check" *ngFor="let data of dataArray" id="note" fxLayout="row" 
             style = "margin-bottom: 5px;">
@@ -32,6 +33,8 @@
       </div>
       <mat-divider></mat-divider>
     </div>
+    <!--*************************-->
+    <!--*********Labels**********-->
     <div *ngFor="let index of add" class="cancel">
       <div *ngIf="index.isDeleted == false">
         <mat-chip-list selected>
@@ -41,8 +44,9 @@
         </mat-chip-list>
       </div>
     </div>
+    <!--**************************-->
+    <!--*********Reminders**********-->
     <div *ngFor="let index of reminderArray">
-
       <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')" class="cancel">
         <mat-chip-list selected>
           <mat-chip>Today, {{index | date:'shortTime'}}
@@ -68,10 +72,10 @@
         cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
+ </div>
 </div>
-    </div>
-    
-    
+<!--***********************************-->
+<!--**********ToolBar*********-->
     <div>
       <div fxLayout="row" fxLayoutAlign="space-between">
         <app-toolbar [reminderValue]="note" (emitReminder) = "reminderEntry($event)"></app-toolbar>
@@ -85,3 +89,4 @@
         </span>
       </div>
     </div>
+    <!--*****************************-->

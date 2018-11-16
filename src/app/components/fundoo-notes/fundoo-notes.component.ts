@@ -39,6 +39,8 @@ export class FundooNotesComponent {
   id = localStorage.getItem('userId');
   selectedFile = null;
   Profile;
+  public image2 = localStorage.getItem('imageUrl');
+  img = environment.apiUrl + this.image2;
   @ViewChild('labelList') labelList: ElementRef;
   @ViewChild('newLabel') newLabel: ElementRef;
 
@@ -46,11 +48,11 @@ export class FundooNotesComponent {
     ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver:
       BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
 
-
+/**Function to toggle divisions */
   toggle() {
     this.show = 1;
   }
-
+/**Hitting API to logout from the fundoo */
   signout() {
     console.log(this.token);
     this.myHttpService.signoutPost('/user/logout', this.token).subscribe(
@@ -65,7 +67,7 @@ export class FundooNotesComponent {
       })
 
   }
-
+/**Pop up to add labels */
   openDialog(): void {
     const dialogRef = this.dialog.open(LabelComponent, {
       width: '300px',
@@ -76,7 +78,7 @@ export class FundooNotesComponent {
       this.label();
     });
   }
-
+/**Hitting API to add labels */
   label() {
     let tempArr = [];
     this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
@@ -91,47 +93,43 @@ export class FundooNotesComponent {
       error => {
       })
   }
-
+/**Navigate page to particular label component */
   labelClick(labelList) {
     var labelList = labelList.label;
     this.router.navigate(['/home/newlabel/' + labelList]);
   }
-
+/**Navigate page to search component */
   searchEle() {
     this.router.navigate(['/home/search']);
   }
-
+/**emitting event to search element */
   keyPress() {
     this.data.changeMessage(this.searchElement);
   }
-
+/**Event to toggle between grid and list */
   view() {
     this.grid = 1;
     this.data.changeGridEvent(false);
   }
-  
+/**Event to toggle between grid and list */  
   viewClose() {
     this.grid = 0;
     this.data.changeGridEvent(true);
   }
-
-
-public image2 = localStorage.getItem('imageUrl');
-img = environment.apiUrl + this.image2;
-
-onFileUpload(event) {
-var token = localStorage.getItem('token');
+/**passing profile picture event */
+onUpload(event) {
 this.profileCropOpen(event);
 
 this.selectedFile = event.path[0].files[0];
 const uploadData = new FormData();
 uploadData.append('file', this.selectedFile, this.selectedFile.name);
 }
-
+/**Navigate to particular label component */
 clickLabel(labelsList) {
 var labelsList = labelsList.label;
 this.router.navigate(['/home/label/' + labelsList])
 }
+/**dialog box to open profile crop */
 profileCropOpen(data): void { 
 const dialogRefPic = this.dialog.open(CropImageComponent, {
 width: '450px',
@@ -147,6 +145,7 @@ this.img = environment.apiUrl + this.image2;
 
 });
 }
+/**To change names on the nav-bar according to the component name  */
 nameChange(names)
 {
   this.names = names;

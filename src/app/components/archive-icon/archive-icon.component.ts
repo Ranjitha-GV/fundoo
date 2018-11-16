@@ -15,7 +15,7 @@ export class ArchiveIconComponent implements OnInit {
 
   ngOnInit() {
   }
-
+/**Hitting API to archive notes */
   archivePost(archive) {
     this.myHttpService.postArchive('/notes/archiveNotes',
       {

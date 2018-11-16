@@ -104,7 +104,7 @@
   display: flex;
   align-items: center;
   height:46px;
-  width:599px;
+  width:stretch;
   color: black;
   border-radius: 5px;
   padding-left: 1%;
@@ -113,7 +113,7 @@
 .searchIcon
 {
   height:41px;
-  width:693px;
+  // width:str;
   color: black;
   opacity: 1;
   background-color: rgb(235, 174, 22);

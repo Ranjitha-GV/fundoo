@@ -25,7 +25,7 @@ export class BinComponent implements OnInit {
     this.gridList();
   }
 
-
+/**Delete confirmation pop over */
 openDialog(note): void {
   const dialogRef = this.dialog.open(PopOverComponent, {
   width: 'fit-content',
@@ -37,7 +37,7 @@ openDialog(note): void {
     this.delete();
   });
   }
-
+/**Delete message pop over */
   openDeleteDialog(note): void {
     const dialogRef = this.dialog.open(DeletePopComponent, {
     width: 'fit-content',
@@ -58,7 +58,7 @@ openDialog(note): void {
           error => {
           })    });
     }
-
+/**Hitting API to get trash notes */
   delete() {
     this.myHttpService.getTrash('/notes/getTrashNotesList', this.token).subscribe(
       (data) => {
@@ -70,9 +70,9 @@ openDialog(note): void {
         }
       },
       error => {
-      })
+    })
   }
-
+/**Hitting API to restore trash notes */
   restore(note) {
     var id = note.id
     this.myHttpService.deleteNotes('/notes/trashNotes', {
@@ -85,16 +85,17 @@ openDialog(note): void {
       error => {
       })
   }
-
+/**API call to hit delete forever API */
   deleteForever(note) {
     this.openDeleteDialog(note);
   }
-
+/**Event emission for grid and list view */
   gridList() {
     this.data.currentGridEvent.subscribe(message => {
       this.toggle = message;
     })
   }
+/**Checking status of the checklist */
   checkBox(checkList,note) {
 
     if (checkList.status == "open") {
@@ -104,8 +105,6 @@ openDialog(note): void {
       checkList.status = "open"
     }
     this.modifiedList = checkList;
-    // this.update(note.id);
-
   }
 }
 

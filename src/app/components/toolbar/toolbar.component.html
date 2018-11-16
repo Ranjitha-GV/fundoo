@@ -11,14 +11,14 @@
     </span></button></div>
     <div><button mat-menu-item (click) = "addWeekReminder()">Next Week<span class="coding">
     Mon,08:00</span></button></div>
-    <div><button mat-menu-item (click) = "$event.stopPropagation(); enter();"><mat-icon>query_builder
+    <div><button mat-menu-item (click) = "$event.stopPropagation(); enter();">
+      <mat-icon>query_builder
     </mat-icon>Select Date and Time</button></div>
     </div>
 
-
-
     <div *ngIf = "show == 1" class = "menuDown">
-        <div><button mat-menu-item (click) = "$event.stopPropagation(); enterAfter();"><mat-icon>keyboard_backspace
+        <div><button mat-menu-item (click) = "$event.stopPropagation(); enterAfter();">
+          <mat-icon>keyboard_backspace
           </mat-icon>Select Date and Time</button></div>
           <mat-form-field>
         <input matInput [matDatepicker]="picker" placeholder="Choose a date" class = "edit" 
@@ -30,14 +30,17 @@
   </mat-form-field>
   <div fxLayout="row">
     <mat-form-field (click)="$event.stopPropagation()">
-        <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" [(ngModel)]="reminderBody.time">
-        <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" class="arrow">keyboard_arrow_down</mat-icon>
+        <input matInput placeholder="Choose Time" (click)="$event.stopPropagation()" 
+          [matMenuTriggerFor]="Menu" [(ngModel)]="reminderBody.time">
+        <mat-icon (click)="$event.stopPropagation()" [matMenuTriggerFor]="Menu" 
+          class="arrow">keyboard_arrow_down</mat-icon>
       </mat-form-field>
     
 </div>
 <mat-menu #Menu [overlapTrigger]=false>
 <div fxLayout="column" *ngFor="let timeIndex of reminders">
-        <button mat-button (click)="reminderBody.time = timeIndex.viewTime" (click)="$event.stopPropagation()" placeholder="">
+        <button mat-button (click)="reminderBody.time = timeIndex.viewTime" 
+          (click)="$event.stopPropagation()" placeholder="">
                 
                 <div fxFlex="35" >{{timeIndex.period}}</div>
                 <div fxFlex="70"></div>
@@ -49,10 +52,11 @@
     <button mat-button (click)="$event.stopPropagation()">Custom Time</button>
 </div>
 </mat-menu>
-<div><button mat-button (click)="customReminder(reminderBody.date.value,reminderBody.time)">Save</button></div>
+<div><button mat-button (click)="customReminder(reminderBody.date.value,reminderBody.time)">
+  Save</button></div>
 
 </div>
 
-  </mat-menu>
+</mat-menu>
 </div>
 

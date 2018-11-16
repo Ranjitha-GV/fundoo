@@ -134,10 +134,10 @@ export class ToolbarComponent implements OnInit {
     }else 
     if(timing==this.reminderBody.time){
       var x;
-      var splitTime=this.reminderBody.time.split("",8);
-      var hour= Number(splitTime[0]+splitTime[1]);
-      var minute= Number(splitTime[3]+splitTime[4]);
-      var ampm = (splitTime[6]+splitTime[7]);
+      var split=this.reminderBody.time.split("",8);
+      var hour= Number(split[0]+split[1]);
+      var minute= Number(split[3]+split[4]);
+      var ampm = (split[6]+split[7]);
      
       if(ampm=='AM' || ampm=='am'){
         var date8 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour, minute, 0, 0);
@@ -150,7 +150,8 @@ export class ToolbarComponent implements OnInit {
           
           this.reminderEmit.emit({})
         })
-      }else if(ampm=='PM' || ampm=='pm'){
+      }
+      else if(ampm=='PM' || ampm=='pm'){
         let date9 = new Date(date.getFullYear(), date.getMonth(), date.getDate(), hour+12, minute, 0, 0);
         this.emitReminder.emit(date9);
         this.body = {
