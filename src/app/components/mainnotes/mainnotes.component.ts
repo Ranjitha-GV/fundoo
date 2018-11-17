@@ -40,7 +40,6 @@ export class MainnotesComponent implements OnInit {
   @Output() addEntry = new EventEmitter();
   currentDate = new Date();
   today = new Date();
-  @ViewChild(ToolbarComponent) childMenu: ToolbarComponent;
   tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),this.currentDate.getDate()+1)
 
 

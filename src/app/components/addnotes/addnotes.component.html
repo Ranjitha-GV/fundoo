@@ -77,7 +77,7 @@
 <!--***********************************-->
 <!--**********ToolBar*********-->
     <div>
-      <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutWrap>
         <app-toolbar [reminderValue]="note" (emitReminder) = "reminderEntry($event)"></app-toolbar>
         <app-collab></app-collab>
         <app-color (emitColor)=colorsEntry($event)></app-color>

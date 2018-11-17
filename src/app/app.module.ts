@@ -44,7 +44,7 @@ import { PopOverComponent } from './components/pop-over/pop-over.component';
 import { LabelpopComponent } from './components/labelpop/labelpop.component';
 import { DeletePopComponent } from './components/delete-pop/delete-pop.component';
 import { PinComponent } from './components/pin/pin.component';
-
+import { MessagingService } from './core/services/messaging/messaging.service';
 
 
 
@@ -110,7 +110,7 @@ import { PinComponent } from './components/pin/pin.component';
     MatNativeDateModule,
     MatSelectModule
   ],
-  providers: [HttpService, AuthService, AuthGuard, LoggerService],
+  providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
   LabelpopComponent, DeletePopComponent],
   bootstrap: [AppComponent],

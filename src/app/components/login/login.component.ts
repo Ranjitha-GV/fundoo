@@ -74,8 +74,19 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('email', data['email']);
           localStorage.setItem('userId', data['userId']);
           localStorage.setItem('imageUrl', data['imageUrl']);
+          var pushToken = localStorage.getItem('pushToken');
+          var token = localStorage.getItem('token');
           this.router.navigateByUrl('/home');
-        },
+          this.myHttpService.postArchive('/user/registerPushToken', 
+          {'pushToken' : pushToken}, token).subscribe((data)=>
+           {
+             LoggerService.log('pushToken', data);
+           },
+        error=>
+          {
+             LoggerService.log('Error', error);
+          })
+      },
         error => {
           this.snackBar.open("Invalid email or password", "fail", {
             duration: 3000

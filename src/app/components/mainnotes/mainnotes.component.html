@@ -1,135 +1,139 @@
-<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" fxLayoutAlign="center" class="main" fxFlex.sm = 100 fxFlex.xs = 100>
-    <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
-      <div [ngClass]="{'grid':toggle,'list':!toggle}">
-        <mat-card align="center" [style.backgroundColor]="note.color">
-            <app-pin [pinArray] = "note" (pinEmit) = "nextEntry($event)" class = "pin"></app-pin>
-          <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
-            <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
-            <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
-          </div>
-          <!-- ********************CheckList******************* -->
-          <div class="notes" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
-              <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
-              (click)=checkBox(checklist,note)></mat-checkbox>
-              <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
-              [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
-                (click)="open(note)" [style.backgroundColor]="note.color">
-             </div>
-            
-              <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
-              <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
-               (click)=checkBox(checklist,note)></mat-checkbox>
-              <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
-               (click)="open(note)">{{checklist.itemName}}</del>
-            </div>
-            <!-- ************************************************* -->
-            <!--*********************Labels***********************-->
-          <div fxLayout="row">
-            <div *ngFor="let index of note.noteLabels" class="cancel">
-              <div *ngIf="index.isDeleted == false">
-                <mat-chip-list selected>
-                  <mat-chip><span [innerHTML]="index.label" (click) = "labelNav(index.label)"> </span>
-                    <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
-                    </mat-icon>
-                  </mat-chip>     
-                </mat-chip-list>
-              </div>
+<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" fxLayoutAlign="center" class="main"
+  fxFlex.sm=100 fxFlex.xs=100>
+  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
+    <div [ngClass]="{'grid':toggle,'list':!toggle}">
+      <mat-card align="center" [style.backgroundColor]="note.color">
+        <app-pin [pinArray]="note" (pinEmit)="nextEntry($event)" class="pin"></app-pin>
+        <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
+          <b>
+            <div style="font-size: 20px;" [innerHTML]="note.title"></div>
+          </b> <br>
+          <div style="font-size: 15px;" [innerHTML]="note.description"></div> <br>
+        </div>
+        <!-- ********************CheckList******************* -->
+        <div class="notes" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
+          <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" (click)=checkBox(checklist,note)></mat-checkbox>
+          <input *ngIf="!checklist.isDeleted && checklist.status=='open' " [(ngModel)]=checklist.itemName fxFlex="90%"
+            class="note" (click)="open(note)" [style.backgroundColor]="note.color">
+        </div>
+
+        <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
+          <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted" (click)=checkBox(checklist,note)></mat-checkbox>
+          <del *ngIf="!checklist.isDeleted && checklist.status=='close'" (click)="open(note)">{{checklist.itemName}}</del>
+        </div>
+        <!-- ************************************************* -->
+        <!--*********************Labels***********************-->
+        <div fxLayout="row">
+          <div *ngFor="let index of note.noteLabels" class="cancel">
+            <div *ngIf="index.isDeleted == false">
+              <mat-chip-list selected>
+                <mat-chip><span [innerHTML]="index.label" (click)="labelNav(index.label)"> </span>
+                  <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
+                  </mat-icon>
+                </mat-chip>
+              </mat-chip-list>
             </div>
           </div>
-          <!--******************************************************-->
-          <!--*******************Reminders**************************-->
-            <div *ngIf = "remind(note.reminder[0])" fxLayout="row" class="reminder">
-              <div *ngIf="note.reminder.length!=0">
-                  <div *ngFor="let index of note.reminder">
-               <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')">
-                  <mat-chip-list>
+        </div>
+        <!--******************************************************-->
+        <!--*******************Reminders**************************-->
+        <div *ngIf="remind(note.reminder[0])" fxLayout="row" class="reminder">
+          <div *ngIf="note.reminder.length!=0">
+            <div *ngFor="let index of note.reminder">
+              <div *ngIf="(today | date:'shortDate') == (index | date:'shortDate')">
+                <mat-chip-list>
                   <mat-chip>
-                    <mat-icon [matMenuTriggerFor]="childMenu?.menu">
-                      query_builder</mat-icon>Today, {{note.reminder | date:'shortTime'}}
-                      <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
-                       style = "color: rgb(223, 223, 223)"></app-toolbar>
+                    <mat-icon>query_builder</mat-icon>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                      Today, {{note.reminder | date:'shortTime'}}
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
                     <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
                       cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
               </div>
-              <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')">
+              <div *ngIf="(tomorrow | date:'shortDate') == (index | date:'shortDate')">
                 <mat-chip-list>
-                    <mat-chip>
-                      <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon>Tomorrow, {{note.reminder | date:'shortTime'}}
-                      <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
-                      style = "color: rgb(223, 223, 223)"></app-toolbar>
-                      <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
-                        cancel</mat-icon>
-                    </mat-chip>
-                  </mat-chip-list>
-                </div>
-                <div *ngIf = "(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
-                    <mat-chip-list>
-                      <mat-chip>
-                        <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon>{{note.reminder | date:'medium'}}
-                        <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
-                        style = "color: rgb(223, 223, 223)"></app-toolbar>
-                        <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
-                          cancel</mat-icon>
-                      </mat-chip>
-                    </mat-chip-list>
-                  </div>
-                  </div>
+                  <mat-chip>
+                    <mat-icon >query_builder</mat-icon>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    Tomorrow, {{note.reminder | date:'shortTime'}}
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
               </div>
-            </div>
-
-            <div *ngIf = "!remind(note.reminder[0])" fxLayout="row" class="reminder">
-              <div *ngIf="note.reminder.length!=0">
-                  <div *ngFor="let index of note.reminder">
-                  <div *ngIf = "(today | date:'shortDate') == (index | date:'shortDate')">
-                      <mat-chip-list>
-                      <mat-chip>
-                        <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon><del>Today, {{note.reminder | date:'shortTime'}}</del>
-                        <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
-                       style = "color: rgb(223, 223, 223)"></app-toolbar>
-                        <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
-                          cancel</mat-icon>
-                      </mat-chip>
-                    </mat-chip-list>
-                  </div>
-                  <div *ngIf = "(tomorrow | date:'shortDate') == (index | date:'shortDate')">
-                    <mat-chip-list>
-                        <mat-chip>
-                          <mat-icon ([matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon><del>Tomorrow, {{note.reminder | date:'shortTime'}}</del>
-                          <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
-                          style = "color: rgb(223, 223, 223)"></app-toolbar>
-                          <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
-                            cancel</mat-icon>
-                        </mat-chip>
-                      </mat-chip-list>
-                    </div>
-                    <div *ngIf = "(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
-                        <mat-chip-list>
-                          <mat-chip >
-                            <mat-icon [matMenuTriggerFor]="childMenu?.menu">query_builder</mat-icon><del>{{note.reminder | date:'medium'}}</del>
-                            <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"
-                            style = "color: rgb(223, 223, 223)"></app-toolbar>
-                            <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
-                              cancel</mat-icon>
-                          </mat-chip>
-                        </mat-chip-list>
-                      </div>
-                      </div>
-                      </div>
+              <div *ngIf="(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
+                <mat-chip-list>
+                  <mat-chip>
+                    <mat-icon >query_builder</mat-icon>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    {{note.reminder | date:'medium'}}
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
               </div>
-          <div>
-            <!--************************************************************-->
-            <div class="tool" fxLayout="row">
-              <app-toolbar class="mainStyle" [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
-              <app-collab class="mainStyle"></app-collab>
-              <app-color class="mainStyle" [color]="note" (changeColor)=nextEntry($event)></app-color>
-              <app-photo class="mainStyle"></app-photo>
-              <app-archive-icon class="mainStyle" [archive]="note" (archiveEmit)=nextEntry($event)>
-              </app-archive-icon>
-              <app-more class="mainStyle" [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
             </div>
           </div>
-        </mat-card>
-      </div>
+        </div>
+
+        <div *ngIf="!remind(note.reminder[0])" fxLayout="row" class="reminder">
+          <div *ngIf="note.reminder.length!=0">
+            <div *ngFor="let index of note.reminder">
+              <div *ngIf="(today | date:'shortDate') == (index | date:'shortDate')">
+                <mat-chip-list>
+                  <mat-chip>
+                    <mat-icon >query_builder</mat-icon>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <del>Today, {{note.reminder | date:'shortTime'}}</del>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+              <div *ngIf="(tomorrow | date:'shortDate') == (index | date:'shortDate')">
+                <mat-chip-list>
+                  <mat-chip>
+                    <mat-icon >query_builder</mat-icon>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <del> Tomorrow, {{note.reminder | date:'shortTime'}}</del>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+              <div *ngIf="(today | date:'shortDate') != (index | date:'shortDate') && (tomorrow | date:'shortDate') != (index | date:'shortDate')">
+                <mat-chip-list>
+                  <mat-chip>
+                    <mat-icon >query_builder</mat-icon>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <del>{{note.reminder | date:'medium'}}</del>
+                    <app-toolbar [reminderValue]="note" (reminderEmit)="nextEntry($event)" style="color: rgb(223, 223, 223); width: 8px"></app-toolbar>
+                    <mat-icon (click)="$event.stopPropagation(); reminderDelete(note)">
+                      cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <!--************************************************************-->
+          <div class="tool" fxLayout="row">
+            <app-toolbar class="mainStyle" [reminderValue]="note" (reminderEmit)="nextEntry($event)"></app-toolbar>
+            <app-collab class="mainStyle"></app-collab>
+            <app-color class="mainStyle" [color]="note" (changeColor)=nextEntry($event)></app-color>
+            <app-photo class="mainStyle"></app-photo>
+            <app-archive-icon class="mainStyle" [archive]="note" (archiveEmit)=nextEntry($event)>
+            </app-archive-icon>
+            <app-more class="mainStyle" [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
+          </div>
+        </div>
+      </mat-card>
     </div>
+  </div>

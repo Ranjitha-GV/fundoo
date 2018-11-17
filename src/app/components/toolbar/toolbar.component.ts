@@ -1,13 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { FormControl } from '@angular/forms';
-import { MatMenu } from '@angular/material';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
-  // exportAs: 'parentComponent',
 })
 export class ToolbarComponent implements OnInit {
 
@@ -16,7 +14,6 @@ export class ToolbarComponent implements OnInit {
   token = localStorage.getItem('token');
   body;
   show = 0;
-  @ViewChild(MatMenu) menu: MatMenu;
   @Output() reminderEmit = new EventEmitter();
   @Output() emitReminder = new EventEmitter();
 

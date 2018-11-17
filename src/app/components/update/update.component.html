@@ -1,5 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between">
-  <div align="center" [style.backgroundColor]="data.color">
+  <div align="center" [style.backgroundColor]="color">
     <div align="left" class = "update">
       <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" 
       data-text="" style="font-size: 20px;" [innerHTML]="data.title"></div></b> <br>
@@ -48,9 +48,10 @@
         </div>
       </div>
     </div>
-
+<!--******************Reminder******************-->
     <div fxLayout="row" class="reminder">
       <div *ngIf="data.reminder.length!=0">
+          <!-- <div *ngFor="let index of data.reminder"> -->
         <mat-chip-list>
           <mat-chip>
             <mat-icon (click)="reminderDelete(data)">query_builder</mat-icon>{{data.reminder | date:'medium'}}
@@ -58,17 +59,18 @@
               cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
+        <!-- </div> -->
       </div>
     </div>
-    
-    <div class="tool" fxLayout="row" fxLayoutAlign="space-between center">
-      <app-toolbar style="padding: 5px;" [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
-      <app-collab style="padding: 5px;"></app-collab>
-      <app-color style="padding: 5px;"></app-color>
-      <app-photo style="padding: 5px;"></app-photo>
-      <app-archive-icon style="padding: 5px;"></app-archive-icon>
-      <app-more style="padding: 5px;" [notedetails]="data"></app-more>
-      <button mat-button class="close" type=submit (click)="onNoClick()">
+<!--************************************************-->
+    <div class="tool" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between center" >
+      <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
+      <app-collab ></app-collab>
+      <app-color [color]="data" (emitColor)=colorsEntry($event)></app-color>
+      <app-photo></app-photo>
+      <app-archive-icon ></app-archive-icon>
+      <app-more [notedetails]="data"></app-more>
+      <button mat-button type=submit (click)="onNoClick()">
       Close</button>
       <div>
       </div>

@@ -33,6 +33,7 @@ export class UpdateComponent implements OnInit {
   public status="open";
   public newList;
   public newData;
+  color = '#fafafa';
 
   onNoClick(): void {
     if(this.checklist==false){
@@ -40,7 +41,7 @@ export class UpdateComponent implements OnInit {
     this.myHttpService.noteUpdate('/notes/updateNotes', {
       "noteId": [this.data.id],
       "title": document.getElementById('titleId').innerHTML,
-      "description": document.getElementById('descriptionId').innerHTML
+      "description": document.getElementById('descriptionId').innerHTML,
 
     }, this.token).subscribe(data => {
       this.dialogRef.close();
@@ -161,8 +162,14 @@ else{
         error => {
         })
   }
+  colorsEntry(event) {
+    this.color = event;
+    console.log(this.color);
+  }
 
   ngOnInit() {
+    this.color = this.data['color'];
+    console.log(this.color);
     if (this.data['noteCheckLists'].length>0){
       this.checklist=true;
     }

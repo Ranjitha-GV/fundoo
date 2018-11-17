@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
-import { LoggerService } from '../../core/services/logger/logger.service';
 
 
 @Component({
