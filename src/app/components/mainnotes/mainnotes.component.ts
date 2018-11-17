@@ -37,6 +37,8 @@ export class MainnotesComponent implements OnInit {
   notesCards = [];
   @Input() searchElement;
   @Input() notesArray;
+  @Input() length;
+  @Input() string;
   @Output() addEntry = new EventEmitter();
   currentDate = new Date();
   today = new Date();
