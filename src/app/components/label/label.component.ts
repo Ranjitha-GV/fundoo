@@ -77,7 +77,7 @@ export class LabelComponent implements OnInit {
 
       },
       error => {
-        this.dialogRef.close();
+        // this.dialogRef.close();
       })
   }
 

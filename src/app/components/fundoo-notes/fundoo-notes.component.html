@@ -95,7 +95,7 @@
           </div>
         </div>
       </div>
-      <a mat-list-item (click)="openDialog()"><img src="../../../assets/images/label.svg">
+      <a mat-list-item (click)="$event.stopPropagation(); openDialog()"><img src="../../../assets/images/label.svg">
         <span class="one">Add Label</span></a>
       <hr>
       <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')"><img src="../../../assets/images/archive.svg">
