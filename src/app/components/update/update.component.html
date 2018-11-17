@@ -51,7 +51,7 @@
 <!--******************Reminder******************-->
     <div fxLayout="row" class="reminder">
       <div *ngIf="data.reminder.length!=0">
-          <!-- <div *ngFor="let index of data.reminder"> -->
+          <div *ngFor="let index of data.reminder">
         <mat-chip-list>
           <mat-chip>
             <mat-icon (click)="reminderDelete(data)">query_builder</mat-icon>{{data.reminder | date:'medium'}}
@@ -59,11 +59,11 @@
               cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
-        <!-- </div> -->
+        </div>
       </div>
     </div>
 <!--************************************************-->
-    <div class="tool" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between center" >
+    <div class="tool" fxLayout="row"  fxLayoutAlign="space-between center" >
       <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
       <app-collab ></app-collab>
       <app-color [color]="data" (emitColor)=colorsEntry($event)></app-color>

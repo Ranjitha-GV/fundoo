@@ -164,7 +164,6 @@ else{
   }
   colorsEntry(event) {
     this.color = event;
-    console.log(this.color);
   }
 
   ngOnInit() {

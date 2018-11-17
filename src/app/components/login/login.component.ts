@@ -5,8 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../../app/core/services/logger/logger.service';
-
-
+import { MessagingService } from '../../core/services/messaging/messaging.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,7 @@ import { LoggerService } from '../../../app/core/services/logger/logger.service'
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private snackBar: MatSnackBar, private myHttpService:
-    HttpService) { }
+    HttpService, private message : MessagingService) { }
 
   hide = true;
   clickedDivState = 'start';

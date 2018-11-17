@@ -1,5 +1,5 @@
-<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" fxLayoutAlign="center" class="main"
-  fxFlex.sm=100 fxFlex.xs=100>
+<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap="20px" 
+ fxLayoutAlign="center" class="main" fxFlex.sm=100 fxFlex.xs=100>
   <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card align="center" [style.backgroundColor]="note.color">

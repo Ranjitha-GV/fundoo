@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class MessagingService {
     this.messaging.requestPermission()
     .then(() => {
       console.log('Notification permission granted.');
-      return this.messaging.getToken()
+      return this.messaging.getToken();
     })     
     .then(token => {
       console.log('i am push token',token);
