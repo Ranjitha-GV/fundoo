@@ -1,2 +1,7 @@
 <app-addnotes></app-addnotes>
+<div *ngIf = "reminderArray.length == 0">
+    <h4 style = "margin-left: 20px;">No Reminders</h4>
+</div>
+<div *ngIf = "reminderArray.length != 0">
 <app-mainnotes [notesArray] = "reminderArray"></app-mainnotes>
+</div>

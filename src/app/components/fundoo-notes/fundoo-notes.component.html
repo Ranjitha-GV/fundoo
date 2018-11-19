@@ -3,8 +3,8 @@
   <button fxFlex=5 type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span class="heading" fxFlex = 7>{{names}}</span>
-  <div fxFlex = 5 class="right">
+  <span class="heading" fxFlex = 5>{{names}}</span>
+  <div fxFlex = 1 class="right">
      
   </div>
     <div class="searchBar" fxShow="true" fxHide.xs="false" fxHide.sm="false" fxHide.md = "false"
@@ -15,7 +15,7 @@
     </div>
   <div fxFlex fxLayoutAlign="end">
     <div class="icons">
-      <button mat-icon-button matTooltip="Refresh">
+      <button mat-icon-button matTooltip="Refresh" (click)="refresh()">
       <span><mat-icon>refresh</mat-icon></span>
       </button>
       <button mat-icon-button matTooltip="List View" (click)="view()" *ngIf="grid == 0" 
@@ -72,7 +72,7 @@
                   <!-- ***********************Side-Nav-Bar**************************-->
 <mat-sidenav-container class="sidenav-container">
   <div fxlayout=row fxLayoutAlign="center center"></div>
-  <div class="container" fxLayout="row" fxLayout.xs="r ow" fxLayoutAlign="center center" 
+  <div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" 
   fxLayoutGap="10px" fxLayoutGap.xs="0">
   </div>
   <div fxFlex="50" fxFlex.sm="80" fxFlex.md="60" fxFlex.lg="50" fxFlex.xl="30"></div>

@@ -95,6 +95,10 @@ export class FundooNotesComponent {
       error => {
       })
   }
+  refresh()
+  {
+    window.location.reload();
+  }
 /**Navigate page to particular label component */
   labelClick(labelList) {
     var labelList = labelList.label;

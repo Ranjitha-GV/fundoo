@@ -65,3 +65,94 @@
 {
     opacity: 1;
 }
+.mainCardsClass 
+{
+    justify-content: center;
+}
+@media only screen and (min-width: 200px) and (max-width: 600px){
+    .flexClass
+    {
+        width:100%; 
+        justify-content: center;
+    }
+}
+@media only screen and (min-width: 699px) and (max-width: 750px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:650px;
+}
+}
+@media only screen and (min-width: 627px) and (max-width: 699px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:580px;
+}
+}
+@media only screen and (min-width: 604px) and (max-width: 626px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:500px;
+}
+}
+@media only screen and (min-width: 600px) and (max-width: 605px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:260px;
+}
+}
+@media only screen and (min-width: 509px) and (max-width: 600px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:460px;
+}
+}
+@media only screen and (min-width: 466px) and (max-width: 509px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:420px;
+}
+}
+@media only screen and (min-width: 411px) and (max-width: 465px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:360px;
+}
+}
+@media only screen and (min-width: 360px) and (max-width: 410px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:320px;
+}
+}
+@media only screen and (min-width: 310px) and (max-width: 359px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:300px;
+}
+}
+@media only screen and (min-width: 601px) and (max-width: 603px)
+{
+    .list
+{
+    margin-top: 20px;
+    width:460px;
+}
+}
