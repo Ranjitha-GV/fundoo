@@ -6,9 +6,9 @@ createdDate: string,
 description: string,
 id: string,
 imageUrl: string,
-isArchived: false,
-isDeleted: true,
-isPined: false,
+isArchived: boolean,
+isDeleted: boolean,
+isPined: boolean,
 label: [],
 linkUrl: string,
 modifiedDate: string,
@@ -22,7 +22,7 @@ userId: string
 export interface Labels
 {
     id: string,
-    isDeleted: false
+    isDeleted: boolean
     label: string,
     userId: string
 }
@@ -31,7 +31,7 @@ export interface Checklists
 {
     createdDate: string,
     id: string,
-    isDeleted: false
+    isDeleted: boolean,
     itemName: string,
     modifiedDate: string
     notesId: string,

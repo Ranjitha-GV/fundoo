@@ -4,6 +4,8 @@ import { HttpService } from '../../core/services/http/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsersService } from '../../core/services/users/users.service';
+
 
 
 @Component({
@@ -85,14 +87,20 @@ export class RegistrationComponent implements OnInit {
     MatSnackBar) { }
 
   ngOnInit() {
-    this.records = this.myHttpService.getConfig().subscribe(data => {
-      for (var i = 0; i < data["data"].data.length; i++) {
-        data["data"].data[i].select = false;
-        this.cards.push(data["data"].data[i]);
-      }
-      var value = data["data"].data.name;
-    })
+    this.users();
+   
   }
+  
+  users()
+  {
+  this.records = this.myHttpService.getConfig().subscribe(data => {
+    for (var i = 0; i < data["data"].data.length; i++) {
+      data["data"].data[i].select = false;
+      this.cards.push(data["data"].data[i]);
+    }
+    var value = data["data"].data.name;
+  })
+}
 
   next() {
     let pass = this.model.password;

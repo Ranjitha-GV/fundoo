@@ -17,6 +17,7 @@ export class AddnotesComponent implements OnInit {
   token = localStorage.getItem('token');
   id = localStorage.getItem('userId');
   @ViewChild('newLabel') newLabel: ElementRef;
+  @Output() modelEmit = new EventEmitter();
   newObject: any;
   dataArrayCheck = [];
   save = [];
@@ -66,6 +67,7 @@ export class AddnotesComponent implements OnInit {
       'reminder': this.reminderNew
     }, this.token).subscribe(
       (data) => {
+        this.modelEmit.emit(data['status'].details);
         this.onNewEntryAdded.emit({
         })
         this.color = "#fafafa";

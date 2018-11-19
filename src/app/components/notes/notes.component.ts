@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
+import { Notes } from 'src/app/core/model/notes';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class NotesComponent implements OnInit {
 
   constructor(private myHttpService: HttpService) { }
   response: any = [];
-  noteCard: any = [];
+  noteCard : Notes[] = [];
   token = localStorage.getItem('token');
   noteId = [];
   notePinedCard = [];
@@ -28,16 +29,20 @@ export class NotesComponent implements OnInit {
       this.getNotes();
     }
   }
+  modelCatch(dataNotes: Notes)
+  {
+    this.noteCard.splice(0,0,dataNotes);
+  }
 
   getNoteCard() {
     this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
       (data) => {
         this.noteCard = [];
-        this.response = data['data']['data'];
+        var response : Notes[] = [] = data['data']['data'];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false && 
-          data['data']['data'][i].isArchived == false && data['data']['data'][i].isPined == false) {
-            this.noteCard.push(data['data']['data'][i]);
+          if (response[i].isDeleted == false && response[i].isArchived == false 
+            && response[i].isPined == false) {
+            this.noteCard.push(response[i]);
           }
         }
       },

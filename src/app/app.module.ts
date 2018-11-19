@@ -45,6 +45,8 @@ import { LabelpopComponent } from './components/labelpop/labelpop.component';
 import { DeletePopComponent } from './components/delete-pop/delete-pop.component';
 import { PinComponent } from './components/pin/pin.component';
 import { MessagingService } from './core/services/messaging/messaging.service';
+import { UsersService } from './core/services/users/users.service';
+import { NotesServiceService } from './core/services/notes/notes-service.service';
 
 
 
@@ -110,7 +112,8 @@ import { MessagingService } from './core/services/messaging/messaging.service';
     MatNativeDateModule,
     MatSelectModule
   ],
-  providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService],
+  providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
+    NotesServiceService],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
   LabelpopComponent, DeletePopComponent],
   bootstrap: [AppComponent],
