@@ -88,7 +88,9 @@ export class FundooNotesComponent {
             tempArr.push(data['data']['details'][i]);
           }
         }
+        tempArr.sort();
         this.value = tempArr;
+        
       },
       error => {
       })

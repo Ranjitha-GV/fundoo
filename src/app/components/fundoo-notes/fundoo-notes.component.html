@@ -5,6 +5,7 @@
   </button>
   <span class="heading" fxFlex = 7>{{names}}</span>
   <div fxFlex = 5 class="right">
+     
   </div>
     <div class="searchBar" fxShow="true" fxHide.xs="false" fxHide.sm="false" fxHide.md = "false"
      fxHide.lg = "false" fxHide.xl = "false">
@@ -14,12 +15,14 @@
     </div>
   <div fxFlex fxLayoutAlign="end">
     <div class="icons">
-      <button mat-icon-button matTooltip="Refresh" fxShow="true" fxHide.xs="true">
+      <button mat-icon-button matTooltip="Refresh">
       <span><mat-icon>refresh</mat-icon></span>
       </button>
-      <button mat-icon-button matTooltip="List View" (click)="view()" *ngIf="grid == 0">
+      <button mat-icon-button matTooltip="List View" (click)="view()" *ngIf="grid == 0" 
+        fxShow="true" fxHide.xs="true">
         <span><mat-icon>view_stream</mat-icon></span></button>
-      <button mat-icon-button matTooltip="Grid View" (click)="viewClose()" *ngIf="grid == 1">
+      <button mat-icon-button matTooltip="Grid View" (click)="viewClose()" *ngIf="grid == 1" 
+        fxShow="true" fxHide.xs="true">
         <span><mat-icon>view_module</mat-icon></span></button>
     </div>
     <!--***************Upload Profile Picture*****************-->

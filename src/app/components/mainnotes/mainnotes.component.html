@@ -1,15 +1,14 @@
-<div class="container" fxLayout="row wrap" fxLayoutWrap fxLayoutGap = '10px'
- fxLayoutAlign="center" class="main" fxFlex=100 fxLayout=row >
- <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10% ></div>
- <div fxFlex.xs=100% fxFlex.sm=100% fxFlex.md=90% fxFlex.lg=90% fxFlex.xl=80% 
+<div class="container" fxLayout="row" fxLayoutGap = '10px'
+ fxLayoutAlign="center" class="main" fxFlex=100 fxLayout=row>
+ <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10% style = "border: solid"></div>
+ <div style = "border: solid" fxFlex.xs=100% fxFlex.sm=100% fxFlex.md=90% fxFlex.lg=90% fxFlex.xl=80% 
   fxLayout="row wrap">
  <div *ngIf="length!=0" fxLayoutAlign="left" style="width:100%">
-    {{string}}
+   <b> {{string}} </b>
   </div>
  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card align="center" [style.backgroundColor]="note.color" ngStyle.xs = "width:500px;"
-        style = "border:solid;">
+      <mat-card align="center" [style.backgroundColor]="note.color" fxFlex.xs = 100 ngStyle.xs = "width:100%;">
         <app-pin [pinArray]="note" (pinEmit)="nextEntry($event)" class="pin"></app-pin>
         <div align="left" (click)="openUpdateNotes(note)" style="cursor: pointer;">
           <b>
@@ -131,19 +130,19 @@
         </div>
         <div>
           <!--************************************************************-->
-          <div fxLayout="row" fxLayoutAlign="space-around center" >
-            <app-toolbar class="mainStyle" [reminderValue]="note" (reminderEmit)="nextEntry($event)"></app-toolbar>
-            <app-collab class="mainStyle"></app-collab>
-            <app-color class="mainStyle" [color]="note" (changeColor)=nextEntry($event)></app-color>
-            <app-photo class="mainStyle"></app-photo>
-            <app-archive-icon class="mainStyle" [archive]="note" (archiveEmit)=nextEntry($event)>
+          <div class="mainStyle" fxLayout="row" fxLayoutAlign="space-around center" >
+            <app-toolbar  [reminderValue]="note" (reminderEmit)="nextEntry($event)"></app-toolbar>
+            <app-collab ></app-collab>
+            <app-color [color]="note" (changeColor)=nextEntry($event)></app-color>
+            <app-photo ></app-photo>
+            <app-archive-icon [archive]="note" (archiveEmit)=nextEntry($event)>
             </app-archive-icon>
-            <app-more class="mainStyle" [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
+            <app-more [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
           </div>
         </div>
       </mat-card>
     </div>
-      <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10% ></div>
     </div>
   </div>
+  <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10% style = "border: solid"></div>
   </div>

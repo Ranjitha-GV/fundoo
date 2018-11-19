@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-between">
+<div fxLayout="row wrap" fxLayoutAlign="space-between" fxFlex = 100>
   <div align="center" [style.backgroundColor]="color">
     <div align="left" class = "update">
       <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" 
@@ -35,6 +35,7 @@
         <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
          *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
   </div>
+  <!--**********************************************************-->
 
     <div fxLayout="row">
       <div *ngFor="let index of data.noteLabels" class="cancel">
@@ -68,10 +69,8 @@
       <app-collab ></app-collab>
       <app-color [color]="data" (emitColor)=colorsEntry($event)></app-color>
       <app-photo></app-photo>
-      <app-archive-icon ></app-archive-icon>
-      <app-more [notedetails]="data"></app-more>
-      <div>
-      </div>
+      <app-archive-icon fxLayout.xs="column"></app-archive-icon>
+      <app-more fxLayout.xs="column" [notedetails]="data"></app-more>
     </div>
   </div>
 </div>

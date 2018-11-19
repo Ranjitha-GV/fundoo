@@ -95,6 +95,9 @@
 .value 
 {
   margin-left: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
 }
 .newSearch
 {
