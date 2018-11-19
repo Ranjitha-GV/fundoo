@@ -63,15 +63,13 @@
       </div>
     </div>
 <!--************************************************-->
-    <div class="tool" fxLayout="row"  fxLayoutAlign="space-between center" >
+    <div class = "tool" fxLayout="row" fxLayoutAlign="space-around center">
       <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
       <app-collab ></app-collab>
       <app-color [color]="data" (emitColor)=colorsEntry($event)></app-color>
       <app-photo></app-photo>
       <app-archive-icon ></app-archive-icon>
       <app-more [notedetails]="data"></app-more>
-      <button mat-button type=submit (click)="onNoClick()">
-      Close</button>
       <div>
       </div>
     </div>
