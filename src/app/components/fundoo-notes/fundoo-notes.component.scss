@@ -1,17 +1,17 @@
 .sidenav-container {
   height:auto;
   width: auto;
-  /* background-color: rgb(221, 221, 230); */
+  // background-color: rgb(221, 221, 230);
   flex:1 0 auto;
   margin-top: 60px;
   overflow: auto;
 }
 
 .sidenav {
-  width: 210px;
+  width: 230px;
   margin-top: 15px;
   background-color: rgb(221, 221, 230);
-  overflow-y: auto;
+  overflow-y:auto;
   position: fixed;
   margin-top: 57px;
 }
@@ -26,7 +26,6 @@
 }
 .heading
 {
-  margin-left: 10px;
   font-size: 25px;
 }
 .right 
@@ -97,6 +96,16 @@
 {
   margin-left: 5px;
 }
+.newSearch
+{
+  width: stretch;
+  background-color: rgb(235, 174, 22);
+  display: flex;
+  align-items: center;
+  height:46px;
+  border-radius: 5px;
+  padding-left: 1%;
+}
 
 .searchBar
 {
@@ -108,12 +117,12 @@
   color: black;
   border-radius: 5px;
   padding-left: 1%;
-  margin-left: 20px;
+  min-width: 30px;
 }
 .searchIcon
 {
   height:41px;
-  // width:str;
+  width:stretch;
   color: black;
   opacity: 1;
   background-color: rgb(235, 174, 22);
