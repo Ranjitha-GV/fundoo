@@ -1,6 +1,6 @@
 export interface Notes 
 {
-collaberator: [],
+collaberator: Array<Object>,
 color: string,
 createdDate: string,
 description: string,
@@ -9,12 +9,12 @@ imageUrl: string,
 isArchived: boolean,
 isDeleted: boolean,
 isPined: boolean,
-label: [],
+label: Array<Labels>,
 linkUrl: string,
 modifiedDate: string,
 noteCheckLists: Array<Checklists>,
 noteLabels: Array<Labels>,
-questionAndAnswerNotes: [],
+questionAndAnswerNotes: Array<Object>,
 reminder: [Date],
 title: string,
 userId: string

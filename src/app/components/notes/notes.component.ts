@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { Notes } from 'src/app/core/model/notes';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 
 @Component({
@@ -10,12 +10,11 @@ import { Notes } from 'src/app/core/model/notes';
 })
 export class NotesComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService) { }
-  response: any = [];
-  noteCard : Notes[] = [];
-  token = localStorage.getItem('token');
-  noteId = [];
-  notePinedCard = [];
+  constructor(public httpService: NotesServiceService) { }
+  private response = [];
+  private noteCard : Notes[] = [];
+  private noteId = [];
+  private notePinedCard = [];
   @Input() notedetails;
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class NotesComponent implements OnInit {
   }
 
   getNoteCard() {
-    this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
+    this.httpService.notesList().subscribe(
       (data) => {
         this.noteCard = [];
         var response : Notes[] = [] = data['data']['data'];
@@ -50,7 +49,7 @@ export class NotesComponent implements OnInit {
       })
   }
   getNotes() {
-    this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
+    this.httpService.notesList().subscribe(
       (data) => {
         this.notePinedCard = [];
         this.response = data['data']['data'];

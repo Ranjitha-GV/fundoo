@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FundooNotesComponent } from '../fundoo-notes/fundoo-notes.component';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HttpService } from '../../core/services/http/http.service';
-import { NullAstVisitor } from '@angular/compiler';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { SearchService } from '../../core/services/data/search.service';
 import { LabelpopComponent } from '../labelpop/labelpop.component';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 
 
@@ -15,18 +14,15 @@ import { LabelpopComponent } from '../labelpop/labelpop.component';
 })
 export class LabelComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, public dialogRef:
-    MatDialogRef<FundooNotesComponent>, public data: SearchService, public dialog : MatDialog) { }
+  constructor(public dialogRef: MatDialogRef<FundooNotesComponent>, public data: SearchService, 
+    public dialog : MatDialog, public httpService: NotesServiceService) { }
 
-  public show;
-  value1: any = [];
+  private show;
+  private value1 = [];
+  id = localStorage.getItem('userId')
   @ViewChild('newLabel') newLabel: ElementRef;
   @ViewChild('myLabel') myLabel: ElementRef;
-  clear: any;
-  res: string;
-  id = localStorage.getItem('userId')
-  token = localStorage.getItem('token');
-
+  
   onNoClick(): void {
   }
 
@@ -37,16 +33,19 @@ export class LabelComponent implements OnInit {
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true)
+      if(result)
       {      
-        this.myHttpService.deleteLabel('/noteLabels/' + note + '/deleteNoteLabel', {
+        this.httpService.deleteNoteLabels(note, {
           "label": this.newLabel.nativeElement.innerHTML
         }).subscribe(
-          (data) => {
+          (response) => {
+            console.log(response);            
             this.data.changeChipEvent(true);
             this.delete();
           },
           error => {
+            console.log(error);
+
           })
         }
     });
@@ -54,7 +53,7 @@ export class LabelComponent implements OnInit {
   
   ngOnInit() {
     this.delete();
-    this.addLabel();
+    // this.addLabel();
   }
 
   addLabel() {
@@ -65,19 +64,18 @@ export class LabelComponent implements OnInit {
         return false;
       }
     }
-    this.myHttpService.postNotes('/noteLabels', {
+    this.httpService.addLabels({
       "label": this.newLabel.nativeElement.innerHTML,
       "isDeleted": false,
       "userId": this.id
 
-    }, this.token).subscribe(
+    }).subscribe(
       (data) => {
         this.delete();
         this.dialogRef.close();
 
       },
       error => {
-        // this.dialogRef.close();
       })
   }
 
@@ -87,7 +85,7 @@ export class LabelComponent implements OnInit {
 
   delete() {
     let tempArr = [];
-    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+    this.httpService.getLabels().subscribe(
       (data) => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
@@ -100,14 +98,12 @@ export class LabelComponent implements OnInit {
       })
   }
   edit(val) {
-    this.myHttpService.postNotes('/noteLabels/' + val + '/updateNoteLabel',
-      {
+    this.httpService.editLabel(val,{
         "label": this.myLabel.nativeElement.innerHTML,
         "isDeleted": false,
         "id": val,
         "userId": localStorage.getItem('userId')
-      },
-      this.token).subscribe(
+      }).subscribe(
         (data) => {
           this.delete();
         },

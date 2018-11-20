@@ -1,5 +1,8 @@
-import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -9,35 +12,34 @@ import { HttpService } from '../../core/services/http/http.service';
   outputs: ['onNewEntryAdded']
 
 })
-export class AddnotesComponent implements OnInit {
-
-  constructor(private myHttpService: HttpService) { }
-  hide: any = 0;
-  listing = true;
-  token = localStorage.getItem('token');
-  id = localStorage.getItem('userId');
+export class AddnotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  constructor(public myHttpService: UsersService, public httpService: NotesServiceService) { }
+  private hide = 0;
+  private listing = true;
+  private id = localStorage.getItem('userId');
+  private dataArrayCheck = [];
+  private save = [];
+  private add = [];
+  private array = [];
+  private checked = false;
+  private i = 0;
+  private data;
+  private dataArray = [];
+  private status = "open";
+  private keys;
+  private color = "#fafafa";
+  private reminderArray = [];
+  private reminderVal;
+  private reminderNew;
+  private currentDate = new Date();
+  private today = new Date();
+  private tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+   this.currentDate.getDate()+1)
   @ViewChild('newLabel') newLabel: ElementRef;
   @Output() modelEmit = new EventEmitter();
-  newObject: any;
-  dataArrayCheck = [];
-  save = [];
-  add = [];
-  array = [];
-  checked = false;
-  public i=0;
-  data;
-  dataArray = [];
-  status = "open";
-  keys: any;
   @Output() onNewEntryAdded = new EventEmitter();
-  color = "#fafafa";
-  reminderArray = [];
-  reminderVal;
-  reminderNew;
-  currentDate = new Date();
-  today = new Date();
-  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-   this.currentDate.getDate()+1)
+  
 /**Function to hide and show Note Division */
   move() {
     this.hide = 1;
@@ -57,7 +59,7 @@ export class AddnotesComponent implements OnInit {
     {
     this.hide = 0;
     this.listing = !this.listing;
-    this.myHttpService.postNotes('/notes/addNotes', {
+    this.httpService.addNotes({
       'title': document.getElementById('title').innerHTML,
       'description': document.getElementById('description').innerHTML,
       'labelIdList': JSON.stringify(this.array),
@@ -65,7 +67,9 @@ export class AddnotesComponent implements OnInit {
       'isPined': 'false',
       'color': this.color,
       'reminder': this.reminderNew
-    }, this.token).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.modelEmit.emit(data['status'].details);
         this.onNewEntryAdded.emit({
@@ -101,14 +105,16 @@ export class AddnotesComponent implements OnInit {
         this.status="open"
       }
 
-      this.myHttpService.postNotes('/notes/addNotes', {
+      this.httpService.addNotes({
         'title': document.getElementById('title').innerHTML,
         'labelIdList': JSON.stringify(this.array),
         'checklist': JSON.stringify(this.dataArrayCheck),
         'isPined': 'false',
         'color': this.color,
         'reminder': this.reminderNew 
-      }, this.token).subscribe(
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         (data) => {
           this.dataArray = [];
           this.array = [];
@@ -135,12 +141,14 @@ export class AddnotesComponent implements OnInit {
 /**Hitting Post Notes API */
   addLabel() {
   
-    this.myHttpService.postNotes('/noteLabels', {
+    this.httpService.addLabels({
       "label": this.newLabel.nativeElement.innerHTML,
       "isDeleted": false,
       "userId": this.id
 
-    }, this.token).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
       },
       error => {
@@ -159,9 +167,7 @@ export class AddnotesComponent implements OnInit {
   }
 /**Catching Label event */
   labelEvent(event) {
-    console.log('i am event',event)
     if (this.add.indexOf(event) < 0) {
-      console.log(event)
       this.array.push(event.id);
       this.add.push(event);
       
@@ -224,6 +230,11 @@ remove()
   this.add.pop();
   this.array.pop();
 
+}
+ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
 }
   ngOnInit() {
 

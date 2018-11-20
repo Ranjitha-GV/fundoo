@@ -1,4 +1,13 @@
+<div *ngIf = "archive.isArchived == false">
 <div class="icons" fxLayout="row" fxLayoutAlign="space-between">
     <div matTooltip="Archive" class="space"> <i class="material-icons" 
     style="cursor: pointer;" (click)="archivePost(archive.id)">archive</i></div>
+</div>
+</div>
+
+<div *ngIf = "archive.isArchived == true">
+<div class="icons" fxLayout="row" fxLayoutAlign="space-between">
+    <div matTooltip="UnArchive" class="space"> <i class="material-icons" 
+    style="cursor: pointer;" (click)="unarchive(archive.id)">unarchive</i></div>
+</div>
 </div>

@@ -1,10 +1,10 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
 import { SearchService } from '../../core/services/data/search.service';
 import { EventEmitter } from 'events';
 import { PopOverComponent } from '../pop-over/pop-over.component';
 import { MatDialog } from '@angular/material';
 import { DeletePopComponent } from '../delete-pop/delete-pop.component';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-bin',
@@ -13,12 +13,13 @@ import { DeletePopComponent } from '../delete-pop/delete-pop.component';
 })
 export class BinComponent implements OnInit {
   card = [];
-  constructor(private myHttpService: HttpService, private data: SearchService,
-  public dialog : MatDialog) { }
-  token = localStorage.getItem('token');
-  @Output() getTrashList = new EventEmitter();
-  toggle = true;
-  public modifiedList;
+  constructor(public data: SearchService, public dialog : MatDialog, 
+    public httpService: NotesServiceService) { }
+
+   private toggle = true;
+   private modifiedList;
+   @Output() getTrashList = new EventEmitter();
+  
 
   ngOnInit() {
     this.delete();
@@ -47,11 +48,11 @@ openDialog(note): void {
     
     dialogRef.afterClosed().subscribe(result => {
       var id = note.id
-      this.myHttpService.deleteNotes('/notes/deleteForeverNotes',
+      this.httpService.deleteNotesForever(
         {
           "isDeleted": false,
           "noteIdList": [id]
-        }, this.token).subscribe(
+        }).subscribe(
           (data) => {
             this.delete();
           },
@@ -60,7 +61,7 @@ openDialog(note): void {
     }
 /**Hitting API to get trash notes */
   delete() {
-    this.myHttpService.getTrash('/notes/getTrashNotesList', this.token).subscribe(
+    this.httpService.getTrashNotes().subscribe(
       (data) => {
         this.card = [];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
@@ -75,10 +76,10 @@ openDialog(note): void {
 /**Hitting API to restore trash notes */
   restore(note) {
     var id = note.id
-    this.myHttpService.deleteNotes('/notes/trashNotes', {
+    this.httpService.trashNotes({
       "isDeleted": false,
       "noteIdList": [id]
-    }, this.token).subscribe(
+    }).subscribe(
       (data) => {
         this.delete();
       },

@@ -69,7 +69,8 @@
       <app-collab ></app-collab>
       <app-color [color]="data" (emitColor)=colorsEntry($event)></app-color>
       <app-photo></app-photo>
-      <app-archive-icon fxLayout.xs="column"></app-archive-icon>
+      <!-- <app-archive-icon fxLayout.xs="column"></app-archive-icon> -->
+      <app-archive-icon [archive]="data"></app-archive-icon>
       <app-more fxLayout.xs="column" [notedetails]="data"></app-more>
       <span><button (click) = 'onNoClick()' mat-button color = "disable">Close</button></span>
     </div>

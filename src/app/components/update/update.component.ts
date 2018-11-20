@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MainnotesComponent } from '../mainnotes/mainnotes.component';
-import { HttpService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 export interface DialogData {
   title: string;
@@ -19,31 +19,32 @@ export interface DialogData {
 
 export class UpdateComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<MainnotesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private myHttpService: HttpService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, 
+     public httpService: NotesServiceService) { }
 
-  token = localStorage.getItem('token');
+  
+  private checklist =  false;
+  private modifiedCheckList;
+  private tempArray = [];
+  private adding=false;
+  private addCheck=false;
+  private status="open";
+  private newList;
+  private newData;
+  private color = '#fafafa';
   @Input() notedetails;
   @Input() label;
   @Output() emitEvent = new EventEmitter();
-  public checklist =  false;
-  public modifiedCheckList;
-  tempArray = [];
-  public adding=false;
-  public addCheck=false;
-  public status="open";
-  public newList;
-  public newData;
-  color = '#fafafa';
 
   onNoClick(): void {
     if(this.checklist==false){
       LoggerService.log('i am in update');
-    this.myHttpService.noteUpdate('/notes/updateNotes', {
+    this.httpService.updateNotes({
       "noteId": [this.data.id],
       "title": document.getElementById('titleId').innerHTML,
       "description": document.getElementById('descriptionId').innerHTML,
 
-    }, this.token).subscribe(data => {
+    }).subscribe(data => {
       this.dialogRef.close();
     },
   error => {
@@ -55,8 +56,8 @@ else{
         "itemName": this.modifiedCheckList.itemName,
         "status":this.modifiedCheckList.status
     }
-    var url = "/notes/" +this.data['id']+ "/checklist/" + this.modifiedCheckList.id + "/update";
-    this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
+    this.httpService.updateChecklist(this.data['id'], this.modifiedCheckList.id, 
+     JSON.stringify(apiData)).subscribe(response => {
       this.dialogRef.close();
 
     },
@@ -70,9 +71,8 @@ else{
     this.removeCheckList()
   }
   removeCheckList(){
-    var url = "/notes/" + this.data['id']+ "/checklist/" + this.removedList.id + "/remove";
-
-    this.myHttpService.postColor(url,null,this.token).subscribe((response)=>{
+    this.httpService.removeCheckList(this.data['id'], this.removedList.id, {})
+     .subscribe((response)=>{
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
           this.tempArray.splice(i,1)
@@ -99,9 +99,8 @@ else{
         "itemName":this.newList,
         "status":this.status
       }
-  var url = "/notes/" + this.data['id'] + "/checklist/add";
 
-    this.myHttpService.postColor(url, this.newData, this.token)
+    this.httpService.addCheckListUpdate(this.data['id'], this.newData)
     .subscribe(response => {
       console.log(response);
       this.newList=null;
@@ -124,12 +123,11 @@ else{
   }
 
   remove(label) {
-    this.myHttpService.postNotes('/notes/' + this.data.id + '/addLabelToNotes/' + label + '/remove',
+    this.httpService.removeLabelsNotes(this.data.id, label,
       {
         "noteId": this.data.id,
         "lableId": label
-      },
-      this.token).subscribe(
+      }).subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
         },
@@ -151,12 +149,10 @@ else{
   }
   reminderDelete(note) {
     var id = note.id;
-    LoggerService.log('reminder note id is', id);
-    this.myHttpService.postArchive('/notes/removeReminderNotes',
+    this.httpService.deleteReminder(
       {
         "noteIdList": [id]   
-      },
-      this.token).subscribe( 
+      }).subscribe( 
         (data) => {
         },
         error => {
@@ -168,7 +164,6 @@ else{
 
   ngOnInit() {
     this.color = this.data['color'];
-    console.log(this.color);
     if (this.data['noteCheckLists'].length>0){
       this.checklist=true;
     }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../core/services/http/http.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -40,14 +39,10 @@ import { UsersService } from '../../core/services/users/users.service';
 })
 
 export class RegistrationComponent implements OnInit {
-  records = {};
-  basic: any;
-  advance: any;
-  basicset = true;
-  advanceset = true;
-  cards = [];
+  private records = {};
+  private cards = [];
   model: any = {};
-  service: any;
+  private service;
   registrationForm: FormGroup;
   email = new FormControl('', [Validators.required, Validators.email]);
   firstname = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]);
@@ -83,7 +78,7 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-  constructor(private router: Router, private myHttpService: HttpService, private snackBar:
+  constructor(public router: Router, public myHttpService: UsersService, public snackBar:
     MatSnackBar) { }
 
   ngOnInit() {
@@ -93,7 +88,7 @@ export class RegistrationComponent implements OnInit {
   
   users()
   {
-  this.records = this.myHttpService.getConfig().subscribe(data => {
+  this.records = this.myHttpService.userService().subscribe(data => {
     for (var i = 0; i < data["data"].data.length; i++) {
       data["data"].data[i].select = false;
       this.cards.push(data["data"].data[i]);
@@ -125,7 +120,7 @@ export class RegistrationComponent implements OnInit {
       return false;
     }
     this.myHttpService
-      .addData('/user/userSignUp', {
+      .userSignup({
         "firstName": this.model.firstname,
         "lastName": this.model.lastname,
         "phoneNumber": "8867684833",

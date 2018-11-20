@@ -1,8 +1,7 @@
-import { Component, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpService } from '../../core/services/http/http.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +10,8 @@ import { LabelComponent } from '../label/label.component';
 import { SearchService } from '../../core/services/data/search.service';
 import { environment } from '../../../environments/environment'
 import { CropImageComponent } from '../crop-image/crop-image.component'
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 
 @Component({
@@ -25,28 +26,27 @@ export class FundooNotesComponent {
       map(result => result.matches)
     );
 
-  show: any = 0;
-  searchElement: any;
-  public grid = 0;
-  firstname: any;
-  email: any;
-  lastname: any;
-  public pic;
-  image = {};
-  public names = 'fundoo';
-  value = [];
-  token = localStorage.getItem('token');
-  id = localStorage.getItem('userId');
-  selectedFile = null;
-  Profile;
-  public image2 = localStorage.getItem('imageUrl');
-  img = environment.apiUrl + this.image2;
+  private show = 0;
+  private searchElement;
+  private grid = 0;
+  private firstname;
+  private email;
+  private lastname;
+  private pic;
+  private image = {};
+  private names = 'fundoo';
+  private value = [];
+  private id = localStorage.getItem('userId');
+  private selectedFile = null;
+  private image2 = localStorage.getItem('imageUrl');
+  private img = environment.apiUrl + this.image2;
   @ViewChild('labelList') labelList: ElementRef;
   @ViewChild('newLabel') newLabel: ElementRef;
 
   constructor(public dialog: MatDialog, public data: SearchService, public route:
-    ActivatedRoute, private snackBar: MatSnackBar, private breakpointObserver:
-      BreakpointObserver, private myHttpService: HttpService, private router: Router) { }
+    ActivatedRoute, public snackBar: MatSnackBar, public breakpointObserver:
+      BreakpointObserver, public myHttpService: UsersService, 
+      public httpService: NotesServiceService, public router: Router) { }
 
 /**Function to toggle divisions */
   toggle() {
@@ -54,8 +54,7 @@ export class FundooNotesComponent {
   }
 /**Hitting API to logout from the fundoo */
   signout() {
-    console.log(this.token);
-    this.myHttpService.signoutPost('/user/logout', this.token).subscribe(
+    this.myHttpService.logout().subscribe(
       (data) => {
         this.snackBar.open("Logout successfull", "success", {
           duration: 3000
@@ -81,7 +80,7 @@ export class FundooNotesComponent {
 /**Hitting API to add labels */
   label() {
     let tempArr = [];
-    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+    this.httpService.getLabels().subscribe(
       (data) => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {

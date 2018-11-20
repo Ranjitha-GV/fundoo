@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FundooNotesComponent } from '../fundoo-notes/fundoo-notes.component';
-import { HttpService } from '../../core/services/http/http.service';
 import { environment } from '../../../environments/environment';
 import { SearchService } from '../../core/services/data/search.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 @Component({
     selector: 'app-crop-image',
@@ -11,13 +12,14 @@ import { SearchService } from '../../core/services/data/search.service';
     styleUrls: ['./crop-image.component.scss']
 })
 export class CropImageComponent implements OnInit {
-    public croppedImage: any = '';
-    imageChangedEvent: any = '';
+    private croppedImage = '';
+    private image2 = localStorage.getItem('imageUrl');
+    private img = environment.apiUrl + this.image2;
     constructor(
         public dialogRefPic: MatDialogRef<FundooNotesComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private httpService: HttpService,
-        private dataService: SearchService) { }
+        public httpService: UsersService,
+        public dataService: SearchService) { }
 
     ngOnInit() {
     }
@@ -25,14 +27,12 @@ export class CropImageComponent implements OnInit {
     imageCropped(event: any) {
         this.croppedImage = event.file;
     }
-    public image2 = localStorage.getItem('imageUrl');
-    img = environment.apiUrl + this.image2;
+   
 /**Hitting API to upload profile image */
     onUpload() {
-        var token = localStorage.getItem('token');
         const uploadData = new FormData();
         uploadData.append('file', this.croppedImage);
-        this.httpService.httpAddImage('/user/uploadProfileImage', uploadData, token).subscribe(res => {
+        this.httpService.httpAddImage(uploadData).subscribe(res => {
             this.img = environment.apiUrl + res['status'].imageUrl;
             localStorage.setItem("imageUrl", res['status'].imageUrl);
             this.dialogRefPic.close()

@@ -22,4 +22,10 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should create', () => {
+    expect(1+1).toBeTruthy(2);
+  });
+  it('should create', () => {
+    expect(1+1).toBeTruthy(2);
+  });
 });

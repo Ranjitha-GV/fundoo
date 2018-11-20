@@ -1,11 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { SearchService } from '../../core/services/data/search.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Router } from '@angular/router';
-import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 
 @Component({
@@ -15,8 +14,8 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 })
 export class MainnotesComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, public dialog: MatDialog, public data: SearchService,
-    private router : Router) {
+  constructor(public dialog: MatDialog, public data: SearchService, 
+     public router : Router, public httpService: NotesServiceService) {
     this.data.currentChipEvent.subscribe(
       message => {
         if (message) {
@@ -25,26 +24,21 @@ export class MainnotesComponent implements OnInit {
         }
       })
   }
-  array: any = [];
-  public modifiedList;
-  token = localStorage.getItem('token');
-  noteCard: any = [];
-  response: any;
-  interval: any;
-  toggle = true;
-  notesPinedCard = [];
-  show = 0;
-  notesCards = [];
+  private array = [];
+  private modifiedList;
+  private noteCard = [];
+  private toggle = true;
+  private show = 0;
+  private currentDate = new Date();
+  private today = new Date();
+  private tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
+   this.currentDate.getDate()+1)
   @Input() searchElement;
   @Input() notesArray;
   @Input() length;
   @Input() string;
   @Output() addEntry = new EventEmitter();
-  currentDate = new Date();
-  today = new Date();
-  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),this.currentDate.getDate()+1)
-
-
+  
   ngOnInit() {
     this.getlabels();
     this.gridList();
@@ -90,12 +84,11 @@ export class MainnotesComponent implements OnInit {
   }
 
   remove(label, note) {
-    this.myHttpService.postNotes('/notes/' + note + '/addLabelToNotes/' + label + '/remove',
+    this.httpService.removeLabelsNotes(note, label,
       {
         "noteId": note,
         "lableId": label
-      },
-      this.token).subscribe(
+      }).subscribe(
         (data) => {
           this.addEntry.emit({});
         },
@@ -104,7 +97,7 @@ export class MainnotesComponent implements OnInit {
   }
 
   getlabels() {
-    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+    this.httpService.getLabels().subscribe(
       (data) => {
         var value1 = [];
         for (var i = 0; i < data['data']['details'].length; i++) {
@@ -120,12 +113,10 @@ export class MainnotesComponent implements OnInit {
   }
   reminderDelete(note) {
     var id = note.id;
-    LoggerService.log('reminder note id is', id);
-    this.myHttpService.postArchive('/notes/removeReminderNotes',
+    this.httpService.deleteReminder(
       {
         "noteIdList": [id]
-      },
-      this.token).subscribe(
+      }).subscribe(
         (data) => {
           this.addEntry.emit({});
         },
@@ -137,8 +128,8 @@ export class MainnotesComponent implements OnInit {
       "itemName": this.modifiedList.itemName,
       "status": this.modifiedList.status
     }
-    var url = "/notes/" + id + "/checklist/" + this.modifiedList.id + "/update";
-    this.myHttpService.postColor(url, JSON.stringify(apiData), this.token).subscribe(response => {
+    this.httpService.updateChecklist(id, this.modifiedList.id,JSON.stringify(apiData))
+    .subscribe(response => {
 
     })
   }

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpService } from '../../core/services/http/http.service';
 import { LoggerService } from '../../../app/core/services/logger/logger.service';
 import { MessagingService } from '../../core/services/messaging/messaging.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { UsersService } from 'src/app/core/services/users/users.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -24,20 +27,20 @@ import { MessagingService } from '../../core/services/messaging/messaging.servic
     ])
   ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  constructor(public router: Router, public snackBar: MatSnackBar, public myHttpService:
+    UsersService, public message : MessagingService, public httpService: NotesServiceService) { }
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private myHttpService:
-    HttpService, private message : MessagingService) { }
-
-  hide = true;
-  clickedDivState = 'start';
+  private hide = true;
+  private clickedDivState = 'start';
+  private token = localStorage.getItem('token');
   model: any = {};
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required,
   Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
   changeDivState() {
-    console.log(this.email.value);
     if (!this.email.invalid) {
       this.clickedDivState = 'end';
     }
@@ -58,10 +61,11 @@ export class LoginComponent implements OnInit {
       '';
   }
   login() {
-    this.myHttpService.loginPost('/user/login', {
+    this.myHttpService.login({
       "email": this.model.email,
       "password": this.model.password
     })
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
           this.snackBar.open("Login successfull", "success", {
@@ -73,11 +77,12 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('email', data['email']);
           localStorage.setItem('userId', data['userId']);
           localStorage.setItem('imageUrl', data['imageUrl']);
-          var pushToken = localStorage.getItem('pushToken');
-          var token = localStorage.getItem('token');
+          let pushToken = localStorage.getItem('pushToken');
           this.router.navigateByUrl('/home');
-          this.myHttpService.postArchive('/user/registerPushToken', 
-          {'pushToken' : pushToken}, token).subscribe((data)=>
+          this.httpService.pushNotifications( 
+          {'pushToken' : pushToken})
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((data)=>
            {
              LoggerService.log('pushToken', data);
            },
@@ -99,5 +104,10 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('/home');     
     }
 
+  }
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
