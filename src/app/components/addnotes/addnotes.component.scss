@@ -12,13 +12,13 @@ mat-card
     cursor: pointer;  
 }
 
-.notes 
-{
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-}
+    .notes 
+    {
+        border: none;
+        border-color: transparent;
+        outline: none;
+        word-wrap: break-word;
+    }
 
 .editable
 {
@@ -67,4 +67,10 @@ mat-card
     word-wrap: break-word;
     width: 100%;
     min-height: 20px;
+}
+.check
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
 }

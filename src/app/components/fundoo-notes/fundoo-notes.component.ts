@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ParamMap } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material';
@@ -12,6 +12,7 @@ import { environment } from '../../../environments/environment'
 import { CropImageComponent } from '../crop-image/crop-image.component'
 import { UsersService } from 'src/app/core/services/users/users.service';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { Labels } from 'src/app/core/model/labels';
 
 
 @Component({
@@ -83,14 +84,15 @@ export class FundooNotesComponent implements OnDestroy{
   }
 /**Hitting API to add labels */
   label() {
-    let tempArr = [];
+    let tempArr: Labels[] = [];
     this.httpService.getLabels()
     .pipe(takeUntil(this.destroy$))
     .subscribe(
       (data) => {
-        for (var i = 0; i < data['data']['details'].length; i++) {
-          if (data['data']['details'][i].isDeleted == false) {
-            tempArr.push(data['data']['details'][i]);
+        var response: Labels[] = data['data']['details'];
+        for (var i = 0; i < response.length; i++) {
+          if (response[i].isDeleted == false) {
+            tempArr.push(response[i]);
           }
         }
         this.value = tempArr;
@@ -170,6 +172,28 @@ nameChange(names)
     this.email = localStorage.getItem('email');
     this.lastname = localStorage.getItem('lastname');
     this.label();
+    this.route.firstChild.paramMap.subscribe(
+      (params: ParamMap)=>{
+        this.names = params['params'].labelList;
+      }
+    )
+    if(this.router.url == '/home/notes')
+    {
+      this.names = 'fundoo';
+    }
+
+    if(this.router.url == '/home/reminder')
+    {
+      this.names = 'Reminder';
+    }
+    if(this.router.url == '/home/bin')
+    {
+      this.names = 'Bin'; 
+    }
+    if(this.router.url == '/home/archive')
+    {
+      this.names = 'Archive'; 
+    }
   }
 
   ngOnDestroy() {

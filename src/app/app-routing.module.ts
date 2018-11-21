@@ -20,6 +20,8 @@ import { SearchComponent } from './components/search/search.component';
 
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
@@ -38,7 +40,6 @@ const appRoutes: Routes = [
 
     ]
   },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ]
 
 @NgModule({

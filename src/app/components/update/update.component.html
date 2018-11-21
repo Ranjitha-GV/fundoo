@@ -14,7 +14,7 @@
       <input [(ngModel)]=check.itemName fxFlex="80%" class="note" (keydown)=editing(check,$event)
       [ngStyle]="{'background-color':data.color}" *ngIf="!check.isDeleted && check.status=='open'">
       <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check) 
-      *ngIf="!check.isDeleted && check.status=='open'">clear</mat-icon>
+      *ngIf="!check.isDeleted && check.status=='open'" matTooltip = "Delete">clear</mat-icon>
     </div>
   
       <mat-divider *ngIf="checklist"></mat-divider>
@@ -33,7 +33,7 @@
          fxFlex="80%" *ngIf="check.status=='close' && !check.isDeleted"
         [ngStyle]="{'background-color':data.color}"  (keydown)=editing(check,$event)>
         <mat-icon fxFlex="10%" class="clearIcon" (click)=removeList(check)
-         *ngIf="!check.isDeleted && check.status=='close'">clear</mat-icon>
+         *ngIf="!check.isDeleted && check.status=='close'" matTooltip = "Delete">clear</mat-icon>
   </div>
   <!--**********************************************************-->
 

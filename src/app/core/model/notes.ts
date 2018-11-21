@@ -1,3 +1,6 @@
+import { Checklists } from "./checklists";
+import { Labels } from "./labels";
+
 export interface Notes 
 {
 collaberator: Array<Object>,
@@ -19,21 +22,6 @@ reminder: [Date],
 title: string,
 userId: string
 }
-export interface Labels
-{
-    id: string,
-    isDeleted: boolean
-    label: string,
-    userId: string
-}
 
-export interface Checklists
-{
-    createdDate: string,
-    id: string,
-    isDeleted: boolean,
-    itemName: string,
-    modifiedDate: string
-    notesId: string,
-    status: string
-}
+
+

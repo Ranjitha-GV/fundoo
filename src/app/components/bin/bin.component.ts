@@ -7,6 +7,7 @@ import { DeletePopComponent } from '../delete-pop/delete-pop.component';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Notes } from 'src/app/core/model/notes';
 
 @Component({
   selector: 'app-bin',
@@ -16,7 +17,7 @@ import { takeUntil } from 'rxjs/operators';
 export class BinComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  private card = [];
+  private card: Notes[] = [];
   constructor(public data: SearchService, public dialog : MatDialog, 
     public httpService: NotesServiceService) { }
 
@@ -74,9 +75,10 @@ openDialog(note): void {
     .subscribe(
       (data) => {
         this.card = [];
-        for (var i = data['data']['data'].length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == true) {
-            this.card.push(data['data']['data'][i]);
+        let response: Notes[] = data['data']['data'];
+        for (var i = response.length - 1; i >= 0; i--) {
+          if (response[i].isDeleted == true) {
+            this.card.push(response[i]);
           }
         }
       },

@@ -5,7 +5,7 @@
     <mat-icon matTooltip="Remove" (click)="close()">close</mat-icon>
   </div>
     <div fxFlex =65 >
-      <div contenteditable="true" class="edit" data-placeholder="Create new Label" 
+      <div contenteditable="true" class="edit" max-length = 10 data-placeholder="Create new Label" 
       #newLabel></div>
     </div>
     <div fxFlex = 15>
@@ -29,7 +29,7 @@
         </div>
         <div *ngIf="show == val.id">
           <mat-icon matTooltip="Delete Label" (click)="labelDelete(val.id)">delete</mat-icon>
-          <span contenteditable="true" class="name" [innerHTML]="val.label" #myLabel></span>
+          <span contenteditable="true" class="name" [innerHTML]="val.label" max-length = 10 #myLabel></span>
           <mat-icon matTooltip="Edit Label" (click)="edit(val.id)" class="create">done</mat-icon>
         </div>
       </div>

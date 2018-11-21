@@ -6,7 +6,7 @@ import { LabelpopComponent } from '../labelpop/labelpop.component';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Labels } from 'src/app/core/model/notes';
+import { Labels } from 'src/app/core/model/labels';
 
 
 

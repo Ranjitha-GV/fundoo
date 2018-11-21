@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -48,6 +48,7 @@ import { MessagingService } from './core/services/messaging/messaging.service';
 import { UsersService } from './core/services/users/users.service';
 import { NotesServiceService } from './core/services/notes/notes-service.service';
 import { InterceptService } from './core/services/Interceptor/intercept.service'
+import { ErrorsHandler } from './core/services/errorHandling/errors-handler';
 
 
 @NgModule({
@@ -115,7 +116,10 @@ import { InterceptService } from './core/services/Interceptor/intercept.service'
   providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
     NotesServiceService, InterceptService,{ provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
-      multi: true }],
+      multi: true }, {
+        provide: ErrorHandler,
+        useClass: ErrorsHandler,
+      }],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
   LabelpopComponent, DeletePopComponent],
   bootstrap: [AppComponent],

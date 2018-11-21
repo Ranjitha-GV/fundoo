@@ -32,7 +32,7 @@ export class UpdateComponent implements OnInit {
   private tempArray = [];
   private adding=false;
   private addCheck=false;
-  private status="open";
+  public status="open";
   private newList;
   private newData;
   private color = '#fafafa';
@@ -41,8 +41,7 @@ export class UpdateComponent implements OnInit {
   @Output() emitEvent = new EventEmitter();
 
   onNoClick(): void {
-    if(this.checklist==false){
-      LoggerService.log('i am in update');
+    if(this.checklist==false ){
     this.httpService.updateNotes({
       "noteId": [this.data.id],
       "title": document.getElementById('titleId').innerHTML,
@@ -62,6 +61,8 @@ else{
         "itemName": this.modifiedCheckList.itemName,
         "status":this.modifiedCheckList.status
     }
+    if(this.modifiedCheckList!=undefined)
+    {
     this.httpService.updateChecklist(this.data['id'], this.modifiedCheckList.id, 
      JSON.stringify(apiData))
      .pipe(takeUntil(this.destroy$))  
@@ -72,6 +73,7 @@ else{
     error => {
     })
   }
+}
 }
   public removedList;
   removeList(checklist){
@@ -112,7 +114,6 @@ else{
     this.httpService.addCheckListUpdate(this.data['id'], this.newData)
     .pipe(takeUntil(this.destroy$))  
     .subscribe(response => {
-      console.log(response);
       this.newList=null;
       this.addCheck=false;
       this.adding=false;

@@ -1,5 +1,8 @@
-<div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-around" class="trash">
-  <div *ngFor='let note of card' fxFlex="0 1 calc(30% - 32px)">
+<div fxLayout="row wrap" fxLayoutAlign="center" fxFlex=100>
+  <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=10% fxFlex.xl=10%></div>
+  <div fxFlex.xs=100% fxFlex.sm=100% fxFlex.md=90% fxFlex.lg=80% fxFlex.xl=80% 
+  fxLayout="row wrap" class = "mainCardsClass" fxLayoutAlign="center">
+  <div *ngFor='let note of card'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card class="bin" [style.backgroundColor]="note.color">
         <div align="left" (click) = "openDialog(note)">
@@ -16,8 +19,8 @@
          </div>
         
           <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
-          <mat-checkbox fxFlex="10%" checked=true *ngIf="checklist.status=='close'&& !checklist.isDeleted"
-           (click)=checkBox(checklist,note)></mat-checkbox>
+          <mat-checkbox fxFlex="10%" checked=true 
+           *ngIf="checklist.status=='close'&& !checklist.isDeleted" (click)=checkBox(checklist,note)></mat-checkbox>
           <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
            (click)="open(note)">{{checklist.itemName}}</del>
         </div>
@@ -36,4 +39,6 @@
       </mat-card>
     </div>
   </div>
+</div>
+<div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=10% fxFlex.xl=10%></div>
 </div>

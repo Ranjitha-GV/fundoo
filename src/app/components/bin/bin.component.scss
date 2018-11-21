@@ -13,15 +13,24 @@
 }
 .grid
 {
-    
+    width: 270px;
+    margin-left: 10px;
 }
 .bin 
 {
     margin-top: 15px; 
+    margin-bottom: 15px; 
+
 }
 .trash 
 {
     margin-left: 60px; 
     margin-top: 20px; 
     margin-bottom: 20px;
+}
+.note
+{
+    outline: none;
+    border: transparent;
+    border-color: none;
 }
