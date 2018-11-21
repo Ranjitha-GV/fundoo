@@ -1,18 +1,22 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 import { SearchService } from '../../core/services/data/search.service';
 import { EventEmitter } from 'events';
 import { PopOverComponent } from '../pop-over/pop-over.component';
 import { MatDialog } from '@angular/material';
 import { DeletePopComponent } from '../delete-pop/delete-pop.component';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bin',
   templateUrl: './bin.component.html',
   styleUrls: ['./bin.component.scss']
 })
-export class BinComponent implements OnInit {
-  card = [];
+export class BinComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  private card = [];
   constructor(public data: SearchService, public dialog : MatDialog, 
     public httpService: NotesServiceService) { }
 
@@ -34,7 +38,9 @@ openDialog(note): void {
   data: note
   });
   
-  dialogRef.afterClosed().subscribe(result => {
+  dialogRef.afterClosed()
+  .takeUntil(this.destroy$)
+  .subscribe(result => {
     this.delete();
   });
   }
@@ -52,7 +58,9 @@ openDialog(note): void {
         {
           "isDeleted": false,
           "noteIdList": [id]
-        }).subscribe(
+        })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
           (data) => {
             this.delete();
           },
@@ -61,7 +69,9 @@ openDialog(note): void {
     }
 /**Hitting API to get trash notes */
   delete() {
-    this.httpService.getTrashNotes().subscribe(
+    this.httpService.getTrashNotes()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.card = [];
         for (var i = data['data']['data'].length - 1; i >= 0; i--) {
@@ -79,7 +89,9 @@ openDialog(note): void {
     this.httpService.trashNotes({
       "isDeleted": false,
       "noteIdList": [id]
-    }).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.delete();
       },
@@ -92,7 +104,9 @@ openDialog(note): void {
   }
 /**Event emission for grid and list view */
   gridList() {
-    this.data.currentGridEvent.subscribe(message => {
+    this.data.currentGridEvent
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(message => {
       this.toggle = message;
     })
   }
@@ -106,6 +120,12 @@ openDialog(note): void {
       checkList.status = "open"
     }
     this.modifiedList = checkList;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

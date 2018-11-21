@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from 'src/app/core/services/users/users.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -10,7 +12,8 @@ import { UsersService } from 'src/app/core/services/users/users.service';
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss']
 })
-export class ResetComponent implements OnInit {
+export class ResetComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public myHttpService: UsersService, public route: ActivatedRoute, 
   public snackBar: MatSnackBar) { }
@@ -55,10 +58,18 @@ export class ResetComponent implements OnInit {
       return;
     }
     this.input.append('newPassword', this.model.password);
-    this.myHttpService.resetPassword(body, this.accessToken).subscribe(response => {
+    this.myHttpService.resetPassword(body, this.accessToken)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(response => {
     }, error => {
     })
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  } 
 
   ngOnInit() {
   }

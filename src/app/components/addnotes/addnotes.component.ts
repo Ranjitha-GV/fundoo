@@ -16,7 +16,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(public myHttpService: UsersService, public httpService: NotesServiceService) { }
   private hide = 0;
-  private listing = true;
+  private listing = true;   
   private id = localStorage.getItem('userId');
   private dataArrayCheck = [];
   private save = [];

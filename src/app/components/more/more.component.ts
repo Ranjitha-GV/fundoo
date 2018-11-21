@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-more',
@@ -8,8 +10,8 @@ import { NotesServiceService } from 'src/app/core/services/notes/notes-service.s
   outputs: ['onNewEntryAdded']
 
 })
-export class MoreComponent implements OnInit {
-
+export class MoreComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public httpService: NotesServiceService) { }
   private value1 = null;
@@ -28,7 +30,9 @@ export class MoreComponent implements OnInit {
     this.httpService.trashNotes({
       "isDeleted": true,
       "noteIdList": [this.notedetails.id]
-    }).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.eventEntry.emit({
         })
@@ -38,7 +42,9 @@ export class MoreComponent implements OnInit {
   }
 
   addLabel() {
-    this.httpService.getLabels().subscribe(
+    this.httpService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.value1 = [];
         for (var i = 0; i < data['data']['details'].length; i++) {
@@ -70,11 +76,19 @@ export class MoreComponent implements OnInit {
       }
     }
     this.httpService.addLabelsNotes(this.notedetails.id, label.id,
-      this.body).subscribe(
+      this.body)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         (data) => {
           this.eventEntry.emit({});
         },
         error => {
         })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

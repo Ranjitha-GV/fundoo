@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,6 +10,7 @@ import { NotesServiceService } from 'src/app/core/services/notes/notes-service.s
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public httpService: NotesServiceService) { }
 
@@ -38,7 +41,9 @@ export class ToolbarComponent implements OnInit {
       "noteIdList": [this.reminderValue.id],
       "reminder": date1
 
-    }).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(
       (data) => {
         this.reminderEmit.emit({
         })
@@ -55,7 +60,9 @@ export class ToolbarComponent implements OnInit {
       {
         "noteIdList": [this.reminderValue.id],
         "reminder": date2
-      }).subscribe(data => {
+      })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
         this.show = 1;
         this.reminderEmit.emit({
         })
@@ -70,7 +77,9 @@ export class ToolbarComponent implements OnInit {
       {
         "noteIdList": [this.reminderValue.id],
         "reminder": date3
-      }).subscribe(data => {
+      })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
         this.show = 1;
         this.reminderEmit.emit({
         })
@@ -92,7 +101,9 @@ export class ToolbarComponent implements OnInit {
         "noteIdList": [this.reminderValue.id],
         "reminder": date4
       }
-      this.httpService.addReminderUpdate(this.body).subscribe((data) => {
+      this.httpService.addReminderUpdate(this.body)
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe((data) => {
 
         this.reminderEmit.emit({});
       })
@@ -103,7 +114,9 @@ export class ToolbarComponent implements OnInit {
         "noteIdList": [this.reminderValue.id],
         "reminder": date5
       }
-      this.httpService.addReminderUpdate(this.body).subscribe((data) => {
+      this.httpService.addReminderUpdate(this.body)
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe((data) => {
 
         this.reminderEmit.emit({});
       })
@@ -114,7 +127,9 @@ export class ToolbarComponent implements OnInit {
         "noteIdList": [this.reminderValue.id],
         "reminder": date6
       }
-      this.httpService.addReminderUpdate(this.body).subscribe((data) => {
+      this.httpService.addReminderUpdate(this.body)
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe((data) => {
 
         this.reminderEmit.emit({})
       })
@@ -125,7 +140,9 @@ export class ToolbarComponent implements OnInit {
         "noteIdList": [this.reminderValue.id],
         "reminder": date7
       }
-      this.httpService.addReminderUpdate(this.body).subscribe((data) => {
+      this.httpService.addReminderUpdate(this.body)
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe((data) => {
 
         this.reminderEmit.emit({})
       })
@@ -144,7 +161,9 @@ export class ToolbarComponent implements OnInit {
             "noteIdList": [this.reminderValue.id],
             "reminder": date8
           }
-          this.httpService.addReminderUpdate(this.body).subscribe((data) => {
+          this.httpService.addReminderUpdate(this.body)
+          .pipe(takeUntil(this.destroy$))  
+          .subscribe((data) => {
 
             this.reminderEmit.emit({})
           })
@@ -156,13 +175,22 @@ export class ToolbarComponent implements OnInit {
             "noteIdList": [this.reminderValue.id],
             "reminder": date9
           }
-          this.httpService.addReminderUpdate(this.body).subscribe((data) => {
+          this.httpService.addReminderUpdate(this.body)
+          .pipe(takeUntil(this.destroy$))  
+          .subscribe((data) => {
 
             this.reminderEmit.emit({})
           })
         }
       }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+
   enter() {
     this.show = 1;
   }

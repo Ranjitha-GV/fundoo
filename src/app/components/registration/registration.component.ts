@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from '../../core/services/users/users.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 
@@ -38,7 +40,9 @@ import { UsersService } from '../../core/services/users/users.service';
   ]
 })
 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   private records = {};
   private cards = [];
   model: any = {};
@@ -88,7 +92,9 @@ export class RegistrationComponent implements OnInit {
   
   users()
   {
-  this.records = this.myHttpService.userService().subscribe(data => {
+  this.records = this.myHttpService.userService()
+  .pipe(takeUntil(this.destroy$))
+  .subscribe(data => {
     for (var i = 0; i < data["data"].data.length; i++) {
       data["data"].data[i].select = false;
       this.cards.push(data["data"].data[i]);
@@ -133,6 +139,8 @@ export class RegistrationComponent implements OnInit {
         "modifiedDate": "2018-10-09T06:35:12.617Z",
 
       })
+      
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         (data) => {
 
@@ -150,6 +158,12 @@ export class RegistrationComponent implements OnInit {
       }
       this.cards[i].select = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
 

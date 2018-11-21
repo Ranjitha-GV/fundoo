@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MainnotesComponent } from '../mainnotes/mainnotes.component';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 export interface DialogData {
   title: string;
@@ -18,6 +20,8 @@ export interface DialogData {
 })
 
 export class UpdateComponent implements OnInit {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   constructor(public dialogRef: MatDialogRef<MainnotesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, 
      public httpService: NotesServiceService) { }
@@ -44,7 +48,9 @@ export class UpdateComponent implements OnInit {
       "title": document.getElementById('titleId').innerHTML,
       "description": document.getElementById('descriptionId').innerHTML,
 
-    }).subscribe(data => {
+    })
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(data => {
       this.dialogRef.close();
     },
   error => {
@@ -57,7 +63,9 @@ else{
         "status":this.modifiedCheckList.status
     }
     this.httpService.updateChecklist(this.data['id'], this.modifiedCheckList.id, 
-     JSON.stringify(apiData)).subscribe(response => {
+     JSON.stringify(apiData))
+     .pipe(takeUntil(this.destroy$))  
+     .subscribe(response => {
       this.dialogRef.close();
 
     },
@@ -72,7 +80,8 @@ else{
   }
   removeCheckList(){
     this.httpService.removeCheckList(this.data['id'], this.removedList.id, {})
-     .subscribe((response)=>{
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe((response)=>{
       for(var i=0;i<this.tempArray.length;i++){
         if(this.tempArray[i].id==this.removedList.id){
           this.tempArray.splice(i,1)
@@ -101,6 +110,7 @@ else{
       }
 
     this.httpService.addCheckListUpdate(this.data['id'], this.newData)
+    .pipe(takeUntil(this.destroy$))  
     .subscribe(response => {
       console.log(response);
       this.newList=null;
@@ -127,7 +137,9 @@ else{
       {
         "noteId": this.data.id,
         "lableId": label
-      }).subscribe(
+      })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(
         (data) => {
           console.log("POST Request is successful ", data);
         },
@@ -152,7 +164,9 @@ else{
     this.httpService.deleteReminder(
       {
         "noteIdList": [id]   
-      }).subscribe( 
+      })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe( 
         (data) => {
         },
         error => {
@@ -169,7 +183,12 @@ else{
     }
     this.tempArray=this.data['noteCheckLists']
 
+  }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 
 }

@@ -65,8 +65,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       "email": this.model.email,
       "password": this.model.password
     })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
         (data) => {
           this.snackBar.open("Login successfull", "success", {
             duration: 3000
