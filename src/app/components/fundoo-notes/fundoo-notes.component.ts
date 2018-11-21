@@ -1,7 +1,7 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,8 +19,8 @@ import { NotesServiceService } from 'src/app/core/services/notes/notes-service.s
   templateUrl: './fundoo-notes.component.html',
   styleUrls: ['./fundoo-notes.component.scss']
 })
-export class FundooNotesComponent {
-
+export class FundooNotesComponent implements OnDestroy{
+  destroy$: Subject<boolean> = new Subject<boolean>();
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -54,7 +54,9 @@ export class FundooNotesComponent {
   }
 /**Hitting API to logout from the fundoo */
   signout() {
-    this.myHttpService.logout().subscribe(
+    this.myHttpService.logout()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.snackBar.open("Logout successfull", "success", {
           duration: 3000
@@ -73,21 +75,24 @@ export class FundooNotesComponent {
       data: ''
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       this.label();
     });
   }
 /**Hitting API to add labels */
   label() {
     let tempArr = [];
-    this.httpService.getLabels().subscribe(
+    this.httpService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         for (var i = 0; i < data['data']['details'].length; i++) {
           if (data['data']['details'][i].isDeleted == false) {
             tempArr.push(data['data']['details'][i]);
           }
         }
-        tempArr.sort();
         this.value = tempArr;
         
       },
@@ -141,8 +146,12 @@ width: '450px',
 data: data
 });
 
-dialogRefPic.afterClosed().subscribe(result => {
-this.data.currentMsg.subscribe(message => this.pic = message)
+dialogRefPic.afterClosed()
+.pipe(takeUntil(this.destroy$))
+.subscribe(result => {
+this.data.currentMsg
+.pipe(takeUntil(this.destroy$))
+.subscribe(message => this.pic = message)
 if (this.pic == true) {
 this.image2 = localStorage.getItem('imageUrl');
 this.img = environment.apiUrl + this.image2;
@@ -161,5 +170,11 @@ nameChange(names)
     this.email = localStorage.getItem('email');
     this.lastname = localStorage.getItem('lastname');
     this.label();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

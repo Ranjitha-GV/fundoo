@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from 'src/app/core/services/users/users.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 
@@ -10,7 +12,8 @@ import { UsersService } from 'src/app/core/services/users/users.service';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss']
 })
-export class ResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
+  destroy$: Subject <boolean> = new Subject<boolean>();
 
   constructor(public myHttpService: UsersService, public snackBar: MatSnackBar) { }
 
@@ -27,7 +30,8 @@ export class ResetPasswordComponent implements OnInit {
       this.myHttpService.userReset({
         "email": this.model.email,
       })
-        .subscribe(
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(
           (data) => {
             this.snackBar.open("Email Sent to your mail", "Reset password using the sent link", {
               duration: 3000
@@ -46,6 +50,13 @@ export class ResetPasswordComponent implements OnInit {
       })
     }
   }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
+  }
+  
   ngOnInit() {
   }
 

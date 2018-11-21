@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { SearchService } from '../../core/services/data/search.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { Router } from '@angular/router';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -12,11 +14,13 @@ import { NotesServiceService } from 'src/app/core/services/notes/notes-service.s
   templateUrl: './mainnotes.component.html',
   styleUrls: ['./mainnotes.component.scss']
 })
-export class MainnotesComponent implements OnInit {
-
+export class MainnotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(public dialog: MatDialog, public data: SearchService, 
      public router : Router, public httpService: NotesServiceService) {
-    this.data.currentChipEvent.subscribe(
+    this.data.currentChipEvent
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       message => {
         if (message) {
           this.addEntry.emit({
@@ -66,7 +70,9 @@ export class MainnotesComponent implements OnInit {
   }
 
   gridList() {
-    this.data.currentGridEvent.subscribe(message => {
+    this.data.currentGridEvent
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(message => {
       this.toggle = message;
     })
   }
@@ -78,7 +84,9 @@ export class MainnotesComponent implements OnInit {
       data: note
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       this.addEntry.emit({});
     });
   }
@@ -88,16 +96,20 @@ export class MainnotesComponent implements OnInit {
       {
         "noteId": note,
         "lableId": label
-      }).subscribe(
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         (data) => {
           this.addEntry.emit({});
-        },
+        },    
         error => {
         })
   }
 
   getlabels() {
-    this.httpService.getLabels().subscribe(
+    this.httpService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         var value1 = [];
         for (var i = 0; i < data['data']['details'].length; i++) {
@@ -116,7 +128,9 @@ export class MainnotesComponent implements OnInit {
     this.httpService.deleteReminder(
       {
         "noteIdList": [id]
-      }).subscribe(
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         (data) => {
           this.addEntry.emit({});
         },
@@ -129,6 +143,7 @@ export class MainnotesComponent implements OnInit {
       "status": this.modifiedList.status
     }
     this.httpService.updateChecklist(id, this.modifiedList.id,JSON.stringify(apiData))
+    .pipe(takeUntil(this.destroy$))
     .subscribe(response => {
 
     })
@@ -150,4 +165,10 @@ export class MainnotesComponent implements OnInit {
     LoggerService.log(labelsList);
     this.router.navigate(['/home/newlabel/' + labelsList]);
  }
+
+ ngOnDestroy() {
+  this.destroy$.next(true);
+  // Now let's also unsubscribe from the subject itself:
+  this.destroy$.unsubscribe();
+}
 }

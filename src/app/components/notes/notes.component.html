@@ -1,7 +1,19 @@
 <!-- <app-addnotes (onNewEntryAdded)="addNewEntry($event)" ></app-addnotes> -->
 
-<app-addnotes (modelEmit) = "modelCatch($event)" (onNewEntryAdded)="addNewEntry($event)"></app-addnotes>
+<app-addnotes (modelEmit) = "modelCatch($event)" (onNewEntryAdded)="addNewEntry($event)">
+
+</app-addnotes>
+<!-- <div *ngIf = 'notePinedCard.length == 0'> -->
 <app-mainnotes [notesArray] = "notePinedCard" [length]='notePinedCard.length'
  [string]="'Pinned'" (addEntry) = "addNewEntry($event)"></app-mainnotes>
 <app-mainnotes [notesArray] = "noteCard" [length]=notePinedCard.length 
  [string]="'Others'" (addEntry) = "addNewEntry($event)"></app-mainnotes>
+<!-- </div> -->
+<!-- <div *ngIf = 'notePinedCard.length != 0'>
+    <h1>Pined</h1>  
+ <app-mainnotes [notesArray] = "notePinedCard" [length]='notePinedCard.length'
+ [string]="'Pinned'" (addEntry) = "addNewEntry($event)"></app-mainnotes>
+ <h1>Others</h1>
+<app-mainnotes [notesArray] = "noteCard" [length]=notePinedCard.length 
+ [string]="'Others'" (addEntry) = "addNewEntry($event)"></app-mainnotes>
+ </div> -->

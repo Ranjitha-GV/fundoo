@@ -1,9 +1,9 @@
-<div class="container" fxLayout="row" fxLayoutGap = '10px' fxLayoutAlign="start" class="main" 
+<div class="container" fxLayout="row wrap" fxLayoutGap = '10px' fxLayoutAlign="start" class="main" 
  fxFlex=100 >
- <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
+ <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
  <div fxFlex.xs=100% fxFlex.sm=100% fxFlex.md=90% fxFlex.lg=90% fxFlex.xl=80% 
-  fxLayout="row wrap" class = "mainCardsClass" style ="border: solid">
- <div *ngIf="length!=0" fxLayoutAlign="left" style="width:100%">
+  fxLayout="row wrap" class = "mainCardsClass" fxLayoutAlign="center">
+ <div *ngIf="length!=0" style="width:100%;">
    <b> {{string}} </b>
   </div>
  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
@@ -144,5 +144,5 @@
     </div>
     </div>
   </div>
-  <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
+  <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
   </div>

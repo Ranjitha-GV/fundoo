@@ -1,16 +1,19 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { DialogData } from '../update/update.component';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { DeletePopComponent } from '../delete-pop/delete-pop.component';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-pop-over',
   templateUrl: './pop-over.component.html',
   styleUrls: ['./pop-over.component.scss']
 })
-export class PopOverComponent implements OnInit {
+export class PopOverComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public myHttpService : HttpService, public dialogRef: MatDialogRef<PopOverComponent>,
     @Inject(MAT_DIALOG_DATA) public data : DialogData, public dialog : MatDialog, 
@@ -25,7 +28,9 @@ export class PopOverComponent implements OnInit {
     height:'fit-content'
     });
     
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       if(result == true)
       {      
         var id = note.id
@@ -47,7 +52,9 @@ export class PopOverComponent implements OnInit {
     this.httpService.trashNotes({
       "isDeleted": false,
       "noteIdList": [id]
-    }).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
       },
       error => {
@@ -57,5 +64,11 @@ export class PopOverComponent implements OnInit {
   deleteForever(note) {
     this.dialogOpen(note);
    
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

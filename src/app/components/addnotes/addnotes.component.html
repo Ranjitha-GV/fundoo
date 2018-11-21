@@ -82,7 +82,7 @@
         <app-collab></app-collab>
         <app-color (emitColor)=colorsEntry($event)></app-color>
         <app-photo></app-photo>
-        <app-archive-icon></app-archive-icon>
+        <app-archive-icon [archive]="note"></app-archive-icon>
         <app-more [addArray]="add" (addLabelEvent)=labelEvent($event)></app-more>
         <span> 
           <button mat-button class="close" type=submit (click)="back()">Close</button> 

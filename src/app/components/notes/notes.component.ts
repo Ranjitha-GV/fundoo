@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Notes } from 'src/app/core/model/notes';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -8,13 +10,14 @@ import { NotesServiceService } from 'src/app/core/services/notes/notes-service.s
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(public httpService: NotesServiceService) { }
   private response = [];
   private noteCard : Notes[] = [];
   private noteId = [];
-  private notePinedCard = [];
+  private notePinedCard : Notes[] = [];
   @Input() notedetails;
 
   ngOnInit() {
@@ -34,7 +37,9 @@ export class NotesComponent implements OnInit {
   }
 
   getNoteCard() {
-    this.httpService.notesList().subscribe(
+    this.httpService.notesList()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.noteCard = [];
         var response : Notes[] = [] = data['data']['data'];
@@ -49,18 +54,26 @@ export class NotesComponent implements OnInit {
       })
   }
   getNotes() {
-    this.httpService.notesList().subscribe(
+    this.httpService.notesList()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
+        var response : Notes[] = [] = data['data']['data'];
         this.notePinedCard = [];
-        this.response = data['data']['data'];
-        for (var i = data['data']['data'].length - 1; i >= 0; i--) {
-          if (data['data']['data'][i].isDeleted == false && 
-          data['data']['data'][i].isArchived == false && data['data']['data'][i].isPined == true) {
-            this.notePinedCard.push(data['data']['data'][i]);
+        for (var i = response.length - 1; i >= 0; i--) {
+          if (response[i].isDeleted == false && 
+            response[i].isArchived == false && response[i].isPined == true) {
+            this.notePinedCard.push(response[i]);
           }
         }
       },
       error => {
       })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }

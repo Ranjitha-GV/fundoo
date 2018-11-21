@@ -1,9 +1,12 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { FundooNotesComponent } from '../fundoo-notes/fundoo-notes.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SearchService } from '../../core/services/data/search.service';
 import { LabelpopComponent } from '../labelpop/labelpop.component';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Labels } from 'src/app/core/model/notes';
 
 
 
@@ -12,8 +15,8 @@ import { NotesServiceService } from 'src/app/core/services/notes/notes-service.s
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss']
 })
-export class LabelComponent implements OnInit {
-
+export class LabelComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(public dialogRef: MatDialogRef<FundooNotesComponent>, public data: SearchService, 
     public dialog : MatDialog, public httpService: NotesServiceService) { }
 
@@ -32,12 +35,16 @@ export class LabelComponent implements OnInit {
     height:'fit-content'
     });
     
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
       if(result)
       {      
         this.httpService.deleteNoteLabels(note, {
           "label": this.newLabel.nativeElement.innerHTML
-        }).subscribe(
+        })
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(
           (response) => {
             console.log(response);            
             this.data.changeChipEvent(true);
@@ -69,7 +76,9 @@ export class LabelComponent implements OnInit {
       "isDeleted": false,
       "userId": this.id
 
-    }).subscribe(
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
         this.delete();
         this.dialogRef.close();
@@ -84,12 +93,15 @@ export class LabelComponent implements OnInit {
   }
 
   delete() {
-    let tempArr = [];
-    this.httpService.getLabels().subscribe(
+    let tempArr: Labels[] = [];
+    this.httpService.getLabels()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (data) => {
-        for (var i = 0; i < data['data']['details'].length; i++) {
-          if (data['data']['details'][i].isDeleted == false) {
-            tempArr.push(data['data']['details'][i])
+        var response : Labels[] = [] = data['data']['details'];
+        for (var i = 0; i < response.length; i++) {
+          if (response[i].isDeleted == false) {
+            tempArr.push(response[i]);
           }
         }
         this.value1 = tempArr;
@@ -103,7 +115,9 @@ export class LabelComponent implements OnInit {
         "isDeleted": false,
         "id": val,
         "userId": localStorage.getItem('userId')
-      }).subscribe(
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
         (data) => {
           this.delete();
         },
@@ -116,5 +130,11 @@ export class LabelComponent implements OnInit {
 
   close() {
     this.newLabel.nativeElement.innerHTML = ' ';
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    // Now let's also unsubscribe from the subject itself:
+    this.destroy$.unsubscribe();
   }
 }
