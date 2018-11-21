@@ -1,11 +1,11 @@
-<div class="container" fxLayout="row" fxLayout.xs="row" fxLayoutAlign="center center" 
-fxLayoutGap="10px" fxLayoutGap.xs="0">
-  <div fxLayout="column" fxFlex="20"></div>
-  <div fxLayout="column" fxFlex="20" fxflex.sm="30" fxflex.xs="60" fxflex.md="80" 
-  fxflex.lg="70" fxflex.xl="40" fxFlexOrder="3"></div>
+<div class="container" fxLayout="row" fxFlex = 100  fxLayout.xs="column" fxLayoutAlign="center center">
+  <div fxLayout="row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=10% 
+  fxFlex.lg=10% fxFlex.xl=20%></div>
+  <div fxLayoutAlign="center" fxLayout.xs = "column" fxLayout="row" fxFlex.xs=100% 
+  fxFlex.sm=100% fxFlex.md=80% fxFlex.lg=80% fxFlex.xl=60%>
   <form>
     <mat-card class="card" role="group">
-      <h1 align=l eft>
+      <h1 align=left>
         <span class="f">F</span>
         <span class="u">u</span>
         <span class="n">n</span>
@@ -23,8 +23,8 @@ fxLayoutGap="10px" fxLayoutGap.xs="0">
         <input matInput placeholder="Lastname" name="lastname" minlength="3" 
         [formControl]="lastname" [(ngModel)]="model.lastname" required>
         <mat-error *ngIf="lastname.invalid">{{getErrorMessagelastName()}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="username">
+      </mat-form-field> <br>
+      <mat-form-field class = "username">
         <input matInput placeholder="Email ID" type="email" name="email" 
         [formControl]="email" [(ngModel)]="model.email" required>
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
@@ -48,7 +48,7 @@ fxLayoutGap="10px" fxLayoutGap.xs="0">
       a mix of letters, numbers & symbols</div>
       <p><b><i>Packages</i></b></p>
       <div class="card2" fxLayout="row" fxLayoutAlign="space-between" fxLayout="row-wrap">
-        <span *ngFor="let card of cards" style="padding : 20px;">
+        <span *ngFor="let card of cards" style="padding : 20px;" fxLayout.xs = "column">
           <mat-card (click)="selectCards(card)" [ngClass]="card.select ? 'select' : 'notSelect'">
             <header class="header"><strong><i>{{card.name}}</i></strong></header> <br>
             <i>{{card.description}}</i>
@@ -61,4 +61,7 @@ fxLayoutGap="10px" fxLayoutGap.xs="0">
       <p> </p>
     </mat-card>
   </form>
+</div>
+<div fxLayoutAlign="center" fxLayout="row" fxFlex.xs=0% 
+  fxFlex.sm=0% fxFlex.md=10% fxFlex.lg=10% fxFlex.xl=20% ></div>
 </div>

@@ -12,7 +12,7 @@ MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule, MatDatepic
 MatNativeDateModule, MatSelectModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpService } from './core/services/http/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { FundooNotesComponent } from './components/fundoo-notes/fundoo-notes.component';
@@ -47,7 +47,7 @@ import { PinComponent } from './components/pin/pin.component';
 import { MessagingService } from './core/services/messaging/messaging.service';
 import { UsersService } from './core/services/users/users.service';
 import { NotesServiceService } from './core/services/notes/notes-service.service';
-
+import { InterceptService } from './core/services/Interceptor/intercept.service'
 
 
 @NgModule({
@@ -113,7 +113,9 @@ import { NotesServiceService } from './core/services/notes/notes-service.service
     MatSelectModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
-    NotesServiceService],
+    NotesServiceService, InterceptService,{ provide: HTTP_INTERCEPTORS,
+      useClass: InterceptService,
+      multi: true }],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
   LabelpopComponent, DeletePopComponent],
   bootstrap: [AppComponent],

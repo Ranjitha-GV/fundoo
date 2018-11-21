@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-new-label',
@@ -9,11 +9,10 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class NewLabelComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private myHttpService: HttpService) { }
+  constructor(public route: ActivatedRoute, public httpService: NotesServiceService) { }
 
-  labelArray = [];
-  labelList;
-  token = localStorage.getItem('token');
+  private labelArray = [];
+  private labelList;
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -25,7 +24,7 @@ export class NewLabelComponent implements OnInit {
     )
   }
   getLabel(labelList) {
-    this.myHttpService.postArchive('/notes/getNotesListByLabel/' + labelList, {}, this.token)
+    this.httpService.getNotesByLabel(labelList, {})
       .subscribe(
         (data) => {
           this.labelArray = data['data'].data;

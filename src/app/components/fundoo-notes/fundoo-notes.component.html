@@ -41,7 +41,7 @@
                 <button *ngIf="image2 != ''" (click)="$event.stopPropagation()" 
                   [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
                   (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}" mat-mini-fab class="profilePic">
-                  <div class="change">Change</div>
+                  <div class="change" matTooltip = "Change Picture">Change</div>
                 </button>
                 <button *ngIf="image2 == ''" (click)="$event.stopPropagation()" 
                   (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
@@ -59,8 +59,6 @@
             <hr>
             <hr>
             <div fxLayoutAlign="row wrap" class="add" fxLayoutGap=85px>
-              <button mat-button color="link" fxFlex class="account" routerLink="/registration">
-                Add Account</button>
               <button mat-button color="link" fxFlex class="logout" (click)="signout()">
                 Sign Out</button></div>
         </mat-menu>

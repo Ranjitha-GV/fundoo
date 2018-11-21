@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-color',
@@ -8,9 +8,8 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class ColorComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService) { }
-  token = localStorage.getItem('token');
-  colorsArray = 
+  constructor(public httpService: NotesServiceService) { }
+  private colorsArray = 
   [[{ 'color': '#ffffff', 'name': 'White' },
   { 'color': '#f28b82', 'name': 'Red' },
   { 'color': '#fbbc04', 'name': 'Orange' },
@@ -26,7 +25,7 @@ export class ColorComponent implements OnInit {
   { 'color': '#e6c9a8', 'name': 'Brown' },
   { 'color': '#e8eaed', 'name': 'Gray' }]]
 
-  card = [];
+  private card = [];
   @Input() color;
   @Output() changeColor = new EventEmitter();
   @Output() emitColor = new EventEmitter();
@@ -37,11 +36,11 @@ export class ColorComponent implements OnInit {
   colorChange(id) {
     this.emitColor.emit(id);
     if (this.color != undefined) {
-      this.myHttpService.postColor('/notes/changesColorNotes',
+      this.httpService.changeColor(
         {
           "color": id,
           "noteIdList": [this.color.id]
-        }, this.token).subscribe(
+        }).subscribe(
           (data) => {
             localStorage.setItem('colorId', this.color.id);
             this.changeColor.emit({

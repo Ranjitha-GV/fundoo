@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-more',
@@ -11,27 +11,24 @@ import { HttpService } from '../../core/services/http/http.service';
 export class MoreComponent implements OnInit {
 
 
-  constructor(private myHttpService: HttpService) { }
+  constructor(public httpService: NotesServiceService) { }
+  private value1 = null;
+  private body;
   @Input() notedetails;
   @Input() addArray;
   @Output() eventEntry = new EventEmitter();
   @Output() checkEmit = new EventEmitter();
   @Output() addLabelEvent = new EventEmitter();
-  token = localStorage.getItem('token');
-  search: any;
-  value1 = null;
-  body: any;
-
-
+  
 
   ngOnInit() {
   }
 
   delete(id) {
-    this.myHttpService.deleteNotes('/notes/trashNotes', {
+    this.httpService.trashNotes({
       "isDeleted": true,
       "noteIdList": [this.notedetails.id]
-    }, this.token).subscribe(
+    }).subscribe(
       (data) => {
         this.eventEntry.emit({
         })
@@ -41,7 +38,7 @@ export class MoreComponent implements OnInit {
   }
 
   addLabel() {
-    this.myHttpService.getNotes('/noteLabels/getNoteLabelList', this.token).subscribe(
+    this.httpService.getLabels().subscribe(
       (data) => {
         this.value1 = [];
         for (var i = 0; i < data['data']['details'].length; i++) {
@@ -72,8 +69,8 @@ export class MoreComponent implements OnInit {
           "lableId": label.id
       }
     }
-    this.myHttpService.postNotes('/notes/' + this.notedetails.id + '/addLabelToNotes/' + label.id + '/add',
-      this.body, this.token).subscribe(
+    this.httpService.addLabelsNotes(this.notedetails.id, label.id,
+      this.body).subscribe(
         (data) => {
           this.eventEntry.emit({});
         },

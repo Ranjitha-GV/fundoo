@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpService } from '../../core/services/http/http.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 
 @Component({
@@ -12,15 +12,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ResetComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, public route: ActivatedRoute, 
-  private snackBar: MatSnackBar) { }
+  constructor(public myHttpService: UsersService, public route: ActivatedRoute, 
+  public snackBar: MatSnackBar) { }
 
   resetForm: FormGroup;
   model: any = {};
-  hide = true;
-  hide1 = true;
-  public accessToken = this.route.snapshot.params.forgotToken;
-  public input = new FormData();
+  private hide = true;
+  private hide1 = true;
+  private accessToken = this.route.snapshot.params.forgotToken;
+  private input = new FormData();
   password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
   confirmPassword = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
@@ -55,7 +55,7 @@ export class ResetComponent implements OnInit {
       return;
     }
     this.input.append('newPassword', this.model.password);
-    this.myHttpService.resetPost("/user/reset-password", body, this.accessToken).subscribe(response => {
+    this.myHttpService.resetPassword(body, this.accessToken).subscribe(response => {
     }, error => {
     })
   }

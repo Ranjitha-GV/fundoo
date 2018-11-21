@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { HttpService } from '../../core/services/http/http.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-pin',
@@ -8,23 +8,23 @@ import { HttpService } from '../../core/services/http/http.service';
 })
 export class PinComponent implements OnInit {
 
-  constructor(private myHttpService : HttpService) { }
+  constructor(public httpService: NotesServiceService) { }
 
+  private show = 0;
   @Input() pinArray;
   @Output() pinEmit = new EventEmitter();
-  show = 0;
+  
 
   ngOnInit() {
   }
   token = localStorage.getItem('token');
   pin() {
     this.show = 1;
-    this.myHttpService.postArchive('/notes/pinUnpinNotes',
+    this.httpService.pinUnpin(
       {
         "noteIdList": [this.pinArray.id],
         "isPined": true
-      },
-      this.token).subscribe(
+      }).subscribe(
         (data) => {
           this.pinEmit.emit({});
 
@@ -36,12 +36,11 @@ export class PinComponent implements OnInit {
   unPin()
   {
     this.show = 0;
-    this.myHttpService.postArchive('/notes/pinUnpinNotes',
+    this.httpService.pinUnpin(
       {
         "noteIdList": [this.pinArray.id],
         "isPined": false
-      },
-      this.token).subscribe(
+      }).subscribe(
         (data) => {
           this.pinEmit.emit({});
 

@@ -3,6 +3,7 @@ import { HttpService } from '../../core/services/http/http.service';
 import { DialogData } from '../update/update.component';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { DeletePopComponent } from '../delete-pop/delete-pop.component';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-pop-over',
@@ -11,9 +12,10 @@ import { DeletePopComponent } from '../delete-pop/delete-pop.component';
 })
 export class PopOverComponent implements OnInit {
 
-  constructor(private myHttpService : HttpService, public dialogRef: MatDialogRef<PopOverComponent>,
-    @Inject(MAT_DIALOG_DATA) public data : DialogData, public dialog : MatDialog) { }
-  token = localStorage.getItem('token');
+  constructor(public myHttpService : HttpService, public dialogRef: MatDialogRef<PopOverComponent>,
+    @Inject(MAT_DIALOG_DATA) public data : DialogData, public dialog : MatDialog, 
+    public httpService: NotesServiceService) { }
+    
   ngOnInit() {
   }
 
@@ -27,11 +29,11 @@ export class PopOverComponent implements OnInit {
       if(result == true)
       {      
         var id = note.id
-        this.myHttpService.deleteNotes('/notes/deleteForeverNotes',
+        this.httpService.deleteNotesForever(
           {
             "isDeleted": false,
             "noteIdList": [id]
-          }, this.token).subscribe(
+          }).subscribe(
             (data) => {
             },
             error => {
@@ -42,10 +44,10 @@ export class PopOverComponent implements OnInit {
   }
   restore(note) {
     var id = note.id
-    this.myHttpService.deleteNotes('/notes/trashNotes', {
+    this.httpService.trashNotes({
       "isDeleted": false,
       "noteIdList": [id]
-    }, this.token).subscribe(
+    }).subscribe(
       (data) => {
       },
       error => {

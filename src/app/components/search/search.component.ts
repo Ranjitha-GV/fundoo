@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
 import { SearchService } from '../../core/services/data/search.service';
+import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 
 @Component({
   selector: 'app-search',
@@ -9,11 +10,12 @@ import { SearchService } from '../../core/services/data/search.service';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(public myHttpService: HttpService, public data: SearchService) { }
-  token = localStorage.getItem('token');
-  response = [];
-  noteCard = [];
-  searchElement: any;
+  constructor(public myHttpService: HttpService, public data: SearchService, 
+    public httpService: NotesServiceService) { }
+  
+  private response = [];
+  private noteCard = [];
+  private searchElement;
 
   ngOnInit() {
     this.data.currentMessage.subscribe(message => {
@@ -23,7 +25,7 @@ export class SearchComponent implements OnInit {
   }
 
   getNoteCard() {
-    this.myHttpService.getNotes('/notes/getNotesList', this.token).subscribe(
+    this.httpService.notesList().subscribe(
       (data) => {
         this.noteCard = [];
         this.response = data['data']['data'];

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpService } from '../../core/services/http/http.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UsersService } from 'src/app/core/services/users/users.service';
 
 
 
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(private myHttpService: HttpService, private snackBar: MatSnackBar) { }
+  constructor(public myHttpService: UsersService, public snackBar: MatSnackBar) { }
 
   email = new FormControl('', [Validators.required, Validators.email]);
   model: any = {};
@@ -24,7 +24,7 @@ export class ResetPasswordComponent implements OnInit {
   }
   reset() {
     if (!this.email.invalid) {
-      this.myHttpService.resetPass('/user/reset', {
+      this.myHttpService.userReset({
         "email": this.model.email,
       })
         .subscribe(
