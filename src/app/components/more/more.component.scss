@@ -1,10 +1,13 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .icons 
 {
-    float: left;  
+    @include floatsLeft();  
 }
 .space 
 {
-    cursor : pointer;
+    @include cursors();
 }
 .check
 {

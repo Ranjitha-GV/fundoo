@@ -1,9 +1,9 @@
-<mat-icon style="cursor: pointer;" matTooltip="Change color" aria-label="change color" 
-    [matMenuTriggerFor]="appMenu">palette </mat-icon>
+<mat-icon class = 'space' matTooltip="Change color" aria-label="change color" 
+    [matMenuTriggerFor]="appMenu"> palette </mat-icon>
 <mat-menu #appMenu="matMenu" [overlapTrigger]="false" class = "sizes">
     <ng-template matMenuContent >
       <div class="buttons">
-          <div fxLayout=row fxLayoutGap=10px style="margin-top:2px; padding: 5px;" 
+          <div fxLayout=row fxLayoutGap=10px class = "colors" 
               *ngFor='let colors of colorsArray'>
                   <div *ngFor='let color of colors'>
                       <button class="colorButton" [ngStyle]="{'background-color': color.color }" 

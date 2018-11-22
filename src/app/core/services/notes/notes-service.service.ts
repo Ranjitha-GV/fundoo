@@ -111,4 +111,9 @@ export class NotesServiceService {
     let url = this.baseUrl + "notes/" + data + "/checklist/add";
     return this.http.postArchive(url, body);
   }
+  addCollabNotes(id,body)
+  {
+    let url = this.baseUrl + "notes/" + id + "/AddcollaboratorsNotes";
+    return this.http.postArchive(url, body);
+  }
 }

@@ -1,4 +1,16 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .icons 
 {
-    float: left;
+    @include floatsLeft();
+}
+.colors
+{
+    margin-top:2px;
+    padding: 5px;
+}
+.space
+{
+    @include cursors();
 }

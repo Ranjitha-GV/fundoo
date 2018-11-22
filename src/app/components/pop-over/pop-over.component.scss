@@ -1,7 +1,19 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .content 
 {
     padding: 20px;
    height:100px;
    width: 300px;
    overflow: hidden;
+}
+.menu
+{
+    @include cursors();
+    @include floatsRight();
+}
+.delete
+{
+    padding:10px
 }

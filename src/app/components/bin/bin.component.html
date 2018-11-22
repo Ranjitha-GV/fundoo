@@ -5,22 +5,23 @@
   <div *ngFor='let note of card'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
       <mat-card class="bin" [style.backgroundColor]="note.color">
-        <div align="left" (click) = "openDialog(note)">
-          <b><div style="font-size: 20px;" [innerHTML]="note.title"></div></b> <br>
-          <div style="font-size: 15px;" [innerHTML]="note.description"></div>
+        <div align="left" class = 'space' (click) = "openDialog(note)">
+          <b><div class = "noteText" [innerHTML]="note.title"></div></b> <br>
+          <div class = "descriptionText" [innerHTML]="note.description"></div>
         </div>
         <!--*****************Checklists*******************-->
         <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row" > 
           <mat-checkbox fxFlex="10%" *ngIf="checklist.status=='open'&& !checklist.isDeleted" 
           (click)=checkBox(checklist,note)></mat-checkbox>
-          <input *ngIf="!checklist.isDeleted && checklist.status=='open' " 
+          <input *ngIf="!checklist.isDeleted && checklist.status=='open'" 
           [(ngModel)]=checklist.itemName fxFlex="90%" class="note"
             (click)="open(note)" [style.backgroundColor]="note.color">
          </div>
         
           <div class="note" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
           <mat-checkbox fxFlex="10%" checked=true 
-           *ngIf="checklist.status=='close'&& !checklist.isDeleted" (click)=checkBox(checklist,note)></mat-checkbox>
+           *ngIf="checklist.status=='close'&& !checklist.isDeleted" 
+             (click)=checkBox(checklist,note)></mat-checkbox>
           <del *ngIf="!checklist.isDeleted && checklist.status=='close'"
            (click)="open(note)">{{checklist.itemName}}</del>
         </div>

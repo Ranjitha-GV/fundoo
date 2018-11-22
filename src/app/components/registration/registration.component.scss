@@ -1,32 +1,39 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .f
 {
-    color: rgb(100, 158, 235);
+    color: $f;
 }
 .u{
-    color:yellow;
+    color:$yellow;
 }
 .n{
-    color:red;
+    color:$red;
 }
 .d{
-    color: rgb(100, 158, 235);
+    color: $f;
     font-size: 35px;
 }
 .o{
-    color: green;
+    color: $green;
 }
 .oo{
-    color:red;
+    color:$red;
 }
 .hElement
 {
     font-size: 20px;
-    color: black;
+    color: $black;
 }
 .username
 {
     width:713px;
     width: stretch;
+}
+.cardPadding
+{
+    padding : 20px;
 }
 .para
 {
@@ -35,11 +42,11 @@
 }
 .container
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include displayFlex();
+    @include justifyCenter();
+    @include alignCenter();
     height: 100vh;
-    width:100%;
+    @include widthFull();
 }
 .password
 {
@@ -52,18 +59,18 @@
 }
 .nextButton
 {
-    float: right;
+    @include floatsRight();
 }
 
 .select
 {
-    background-color: goldenrod;
+    background-color: $goldenrod;
     height: 100px;
     width: 190px;
 }
 .notSelect
 {
-    background-color: burlywood;
+    background-color: $burlywood;
     height: 100px;
     width: 190px;
 }
@@ -76,10 +83,3 @@
     margin-left: 20px;
     width:347px;
 }
-
-
-// .card
-// {
-//     width: 700px;
-//     height: fit-content;
-// }

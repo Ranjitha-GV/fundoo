@@ -1,6 +1,8 @@
                 <!-- ********************ToolBar***********************  -->
-<mat-toolbar color="primary" fxLayout='row' fxLayout.xs="row" fxLayoutGap="30px" fxLayoutGap.xs="20px">
-  <button fxFlex=5 type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+<mat-toolbar color="primary" fxLayout='row' fxLayout.xs="row" fxLayoutGap="30px" 
+  fxLayoutGap.xs="20px">
+  <button fxFlex=5 type="button" aria-label="Toggle sidenav" mat-icon-button 
+    (click)="drawer.toggle()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span class="heading" fxFlex = 5>{{names}}</span>
@@ -27,7 +29,7 @@
     </div>
                    <!--***************Upload Profile Picture*****************-->
     <div class="photo">
-        <button *ngIf = "image2 != ''" class="profilebutton3">
+        <button *ngIf = "image2 != ''" class="commonBtn profilebutton3">
             <img src="{{img}}" mat-mini-fab [matMenuTriggerFor]="menu" 
             matTooltip="{{firstname}} {{lastname}}" class = "profile">
           </button>
@@ -40,20 +42,22 @@
               <div fxFlex=30>
                 <button *ngIf="image2 != ''" (click)="$event.stopPropagation()" 
                   [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}"
-                  (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}" mat-mini-fab class="profilePic">
-                  <div class="change" matTooltip = "Change Picture">Change</div>
+                  (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}" 
+                    mat-mini-fab class="profilePic">
+                  <div class="changeOne" matTooltip = "Change Picture">Change</div>
                 </button>
                 <button *ngIf="image2 == ''" (click)="$event.stopPropagation()" 
                   (click)="selectFile.click()" matTooltip="{{firstName | titlecase}} {{lastName | titlecase}}"
                   mat-mini-fab class="newName">{{firstname | slice:0:1}}
-                  <div class="change">Change</div>
+                  <div class="change" >Change</div>
                 </button>
-                <input style="display:none" (click)="$event.stopPropagation()" class="image" 
+                <input style = "display: none" (click)="$event.stopPropagation()" class="image" 
                   type="file" (change)="onUpload($event)" #selectFile>
               </div>
               <div fxFlex=60>
                 <mat-content fxFlex class="content"><b>
-                    {{firstname | titlecase}} {{lastname | titlecase}}</b> {{email}} </mat-content>
+                    {{firstname | titlecase}} {{lastname | titlecase}}</b> {{email}} 
+                   </mat-content>
               </div>
             </div> <br>
             <hr>
@@ -79,13 +83,15 @@
   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home/notes" (click) = "nameChange('fundoo')"><img src="../../../assets/images/notes.svg">
+      <a mat-list-item routerLink="/home/notes" (click) = "nameChange('fundoo')">
+         <img src="../../../assets/images/notes.svg">
         <span class="one">Notes</span></a>
-      <a mat-list-item routerLink="/home/reminder" (click) = "nameChange('Reminder')"><img src="../../../assets/images/reminder.svg">
+      <a mat-list-item routerLink="/home/reminder" (click) = "nameChange('Reminder')">
+         <img src="../../../assets/images/reminder.svg">
         <span class="one">Reminder</span></a>
       <hr>
       <div>
-        <p style="margin-left: 10px;">Labels</p>
+        <p class = "labels">Labels</p>
         <div *ngFor="let val of value; trackBy:val?.id" (click)="labelClick(val)">
           <div *ngIf="val.isDeleted == false">
             <a mat-list-item (click) = "nameChange(val.label)">
@@ -95,12 +101,15 @@
           </div>
         </div>
       </div>
-      <a mat-list-item (click)="$event.stopPropagation(); openDialog()"><img src="../../../assets/images/label.svg">
+      <a mat-list-item (click)="$event.stopPropagation(); openDialog()">
+         <img src="../../../assets/images/label.svg">
         <span class="one">Add Label</span></a>
       <hr>
-      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')"><img src="../../../assets/images/archive.svg">
+      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')">
+         <img src="../../../assets/images/archive.svg">
         <span class="one">Archive</span></a>
-      <a mat-list-item routerLink="/home/bin" (click) = "nameChange('Bin')"><img src="../../../assets/images/bin.svg">
+      <a mat-list-item routerLink="/home/bin" (click) = "nameChange('Bin')">
+         <img src="../../../assets/images/bin.svg">
         <span class="one">Bin</span></a>
     </mat-nav-list>
   </mat-sidenav>

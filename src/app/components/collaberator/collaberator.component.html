@@ -1,0 +1,21 @@
+<div fxFlex=100 class="main">
+  <div class="heading">
+    <h2>Collaborators</h2>
+  </div>
+  <hr>
+  <button class="image" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+  </button>
+  <div class="email">
+    <b>{{firstname}} {{lastname}} <i>(Owner)</i></b>
+    <div>{{email}}</div>
+  </div>
+  <button mat-mini-fab color="disabled" class="add"><i class="material-icons">person_add
+    </i></button>
+  <input type="text" class="text" placeholder="Person or email to share with" (keyup) = onKey($event)
+   [(ngModel)] = "searchword">
+  <span class="tick" matTooltip="Add Collaborator"><i class="material-icons">done</i></span>
+  <div class="buttons">
+    <button mat-button color="disabled" (click) = "openDialog()">Cancel</button>
+    <button mat-button color="disabled" (click) = 'addCollab()'>Save</button>
+  </div>
+</div>

@@ -42,5 +42,10 @@ export class UsersService {
     let url = this.baseUrl + 'user/uploadProfileImage';
     return this.http.image(url,body);
   }
+  searchName(body)
+  {
+    let url = this.baseUrl + 'user/searchUserList';
+    return this.http.postArchive(url, body);
+  }
   
 }

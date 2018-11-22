@@ -1,3 +1,6 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 mat-card 
 {
   opacity: 0.7;
@@ -8,26 +11,22 @@ mat-card
 
 .list 
 {
-    float:right;
-    cursor: pointer;  
-}
+    @include floatsRight();
+    @include cursors();      
+}    
 
-    .notes 
-    {
-        border: none;
-        border-color: transparent;
-        outline: none;
-        word-wrap: break-word;
-    }
+.notes 
+{
+    @include boxes();
+    @include words();
+}
 
 .editable
 {
     font-weight: bold;
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
+    @include boxes();
+    @include words();
+    @include widthFull();
     min-height: 20px;
 }
 
@@ -37,22 +36,20 @@ mat-card
 
 .edit 
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
+    @include boxes();
+    @include words();
+    @include widthFull();
     min-height: 20px;
 }
 .close 
 {
-    float: right;
+    @include floatsRight();
     margin-block-end: 25px;
     
 }
 .pin
 {
-    float: right;
+    @include floatsRight();
 }
 .tool 
 {
@@ -61,16 +58,24 @@ mat-card
 }
 .checkBox
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
+    @include boxes();
+    @include words();
+    @include widthFull();
     min-height: 20px;
 }
 .check
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
+    @include boxes();
+}
+.addNotes
+{
+   margin-top: 40px;
+}
+.description
+{
+    margin-bottom: 20px;
+}
+.delete
+{
+    @include cursors();
 }

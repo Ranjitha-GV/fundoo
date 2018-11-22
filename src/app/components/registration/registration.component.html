@@ -48,7 +48,7 @@
       a mix of letters, numbers & symbols</div>
       <p><b><i>Packages</i></b></p>
       <div class="card2" fxLayout="row" fxLayoutAlign="space-between" fxLayout="row-wrap">
-        <span *ngFor="let card of cards" style="padding : 20px;" fxLayout.xs = "column">
+        <span *ngFor="let card of cards" class = "cardPadding" fxLayout.xs = "column">
           <mat-card (click)="selectCards(card)" [ngClass]="card.select ? 'select' : 'notSelect'">
             <header class="header"><strong><i>{{card.name}}</i></strong></header> <br>
             <i>{{card.description}}</i>

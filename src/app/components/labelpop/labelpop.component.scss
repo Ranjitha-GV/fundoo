@@ -1,14 +1,17 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .box 
 {
     width: 500px;
     height: 50px;
     overflow: hidden;
     padding: 10px;
-    align-content: center;
+    @include alignCenter();
 }
 .accept 
 {
-    float: right;
+    @include floatsRight();
 }
 .buttons 
 {

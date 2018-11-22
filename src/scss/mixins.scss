@@ -1,0 +1,62 @@
+@mixin boxes()
+{
+    border: none;
+    border-color: transparent;
+    outline: none;
+}
+
+@mixin words
+{
+    word-wrap: break-word;
+}
+
+@mixin floatsRight
+{
+    float:right;
+}
+
+@mixin widthFull
+{
+    width: 100%;
+}
+
+@mixin floatsLeft
+{
+    float: left;   
+    
+}
+@mixin cursors
+{
+    cursor: pointer;
+}
+@mixin scroll 
+{
+    overflow-y: hidden;    
+}
+@mixin upperFont
+{
+    text-transform: uppercase;
+
+}
+@mixin alignCenter
+{
+    align-items: center;
+
+}
+@mixin scrollAuto 
+{
+    overflow: auto;
+
+}
+@mixin fixedPos
+{
+    position: fixed;
+}
+@mixin justifyCenter
+{
+    justify-content: center;
+}
+@mixin displayFlex
+{
+    display: flex;
+}

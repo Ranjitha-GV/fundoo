@@ -1,4 +1,7 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .pin
 {
-    cursor: pointer;
+    @include cursors();
 }

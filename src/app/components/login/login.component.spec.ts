@@ -28,4 +28,18 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(1+1).toBeTruthy(2);
   });
+
+    it('Form should be valid '),async(()=> {
+    expect(component.model.email.toEqual('nish@gmail.com'));
+    expect(component.model.password.toEqual('Casperspike@10'));
+    expect(component.model.email).toBeTruthy();
+    expect(component.model.password).toBeTruthy();
+    })
+    
+    it('Invalid Form'),async(()=> {
+    expect(component.model.email.toEqual(''));
+    expect(component.model.password.toEqual(''));
+    expect(component.model.email).toBeFalsy();
+    expect(component.model.password).toBeFalsy();
+    })
 });

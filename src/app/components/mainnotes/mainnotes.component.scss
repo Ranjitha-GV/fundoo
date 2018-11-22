@@ -1,3 +1,6 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .mat-dialog-container{
     padding: 0px !important;
 }
@@ -9,7 +12,7 @@
 }
 .container
 {
-    display: flex;
+    @include displayFlex();
 }
 .cardsStyle 
 {
@@ -21,7 +24,7 @@
 {
     margin-top: 20px;
     width:300px;
-    word-wrap: break-word;
+    @include words();
     padding:3px;
 }
 .main 
@@ -36,30 +39,40 @@
 }
 .pin
 {
-    float : right;
+    @include floatsRight();
+    @include cursors();
 }
-
+.noteText
+{
+   font-size: 20px;
+}
+.descriptionText
+{
+   font-size: 15px;
+}
 .reminder 
 {
     margin-bottom: 10px;
 }
 .note{
     margin-bottom: 1px;
-    outline: none;
-    border: none;
-    border-color: transparent;
+    @include boxes();
 }
 
 .notes 
 {
     margin-bottom: 1px;
-    outline: none;
-    border: none;
-    border-color: transparent;
+    @include boxes();
 }
 .mainStyle
 {
     opacity: 0;
+}
+.reminders
+{
+    color: $reminder; 
+    width: 8px; 
+    margin-left: 5px;
 }
 .mainStyle:hover
 {
@@ -67,13 +80,17 @@
 }
 .mainCardsClass 
 {
-    justify-content: center;
+    @include justifyCenter();
+}
+.string
+{
+    @include widthFull();
 }
 @media only screen and (min-width: 200px) and (max-width: 600px){
     .flexClass
     {
         width:100%; 
-        justify-content: center;
+        @include justifyCenter();
     }
 }
 @media only screen and (min-width: 699px) and (max-width: 750px)

@@ -1,47 +1,46 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 [contenteditable]:empty:before {
     content: attr(data-placeholder);
-    color: grey;
+    color: $grey;
     display: inline-block;
 }
 
 .edit 
 {
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
+    @include boxes();
+    @include words();
     width: 100%;
     min-height: 20px;
     cursor:default;
 }
 .button
 {
-    float : right;
+    @include floatsRight();
     margin-bottom: 20px;
     margin-top: 10px;
 }
 .icon
 {
-    cursor: pointer;
+    @include cursors();
 }
 .val
 {
     margin-top: 20px;
-    cursor: pointer;
+    @include cursors();
 }
 .name 
 {
     margin-left: 5px;
-    border: none;
-    border-color: transparent;
-    outline: none;
-    word-wrap: break-word;
-    width: 100%;
+    @include boxes();
+    @include words();
+    @include widthFull();
     min-height: 20px;
 }
 .create
 {
-    float: right;
+    @include floatsRight;
 }
 
 .lock:hover .icon-unlock,
@@ -50,4 +49,8 @@ display: none;
 }
 .lock:hover .icon-lock {
 display: inline;
+}
+.labels 
+{
+    padding: 30px;
 }

@@ -1,40 +1,39 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .sidenav-container {
   height:auto;
   width: auto;
-  // background-color: rgb(221, 221, 230);
+  // background-color: $fundooBackground;
   flex:1 0 auto;
   margin-top: 60px;
-  overflow: auto;
+  @include scrollAuto();
 }
 
 .sidenav {
   width: 230px;
   margin-top: 15px;
-  background-color: rgb(221, 221, 230);
-  overflow-y:auto;
-  position: fixed;
+  background-color: $fundooBackground;
+  @include scrollAuto();
+  @include fixedPos();
   margin-top: 57px;
 }
 
 .mat-toolbar.mat-primary 
 {
-  position: fixed;
+  @include fixedPos();
   top: 0;
-  background-color: rgb(254, 174, 1);
-  color: black;
+  background-color: $fundooToolBar;
+  color: $black;
   z-index: 2;
 }
 .heading
 {
   font-size: 22px;
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
-  // overflow: hidden !important;
 }
 .right 
 {
   padding-top: 13px;
-  // margin-left: 10px;
 }
 .size
 {
@@ -45,16 +44,16 @@
 .one 
 {
   margin-left: 20px;
-  cursor: pointer;
+  @include cursors();
 }
 
 .container
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include displayFlex();
+    @include justifyCenter();
+    @include alignCenter();
     height: 100vh;
-    width:100%;
+    @include widthFull();
 }
 .photo 
 {
@@ -71,7 +70,7 @@
 }
 .photocard 
 {
-  background-color:lightgoldenrodyellow ;
+  background-color : $lightgoldenrodyellow ;
 }
 .menu 
 {
@@ -79,20 +78,19 @@
   padding-bottom: 8px;
   padding-left: 10px;
   padding-left: 10px;
-  background-color:lightgoldenrodyellow ;
+  background-color : $lightgoldenrodyellow ;
 
 }
 .profilePic 
 {
   width:80px; 
   height:80px; 
-  background-color: white;
-  float: right;
-  color: black;
+  background-color: $white;
+  @include floatsRight();
+  color: $black;
   text-align: bottom;
   font-size: 10px;
-  text-transform: uppercase;
-
+  @include upperFont();
 }
 
 .value 
@@ -105,9 +103,9 @@
 .newSearch
 {
   width: stretch;
-  background-color: rgb(235, 174, 22);
-  display: flex;
-  align-items: center;
+  background-color: $fundooToolBar;
+  @include displayFlex();
+  @include alignCenter();
   height:46px;
   border-radius: 5px;
   padding-left: 1%;
@@ -115,12 +113,12 @@
 
 .searchBar
 {
-  background-color: rgb(235, 174, 22);
-  display: flex;
-  align-items: center;
+  background-color: $fundooToolBar;
+  @include displayFlex();
+  @include alignCenter();
   height:46px;
   width:stretch;
-  color: black;
+  color: $black;
   border-radius: 5px;
   // padding-left: 1%;
   min-width: 30px;
@@ -129,80 +127,61 @@
 {
   height:41px;
   width:stretch;
-  color: black;
+  color: $black;
   opacity: 1;
-  background-color: rgb(235, 174, 22);
+  background-color: $fundooToolBar;
   border:0px;
   border-radius: 5px;
   font-size: 20px;
   padding-left: 1%;
-  display: flex;
+  @include displayFlex();
   margin-left: 10px;
 }
 input:focus
 {
-  background-color: whitesmoke;
+  background-color: $whitesmoke;
 }  
 
 .name 
 {
   margin-left: 20px; 
-  background-color: bisque; 
-  color: black;
-  text-transform: uppercase;
+  background-color: $bisque; 
+  color: $black;
+  @include upperFont();
 }
 
 .firstName
 {
   margin-left: 20px; 
-  background-color: bisque; 
-  color: black; 
+  background-color: $bisque; 
+  color: $black; 
   margin-left: -2px;
   margin-bottom: 10px;
-  text-transform: uppercase;
+  @include upperFont();
 }
 .email
 {
-  float : left; 
+  @include floatsLeft();
   margin-right: 30px; 
   margin-bottom: 10px;
 }
-.profilebutton{
+.commonBtn{
   width:50px; 
   height:50px; 
-  border: none;
  border-radius: 50%;
- background:white;
- background: transparent;
- outline:none;
- 
+ @include boxes();
 }
 .profilebutton3{
-  width:50px; 
-  height:50px; 
-  border: none;
- border-radius: 50%;
- background: transparent;
- outline:none;
- background:rgb(235, 174, 22);
-}
-.profilebutton2{
-  width:50px; 
-  height:50px; 
-  border: none;
- border-radius: 50%;
- background: transparent;
- outline:none;
- padding: 30px;  
+  background:$fundooToolBar;
 }
 .screen
 {
   margin-left: 20px;
-  float: left;
+  @include floatsLeft();
 }
 .pic
 {
-  float: left;
+  @include floatsLeft();
 }
 .but 
 {
@@ -216,14 +195,14 @@ input:focus
 }
 .profile 
 {
-  float:left; 
+  @include floatsLeft();
   width:50px;
   height:50px;
   border-radius: 100%
 }
 .image 
 {
-  float:left;
+  @include floatsLeft();
   width:50px;
   height:50px;
   border-radius: 100%; 
@@ -233,8 +212,8 @@ input:focus
 {
   margin-left: 20px;
   margin-top:5px;
-  float:right;
-  word-wrap: break-word;
+  @include floatsRight();
+  @include words();
 }
 .menuCard 
 {
@@ -259,10 +238,10 @@ input:focus
 }
 .newName
 {
-  text-transform: uppercase;
-  align-content: center;
-  background-color:lightgoldenrodyellow ;
-  color: black;
+  @include upperFont();
+  @include alignCenter();
+  background-color : $lightgoldenrodyellow ;
+  color: $black;
   font-size: 20px;
 }
 
@@ -274,8 +253,21 @@ input:focus
 .change
 {
   margin-top: 46px;
-  color: black;
+  color: $black;
   font-size: 10px;
-}   
-
+}  
+.changeOne
+{
+  margin-top: 46px;
+  color: $black;
+  font-size: 10px;
+}    
+.labels 
+{
+ margin-left: 10px;
+}
+.display
+{
+  display : none
+}
 

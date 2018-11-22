@@ -1,11 +1,14 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
 .delete
 {
-    float: right;
+    @include floatsRight();
     margin-top: 10px;
 }
 .space 
 {
-    cursor: pointer;
+    @include cursors();
 }
 .list
 {
@@ -30,7 +33,13 @@
 }
 .note
 {
-    outline: none;
-    border: transparent;
-    border-color: none;
+    @include boxes();
+}
+.noteText
+{
+    font-size: 20px;
+}
+.descriptionText
+{
+    font-size: 15px;
 }

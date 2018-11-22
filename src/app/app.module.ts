@@ -49,6 +49,7 @@ import { UsersService } from './core/services/users/users.service';
 import { NotesServiceService } from './core/services/notes/notes-service.service';
 import { InterceptService } from './core/services/Interceptor/intercept.service'
 import { ErrorsHandler } from './core/services/errorHandling/errors-handler';
+import { CollaberatorComponent } from './components/collaberator/collaberator.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { ErrorsHandler } from './core/services/errorHandling/errors-handler';
     LabelpopComponent,
     DeletePopComponent,
     PinComponent,
+    CollaberatorComponent,
   ],
   imports: [
 
@@ -121,7 +123,7 @@ import { ErrorsHandler } from './core/services/errorHandling/errors-handler';
         useClass: ErrorsHandler,
       }],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
-  LabelpopComponent, DeletePopComponent],
+  LabelpopComponent, DeletePopComponent, CollaberatorComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

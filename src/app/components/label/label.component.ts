@@ -46,7 +46,6 @@ export class LabelComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe(
           (response) => {
-            console.log(response);            
             this.data.changeChipEvent(true);
             this.delete();
           },

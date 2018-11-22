@@ -2,9 +2,9 @@
   <div align="center" [style.backgroundColor]="color">
     <div align="left" class = "update">
       <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" 
-      data-text="" style="font-size: 20px;" [innerHTML]="data.title"></div></b> <br>
+      data-text="" class = "noteText" [innerHTML]="data.title"></div></b> <br>
       <div mat-dialog-content contenteditable="true" *ngIf = "!checklist" class="edit" id="descriptionId" 
-      data-text="" style="font-size: 15px;" [innerHTML]="data.description"></div>
+      data-text="" class = "descriptionText" [innerHTML]="data.description"></div>
       <br>
     </div>
     <div class="note" *ngFor="let check of tempArray" fxLayout="row">
