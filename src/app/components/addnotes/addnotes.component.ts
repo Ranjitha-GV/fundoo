@@ -204,7 +204,7 @@ editing(event,edited){
   if(event.code=="Enter"){
     for(var i=0;i<this.dataArray.length;i++){
       if(edited.index==this.dataArray[i].index){
-        this.dataArray[i].data==edited.data
+        this.dataArray[i].data==edited.data;
       }
     }    
   }
