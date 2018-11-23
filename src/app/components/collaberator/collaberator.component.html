@@ -9,13 +9,28 @@
     <b>{{firstname}} {{lastname}} <i>(Owner)</i></b>
     <div>{{email}}</div>
   </div>
+  <!-- <div *ngFor = "let index of newList"> -->
+      <i class="material-icons">
+          {{newList.firstName | slice : 0 : 1}}
+          </i>
+        <b>{{newList.firstName}} {{newList.lastName}}</b>
+        <div>{{newList.email}}</div>
+     <!-- </div> -->
   <button mat-mini-fab color="disabled" class="add"><i class="material-icons">person_add
     </i></button>
-  <input type="text" class="text" placeholder="Person or email to share with" (keyup) = onKey($event)
-   [(ngModel)] = "searchword">
-  <span class="tick" matTooltip="Add Collaborator"><i class="material-icons">done</i></span>
+  <input type="text" class="text" placeholder="Person or email to share with" 
+  (keyup) = onKey($event) [(ngModel)] = "searchword" [matMenuTriggerFor] = 'menu'>
+   <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menu">
+     <button mat-menu-item *ngFor = "let users of usersList" (click) = "addCollab(users); select(users.email)">
+       {{users.firstName }} {{users.lastName }} <{{ users.email }}>
+     </button>
+   </mat-menu>
+  <span class="tick" matTooltip="Add Collaborator" *ngIf = "searchword!=null"><i 
+   class="material-icons" (click) = "enterNewLine(searchword)">done</i>
+  </span>
+   
   <div class="buttons">
     <button mat-button color="disabled" (click) = "openDialog()">Cancel</button>
-    <button mat-button color="disabled" (click) = 'addCollab()'>Save</button>
+    <button mat-button color="disabled" (click) = 'save()'>Save</button>
   </div>
 </div>

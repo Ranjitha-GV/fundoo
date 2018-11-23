@@ -1,6 +1,6 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input, ViewChild, ElementRef } from '@angular/core';
 import { DialogData, UpdateComponent } from '../update/update.component';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatMenu } from '@angular/material';
 import { environment } from 'src/environments/environment.prod';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
@@ -20,40 +20,61 @@ export interface DialogData {
 
 export class CollaberatorComponent implements OnInit {
 
-  constructor(public httpService: NotesServiceService, public myHttpService: UsersService, public dialog: MatDialog, public dialogRef: MatDialogRef<CollaberatorComponent>,
+  constructor(public httpService: NotesServiceService, public myHttpService: UsersService, 
+    public dialog: MatDialog, public dialogRef: MatDialogRef<CollaberatorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
     destroy$: Subject<boolean> = new Subject<boolean>();
 
     private image = localStorage.getItem('imageUrl');
     private firstname = localStorage.getItem('firstname');
     private lastname = localStorage.getItem('lastname');
+    private userId = localStorage.getItem('userId');
     private email = localStorage.getItem('email');
     private img = environment.apiUrl + this.image;
     private values;
     private searchword;
+    private newEmail = 'Person or email to share with';
+    private usersList = [];
+    private newList = [];
     
   ngOnInit() {
 
   }
+//   @ViewChild('menu')
+// set menu(value: MatMenu)  {
+//   this.menuItems[1].elementRef = value;
+// }
+// select(users :string)
+//   {
+//     this.selected = users;
+//   }
+//   selected :string;
+// menuItems: Array<{text: string, elementRef: MatMenu}> = [
+//     {text: "users", elementRef: null },
+//     {text: "Tabledriven.Item2", elementRef: null},
+//   ];
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  addCollab()
+  addCollab(users)
   {
+    console.log(users);
     this.httpService.addCollabNotes(this.data.id,
       {
-        'title' : this.data.title
+        'firstName' : users.firstName,
+        'lastName' : users.lastName,
+        'email' : users.email,
+        'userId' : users.userId
       })
     .pipe(takeUntil(this.destroy$))
     .subscribe((data)=>
     {
       LoggerService.log(data);
-      this.dialogRef.close();
     },
     error =>
     {
-      this.dialogRef.close();
+      LoggerService.log(error);
     })
   }
   openDialog()
@@ -76,12 +97,35 @@ export class CollaberatorComponent implements OnInit {
     .pipe(takeUntil(this.destroy$))
     .subscribe((data)=>
     {
-      LoggerService.log(data);
+      LoggerService.log(data['data']['details']);
+      this.usersList = data['data']['details'];
     },
     error =>
     {
       LoggerService.log(error);
     })
+  }
+  select(users)
+  {
+    this.searchword = users;
+    console.log(this.searchword);
+    
+  }
+  enterNewLine(user)
+  {
+    console.log(user);
+    for(let i = 0; i < this.usersList.length; i++)
+    {
+      if(this.usersList[i].email == user)
+      {
+        this.newList = this.usersList[i];
+      }
+    }
+    console.log(this.newList);
+  }
+  save()
+  {
+    this.dialogRef.close();
   }
 
   ngOnDestroy() {

@@ -16,6 +16,7 @@
 {
     margin-top: -46px;
     margin-left: 70px;
+    @include words();
 }
 .add
 {
@@ -44,4 +45,8 @@
 .heading 
 {
     margin-left: 10px;
+}
+.menu
+{
+    overflow-y: scroll;
 }
