@@ -5,6 +5,13 @@
     outline: none;
 }
 
+@mixin continue()
+{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
+}
+
 @mixin words
 {
     word-wrap: break-word;

@@ -1,10 +1,11 @@
+<!--Change icon to archive when notes is unarchived-->
 <div *ngIf = "archive.isArchived == false">
 <div class="icons" fxLayout="row" fxLayoutAlign="space-between">
     <div matTooltip="Archive" class="space"> <i class="material-icons" 
       (click)="archivePost(archive.id)">archive</i></div>
 </div>
 </div>
-
+<!--Change icon to unarchive when notes is archived-->
 <div *ngIf = "archive.isArchived == true">
 <div class="icons" fxLayout="row" fxLayoutAlign="space-between">
     <div matTooltip="UnArchive" class="space"> <i class="material-icons" 

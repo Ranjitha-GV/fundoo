@@ -4,6 +4,7 @@
 .main
 {
     padding: 10px;
+    overflow-y: auto;
 }
 .image 
 {
@@ -11,6 +12,7 @@
     height:50px; 
     border-radius: 50%;
     @include boxes();
+    @include words();
 }
 .email
 {
@@ -49,4 +51,26 @@
 .menu
 {
     overflow-y: scroll;
+}
+.mail
+{
+    margin-left: 73px;
+    margin-top: -11px;
+}
+.names 
+{
+    margin-left: 25px;
+}
+.icon
+{
+    opacity: 0.5;
+    padding-top: 40px;
+    @include floatsRight();
+    @include cursors();
+}
+.profile
+{
+    @include upperFont();
+    padding-bottom: 6px;
+    font-size: 18px;
 }

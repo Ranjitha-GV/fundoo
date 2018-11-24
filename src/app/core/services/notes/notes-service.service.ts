@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpService } from '../http/http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class NotesServiceService {
 
   baseUrl =  environment.baseUrl;
   token = localStorage.getItem('token');
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, public httpDelete: HttpClient) { }
 
   addNotes(body) {
     let url = this.baseUrl + 'notes/addNotes';
@@ -115,5 +117,10 @@ export class NotesServiceService {
   {
     let url = this.baseUrl + "notes/" + id + "/AddcollaboratorsNotes";
     return this.http.postArchive(url, body);
+  }
+  removeCollabNotes(noteId, userId)
+  {
+    let url = this.baseUrl + 'notes/'+ noteId +'/removeCollaboratorsNotes/'+ userId;
+    return this.httpDelete.delete(url);
   }
 }

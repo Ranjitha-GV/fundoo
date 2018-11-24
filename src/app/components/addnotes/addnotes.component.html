@@ -75,9 +75,8 @@
   </mat-chip-list>
  </div>
 </div>
-<!--***********************************-->
+<!--***********************************--> 
 <!--**********ToolBar*********-->
-    <div>
       <div fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutWrap>
         <app-toolbar [reminderValue]="note" (emitReminder) = "reminderEntry($event)"></app-toolbar>
         <app-collab></app-collab>
@@ -89,5 +88,4 @@
           <button mat-button class="close" type=submit (click)="back()">Close</button> 
         </span>
       </div>
-    </div>
     <!--*****************************-->

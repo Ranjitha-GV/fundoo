@@ -18,7 +18,7 @@ export class ArchiveIconComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
-
+/**Hitting API to get all the archived notes */
   getArchive() {
     this.httpService.getArchiveNotes()
     .pipe(takeUntil(this.destroy$))

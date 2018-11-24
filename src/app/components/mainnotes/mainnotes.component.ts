@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CollaberatorComponent } from '../collaberator/collaberator.component';
 
 
 @Component({
@@ -90,6 +91,20 @@ export class MainnotesComponent implements OnInit, OnDestroy {
       this.addEntry.emit({});
     });
   }
+
+  open(note): void {
+      const dialogRef = this.dialog.open(CollaberatorComponent, {
+        width: '550px',
+        height: 'auto',
+        data: note
+      });
+  
+      dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
+  
+      });
+    }
 
   remove(label, note) {
     this.httpService.removeLabelsNotes(note, label,

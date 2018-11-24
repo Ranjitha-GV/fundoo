@@ -215,8 +215,9 @@ reminderEntry(event)
     this.reminderVal = event;
     this.reminderArray.push(event);
 }
-note ={
-  'id':''
+note = {
+  'id':'',
+  'isArchived': false
 }
 /**Removing reminders from the addnotes division */
 reminderDelete(note) {

@@ -1,36 +1,51 @@
+<!--Collaborator dialog Box-->
 <div fxFlex=100 class="main">
   <div class="heading">
     <h2>Collaborators</h2>
   </div>
   <hr>
-  <button class="image" [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+  <!--Displaying owners profile information-->
+  <button *ngIf = "img!= ''" class="image" 
+    [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+  </button>
+  <button *ngIf = "img == ''" class="image">
+    {{owner.firstName | slice : 0 : 1}}
   </button>
   <div class="email">
-    <b>{{firstname}} {{lastname}} <i>(Owner)</i></b>
-    <div>{{email}}</div>
+    <b>{{owner.firstName}} {{owner.lastName}} <i>(Owner)</i></b>
+    <div>{{owner.email}}</div>
   </div>
-  <!-- <div *ngFor = "let index of newList"> -->
-      <button mat-mini-fab color="disabled" class="add"><i class="material-icons">
-          {{newList.firstName | slice : 0 : 1}}
+  <!--Displaying profile details of the person to share notes with-->
+  <div *ngFor = "let index of newList">
+      <button mat-mini-fab color="disabled" class="add"><i class="material-icons profile">
+          {{index.firstName | slice : 0 : 1}}
           </i></button>
-        <b>{{newList.firstName}} {{newList.lastName}}</b>
-        <div>{{newList.email}}</div>
-     <!-- </div> -->
+      <!-- <button *ngIf = "img!= ''" mat-mini-fab color="disabled" class="add" 
+        [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
+         <i class="material-icons profile">
+      </i></button> -->
+        <b class = "names">{{index.firstName}} {{index.lastName}}</b><i class = "material-icons icon" 
+        matTooltip = "Close" (click) = "close(index)">close</i>
+        <div class = "mail">{{index.email}}</div>
+     </div>
+     <!--Input box to collect details of the person you want to share notes with-->
   <button mat-mini-fab color="disabled" class="add"><i class="material-icons">person_add
     </i></button>
   <input type="text" class="text" placeholder="Person or email to share with" 
   (keyup) = onKey($event) [(ngModel)] = "searchword" [matMenuTriggerFor] = 'menu'>
+  <!--Display the usersList using mat-menu-->
    <mat-menu #menu="matMenu" [overlapTrigger]="false" class = "menu">
      <button mat-menu-item *ngFor = "let users of usersList" (click) = "addCollab(users); select(users.email)">
        {{users.firstName }} {{users.lastName }} <{{ users.email }}>
      </button>
    </mat-menu>
+   <!--Entering the -->
   <span class="tick" matTooltip="Add Collaborator" *ngIf = "searchword!=null"><i 
    class="material-icons" (click) = "enterNewLine(searchword)">done</i>
   </span>
    
   <div class="buttons">
     <button mat-button color="disabled" (click) = "openDialog()">Cancel</button>
-    <button mat-button color="disabled" (click) = 'save()'>Save</button>
+    <button mat-button color="disabled" (click) = 'openDialog();'>Save</button>
   </div>
 </div>

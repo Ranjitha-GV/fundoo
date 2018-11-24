@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CollaberatorComponent } from '../collaberator/collaberator.component';
 import { MatDialog } from '@angular/material';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-collab',
@@ -13,10 +15,11 @@ export class CollabComponent implements OnInit {
 
   @Input() collab;
   constructor(public dialog: MatDialog) { }
-  
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   ngOnInit() {
   }
-
+  /**Function to collaborator dialog*/
   openCollab(): void {
     LoggerService.log(this.collab);
       const dialogRef = this.dialog.open(CollaberatorComponent, {
@@ -25,9 +28,16 @@ export class CollabComponent implements OnInit {
         data: this.collab
       });
   
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
+      dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
   
       });
+    }
+
+    ngOnDestroy() {
+      this.destroy$.next(true);
+      // Now let's also unsubscribe from the subject itself:
+      this.destroy$.unsubscribe();
     }
 }

@@ -11,6 +11,11 @@
     overflow-y: unset;
     @include words();
 }
+.label
+{
+    @include continue();
+    width:60px;
+}
 .container
 {
     @include displayFlex();
@@ -32,6 +37,7 @@
 {
     margin-top: 20px; 
     margin-bottom: 20px;
+    margin-left: 12px;
 }
 .list
 {
@@ -86,6 +92,17 @@
 .string
 {
     @include widthFull();
+}
+.profile 
+{
+    @include upperFont();
+    font-size: 15px;
+    padding-bottom: 10px;
+}
+.add 
+{
+    padding-bottom: 10px;
+    padding-right: 10px;
 }
 @media only screen and (min-width: 200px) and (max-width: 600px){
     .flexClass

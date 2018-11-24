@@ -18,6 +18,7 @@
     overflow: hidden;
     padding: 10px;
     height: fit-content;
+    @include words();
 }
 .search 
 {

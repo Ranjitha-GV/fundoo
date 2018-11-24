@@ -41,7 +41,7 @@ export class UpdateComponent implements OnInit {
   @Output() emitEvent = new EventEmitter();
 
   onNoClick(): void {
-    if(this.checklist==false ){
+    if(this.checklist == false ){
     this.httpService.updateNotes({
       "noteId": [this.data.id],
       "title": document.getElementById('titleId').innerHTML,
@@ -50,9 +50,12 @@ export class UpdateComponent implements OnInit {
     })
     .pipe(takeUntil(this.destroy$))  
     .subscribe(data => {
+      console.log(data);
       this.dialogRef.close();
     },
   error => {
+    console.log(error);
+
   })
   this.dialogRef.close();
 }

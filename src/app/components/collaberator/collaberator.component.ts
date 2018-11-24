@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { DialogData, UpdateComponent } from '../update/update.component';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatMenu } from '@angular/material';
 import { environment } from 'src/environments/environment.prod';
@@ -25,12 +25,13 @@ export class CollaberatorComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
     destroy$: Subject<boolean> = new Subject<boolean>();
 
+    private owner = this.data['user'];
     private image = localStorage.getItem('imageUrl');
     private firstname = localStorage.getItem('firstname');
     private lastname = localStorage.getItem('lastname');
     private userId = localStorage.getItem('userId');
     private email = localStorage.getItem('email');
-    private img = environment.apiUrl + this.image;
+    private img = environment.apiUrl + this.owner.imageUrl;
     private values;
     private searchword;
     private newEmail = 'Person or email to share with';
@@ -38,28 +39,44 @@ export class CollaberatorComponent implements OnInit {
     private newList = [];
     
   ngOnInit() {
-
+    this.collabList();
   }
-//   @ViewChild('menu')
-// set menu(value: MatMenu)  {
-//   this.menuItems[1].elementRef = value;
-// }
-// select(users :string)
-//   {
-//     this.selected = users;
-//   }
-//   selected :string;
-// menuItems: Array<{text: string, elementRef: MatMenu}> = [
-//     {text: "users", elementRef: null },
-//     {text: "Tabledriven.Item2", elementRef: null},
-//   ];
-
-  onNoClick(): void {
-    this.dialogRef.close();
+/**Function to display the list of users the note has been shared with */
+  collabList()
+  {
+    for(let j = 0; j < this.data['collaborators'].length; j++)
+    {      
+      this.newList = this.data['collaborators'];
+    }
   }
+  /**Hitting RemoveCollaborators API */
+  close(index)
+  {
+    this.httpService.removeCollabNotes(this.data.id, index.userId
+    )
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe((data)=>
+    {
+      LoggerService.log('data',data);
+      for(let k = 0; k < this.newList.length; k++)
+      {
+        console.log('this is new list',this.newList.length)
+      this.newList.splice(k,1);
+      }
+    },
+    error=>
+    {
+      LoggerService.log('error',error)
+    })
+  }
+
+  /**Function to close dialog box */
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
+  /**Hitting AddCollaborators API */
   addCollab(users)
   {
-    console.log(users);
     this.httpService.addCollabNotes(this.data.id,
       {
         'firstName' : users.firstName,
@@ -77,16 +94,19 @@ export class CollaberatorComponent implements OnInit {
       LoggerService.log(error);
     })
   }
+  /**Function to open update dialog box when save is clicked */
   openDialog()
   {
     this.dialogRef.close();
     const dialogRef = this.dialog.open(UpdateComponent, {
       data: this.data
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))  
+    .subscribe(result => {
     });
   }
+  /**Hitting Search userlist API */
   onKey(event)
   {
     this.values = event;
@@ -105,30 +125,30 @@ export class CollaberatorComponent implements OnInit {
       LoggerService.log(error);
     })
   }
+  /**To bind mat-option value in the input box*/
   select(users)
   {
     this.searchword = users;
-    console.log(this.searchword);
-    
   }
+  /**Add user profile information */
   enterNewLine(user)
   {
-    console.log(user);
     for(let i = 0; i < this.usersList.length; i++)
     {
       if(this.usersList[i].email == user)
       {
-        this.newList = this.usersList[i];
+        this.newList.push(this.usersList[i]);
       }
     }
-    console.log(this.newList);
   }
+  /**Close dialog box */
   save()
   {
     this.dialogRef.close();
   }
-
-  ngOnDestroy() {
+ /**Function unsubscribe */
+  ngOnDestroy() 
+  {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();

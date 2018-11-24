@@ -1,8 +1,8 @@
-<div class="container" fxLayout="row wrap" fxLayoutGap = '10px' fxLayoutAlign="center" 
+<div class="container" fxLayout="row wrap" fxLayoutGap = '10px' fxLayoutAlign="start" 
   class="main" fxFlex=100 >
  <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
  <div fxFlex.xs=100% fxFlex.sm=100% fxFlex.md=90% fxFlex.lg=90% fxFlex.xl=80% 
-  fxLayout="row wrap" class = "mainCardsClass" fxLayoutAlign="center">
+  fxLayout="row wrap" class = "mainCardsClass" fxLayoutAlign="start">
  <div *ngIf="length!=0" class = 'string'>
    <b> {{string}} </b>
   </div>
@@ -38,7 +38,7 @@
           <div *ngFor="let index of note.noteLabels" class="cancel">
             <div *ngIf="index.isDeleted == false">
               <mat-chip-list selected>
-                <mat-chip><span [innerHTML]="index.label" (click)="labelNav(index.label)"></span>
+                <mat-chip><span class = "label" [innerHTML]="index.label" (click)="labelNav(index.label)"></span>
                   <mat-icon matChipRemove (click)="remove(index.id,note.id)">cancel
                   </mat-icon>
                 </mat-chip>
@@ -46,7 +46,14 @@
             </div>
           </div>
         </div>
-        <!--******************************************************-->
+        <!--**********************Collaborators********************************-->
+        <div fxLayout = "row wrap" >
+        <div *ngFor = "let index of note.collaborators" class="add">
+          <button mat-mini-fab color="disabled" (click) = "open(note)"><i class="material-icons profile">
+              {{index.firstName | slice : 0 : 1}}
+              </i></button>
+         </div>
+         </div>
         <!--*******************Reminders**************************-->
         <div *ngIf="remind(note.reminder[0])" fxLayout="row" class="reminder">
           <div *ngIf="note.reminder.length!=0">
