@@ -24,9 +24,11 @@
         [ngStyle]="{'background-image':'url(' +img+ ')','background-size':'cover'}">
          <i class="material-icons profile">
       </i></button> -->
+      <!-- <div fxLayout = "row" fxFlex = 10> -->
         <b class = "names">{{index.firstName}} {{index.lastName}}</b><i class = "material-icons icon" 
         matTooltip = "Close" (click) = "close(index)">close</i>
-        <div class = "mail">{{index.email}}</div>
+      <!-- </div>  -->
+        <div fxLayout = "row"class = "mail">{{index.email}}</div>
      </div>
      <!--Input box to collect details of the person you want to share notes with-->
   <button mat-mini-fab color="disabled" class="add"><i class="material-icons">person_add

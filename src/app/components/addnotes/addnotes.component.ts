@@ -3,6 +3,8 @@ import { UsersService } from 'src/app/core/services/users/users.service';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 
 @Component({
@@ -32,10 +34,20 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   private reminderArray = [];
   private reminderVal;
   private reminderNew;
+  private image = localStorage.getItem('imageUrl');
+  private img = environment.apiUrl + this.image;
+  private firstname = localStorage.getItem('firstname');
+  private lastname = localStorage.getItem('lastname');
+  private userId = localStorage.getItem('userId');
+  private email = localStorage.getItem('email');
+  private searchword;
+  private usersList = [];
+  private newList = [];
   private currentDate = new Date();
   private today = new Date();
   private tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-   this.currentDate.getDate()+1)
+   this.currentDate.getDate()+1);
+  public collaborator = 0;
   @ViewChild('newLabel') newLabel: ElementRef;
   @Output() modelEmit = new EventEmitter();
   @Output() onNewEntryAdded = new EventEmitter();
@@ -66,7 +78,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
       'checklist': '',
       'isPined': 'false',
       'color': this.color,
-      'reminder': this.reminderNew
+      'reminder': this.reminderNew,
+      'collaberators': JSON.stringify(this.newList)
     })
     .pipe(takeUntil(this.destroy$))
     .subscribe(
@@ -80,6 +93,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
         this.hide = 0;
         this.listing = !this.listing;  
         this.add = [];
+        this.newList = [];
   },
       error => {
         this.color = "#fafafa";
@@ -88,6 +102,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
         this.hide = 0;
         this.listing = !this.listing;
         this.add = [];
+        this.newList = [];
       })
     }
     else
@@ -111,7 +126,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
         'checklist': JSON.stringify(this.dataArrayCheck),
         'isPined': 'false',
         'color': this.color,
-        'reminder': this.reminderNew 
+        'reminder': this.reminderNew,
+        'collaberators': JSON.stringify(this.newList)
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe(
@@ -124,6 +140,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
           this.color = "#fafafa";
           this.listing = !this.listing;
           this.reminderVal = '';
+          this.newList = [];
           this.onNewEntryAdded.emit({
           })
 
@@ -135,6 +152,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
           this.hide = 0;
           this.color = "#fafafa";
           this.listing = !this.listing;
+          this.newList = [];
         })
     }
   }
@@ -154,6 +172,18 @@ export class AddnotesComponent implements OnInit, OnDestroy {
       error => {
       })
     
+}
+delete()
+{
+  this.collaborator = 0;
+  this.newList = [];
+
+}
+
+cancel()
+{
+  this.collaborator = 0;
+
 }
 /**Catching Color event to change color while adding notes */
   colorsEntry(event) {
@@ -237,8 +267,57 @@ ngOnDestroy() {
   // Now let's also unsubscribe from the subject itself:
   this.destroy$.unsubscribe();
 }
-  ngOnInit() {
+toggle()
+{
+  this.collaborator = 1;
+}
+//************************************************************************************ */
 
+  onKey(event)
+  {
+    this.myHttpService.searchName({
+      'searchWord': this.searchword
+    })
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data)=>
+    {
+      LoggerService.log(data['data']['details']);
+      this.usersList = data['data']['details'];
+    },
+    error =>
+    {
+      LoggerService.log(error);
+    })
+  }
+  /**To bind mat-option value in the input box*/
+  select(users)
+  {
+    this.searchword = users;
+  }
+/**Add user profile information */
+  enterNewLine(user)
+  {
+   
+    for(let i = 0; i < this.usersList.length; i++)
+    {
+      if(this.usersList[i].email == user)
+      {
+        this.newList.push(this.usersList[i]);
+      }
+    }
+    this.searchword =  null;
+  }
+
+close(index)
+  {
+      for(let k = 0; k < this.newList.length; k++)
+      {
+      this.newList.splice(k,1);
+      }
+  }
+  
+  //**************************************************************************** */
+  ngOnInit() {
   }
   
 }

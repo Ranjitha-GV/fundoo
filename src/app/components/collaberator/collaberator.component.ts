@@ -60,7 +60,6 @@ export class CollaberatorComponent implements OnInit {
       LoggerService.log('data',data);
       for(let k = 0; k < this.newList.length; k++)
       {
-        console.log('this is new list',this.newList.length)
       this.newList.splice(k,1);
       }
     },
@@ -69,11 +68,7 @@ export class CollaberatorComponent implements OnInit {
       LoggerService.log('error',error)
     })
   }
-
-  /**Function to close dialog box */
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
+  
   /**Hitting AddCollaborators API */
   addCollab(users)
   {
@@ -92,6 +87,7 @@ export class CollaberatorComponent implements OnInit {
     error =>
     {
       LoggerService.log(error);
+
     })
   }
   /**Function to open update dialog box when save is clicked */
@@ -140,6 +136,7 @@ export class CollaberatorComponent implements OnInit {
         this.newList.push(this.usersList[i]);
       }
     }
+    this.searchword =  null;
   }
   /**Close dialog box */
   save()

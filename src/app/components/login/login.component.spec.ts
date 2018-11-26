@@ -22,12 +22,6 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should create', () => {
-    expect(1+1).toBeTruthy(2);
-  });
-  it('should create', () => {
-    expect(1+1).toBeTruthy(2);
-  });
 
     it('Form should be valid '),async(()=> {
     expect(component.model.email.toEqual('nish@gmail.com'));
@@ -37,7 +31,7 @@ describe('LoginComponent', () => {
     })
     
     it('Invalid Form'),async(()=> {
-    expect(component.model.email.toEqual(''));
+    expect(component.model.email.toEqual('1212323'));
     expect(component.model.password.toEqual(''));
     expect(component.model.email).toBeFalsy();
     expect(component.model.password).toBeFalsy();

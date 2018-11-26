@@ -6,6 +6,12 @@
     @include floatsRight();
     margin-top: 10px;
 }
+.width
+{
+    @include widthFull();
+    font-size: 14px;
+    margin-left: 10px;
+}
 .space 
 {
     @include cursors();
@@ -27,9 +33,10 @@
 }
 .trash 
 {
-    margin-left: 60px; 
-    margin-top: 20px; 
-    margin-bottom: 20px;
+    // margin-left: 60px; 
+    // margin-top: 20px; 
+    // margin-bottom: 20px;
+    margin: 20px 0px 20px 60px;
 }
 .note
 {

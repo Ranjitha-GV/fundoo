@@ -1,4 +1,5 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-between" fxFlex = 100>
+  <!-- <div fxFlex.sm = 0 fxFlex.xs = 0 fxFlex.lg = 10 fxFlex.md = 5 fxFlex.xs = 10 style = "border: solid"></div> -->
   <div align="center" [style.backgroundColor]="color">
     <div align="left" class = "update">
       <b><div mat-dialog-title contenteditable="true" class="editable" id="titleId" 
@@ -49,6 +50,16 @@
         </div>
       </div>
     </div>
+    <!--*****************Collaborators*************************-->
+
+    <div fxLayout = "row wrap" >
+        <div *ngFor = "let index of data.collaborators" class="add">
+          <button mat-mini-fab color="disabled" (click) = "open(data)"><i 
+            class="material-icons profile"> {{index.firstName | slice : 0 : 1}}
+              </i></button>
+         </div>
+      </div>
+
 <!--******************Reminder******************-->
     <div fxLayout="row" class="reminder">
       <div *ngIf="data.reminder.length!=0">
@@ -66,13 +77,15 @@
 <!--************************************************-->
     <div class = "tool" fxLayout="row" fxLayoutAlign="space-around center">
       <app-toolbar [reminderValue]="note" (reminderEmit) = "nextEntry($event)"></app-toolbar>
-      <app-collab ></app-collab>
+      <app-collab [collab] = "data" (click) = "close()"></app-collab>
       <app-color [color]="data" (emitColor)=colorsEntry($event)></app-color>
       <app-photo></app-photo>
       <!-- <app-archive-icon fxLayout.xs="column"></app-archive-icon> -->
       <app-archive-icon [archive]="data"></app-archive-icon>
       <app-more fxLayout.xs="column" [notedetails]="data"></app-more>
-      <span><button (click) = 'onNoClick()' mat-button color = "disable">Close</button></span>
+      <span><div (click) = 'onNoClick()' class = "close">
+        Close</div></span>
     </div>
   </div>
+  <!-- <div fxFlex.sm = 0 fxFlex.xs = 0 fxFlex.lg = 10 fxFlex.md = 5 fxFlex.xs = 10 style = "border: solid"></div> -->
 </div>

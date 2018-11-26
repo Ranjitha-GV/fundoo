@@ -5,8 +5,9 @@ mat-card
 {
   opacity: 0.7;
   cursor: text;
-  width: 50%;
+  width: 700px;
   padding: 12px;
+  margin: 10px 10px 10px 10px;
 }
 
 .list 
@@ -24,10 +25,6 @@ mat-card
 .editable
 {
     font-weight: bold;
-    @include boxes();
-    @include words();
-    @include widthFull();
-    min-height: 20px;
 }
 
 [contentEditable=true]:empty:not(:focus):before{
@@ -56,13 +53,6 @@ mat-card
     margin-bottom: -6%;
     padding: 5px;
 }
-.checkBox
-{
-    @include boxes();
-    @include words();
-    @include widthFull();
-    min-height: 20px;
-}
 .check
 {
     @include boxes();
@@ -78,4 +68,90 @@ mat-card
 .delete
 {
     @include cursors();
+}
+
+
+
+
+
+//*********************collaborator css*****************************
+
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
+.main
+{
+    padding: 10px;
+    overflow-y: auto;
+}
+.image 
+{
+    width:50px; 
+    height:50px; 
+    border-radius: 50%;
+    @include boxes();
+    @include words();
+}
+.email
+{
+    margin-top: -46px;
+    margin-left: 70px;
+    @include words();
+}
+.add
+{
+    margin-top: 18px;
+    margin-left: 6px;
+}
+.text
+{
+    margin-left: 24px;
+    width: 86%;
+    cursor: default;
+    @include words();
+    @include boxes();
+}
+.tick
+{
+    margin-left: -20px;
+    opacity: 0.5;
+    @include cursors();
+}
+.buttons
+{
+    @include floatsRight();
+    // background-color: rgb(199, 195, 195);
+}
+.heading 
+{
+    margin-left: 10px;
+}
+.menu
+{
+    overflow-y: scroll;
+}
+.mail
+{
+    margin: -11px 0px 0px 73px;
+}
+.names 
+{
+    margin-left: 25px;
+}
+.icon
+{
+    opacity: 0.5;
+    padding-top: 27px;
+    @include floatsRight();
+    @include cursors();
+}
+.profile
+{
+    @include upperFont();
+    padding-bottom: 6px;
+    font-size: 18px;
+}
+.cards
+{
+    margin-top: 50px;
 }

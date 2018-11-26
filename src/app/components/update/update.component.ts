@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { MainnotesComponent } from '../mainnotes/mainnotes.component';
 import { LoggerService } from '../../core/services/logger/logger.service';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CollaberatorComponent } from '../collaberator/collaberator.component';
 
 export interface DialogData {
   title: string;
@@ -22,7 +23,7 @@ export interface DialogData {
 export class UpdateComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(public dialogRef: MatDialogRef<MainnotesComponent>,
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<MainnotesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, 
      public httpService: NotesServiceService) { }
 
@@ -125,7 +126,7 @@ else{
       this.tempArray.push(response['data'].details)
     })
   }
-  }
+}
   editing(edited,event){
       
     console.log(edited);
@@ -133,7 +134,6 @@ else{
     this.modifiedCheckList=edited;
     this.onNoClick();
     }
-    
   }
 
   remove(label) {
@@ -188,7 +188,23 @@ else{
     this.tempArray=this.data['noteCheckLists']
 
   }
+  open(note): void {
+    const dialogRef = this.dialog.open(CollaberatorComponent, {
+      width: '550px',
+      height: 'auto',
+      data: note
+    });
 
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+
+    });
+  }
+close()
+  {
+    this.dialogRef.close();
+  }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
