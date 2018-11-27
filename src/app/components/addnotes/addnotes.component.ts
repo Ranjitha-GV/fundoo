@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { LoggerService } from 'src/app/core/services/logger/logger.service';
 })
 export class AddnotesComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
-  constructor(public myHttpService: UsersService, public httpService: NotesServiceService) { }
+  constructor(public myHttpService: UsersService, public snackBar: MatSnackBar, public httpService: NotesServiceService) { }
   private hide = 0;
   private listing = true;
   private id = localStorage.getItem('userId');
@@ -173,13 +174,14 @@ export class AddnotesComponent implements OnInit, OnDestroy {
       })
     
 }
+/**Clearing data after clicking close button */
 delete()
 {
   this.collaborator = 0;
   this.newList = [];
 
 }
-
+/**Hide and show collaborator division */
 cancel()
 {
   this.collaborator = 0;
@@ -271,8 +273,8 @@ toggle()
 {
   this.collaborator = 1;
 }
-//************************************************************************************ */
 
+/**Hitting Search userlist API */
   onKey(event)
   {
     this.myHttpService.searchName({
@@ -297,6 +299,17 @@ toggle()
 /**Add user profile information */
   enterNewLine(user)
   {
+    for(let k = 0; k < this.newList.length; k++)
+    {
+      if(this.searchword == this.newList[k].email)
+        { 
+        this.snackBar.open("Collaborator already exists", "fail", {
+            duration: 3000
+          }) 
+          this.searchword =  null;
+          return false;
+        }
+    }
    
     for(let i = 0; i < this.usersList.length; i++)
     {
@@ -307,15 +320,14 @@ toggle()
     }
     this.searchword =  null;
   }
-
+/**Closing function for collaborator */
 close(index)
   {
       for(let k = 0; k < this.newList.length; k++)
       {
-      this.newList.splice(k,1);
+        this.newList.splice(k,1);
       }
-  }
-  
+  } 
   //**************************************************************************** */
   ngOnInit() {
   }

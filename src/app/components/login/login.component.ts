@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   password = new FormControl('', [Validators.required,
   Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
+/**Change division for email and password */
   changeDivState() {
     if (!this.email.invalid) {
       this.clickedDivState = 'end';
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       })
     }
   }
-
+/**Validations */
   getErrorMessage() {
     return this.email.hasError('email') ? 'Not a valid email! Required format: abcd@gmail.com' :
       '';
@@ -60,6 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.password.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
       '';
   }
+/**Hitting API for login */
   login() {
     this.myHttpService.login({
       "email": this.model.email,
@@ -105,6 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
   }
+/**Unsubscribe function */
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

@@ -16,7 +16,7 @@
     <div>{{owner.email}}</div>
   </div>
   <!--Displaying profile details of the person to share notes with-->
-  <div *ngFor = "let index of newList">
+  <div *ngFor = "let index of newList" class = 'new'>
       <button mat-mini-fab color="disabled" class="add"><i class="material-icons profile">
           {{index.firstName | slice : 0 : 1}}
           </i></button>
@@ -28,7 +28,7 @@
         <b class = "names">{{index.firstName}} {{index.lastName}}</b><i class = "material-icons icon" 
         matTooltip = "Close" (click) = "close(index)">close</i>
       <!-- </div>  -->
-        <div fxLayout = "row"class = "mail">{{index.email}}</div>
+        <div fxLayout = "row" class = "mail">{{index.email}}</div>
      </div>
      <!--Input box to collect details of the person you want to share notes with-->
   <button mat-mini-fab color="disabled" class="add"><i class="material-icons">person_add
@@ -45,7 +45,7 @@
   <span class="tick" matTooltip="Add Collaborator" *ngIf = "searchword!=null"><i 
    class="material-icons" (click) = "enterNewLine(searchword)">done</i>
   </span>
-   
+
   <div class="buttons">
     <button mat-button color="disabled" (click) = "openDialog()">Cancel</button>
     <button mat-button color="disabled" (click) = 'openDialog();'>Save</button>

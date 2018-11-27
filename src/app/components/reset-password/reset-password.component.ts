@@ -19,6 +19,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   model: any = {};
+/**Hitting API for forgot password */
 
   getErrorMessage() {
     return this.email.hasError('required') ? 'Email is Required' :

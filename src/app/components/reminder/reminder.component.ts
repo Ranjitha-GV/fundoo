@@ -17,6 +17,7 @@ export class ReminderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.reminders();
   }
+/**Hitting API to get notes with reminders */
   reminders() {
     this.httpService.getRemindersNotes()
     .pipe(takeUntil(this.destroy$))

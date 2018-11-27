@@ -21,7 +21,7 @@ export class PopOverComponent implements OnInit, OnDestroy {
     
   ngOnInit() {
   }
-
+/**Pop up to confirm note deletion */
   dialogOpen(note): void {
     const dialogRef = this.dialog.open(DeletePopComponent, {
     width: 'fit-content',
@@ -47,6 +47,7 @@ export class PopOverComponent implements OnInit, OnDestroy {
        }
      })
   }
+/**Hitting API to recover notes from trash */
   restore(note) {
     var id = note.id
     this.httpService.trashNotes({
@@ -60,7 +61,7 @@ export class PopOverComponent implements OnInit, OnDestroy {
       error => {
       })
   }
-
+/**Hitting API to delete note forever */
   deleteForever(note) {
     this.dialogOpen(note);
    

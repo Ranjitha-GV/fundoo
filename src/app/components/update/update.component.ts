@@ -40,7 +40,7 @@ export class UpdateComponent implements OnInit {
   @Input() notedetails;
   @Input() label;
   @Output() emitEvent = new EventEmitter();
-
+/**Hitting API to update notes */
   onNoClick(): void {
     if(this.checklist == false ){
     this.httpService.updateNotes({
@@ -58,7 +58,6 @@ export class UpdateComponent implements OnInit {
     console.log(error);
 
   })
-  this.dialogRef.close();
 }
 else{
       var apiData={
@@ -77,13 +76,14 @@ else{
     error => {
     })
   }
-}
+ }
 }
   public removedList;
   removeList(checklist){
     this.removedList=checklist;
     this.removeCheckList()
   }
+/**Hitting API to remove checklist */
   removeCheckList(){
     this.httpService.removeCheckList(this.data['id'], this.removedList.id, {})
     .pipe(takeUntil(this.destroy$))  
@@ -95,7 +95,7 @@ else{
       }
     })
   }
-
+/**Hitting API to add checklist */
   addList(event){
     if(this.newList!=""){
       this.adding = true;
@@ -127,15 +127,15 @@ else{
     })
   }
 }
+/**Function to edit checklist */
   editing(edited,event){
       
-    console.log(edited);
     if(event.code=="Enter"){
     this.modifiedCheckList=edited;
     this.onNoClick();
     }
   }
-
+/**Hitting API to remove labels */
   remove(label) {
     this.httpService.removeLabelsNotes(this.data.id, label,
       {
@@ -151,6 +151,7 @@ else{
           console.log("Error", error);
         })
   }
+/**Checkbox strike and no strike function */
   checkBox(checkList){
     
     if (checkList.status=="open"){
@@ -163,6 +164,7 @@ else{
     this.modifiedCheckList=checkList;
     this.onNoClick();
   }
+/**Hitting API to delete reminder */
   reminderDelete(note) {
     var id = note.id;
     this.httpService.deleteReminder(
@@ -176,6 +178,7 @@ else{
         error => {
         })
   }
+/**Change color event */
   colorsEntry(event) {
     this.color = event;
   }
@@ -188,6 +191,7 @@ else{
     this.tempArray=this.data['noteCheckLists']
 
   }
+/**Function to open collaborator pop up */
   open(note): void {
     const dialogRef = this.dialog.open(CollaberatorComponent, {
       width: '550px',
@@ -200,7 +204,9 @@ else{
     .subscribe(result => {
 
     });
+    this.dialogRef.close();
   }
+/**Function to close dialog box */
 close()
   {
     this.dialogRef.close();

@@ -21,6 +21,7 @@ export class PinComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
   token = localStorage.getItem('token');
+/**Hitting API to pin notes */
   pin() {
     this.show = 1;
     this.httpService.pinUnpin(
@@ -37,7 +38,7 @@ export class PinComponent implements OnInit, OnDestroy {
         error => {
         })
   }
-
+/**Hitting API to unpin notes */
   unPin()
   {
     this.show = 0;

@@ -151,7 +151,7 @@
         <div>
           <!--************************************************************-->
           <div class="mainStyle" fxLayout="row" fxLayoutAlign="space-around center" >
-            <app-toolbar  [reminderValue]="note" (reminderEmit)="nextEntry($event)" 
+            <app-toolbar class = "toolBar" [reminderValue]="note" (reminderEmit)="nextEntry($event)" 
             class = "toolBar"></app-toolbar>
             <app-collab [collab] = "note"></app-collab>
             <app-color [color]="note" (changeColor)=nextEntry($event)></app-color>

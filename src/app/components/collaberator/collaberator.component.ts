@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { DialogData, UpdateComponent } from '../update/update.component';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatMenu } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatMenu, MatSnackBar } from '@angular/material';
 import { environment } from 'src/environments/environment.prod';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
@@ -20,7 +20,7 @@ export interface DialogData {
 
 export class CollaberatorComponent implements OnInit {
 
-  constructor(public httpService: NotesServiceService, public myHttpService: UsersService, 
+  constructor(public snackBar: MatSnackBar, public httpService: NotesServiceService, public myHttpService: UsersService, 
     public dialog: MatDialog, public dialogRef: MatDialogRef<CollaberatorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
     destroy$: Subject<boolean> = new Subject<boolean>();
@@ -129,12 +129,24 @@ export class CollaberatorComponent implements OnInit {
   /**Add user profile information */
   enterNewLine(user)
   {
+    for(let k = 0; k < this.newList.length; k++)
+    {
+      if(this.searchword == this.newList[k].email)
+        { 
+        this.snackBar.open("Collaborator already exists", "fail", {
+            duration: 3000
+          }) 
+          this.searchword =  null;
+          return false;
+        }
+    }
+   
     for(let i = 0; i < this.usersList.length; i++)
     {
       if(this.usersList[i].email == user)
-      {
-        this.newList.push(this.usersList[i]);
-      }
+        {
+          this.newList.push(this.usersList[i]);
+        }
     }
     this.searchword =  null;
   }

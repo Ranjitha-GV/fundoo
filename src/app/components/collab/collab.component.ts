@@ -23,7 +23,7 @@ export class CollabComponent implements OnInit {
   openCollab(): void {
     LoggerService.log(this.collab);
       const dialogRef = this.dialog.open(CollaberatorComponent, {
-        width: '550px',
+        // width: '550px',
         height: 'auto',
         data: this.collab
       });

@@ -54,7 +54,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   password = new FormControl('', [Validators.required,
   Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
   confirmPassword = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
-
+/**Validations */
   getErrorMessagefirstName() {
     return this.firstname.hasError('required') ? 'First Name is Required' :
       this.firstname.hasError('pattern') ? 'Invalid First Name! Name should contain only alphabets' :
@@ -89,7 +89,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.users();
    
   }
-  
+/**Hitting API to Add basic or advance service */
   users()
   {
   this.records = this.myHttpService.userService()
@@ -102,7 +102,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     var value = data["data"].data.name;
   })
 }
-
+/**Hitting API to register user */
   next() {
     let pass = this.model.password;
     let confirmPass = this.model.confirmPassword;
@@ -148,7 +148,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         error => {
         })
   }
-
+/**Function to select basic or advance service */
   selectCards(card) {
     this.service = card.name;
     card.select = true;

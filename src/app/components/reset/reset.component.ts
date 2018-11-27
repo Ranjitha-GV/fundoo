@@ -27,6 +27,7 @@ export class ResetComponent implements OnInit, OnDestroy {
   password = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
   confirmPassword = new FormControl('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}$')]);
 
+  /**Validations */
   getErrorMessagePassword() {
     return this.password.hasError('required') ? 'Password is Required' :
       this.password.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
@@ -37,6 +38,7 @@ export class ResetComponent implements OnInit, OnDestroy {
       this.confirmPassword.hasError('pattern') ? 'Not a valid Password! Please follow the correct format' :
         '';
   }
+/**Hitting API for reset password */
   reset() {
     let pass = this.model.password;
     let confirmPass = this.model.confirmPassword;

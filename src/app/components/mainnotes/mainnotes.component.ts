@@ -15,6 +15,7 @@ import { CollaberatorComponent } from '../collaberator/collaberator.component';
   templateUrl: './mainnotes.component.html',
   styleUrls: ['./mainnotes.component.scss']
 })
+
 export class MainnotesComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(public dialog: MatDialog, public data: SearchService, 
@@ -37,7 +38,8 @@ export class MainnotesComponent implements OnInit, OnDestroy {
   private currentDate = new Date();
   private today = new Date();
   private tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
-   this.currentDate.getDate()+1)
+   this.currentDate.getDate()+1);
+  private owner = this.data['user'];
   @Input() searchElement;
   @Input() notesArray;
   @Input() length;
@@ -48,6 +50,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
     this.getlabels();
     this.gridList();
   }
+/**To check if the reminder time is greater than */
   remind(time)
   {
     var currentReminder = new Date().getTime();
@@ -61,7 +64,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
+/**Event emitter to Notes component */
   nextEntry(event) {
     if (event) {
       this.addEntry.emit({
@@ -69,7 +72,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
       })
     }
   }
-
+/**Data service to change grid and list view */
   gridList() {
     this.data.currentGridEvent
     .pipe(takeUntil(this.destroy$))
@@ -77,7 +80,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
       this.toggle = message;
     })
   }
-
+/**Dialog box for update component */
   openUpdateNotes(note): void {
     const dialogRef = this.dialog.open(UpdateComponent, {
       width: '800',
@@ -91,7 +94,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
       this.addEntry.emit({});
     });
   }
-
+/**Dialog box to open collaborator pop up*/
   open(note): void {
       const dialogRef = this.dialog.open(CollaberatorComponent, {
         width: '550px',
@@ -105,7 +108,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
   
       });
     }
-
+/**Hitting API to remove labels*/
   remove(label, note) {
     this.httpService.removeLabelsNotes(note, label,
       {
@@ -120,7 +123,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
         error => {
         })
   }
-
+/**Hitting API to get labels */
   getlabels() {
     this.httpService.getLabels()
     .pipe(takeUntil(this.destroy$))
@@ -138,6 +141,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
       error => {
       })
   }
+  /**Hitting API to delete reminder */
   reminderDelete(note) {
     var id = note.id;
     this.httpService.deleteReminder(
@@ -152,6 +156,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
         error => {
         })
   }
+/**Hitting API to update checklist notes */
   update(id) {
     var apiData = {
       "itemName": this.modifiedList.itemName,
@@ -163,6 +168,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
 
     })
   }
+/**Checklist strike and no strike status */
   checkBox(checkList, note) {
 
     if (checkList.status == "open") {
@@ -175,6 +181,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
     this.update(note.id);
 
   }
+/**Navigate to particular label page when clicked on */
   labelNav(labelsList)
   {
     LoggerService.log(labelsList);

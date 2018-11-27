@@ -28,7 +28,7 @@ export class LabelComponent implements OnInit, OnDestroy {
   
   onNoClick(): void {
   }
-
+/**Open Label popup*/
   openDialog(note): void {
     const dialogRef = this.dialog.open(LabelpopComponent, {
     width: 'fit-content',
@@ -61,7 +61,7 @@ export class LabelComponent implements OnInit, OnDestroy {
     this.delete();
     // this.addLabel();
   }
-
+/**Hitting add label API */
   addLabel() {
     var label = this.newLabel.nativeElement.innerHTML
     for (var i = 0; i < this.value1.length; i++) {
@@ -86,11 +86,11 @@ export class LabelComponent implements OnInit, OnDestroy {
       error => {
       })
   }
-
+/**Hitting label delete component */
   labelDelete(val) {
     this.openDialog(val);
   }
-
+/**Get notes after delete */
   delete() {
     let tempArr: Labels[] = [];
     this.httpService.getLabels()
@@ -108,6 +108,7 @@ export class LabelComponent implements OnInit, OnDestroy {
       error => {
       })
   }
+/**Hitting API to edit label */
   edit(val) {
     this.httpService.editLabel(val,{
         "label": this.myLabel.nativeElement.innerHTML,
@@ -123,10 +124,11 @@ export class LabelComponent implements OnInit, OnDestroy {
         error => {
         })
   }
+/**Show and hide division */
   edit2(id) {
     this.show = id;
   }
-
+/**Function to close popup component */
   close() {
     this.newLabel.nativeElement.innerHTML = ' ';
   }

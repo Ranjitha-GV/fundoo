@@ -27,6 +27,7 @@ export class NewLabelComponent implements OnInit, OnDestroy {
       }
     )
   }
+/**Hitting API to get labels */
   getLabel(labelList) {
     this.httpService.getNotesByLabel(labelList, {})
     .pipe(takeUntil(this.destroy$))  

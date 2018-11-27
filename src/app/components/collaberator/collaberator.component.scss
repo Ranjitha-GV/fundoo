@@ -5,6 +5,7 @@
 {
     padding: 10px;
     overflow-y: auto;
+    width: 600px;
 }
 .image 
 {
@@ -28,7 +29,7 @@
 .text
 {
     margin-left: 24px;
-    width: 86%;
+    width: 67%;
     cursor: default;
     @include words();
     @include boxes();
@@ -37,6 +38,8 @@
 {
     margin-left: -20px;
     opacity: 0.5;
+    float: right;
+    padding-top: 26px;
     @include cursors();
 }
 .buttons
@@ -54,12 +57,20 @@
 }
 .mail
 {
-    margin-left: 73px;
-    margin-top: -11px;
+    margin: -11px 0px 0px 73px;
+    @include continue();
+
 }
 .names 
 {
-    margin-left: 25px;
+    margin-left: 25px;    
+    @include continue();
+
+}
+.new
+{
+    @include words();
+    @include continue();
 }
 .icon
 {

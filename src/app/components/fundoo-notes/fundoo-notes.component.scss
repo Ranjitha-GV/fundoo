@@ -271,4 +271,15 @@ input:focus
 {
   display : none
 }
-
+.mat-nav-list .color
+{
+  background-color: $selected;
+}
+.color
+{
+  background-color: $selected;
+}
+.noColor
+{
+  background-color: none;
+}

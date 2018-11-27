@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     })
     this.getNoteCard();
   }
-
+/**Hitting API to get note cards */
   getNoteCard() {
     this.httpService.notesList()
     .pipe(takeUntil(this.destroy$))  

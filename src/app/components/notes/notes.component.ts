@@ -24,18 +24,19 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.getNoteCard();
     this.getNotes();
   }
-
+/**Function for event emission */
   addNewEntry(event) {
     if (event) {
       this.getNoteCard();
       this.getNotes();
     }
   }
+/**Auto refresh of get notes without calling API */
   modelCatch(dataNotes: Notes)
   {
     this.noteCard.splice(0,0,dataNotes);
   }
-
+/**Hitting API to get note cards */
   getNoteCard() {
     this.httpService.notesList()
     .pipe(takeUntil(this.destroy$))
@@ -53,6 +54,7 @@ export class NotesComponent implements OnInit, OnDestroy {
       error => {
       })
   }
+  /**Hitting API to get pined note cards */
   getNotes() {
     this.httpService.notesList()
     .pipe(takeUntil(this.destroy$))

@@ -32,7 +32,7 @@ export class ToolbarComponent implements OnInit {
     { value: '', period: 'Night', viewTime: '8:00 PM' }
 
   ]
-
+/**Hitting API to add reminders */
   reminder() {
     let date1 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
       this.currentDate.getDate(), 20, 0, 0, 0);
@@ -51,7 +51,7 @@ export class ToolbarComponent implements OnInit {
       error => {
       })
   }
-
+/**Hitting API to add reminders */
   addTomReminder() {
     var date2 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
       this.currentDate.getDate() + 1, 8, 0, 0, 0);
@@ -68,7 +68,7 @@ export class ToolbarComponent implements OnInit {
         })
       })
   }
-
+/**Hitting API to add reminders */
   addWeekReminder() {
     var date3 = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
       this.currentDate.getDate() + 7, 8, 0, 0, 0);
@@ -89,7 +89,7 @@ export class ToolbarComponent implements OnInit {
     "date": new FormControl(new Date()),
     "time": ""
   }
-
+/**Hitting API to add custom reminders */
   customReminder(date, timing) {
 
     timing.match('^[0-2][0-3]:[0-5][0-9]$');
@@ -190,7 +190,7 @@ export class ToolbarComponent implements OnInit {
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();
   }
-
+/**Hide and show division */
   enter() {
     this.show = 1;
   }

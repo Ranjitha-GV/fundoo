@@ -25,7 +25,7 @@ export class MoreComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
-
+/**Hitting API to delete notes */
   delete(id) {
     this.httpService.trashNotes({
       "isDeleted": true,
@@ -40,7 +40,7 @@ export class MoreComponent implements OnInit, OnDestroy {
       error => {
       })
   }
-
+/**Hitting API to get labels */
   addLabel() {
     this.httpService.getLabels()
     .pipe(takeUntil(this.destroy$))
@@ -57,7 +57,7 @@ export class MoreComponent implements OnInit, OnDestroy {
       error => {
       })
   }
-
+/**Hitting API to add labels to notes */
   check(label) {
     this.addLabelEvent.emit(label);
     if(this.notedetails == undefined)

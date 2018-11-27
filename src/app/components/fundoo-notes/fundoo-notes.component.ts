@@ -39,6 +39,7 @@ export class FundooNotesComponent implements OnDestroy{
   private value = [];
   private id = localStorage.getItem('userId');
   private selectedFile = null;
+  private flag = '';
   private image2 = localStorage.getItem('imageUrl');
   private img = environment.apiUrl + this.image2;
   @ViewChild('labelList') labelList: ElementRef;
@@ -165,6 +166,7 @@ this.img = environment.apiUrl + this.image2;
 nameChange(names)
 {
   this.names = names;
+  this.flag = names;
 }
 
   ngOnInit() {
@@ -175,27 +177,37 @@ nameChange(names)
     this.route.firstChild.paramMap.subscribe(
       (params: ParamMap)=>{
         this.names = params['params'].labelList;
+        this.flag = params['params'].labelList;
       }
     )
     if(this.router.url == '/home/notes')
     {
       this.names = 'fundoo';
+      this.flag = 'fundoo'
     }
 
     if(this.router.url == '/home/reminder')
     {
       this.names = 'Reminder';
+      this.flag = 'Reminder';
     }
     if(this.router.url == '/home/bin')
     {
       this.names = 'Bin'; 
+      this.flag = 'Bin';
+
     }
     if(this.router.url == '/home/archive')
     {
       this.names = 'Archive'; 
+      this.flag = 'Archive';
+
     }
   }
-
+  colorChange(label)
+  {
+     this.flag = label;
+  }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

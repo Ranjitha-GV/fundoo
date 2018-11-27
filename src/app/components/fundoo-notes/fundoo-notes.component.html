@@ -83,16 +83,20 @@
   [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home/notes" (click) = "nameChange('fundoo')">
+      <a mat-list-item routerLink="/home/notes" (click) = "nameChange('fundoo');" 
+      [ngClass]="flag == 'fundoo' ? 'color' : 'noColor'">
          <img src="../../../assets/images/notes.svg">
         <span class="one">Notes</span></a>
-      <a mat-list-item routerLink="/home/reminder" (click) = "nameChange('Reminder')">
+      <a mat-list-item routerLink="/home/reminder" (click) = "nameChange('Reminder')"
+      [ngClass]="flag == 'Reminder' ? 'color' : 'noColor'">
          <img src="../../../assets/images/reminder.svg">
         <span class="one">Reminder</span></a>
       <hr>
       <div>
         <p class = "labels">Labels</p>
-        <div *ngFor="let val of value; trackBy:val?.id" (click)="labelClick(val)">
+        <div *ngFor="let val of value; trackBy:val?.id" (click)="labelClick(val); 
+         colorChange(val.label)">
+          <div [ngClass]="flag == val.label ? 'color' : 'noColor'">
           <div *ngIf="val.isDeleted == false">
             <a mat-list-item (click) = "nameChange(val.label)">
               <mat-icon>label_outline</mat-icon>
@@ -100,15 +104,18 @@
             </a>
           </div>
         </div>
+       </div>
       </div>
       <a mat-list-item (click)="$event.stopPropagation(); openDialog()">
          <img src="../../../assets/images/label.svg">
         <span class="one">Add Label</span></a>
       <hr>
-      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')">
+      <a mat-list-item routerLink="/home/archive" (click) = "nameChange('Archive')"
+      [ngClass]="flag == 'Archive' ? 'color' : 'noColor'">
          <img src="../../../assets/images/archive.svg">
         <span class="one">Archive</span></a>
-      <a mat-list-item routerLink="/home/bin" (click) = "nameChange('Bin')">
+      <a mat-list-item routerLink="/home/bin" (click) = "nameChange('Bin')"
+      [ngClass]="flag == 'Bin' ? 'color' : 'noColor'">
          <img src="../../../assets/images/bin.svg">
         <span class="one">Bin</span></a>
     </mat-nav-list>

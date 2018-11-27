@@ -17,7 +17,7 @@
       </div>
       <div fxLayout = "row">
       <div *ngFor = "let index of newList">
-          <button mat-mini-fab color="disabled" class="add"><i class="material-icons profile">
+          <button mat-mini-fab color="disabled" class="add" (click) = "toggle()"><i class="material-icons profile">
               {{index.firstName | slice : 0 : 1}}
               </i></button>
        </div> 
