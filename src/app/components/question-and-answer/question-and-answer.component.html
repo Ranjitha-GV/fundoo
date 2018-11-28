@@ -1,0 +1,23 @@
+<div fxLayout="row" fxFlex=100 fxLayoutAlign="center center" class="container">
+  <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
+  <div fxLayout="row wrap" fxFlex.xs=100% fxFlex.sm=100% fxFlex.md=90% 
+  fxFlex.lg=90% fxFlex.xl=80%>
+    <div class="cards">
+      <button mat-button color = "disabled" class = "button">Close</button>
+      <div [innerHTML]="title" class = "title"></div>
+      <div [innerHTML]="description" class = "title"></div>
+      <mat-divider></mat-divider>
+      <div class = "question">Question Asked</div>
+      <div *ngIf = "messageOutput == null">
+      <input placeholder="Please enter your question" [(ngModel)] = "question" class = "text" 
+      (keydown.enter)="enter(question)">
+    </div>
+      <div *ngIf = "messageOutput != null">
+          <div [innerHTML] = "messageOutput"></div>
+      </div>
+    </div>
+    <div>Username</div>
+    <div class = "question bind" [innerHTML] = "messageOutput"></div> 
+  </div>
+  <div fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
+</div>

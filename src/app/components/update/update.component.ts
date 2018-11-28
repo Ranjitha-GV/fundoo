@@ -51,7 +51,6 @@ export class UpdateComponent implements OnInit {
     })
     .pipe(takeUntil(this.destroy$))  
     .subscribe(data => {
-      console.log(data);
       this.dialogRef.close();
     },
   error => {
@@ -121,7 +120,6 @@ else{
       this.newList=null;
       this.addCheck=false;
       this.adding=false;
-      console.log(response['data'].details);
       
       this.tempArray.push(response['data'].details)
     })
@@ -145,10 +143,8 @@ else{
       .pipe(takeUntil(this.destroy$))  
       .subscribe(
         (data) => {
-          console.log("POST Request is successful ", data);
         },
         error => {
-          console.log("Error", error);
         })
   }
 /**Checkbox strike and no strike function */
@@ -160,7 +156,6 @@ else{
     else{
       checkList.status = "open"
     }
-    console.log(checkList);
     this.modifiedCheckList=checkList;
     this.onNoClick();
   }
@@ -207,11 +202,12 @@ else{
     this.dialogRef.close();
   }
 /**Function to close dialog box */
-close()
+ close()
   {
     this.dialogRef.close();
   }
-  ngOnDestroy() {
+ 
+ ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:
     this.destroy$.unsubscribe();

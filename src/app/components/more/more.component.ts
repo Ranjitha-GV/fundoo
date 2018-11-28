@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-more',
@@ -13,7 +15,7 @@ import { Subject } from 'rxjs';
 export class MoreComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(public httpService: NotesServiceService) { }
+  constructor(public httpService: NotesServiceService, public router: Router) { }
   private value1 = null;
   private body;
   @Input() notedetails;
@@ -84,6 +86,11 @@ export class MoreComponent implements OnInit, OnDestroy {
         },
         error => {
         })
+  }
+  /**Hitting API to pass note details */
+  question(notedetails)
+  {
+      this.router.navigate(['/home/questionAndAnswer/'+ notedetails.id]);
   }
 
   ngOnDestroy() {

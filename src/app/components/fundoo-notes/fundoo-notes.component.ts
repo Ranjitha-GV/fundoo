@@ -201,7 +201,11 @@ nameChange(names)
     {
       this.names = 'Archive'; 
       this.flag = 'Archive';
-
+    }
+    if(this.router.url == '/home/questionAndAnswer/:notedetails')
+    {
+      this.names = 'fundoo';
+      this.flag = 'fundoo'
     }
   }
   colorChange(label)

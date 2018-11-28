@@ -10,10 +10,10 @@
     <div>
       <img src="../../../assets/images/pin.svg" matTooltip="Pin" class="pin">
     </div>
-    <div contenteditable="true" class="editable edit" id="title" data-text="Title"></div> <br>
+    <div contenteditable="true" class="editable edit" id="title" data-text="Title" #title></div> <br>
     <div *ngIf="listing">
       <div contenteditable="true" class="edit" id="description" data-text="Take a note.." 
-       (click) = "checked = false">
+       (click) = "checked = false" #description>
       </div>
       <div fxLayout = "row">
       <div *ngFor = "let index of newList">

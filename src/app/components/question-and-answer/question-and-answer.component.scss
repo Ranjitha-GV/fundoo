@@ -1,0 +1,33 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
+.cards
+{
+    width: 1200px;
+    height: fit-content;
+}
+.container
+{
+    margin: 50px 0px 20px 0px;
+}
+.button
+{
+    @include floatsRight();
+}
+.title
+{
+    margin: 0px 0px 15px 0px;
+}
+.question
+{
+    margin: 25px 0px 15px 0px;
+}
+.text
+{
+    @include widthFull();
+    @include boxes();
+}
+.bind
+{
+    font-size: 35px;
+}

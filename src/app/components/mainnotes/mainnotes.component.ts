@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { UpdateComponent } from '../update/update.component';
 import { SearchService } from '../../core/services/data/search.service';
 import { LoggerService } from '../../core/services/logger/logger.service';
@@ -40,6 +40,8 @@ export class MainnotesComponent implements OnInit, OnDestroy {
   private tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
    this.currentDate.getDate()+1);
   private owner = this.data['user'];
+  @ViewChild('title') title: ElementRef;
+  @ViewChild('description') description: ElementRef;
   @Input() searchElement;
   @Input() notesArray;
   @Input() length;
@@ -49,6 +51,7 @@ export class MainnotesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getlabels();
     this.gridList();
+    this.question();
   }
 /**To check if the reminder time is greater than */
   remind(time)
@@ -91,6 +94,21 @@ export class MainnotesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
     .pipe(takeUntil(this.destroy$))
     .subscribe(result => {
+      console.log(this.title.nativeElement.innerHTML);
+      
+      this.httpService.updateNotes({
+        "noteId": [note.id],
+        "title": this.title.nativeElement.innerHTML,
+        "description": this.description.nativeElement.innerHTML,
+  
+      })
+      .pipe(takeUntil(this.destroy$))  
+      .subscribe(data => {
+        console.log('i am data', data); 
+      },
+    error => {
+      console.log('i am error', error);
+    })
       this.addEntry.emit({});
     });
   }
@@ -186,6 +204,11 @@ export class MainnotesComponent implements OnInit, OnDestroy {
   {
     LoggerService.log(labelsList);
     this.router.navigate(['/home/newlabel/' + labelsList]);
+ }
+
+ question()
+ {
+   
  }
 
  ngOnDestroy() {

@@ -49,6 +49,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
   private tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(),
    this.currentDate.getDate()+1);
   public collaborator = 0;
+  @ViewChild('title') title: ElementRef;
+  @ViewChild('description') description: ElementRef;
   @ViewChild('newLabel') newLabel: ElementRef;
   @Output() modelEmit = new EventEmitter();
   @Output() onNewEntryAdded = new EventEmitter();
@@ -73,8 +75,8 @@ export class AddnotesComponent implements OnInit, OnDestroy {
     this.hide = 0;
     this.listing = !this.listing;
     this.httpService.addNotes({
-      'title': document.getElementById('title').innerHTML,
-      'description': document.getElementById('description').innerHTML,
+      'title': this.title.nativeElement.innerHTML,
+      'description': this.description.nativeElement.innerHTML,
       'labelIdList': JSON.stringify(this.array),
       'checklist': '',
       'isPined': 'false',
@@ -122,7 +124,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
       }
 
       this.httpService.addNotes({
-        'title': document.getElementById('title').innerHTML,
+        'title': this.description.nativeElement.innerHTML,
         'labelIdList': JSON.stringify(this.array),
         'checklist': JSON.stringify(this.dataArrayCheck),
         'isPined': 'false',

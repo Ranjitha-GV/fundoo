@@ -15,6 +15,7 @@ import { AuthGuard } from './core/services/authGaurd/auth.guard';
 import { LabelComponent } from './components/label/label.component';
 import { NewLabelComponent } from './components/new-label/new-label.component';
 import { SearchComponent } from './components/search/search.component';
+import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 
 
 
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
       { path: 'label', component: LabelComponent },
       { path: 'newlabel/:labelList', component: NewLabelComponent },
       { path: 'search', component: SearchComponent },
+      { path: 'questionAndAnswer/:notedetails', component: QuestionAndAnswerComponent },
       { path: '', redirectTo: 'notes', pathMatch: 'full' }
 
     ]

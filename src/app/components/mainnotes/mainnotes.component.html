@@ -12,9 +12,9 @@
         <app-pin [pinArray]="note" (pinEmit)="nextEntry($event)" class="pin"></app-pin>
         <div align="left" (click)="openUpdateNotes(note)">  
           <b>
-            <div class = "noteText" [innerHTML]="note.title"></div>
+            <div class = "noteText" [innerHTML]="note.title" #title></div>
           </b> <br>
-          <div class = "descriptionText" [innerHTML]="note.description"></div> <br>
+          <div class = "descriptionText" [innerHTML]="note.description" #description></div> <br>
         </div>
         <!-- ********************CheckList******************* -->
         <div class="notes" *ngFor="let checklist of note.noteCheckLists" fxLayout="row">
@@ -31,8 +31,7 @@
             (click)=checkBox(checklist,note)></mat-checkbox>
           <del *ngIf="!checklist.isDeleted && checklist.status=='close'" 
             (click)="open(note)">{{checklist.itemName}}</del>
-        </div>
-        <!-- ************************************************* -->
+        </div>       
         <!--*********************Labels***********************-->
         <div fxLayout="row">
           <div *ngFor="let index of note.noteLabels" class="cancel">
@@ -46,14 +45,8 @@
             </div>
           </div>
         </div>
-        <!--**********************Collaborators********************************-->
-        <div fxLayout = "row wrap" >
-        <div *ngFor = "let index of note.collaborators" class="add">
-          <button mat-mini-fab color="disabled" (click) = "open(note)"><i class="material-icons profile">
-              {{index.firstName | slice : 0 : 1}}
-              </i></button>
-         </div>
-         </div>
+        <!--******************************************************-->
+        
         <!--*******************Reminders**************************-->
         <div *ngIf="remind(note.reminder[0])" fxLayout="row" class="reminder">
           <div *ngIf="note.reminder.length!=0">
@@ -149,7 +142,16 @@
           </div>
         </div>
         <div>
-          <!--************************************************************-->
+          <!--****************************Collaborators********************************-->
+          <div fxLayout = "row wrap" >
+              <div *ngFor = "let index of note.collaborators" class="add">
+                <button mat-mini-fab color="disabled" (click) = "open(note)"><i class="material-icons profile">
+                    {{index.firstName | slice : 0 : 1}}
+                    </i></button>
+               </div>
+               </div>
+        <!-- ************************************************* -->
+
           <div class="mainStyle" fxLayout="row" fxLayoutAlign="space-around center" >
             <app-toolbar class = "toolBar" [reminderValue]="note" (reminderEmit)="nextEntry($event)" 
             class = "toolBar"></app-toolbar>
@@ -161,9 +163,18 @@
             <app-more [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
           </div>
         </div>
-      </mat-card>
-    </div>
-    </div>
-  </div>
+        <div *ngIf="note.questionAndAnswerNotes != null">
+          <hr>
+          <span>
+            <div class="question"><b>Question Asked</b></div>
+            <div *ngFor="let msg of note.questionAndAnswerNotes">
+              <div [innerHTML]="msg.message"></div>
+            </div>
+          </span>
+        </div>
+        </mat-card>
+        </div>
+        </div>
+        </div>
   <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
   </div>

@@ -50,6 +50,8 @@ import { NotesServiceService } from './core/services/notes/notes-service.service
 import { InterceptService } from './core/services/Interceptor/intercept.service'
 import { ErrorsHandler } from './core/services/errorHandling/errors-handler';
 import { CollaberatorComponent } from './components/collaberator/collaberator.component';
+import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
+import { QuestionAndAnswerService } from './core/services/questionAndAnswer/question-and-answer.service';
 
 
 @NgModule({
@@ -84,6 +86,7 @@ import { CollaberatorComponent } from './components/collaberator/collaberator.co
     DeletePopComponent,
     PinComponent,
     CollaberatorComponent,
+    QuestionAndAnswerComponent,
   ],
   imports: [
 
@@ -116,7 +119,7 @@ import { CollaberatorComponent } from './components/collaberator/collaberator.co
     MatSelectModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
-    NotesServiceService, InterceptService,{ provide: HTTP_INTERCEPTORS,
+    NotesServiceService, QuestionAndAnswerService, InterceptService,{ provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
       multi: true }, {
         provide: ErrorHandler,
