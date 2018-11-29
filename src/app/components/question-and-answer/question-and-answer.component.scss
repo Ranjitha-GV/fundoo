@@ -20,7 +20,7 @@
 }
 .question
 {
-    margin: 25px 0px 15px 0px;
+    margin: 34px 0px 15px -32px;
 }
 .text
 {
@@ -29,5 +29,97 @@
 }
 .bind
 {
-    font-size: 35px;
+    font-size: 20px;
+}
+.name
+{
+    font-size: 16px;
+    margin: -28px 0px 0px 51px;
+}
+.message
+{
+    margin: 0px 0px 30px 0px;
+}
+.profile
+{
+    @include upperFont();
+    padding-bottom: 6px;
+    font-size: 18px;
+}
+.questionAsked
+{
+    margin: 35px 0px 15px 0px;
+}
+.icon
+{
+    margin: 7px 0px 0px 18px;
+}
+.count
+{
+    font-size: 10px;
+    margin-top: -5px;
+}
+.bar
+{
+    margin: -9px 0px 0px 13px;
+}
+.reply
+{
+    margin :15px 0px 0px 50px;
+    width: 884px;
+    @include words();
+}
+.replyIcon
+{
+    margin: 8px 0px 0px 87px;
+    @include cursors();
+}
+.replyName
+{
+    margin-left: -37px;  
+}
+.replier
+{
+    margin: -28px 0px 0px 12px;
+}
+.replies
+{
+    margin-left: 13px;
+}
+.replymessage
+{
+    margin-left: 12px;
+    font-size: 18px;
+}
+.replyMes{
+    margin-left: 12px;
+}
+.valueMessage
+{
+    @include words();
+    margin: 12px 0px 0px 10px;
+}
+.end
+{
+    margin: 10px 0px 0px 33px;
+}
+.like
+{
+    margin: 10px 0px 0px 10px;
+}
+.bar
+{
+    margin: -7px 0px 0px 10px;
+}
+.newLike
+{
+    margin: 8px 0px 0px 25px;
+}
+.bars
+{
+    margin: -8px 0px 0px 10px;
+}
+.replyDiv
+{
+    margin-bottom: 15px;
 }

@@ -52,7 +52,7 @@ import { ErrorsHandler } from './core/services/errorHandling/errors-handler';
 import { CollaberatorComponent } from './components/collaberator/collaberator.component';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 import { QuestionAndAnswerService } from './core/services/questionAndAnswer/question-and-answer.service';
-
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   declarations: [
@@ -116,7 +116,8 @@ import { QuestionAndAnswerService } from './core/services/questionAndAnswer/ques
     ImageCropperModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    BarRatingModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
     NotesServiceService, QuestionAndAnswerService, InterceptService,{ provide: HTTP_INTERCEPTORS,

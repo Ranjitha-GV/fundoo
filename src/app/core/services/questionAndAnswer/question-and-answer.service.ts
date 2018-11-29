@@ -20,4 +20,14 @@ export class QuestionAndAnswerService {
     let url = this.baseUrl + "questionAndAnswerNotes/addQuestionAndAnswer";
     return this.http.postArchive(url, body);
   }
+  like(id,body)
+  {
+    let url = this.baseUrl + "questionAndAnswerNotes/like/" + id;
+    return this.http.postArchive(url, body);
+  }
+  addAnswer(id,body)
+  {
+    let url = this.baseUrl + "questionAndAnswerNotes/reply/" + id;
+    return this.http.postArchive(url, body);
+  }
 }
