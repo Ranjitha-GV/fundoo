@@ -167,8 +167,8 @@
           <hr>
           <span>
             <div class="question"><b>Question Asked</b></div>
-            <div *ngFor="let msg of note.questionAndAnswerNotes">
-              <div [innerHTML]="msg.message"></div>
+            <div *ngIf = "note.questionAndAnswerNotes[0] != null">
+              <div [innerHTML]="note.questionAndAnswerNotes[0].message"></div>
             </div>
           </span>
         </div>

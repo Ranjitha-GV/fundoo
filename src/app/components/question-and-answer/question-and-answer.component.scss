@@ -21,6 +21,7 @@
 .question
 {
     margin: 34px 0px 15px -32px;
+    font-size: 21px;
 }
 .text
 {
@@ -61,18 +62,16 @@
 }
 .bar
 {
-    margin: -9px 0px 0px 13px;
+    // margin: -34px 0px 0px 22px;
+    // margin-top: -25px;
+    // margin-left: 9px;
 }
 .reply
 {
     margin :15px 0px 0px 50px;
-    width: 884px;
+    width: 800px;
+    // height: 16px;
     @include words();
-}
-.replyIcon
-{
-    margin: 8px 0px 0px 87px;
-    @include cursors();
 }
 .replyName
 {
@@ -86,10 +85,9 @@
 {
     margin-left: 13px;
 }
-.replymessage
+.but
 {
-    margin-left: 12px;
-    font-size: 18px;
+    @include floatsRight;
 }
 .replyMes{
     margin-left: 12px;
@@ -97,11 +95,13 @@
 .valueMessage
 {
     @include words();
-    margin: 12px 0px 0px 10px;
+    margin: 10px 0px 0px 50px;
+    font-size: 18px;
 }
 .end
 {
     margin: 10px 0px 0px 33px;
+    @include cursors();
 }
 .like
 {
@@ -109,11 +109,14 @@
 }
 .bar
 {
-    margin: -7px 0px 0px 10px;
+    margin: -25px 0px 0px 20px;
+    // margin-top: -25px;
+    // margin-left: 10px;
 }
 .newLike
 {
-    margin: 8px 0px 0px 25px;
+    margin: 8px 0px 0px 8px;
+    @include cursors();
 }
 .bars
 {
@@ -122,4 +125,39 @@
 .replyDiv
 {
     margin-bottom: 15px;
+}
+.count
+{
+    margin-top: -9px;
+    font-size: 12px;
+}
+.names
+{
+    margin-left: 50px;
+    margin-top: -30px;
+}
+.box
+{
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+.input
+{
+    margin: 18px 0px 0px 90px;
+    width: 565px;
+    height: 40px;
+}
+.valueMessage1
+{
+    margin: 14px 0px 0px 50px;
+    // margin-left: 50px;
+    // margin-top: 14px;
+}
+.values
+{
+    margin-left: 30px;
+}
+.likes
+{
+    margin-left: -319px;
 }

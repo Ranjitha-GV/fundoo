@@ -94,21 +94,6 @@ export class MainnotesComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
     .pipe(takeUntil(this.destroy$))
     .subscribe(result => {
-      console.log(this.title.nativeElement.innerHTML);
-      
-      this.httpService.updateNotes({
-        "noteId": [note.id],
-        "title": this.title.nativeElement.innerHTML,
-        "description": this.description.nativeElement.innerHTML,
-  
-      })
-      .pipe(takeUntil(this.destroy$))  
-      .subscribe(data => {
-        console.log('i am data', data); 
-      },
-    error => {
-      console.log('i am error', error);
-    })
       this.addEntry.emit({});
     });
   }

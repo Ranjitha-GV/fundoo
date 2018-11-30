@@ -30,4 +30,9 @@ export class QuestionAndAnswerService {
     let url = this.baseUrl + "questionAndAnswerNotes/reply/" + id;
     return this.http.postArchive(url, body);
   }
+  rating(id,body)
+  {
+    let url = this.baseUrl + "questionAndAnswerNotes/rate/" + id;
+    return this.http.postArchive(url, body);
+  }
 }

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { QuestionAndAnswerService } from 'src/app/core/services/questionAndAnswer/question-and-answer.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-question-and-answer',
@@ -24,12 +25,16 @@ export class QuestionAndAnswerComponent implements OnInit {
   private messageOutput;
   private liked = false;
   private userId;
-  private count = 0;
   private id;
   private questionId;
   private replyMessage;
   private repliesArray = [];
   private replyVal = 0;
+  private img;
+  private image;
+  private array = [];
+  private newArray = [];
+  private rateArray;
   private firstname = localStorage.getItem('firstname');
   private lastname = localStorage.getItem('lastname');
 
@@ -49,11 +54,20 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.description = this.response.description;
       this.userId = this.response.userId;
       this.id = this.response.id;
-      if(this.response.questionAndAnswerNotes[0] != undefined)
+      this.image = environment.apiUrl + this.response.questionAndAnswerNotes[0].user.imageUrl
+      this.img = environment.apiUrl;
+      // console.log(this.response.questionAndAnswerNotes[0].user.imageUrl);
+      if(this.response.questionAndAnswerNotes[0].length != 0) 
+        // && this.response.questionAndAnswerNotes[0].rate[0].rate != undefined)
       {
         this.messageOutput = this.response.questionAndAnswerNotes[0].message;
         this.repliesArray = this.response.questionAndAnswerNotes;
-      }   
+        this.array = this.response.questionAndAnswerNotes[0];
+        this.newArray = this.response.questionAndAnswerNotes[0].rate;
+        this.rateArray = this.response.questionAndAnswerNotes[0].rate[0].rate;
+        console.log('i am repliesArray',this.repliesArray[1].id) 
+      }  
+      
     },
     error =>
     {})
@@ -75,11 +89,11 @@ export class QuestionAndAnswerComponent implements OnInit {
     {     })
   }
   /**Function for like */
-  like()
+  like(id)
   {
     this.liked = !this.liked;
     console.log('in like',this.liked);
-    let id = this.response.questionAndAnswerNotes[0].id;
+    // let id = this.response.questionAndAnswerNotes[0].id;
     this.newHttpService.like(id,
       {
         'like': this.liked
@@ -94,12 +108,11 @@ export class QuestionAndAnswerComponent implements OnInit {
     {
       LoggerService.log('i am not liked', error);
     })
-    this.count++
   }
   /**Hitting API to reply */
-  answer(reply)
+  answer(reply, id)
   {
-    let id = this.response.questionAndAnswerNotes[0].id;
+    // let id = this.response.questionAndAnswerNotes[0].id;
     this.newHttpService.addAnswer(id,
       {
         'message': reply,
@@ -119,6 +132,23 @@ export class QuestionAndAnswerComponent implements OnInit {
   replyShow()
   {
     this.replyVal = 1;
+  }
+  /**Hitting API to rate */
+  rateValue(value,event)
+  {
+    this.newHttpService.rating(value.id,
+      {
+        'rate': event,
+      })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data)=>
+    {
+      console.log('I am rate data', data);
+    },
+    error =>
+    {  
+      console.log('I am rate error', error);
+    })
   }
   ngOnDestroy() {
     this.destroy$.next(true);

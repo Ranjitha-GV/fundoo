@@ -2,82 +2,170 @@
   <div fxFlex.xs=5% fxFlex.sm=5% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
   <div fxLayout="row wrap" fxFlex.xs=90% fxFlex.sm=90% fxFlex.md=90% 
   fxFlex.lg=90% fxFlex.xl=80%>
+  <!--***************************Question division****************************************-->
     <div class="cards">
       <button mat-button color = "disabled" class = "button">Close</button>
       <div [innerHTML]="title" class = "title"></div>
       <div [innerHTML]="description" class = "title"></div>
       <mat-divider></mat-divider>
+  <!--****************************Input field to ask a question***************************-->
       <div class = "questionAsked">Question Asked</div>
       <div *ngIf = "messageOutput == null">
       <input placeholder="Please enter your question" [(ngModel)] = "question" class = "text" 
       (keydown.enter)="enter(question)">
     </div>
+  <!--*****************Question is diplayed instead of the input box**********************-->
       <div class = "message" *ngIf = "messageOutput != null">
           <div [innerHTML] = "messageOutput"></div>
       </div>
     </div>
 
-
-
+  <!--**********************Profile picture for the first Question**************************-->
     <div *ngIf = "messageOutput != null">
-      <button mat-mini-fab color="disabled" class="add" (click) = "toggle()">
+      <button *ngIf = "img == ''" mat-mini-fab color="disabled" class="add" (click) = "toggle()">
         <i class="material-icons profile">
         {{firstname | slice : 0 : 1}}
         </i></button>
+        <button mat-mini-fab color="disabled" (click) = "toggle()" *ngIf = "img!= ''"
+        [ngStyle]="{'background-image':'url(' +image+ ')','background-size':'cover'}">
+         </button>
         <div class = "name" [innerHTML] = "firstname"></div>
     </div>
-
+  <!--*********************Reply icon***************************-->
 
   <div fxLayout = "row" fxLayoutAlign = "end" *ngIf = "messageOutput != null">
     <div class = "question" [innerHTML] = "messageOutput"></div>
-      <i class="material-icons end" matTooltip = "Reply" (click) = "replyShow()"
+     <i class="material-icons end" matTooltip = "Reply" (click) = "replyShow()"
       matTooltipPosition = "above">reply</i>
+  <!--***************************Like icon******************************-->
     <div (click) = "like()" class = "like">
       <img src = "../../../assets/images/baseline-thumb_up_alt-24px.svg">
     </div>
+  <!--****************************Bar-rating icon************************-->
+    <div *ngIf = "newArray.length == 0" class = "bar">
+        <bar-rating *ngIf = "messageOutput != null" [(rate)]="rate" [max]="5"
+        (rateChange) = "rateValue(array,$event)">
+        </bar-rating>
+      </div>
+      <div *ngIf = "newArray.length != 0">
+        <bar-rating *ngIf = "messageOutput != null" [(rate)]="rateArray" [max]="5" 
+         (rateChange) = "rateValue(array,$event)">
+        </bar-rating>
+      </div>
   </div>
+  <!--******************************************************************-->
 
 
-  <bar-rating *ngIf = "messageOutput != null" [(rate)]="rate" [max]="5" class = "bar">
-  </bar-rating>
 
-
+  <!--**********************First Reply Input section**********************************-->
   <div class = "reply">
-      <button *ngIf = "replyVal == 1 && replyMessage != null" mat-mini-fab color="disabled" class = "replyName" (click) = "toggle()">
-        <i class="material-icons profile">
-          {{firstname | slice : 0 : 1}}
-          </i></button>
-          <div *ngIf = "replyVal == 1 && replyMessage != null" class = "replier" [innerHTML] = "firstname"></div>
-          <div *ngIf = "replyVal == 1 && replyMessage == null">
-    <input placeholder="Write a reply" [(ngModel)] = "reply" class = "text replies" 
-    (keydown.enter)="answer(reply)"> 
-  </div>
-  <div class = "replyMes" *ngIf = "replyMessage != null" [innerHTML] = "replyMessage"></div>
-  </div>
-
-  <div fxFlex = 70 *ngFor = "let value of repliesArray">
-    <div fxLayout = "row">
+    <div *ngIf="replyVal == 1 && replyMessage == null">
+      <input placeholder="Write a reply" [(ngModel)]="reply" class="text replies" 
+       (keydown.enter)="answer(reply)">
+      <button mat-button color="basic" class="but" (click)="answer(reply, array.id)">Reply</button>
+    </div>
+    </div>
+  <!--***********************First reply section**************************************-->
+  <div fxFlex = 70 *ngFor = "let value of repliesArray" class = "box">
+  <div *ngIf = "value.parentId == array.id">
+    <div fxLayout = "row" fxLayoutAlign = "space-between">
+  <!--************************Profile picture of first reply************************-->
     <div>
-        <button mat-mini-fab color="disabled" class="add" (click) = "toggle()">
-            <i class="material-icons profile">
-            {{firstname | slice : 0 : 1}}
-            </i></button>
+        <button *ngIf="img == ''" mat-mini-fab color="disabled" (click)="toggle()">
+          <i class="material-icons profile">
+            {{value.user.firstName | slice : 0 : 1}}
+          </i></button>
+        <button mat-mini-fab color="disabled" (click)="toggle()" *ngIf="img!= ''" 
+        [ngStyle]="{'background-image':'url(' +img+value.user.imageUrl+ ')','background-size':'cover'}">
+        </button>
+  <!--*************************Name and reply of the replier****************************-->
+        <div fxLayout="column">
+          <div [innerHTML]="value.user.firstName" class="names"></div>
+          <div class="valueMessage" [innerHTML]="value.message">
+          </div>
+        </div>
     </div>
-    <div class = "valueMessage" [innerHTML] = "value.message">
-    </div>
+  <!--**********************Reply icon of first reply division*******************-->
     <div fxLayoutAlign = "end" fxLayout = "row" class = "replyDiv">
-        <div (click) = "like()" class = "newLike">
-            <img src = "../../../assets/images/baseline-thumb_up_alt-24px.svg">
-          </div>
-          <div class = "bars">
-          <bar-rating *ngIf = "messageOutput != null" [(rate)]="rate" [max]="5">
-          </bar-rating>
-          </div>
+      <i class="material-icons end" matTooltip = "Reply" (click) = "replyValDown = value.id"
+      matTooltipPosition = "above">reply</i>
+  <!--**********************Like button of first reply division*********************-->  
+      <div (click)="like(value.id)" class="newLike">
+        <img src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
+        <div *ngIf="value.like.length != 0" [innerHTML]="value.like.length" class="count"></div>
+      </div>
+  <!--********************Bar rating of first reply division****************************-->
+      <div class="bars" *ngIf="value.rate.length == 0">
+        <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
+         (rateChange)="rateValue(value,$event)">
+        </bar-rating>
+      </div>
+      <div class="bars" *ngIf="value.rate.length != 0">
+        <bar-rating *ngIf="messageOutput != null" [(rate)]="value.rate[0].rate" [max]="5" 
+         (rateChange)="rateValue(value,$event)">
+        </bar-rating>
+      </div>
     </div>
-  </div>
+   </div>
+<!--**********************Second reply sections input box*******************************-->
+   <div>
+      <div *ngIf = "replyValDown == value.id && replyMessage == null" class = "input">
+          <input placeholder="Write a reply" [(ngModel)] = "replyback" class = "text replies" 
+          (keydown.enter)="answer(reply)">
+          <button mat-button color = "basic" class = "but" 
+            (click) = "answer(replyback,value.id)">Reply</button> 
+        </div>
+    </div>
+
+<!----*******************************Second reply section*********************************-->
+
+    <div *ngFor = "let value1 of repliesArray" class = "valueMessage1">
+      <div *ngIf='value1.parentId == value.id'>
+          <div fxLayout = "row" fxLayoutAlign = "space-between">
+  <!--*********************Profile picture of second reply section************************-->
+            <div class = "values">
+              <button *ngIf = "img == ''" mat-mini-fab color="disabled" (click) = "toggle()">
+                  <i class="material-icons profile">
+                  {{value1.user.firstName | slice : 0 : 1}}
+                  </i></button>
+              <button mat-mini-fab color="disabled" (click) = "toggle()" *ngIf = "img!= ''"
+              [ngStyle]="{'background-image':'url(' +img+value1.user.imageUrl+ ')','background-size':'cover'}">
+              </button>
+ <!--*********************Name and message of second section replier*********************-->
+              <div fxLayout = "column">
+                  <div [innerHTML] = "value1.user.firstName" class = "names"></div>
+                  <div class = "valueMessage" [innerHTML] = "value1.message">
+                </div>
+            </div>
+          </div>
+          <!--*********************************************************************-->
+          <i class="material-icons" matTooltip = "Reply" (click) = "replyValDown = value.id"
+          matTooltipPosition = "above">reply</i>
+          <div (click)="like(value1.id)" class = "likes">
+              <img src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
+              <div *ngIf="value1.like.length != 0" [innerHTML]="value1.like.length" 
+               class="count"></div>
+          </div>
+          <div class="bars" *ngIf="value1.rate.length == 0">
+              <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
+               (rateChange)="rateValue(value1,$event)">
+              </bar-rating>
+            </div>
+            <div class="bars" *ngIf="value1.rate.length != 0">
+              <bar-rating *ngIf="messageOutput != null" [(rate)]="value1.rate[0].rate" [max]="5" 
+               (rateChange)="rateValue(value1,$event)">
+              </bar-rating>
+            </div>
+        </div>
+      </div>
+      
   </div>
 
+<!--*************************************************************************-->
+</div>  
+</div>
 
+<!-- </div> -->
   </div>
   <div fxFlex.xs=5% fxFlex.sm=5% fxFlex.md=5% fxFlex.lg=5% fxFlex.xl=10%></div>
 </div>
