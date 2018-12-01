@@ -57,16 +57,21 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.image = environment.apiUrl + this.response.questionAndAnswerNotes[0].user.imageUrl
       this.img = environment.apiUrl;
       // console.log(this.response.questionAndAnswerNotes[0].user.imageUrl);
-      if(this.response.questionAndAnswerNotes[0].length != 0) 
-        // && this.response.questionAndAnswerNotes[0].rate[0].rate != undefined)
+      if(this.response.questionAndAnswerNotes[0].length != 0 )
+        // && this.response.questionAndAnswerNotes[0].rate[0].rate != 0 
+        //  && this.response.questionAndAnswerNotes[0].user != 0)
       {
         this.messageOutput = this.response.questionAndAnswerNotes[0].message;
         this.repliesArray = this.response.questionAndAnswerNotes;
         this.array = this.response.questionAndAnswerNotes[0];
+      }
+      if(this.response.questionAndAnswerNotes[0].rate != 0 
+         && this.response.questionAndAnswerNotes[0].rate != null)
+      {
         this.newArray = this.response.questionAndAnswerNotes[0].rate;
         this.rateArray = this.response.questionAndAnswerNotes[0].rate[0].rate;
-        console.log('i am repliesArray',this.repliesArray[1].id) 
-      }  
+      }
+        // console.log('i am repliesArray',this.repliesArray[1].id)   
       
     },
     error =>

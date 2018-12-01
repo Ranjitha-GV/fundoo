@@ -20,7 +20,7 @@
 }
 .question
 {
-    margin: 34px 0px 15px -32px;
+    margin: 9px 0px 15px 50px;
     font-size: 21px;
 }
 .text
@@ -35,7 +35,7 @@
 .name
 {
     font-size: 16px;
-    margin: -28px 0px 0px 51px;
+    margin: -28px 160px 0px 51px;
 }
 .message
 {
@@ -109,9 +109,8 @@
 }
 .bar
 {
-    margin: -25px 0px 0px 20px;
-    // margin-top: -25px;
-    // margin-left: 10px;
+    margin-top: -6px;
+    margin-left: 6px;
 }
 .newLike
 {
@@ -159,5 +158,43 @@
 }
 .likes
 {
-    margin-left: -319px;
+    margin-left: 12px;
+}
+.bars1
+{
+    margin: -16px 0px 0px 8px;
+}
+.replies1
+{
+    margin-left: 320px;
+}
+.replies2
+{
+    margin: 23px 0px 0px 83px;
+}
+.profile2
+{
+    margin: 15px 0px 0px 88px;
+}
+.first1
+{
+    margin: -36px 0px 0px 50px;
+}
+.message1
+{
+    margin: 5px 0px 0px 50px;
+    margin-left: 50px;
+    font-size: 21px;
+}
+.likes1
+{
+    margin: 17px 0px 0px 289px;
+}
+.mainDiv
+{
+    height: 800px;
+}
+.overFlow
+{
+    height: 300px;
 }

@@ -24,32 +24,35 @@
     <div *ngIf = "messageOutput != null">
       <button *ngIf = "img == ''" mat-mini-fab color="disabled" class="add" (click) = "toggle()">
         <i class="material-icons profile">
-        {{firstname | slice : 0 : 1}}
+        {{array.user.firstName | slice : 0 : 1}}
         </i></button>
         <button mat-mini-fab color="disabled" (click) = "toggle()" *ngIf = "img!= ''"
         [ngStyle]="{'background-image':'url(' +image+ ')','background-size':'cover'}">
          </button>
-        <div class = "name" [innerHTML] = "firstname"></div>
+         <div fxLayout = "column">
+        <div class = "name" [innerHTML] = "array.user.firstName"></div>
+        <div class = "question" [innerHTML] = "messageOutput"></div>
+      </div>
     </div>
   <!--*********************Reply icon***************************-->
 
   <div fxLayout = "row" fxLayoutAlign = "end" *ngIf = "messageOutput != null">
-    <div class = "question" [innerHTML] = "messageOutput"></div>
      <i class="material-icons end" matTooltip = "Reply" (click) = "replyShow()"
       matTooltipPosition = "above">reply</i>
   <!--***************************Like icon******************************-->
-    <div (click) = "like()" class = "like">
+    <div (click) = "like(array.id)" class = "like">
       <img src = "../../../assets/images/baseline-thumb_up_alt-24px.svg">
+      <div *ngIf="array.like.length != 0" [innerHTML]="array.like.length" class="count"></div>
     </div>
   <!--****************************Bar-rating icon************************-->
-    <div *ngIf = "newArray.length == 0" class = "bar">
+    <div *ngIf = "newArray.length == 0">
         <bar-rating *ngIf = "messageOutput != null" [(rate)]="rate" [max]="5"
-        (rateChange) = "rateValue(array,$event)">
+        (rateChange) = "rateValue(array,$event)" class = "bar">
         </bar-rating>
       </div>
       <div *ngIf = "newArray.length != 0">
         <bar-rating *ngIf = "messageOutput != null" [(rate)]="rateArray" [max]="5" 
-         (rateChange) = "rateValue(array,$event)">
+         (rateChange) = "rateValue(array,$event)" class = "bar">
         </bar-rating>
       </div>
   </div>
@@ -89,7 +92,7 @@
     <div fxLayoutAlign = "end" fxLayout = "row" class = "replyDiv">
       <i class="material-icons end" matTooltip = "Reply" (click) = "replyValDown = value.id"
       matTooltipPosition = "above">reply</i>
-  <!--**********************Like button of first reply division*********************-->  
+  <!--**********************Like button of first reply division*********************-->
       <div (click)="like(value.id)" class="newLike">
         <img src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
         <div *ngIf="value.like.length != 0" [innerHTML]="value.like.length" class="count"></div>
@@ -110,8 +113,7 @@
 <!--**********************Second reply sections input box*******************************-->
    <div>
       <div *ngIf = "replyValDown == value.id && replyMessage == null" class = "input">
-          <input placeholder="Write a reply" [(ngModel)] = "replyback" class = "text replies" 
-          (keydown.enter)="answer(reply)">
+          <input placeholder="Write a reply" [(ngModel)] = "replyback" class = "text replies">
           <button mat-button color = "basic" class = "but" 
             (click) = "answer(replyback,value.id)">Reply</button> 
         </div>
@@ -139,30 +141,86 @@
             </div>
           </div>
           <!--*********************************************************************-->
-          <i class="material-icons" matTooltip = "Reply" (click) = "replyValDown = value.id"
+          <i class="material-icons replies1" matTooltip = "Reply" (click) = "replyValDown1 = value1.id"
           matTooltipPosition = "above">reply</i>
           <div (click)="like(value1.id)" class = "likes">
               <img src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
               <div *ngIf="value1.like.length != 0" [innerHTML]="value1.like.length" 
                class="count"></div>
           </div>
-          <div class="bars" *ngIf="value1.rate.length == 0">
+          <div class="bars1" *ngIf="value1.rate.length == 0">
               <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
                (rateChange)="rateValue(value1,$event)">
               </bar-rating>
             </div>
-            <div class="bars" *ngIf="value1.rate.length != 0">
+            <div class="bars1" *ngIf="value1.rate.length != 0">
               <bar-rating *ngIf="messageOutput != null" [(rate)]="value1.rate[0].rate" [max]="5" 
                (rateChange)="rateValue(value1,$event)">
               </bar-rating>
             </div>
         </div>
-      </div>
-      
+        <!--*************************Third reply sections input box******************************-->
+  <div>
+    <div *ngIf = "replyValDown1 == value1.id && replyMessage == null">
+      <input placeholder="Write a reply" [(ngModel)] = "replyback1" class = "text replies2">
+          <button mat-button color = "basic" class = "but" 
+            (click) = "answer(replyback1,value1.id)">Reply</button> 
+    </div>
   </div>
 
-<!--*************************************************************************-->
-</div>  
+<!--*************************Thirsd reply section*****************************************-->
+<div *ngFor = "let value2 of repliesArray">
+  <div *ngIf='value2.parentId == value1.id'>
+    <div fxLayout = "row" fxLayoutAlign = "space-between">
+  <!--****************Profile picture of third reply section***************************-->
+      <div class = "profile2">
+          <button *ngIf = "img == ''" mat-mini-fab color="disabled" (click) = "toggle()">
+              <i class="material-icons profile">
+              {{value2.user.firstName | slice : 0 : 1}}
+              </i></button>
+          <button mat-mini-fab color="disabled" (click) = "toggle()" *ngIf = "img!= ''"
+          [ngStyle]="{'background-image':'url(' +img+value2.user.imageUrl+ ')','background-size':'cover'}">
+          </button>
+
+          <!--*******************Name and message of third section reply***********************-->
+        <div fxLayout="column">
+            <div [innerHTML]="value2.user.firstName" class = "first1"></div>
+              <div [innerHTML]="value2.message" class = "message1">
+          </div>
+        </div>
+      </div>
+  <!--************************Like icon for third reply*****************************-->
+        <div (click)="like(value2.id)" class = "likes1">
+            <img src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
+            <div *ngIf="value2.like.length != 0" [innerHTML]="value2.like.length" 
+            class="count"></div>
+        </div>
+
+  <!--***********************Bar-rating for third reply section*************************-->
+  <div *ngIf="value2.rate.length == 0">
+      <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
+       (rateChange)="rateValue(value2,$event)">
+      </bar-rating>
+    </div>
+    <div *ngIf="value2.rate.length != 0">
+      <bar-rating *ngIf="messageOutput != null" [(rate)]="value2.rate[0].rate" [max]="5" 
+       (rateChange)="rateValue(value2,$event)">
+      </bar-rating>
+    </div>
+ 
+
+  <!--**********************************************************************-->
+
+
+      </div>
+  </div>
+</div>
+
+
+<!--*************************************************************************************-->
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- </div> -->
