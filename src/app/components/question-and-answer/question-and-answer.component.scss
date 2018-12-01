@@ -1,218 +1,14 @@
-// @import '../../../scss/mixins.scss';
-// @import '../../../scss/variables.scss';
-
-// .cards
-// {
-//     width: 1200px;
-//     height: 200px;
-// }
-// .container
-// {
-//     margin: 50px 0px 20px 0px;
-// }
-// .button
-// {
-//     @include floatsRight();
-// }
-// .title
-// {
-//     margin: 0px 0px 15px 0px;
-// }
-// .question
-// {
-//     margin: 9px 0px 15px 50px;
-//     font-size: 21px;
-// }
-// .text
-// {
-//     @include widthFull();
-//     @include boxes();
-// }
-// .bind
-// {
-//     font-size: 20px;
-// }
-// .name
-// {
-//     font-size: 16px;
-//     margin: -28px 160px 0px 51px;
-// }
-// .message
-// {
-//     margin: 0px 0px 30px 0px;
-// }
-// .profile
-// {
-//     @include upperFont();
-//     padding-bottom: 6px;
-//     font-size: 18px;
-// }
-// .questionAsked
-// {
-//     margin: 35px 0px 15px 0px;
-// }
-// .icon
-// {
-//     margin: 7px 0px 0px 18px;
-// }
-// .count
-// {
-//     font-size: 10px;
-//     margin-top: -5px;
-// }
-// .bar
-// {
-//     // margin: -34px 0px 0px 22px;
-//     // margin-top: -25px;
-//     // margin-left: 9px;
-// }
-// .reply
-// {
-//     margin :15px 0px 0px 50px;
-//     width: 800px;
-//     // height: 16px;
-//     @include words();
-// }
-// .replyName
-// {
-//     margin-left: -37px;  
-// }
-// .replier
-// {
-//     margin: -28px 0px 0px 12px;
-// }
-// .replies
-// {
-//     margin-left: 13px;
-// }
-// .but
-// {
-//     @include floatsRight;
-// }
-// .replyMes{
-//     margin-left: 12px;
-// }
-// .valueMessage
-// {
-//     @include words();
-//     margin: 10px 0px 0px 50px;
-//     font-size: 18px;
-// }
-// .end
-// {
-//     margin: 10px 0px 0px 33px;
-//     @include cursors();
-// }
-// .like
-// {
-//     margin: 10px 0px 0px 10px;
-// }
-// .bar
-// {
-//     margin-top: -6px;
-//     margin-left: 6px;
-// }
-// .newLike
-// {
-//     margin: 8px 0px 0px 8px;
-//     @include cursors();
-// }
-// .bars
-// {
-//     margin: -8px 0px 0px 10px;
-// }
-// .replyDiv
-// {
-//     margin-bottom: 15px;
-// }
-// .count
-// {
-//     margin-top: -9px;
-//     font-size: 12px;
-// }
-// .names
-// {
-//     margin: -30px 0px 0px 50px;
-// }
-// .box
-// {
-//     margin: 20px 10px 0px 20px;
-// }
-// .input
-// {
-//     margin: 18px 0px 0px 90px;
-//     width: 565px;
-//     height: 40px;
-// }
-// .valueMessage1
-// {
-//     margin: 14px 0px 0px 50px;
-// }
-// .values
-// {
-//     margin-left: 30px;
-// }
-// .likes
-// {
-//     margin-left: -83px;
-// }
-// .bars1
-// {
-//     margin: -16px 0px 0px -162px;
-// }
-// .replies1
-// {
-//     margin-left: 320px;
-//     margin-right: -74px;
-// }
-// .replies2
-// {
-//     margin: 23px 0px 0px 83px;
-// }
-// .profile2
-// {
-//     margin: 15px 0px 0px 88px;
-// }
-// .first1
-// {
-//     margin: -36px 0px 0px 50px;
-// }
-// .message1
-// {
-//     margin: 5px 0px 0px 50px;
-//     margin-left: 50px;
-//     font-size: 21px;
-// }
-// .likes1
-// {
-//     margin: 17px 0px 0px 289px;
-// }
-// .first{
-//     height:auto;
-// }
-// .baring
-// {
-//     margin: -25px 0px 0px 7px;
-// }
-// .mainDiv
-// {
-//     height:375px;
-//     width:auto;
-//     overflow: scroll;
-//     overflow-x: hidden;
-// }
 @import '../../../scss/mixins.scss';
 @import '../../../scss/variables.scss';
 
 .cards
 {
     width: 1200px;
-    height: fit-content;
 }
 .container
 {
-    margin: 50px 0px 20px 0px;
-    overflow: hidden;    
+    margin: 20px 0px 20px 0px;
+    height: 100%;
 }
 .button
 {
@@ -220,199 +16,77 @@
 }
 .title
 {
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 0px 9px;
 }
 .question
 {
-    margin: 9px 0px 15px 50px;
-    font-size: 21px;
-    width: 682px;
+    margin: 10px 0px 0px 0px;
 }
-.text
+.overFlow
 {
-    @include widthFull();
-    @include boxes();
-}
-.bind
-{
-    font-size: 20px;
-}
-.name
-{
-    font-size: 16px;
-    margin: -28px 160px 0px 51px;
-}
-.message
-{
-    margin: 0px 0px 30px 0px;
-}
-.profile
-{
-    @include upperFont();
-    padding-bottom: 6px;
-    font-size: 18px;
-}
-.questionAsked
-{
-    margin: 35px 0px 15px 0px;
-}
-.icon
-{
-    margin: 7px 0px 0px 18px;
+    overflow-y: scroll;
+    height: 460px;
 }
 .count
 {
     font-size: 10px;
-    margin-top: -5px;
+    margin: 21px 5px 0px 0px;
 }
-.bar
+.profile1
 {
-    margin-top: -6px;
-        margin-left: 6px;
-}
-.reply
-{
-    margin :15px 0px 0px 50px;
-    width: 800px;
-    // height: 16px;
-    @include words();
-}
-.replyName
-{
-    margin-left: -37px;  
-}
-.replier
-{
-    margin: -28px 0px 0px 12px;
+    padding: 15px;
 }
 .replies
 {
-    margin-left: 13px;
+    @include floatsRight();
 }
-.but
+.content
 {
-    @include floatsRight;
+    @include boxes();
 }
-.replyMes{
-    margin-left: 12px;
+
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
 }
-.valueMessage
+.date
 {
-    @include words();
-    margin: 10px 0px 0px 50px;
-    font-size: 18px;
-        width: 300px;
+    font-size: 10px;
+    margin-left: 7px;
+    margin-top: 5px;
 }
-.end
+.firstReply
 {
-    margin: 10px 0px 0px 33px;
-    @include cursors();
-}
-.like
-{
-    margin: 10px 0px 0px 10px;
-}
-.bar
-{
-    margin-top: -6px;
-    margin-left: 6px;
-}
-.newLike
-{
-    margin: 8px 0px 0px 8px;
-    @include cursors();
-}
-.bars
-{
-    margin: -8px 0px 0px 10px;
-}
-.replyDiv
-{
-    margin-bottom: 15px;
-}
-.count
-{
-    margin-top: -9px;
-    font-size: 12px;
-}
-.names
-{
-    margin-left: 50px;
-    margin-top: -30px;
-}
-.box
-{
-    margin-bottom: 15px;
+    // padding: 10px; 
     margin-left: 20px;
-    // overflow-y: scroll;
 }
-.input
+.reply1
 {
-    margin: 18px 0px 0px 90px;
-    width: 565px;
-    height: 40px;
+    margin: 12px 5px 0px 0px;
 }
-.valueMessage1
+.bar1
 {
-    margin: 14px 0px 0px 50px;
-    // margin-left: 50px;
-    // margin-top: 14px;
+    margin: -4px 14px 0px 0px;
 }
-.values
+.count1
 {
-    margin-left: 30px;
+    font-size: 10px;
+    margin: 12px 0px 0px 0px;
 }
-.likes
+.reply2
 {
-    margin-left: 12px;
+    margin: 0px 5px 0px 0px;
 }
-.bars1
+.bar2
 {
-    margin: -16px 0px 0px 8px;
+    margin: -17px 0px 0px 2px;
 }
-.replies1
+.secondReply
 {
-    margin-left: 320px;
+    margin-left: 20px;
+    color: chartreuse;
 }
-.replies2
+.thirdReply
 {
-    margin: 23px 0px 0px 83px;
-}
-.profile2
-{
-    margin: 15px 0px 0px 88px;
-}
-.first1
-{
-    margin: -36px 0px 0px 50px;
-}
-.message1
-{
-    margin: 5px 0px 0px 50px;
-    margin-left: 50px;
-    font-size: 19px;
-    width: 281px;
-}
-.likes1
-{
-    margin: 17px 0px 0px 289px;
-}
-.mainDiv
-{
-    height: 800px;
-}
-// .overFlow
-// {
-//     height: 380px;
-//     overflow-y: scroll;
-// }
-.valueMessage2
-{
-    margin: 9px 0px 0px 50px;
-    font-size: 19px;
-    width: 635px;
-}
-.bared
-{
-    margin: -26px 0px 0px 8px;
+    color: tomato; 
+    margin-left: 20px;
 }
