@@ -8,7 +8,7 @@
   </div>
  <div *ngFor='let note of notesArray | searchFilter : searchElement; trackBy:note?.noteId'>
     <div [ngClass]="{'grid':toggle,'list':!toggle}">
-      <mat-card align="center" [style.backgroundColor]="note.color">
+      <mat-card align="center" [style.backgroundColor]="note.color" class = "mainCards">
         <app-pin [pinArray]="note" (pinEmit)="nextEntry($event)" class="pin"></app-pin>
         <div align="left" (click)="openUpdateNotes(note)">  
           <b>
