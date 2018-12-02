@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NotesServiceService } from 'src/app/core/services/notes/notes-service.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -34,9 +34,14 @@ export class QuestionAndAnswerComponent implements OnInit {
   private image;
   private array = [];
   private newArray = [];
+  private value;
   private rateArray;
+  private avgRating;
+  private  showing = 1;
+  private show = false;
   private firstname = localStorage.getItem('firstname');
   private lastname = localStorage.getItem('lastname');
+  @Output() onNewEntryAdded = new EventEmitter();
 
   ngOnInit() {
     this.getNoteDetails();
@@ -54,12 +59,8 @@ export class QuestionAndAnswerComponent implements OnInit {
       this.description = this.response.description;
       this.userId = this.response.userId;
       this.id = this.response.id;
-      this.image = environment.apiUrl + this.response.questionAndAnswerNotes[0].user.imageUrl
       this.img = environment.apiUrl;
-      // console.log(this.response.questionAndAnswerNotes[0].user.imageUrl);
       if(this.response.questionAndAnswerNotes[0].length != 0 )
-        // && this.response.questionAndAnswerNotes[0].rate[0].rate != 0 
-        //  && this.response.questionAndAnswerNotes[0].user != 0)
       {
         this.messageOutput = this.response.questionAndAnswerNotes[0].message;
         this.repliesArray = this.response.questionAndAnswerNotes;
@@ -71,7 +72,12 @@ export class QuestionAndAnswerComponent implements OnInit {
         this.newArray = this.response.questionAndAnswerNotes[0].rate;
         this.rateArray = this.response.questionAndAnswerNotes[0].rate[0].rate;
       }
-        // console.log('i am repliesArray',this.repliesArray[1].id)   
+
+      if(this.response.questionAndAnswerNotes[0].user != 0 
+        && this.response.questionAndAnswerNotes[0].user != null)
+      {
+        this.image = environment.apiUrl + this.response.questionAndAnswerNotes[0].user.imageUrl;
+      }
       
     },
     error =>
@@ -89,6 +95,7 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe((data)=>
     {
       this.messageOutput = data['data']['details'].message;
+      this.onNewEntryAdded.emit({});
     },
     error =>
     {     })
@@ -108,6 +115,7 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe((data)=>
     {
       LoggerService.log('i am liked', data);
+      this.onNewEntryAdded.emit({});
     },
     error =>
     {
@@ -154,6 +162,32 @@ export class QuestionAndAnswerComponent implements OnInit {
     {  
       console.log('I am rate error', error);
     })
+  }
+  /**Calculate rating */
+  averageRating(rateArray) {
+    this.value = 0;
+    if (rateArray.length != 0) {
+    for (let i = 0; i < rateArray.length; i++) {
+    this.value += rateArray[i].rate
+    }
+    this.avgRating = this.value / rateArray.length;
+    return this.avgRating;
+    }
+    }
+    hideReplies()
+    {
+      this.show = !this.show;
+      this.showing = 1;
+    }
+    viewReplies()
+    {
+      this.show = !this.show;
+      this.showing = 0;
+    }
+  /**Close button functionality */
+  close()
+  {
+    this.router.navigate(['/home/notes']);
   }
   ngOnDestroy() {
     this.destroy$.next(true);

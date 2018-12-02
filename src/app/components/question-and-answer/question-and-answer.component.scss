@@ -21,6 +21,7 @@
 .question
 {
     margin: 10px 0px 0px 0px;
+    // padding: 10px;
 }
 .overFlow
 {
@@ -83,10 +84,40 @@
 .secondReply
 {
     margin-left: 20px;
-    color: chartreuse;
 }
 .thirdReply
 {
-    color: tomato; 
     margin-left: 20px;
+}
+.padding
+{
+    padding: 10px;
+}
+.firstInput
+{
+    @include widthFull();
+    padding: 30px;
+    @include boxes();
+}
+.rating
+{
+    margin: 19px 0px 0px 6px;
+}
+.viewReplies
+{
+    font-size: 12px;
+    margin: 5px 0px 0px 0px;
+}
+.cursor
+{
+    @include cursors();
+}
+.input
+{
+    @include widthFull();
+    @include boxes();
+}
+.rating0
+{
+    margin-right: 12px;
 }

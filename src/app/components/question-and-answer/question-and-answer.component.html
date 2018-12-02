@@ -4,20 +4,20 @@
     fxFlex.lg=100% fxFlex.xl=80%>
         <!--***************************Question division***********************************-->
  <div>
-    <button mat-button color = "disabled" class = "button">Close</button>
-    <div [innerHTML]="title" class = "mainTitle"></div>
-    <div [innerHTML]="description" class = "description"></div>
+    <button mat-button color = "disabled" class = "button" (click) = "close()">Close</button>
+    <div [innerHTML]="title" class = "padding"></div>
+    <div [innerHTML]="description" class = "padding"></div>
     <hr>
         <!--****************************Input field to ask a question***********************-->
-    <div>Question Asked</div>
-    <div *ngIf = "messageOutput == null">
+    <div class = "padding">Question Asked</div>
+    <div *ngIf = "messageOutput == null" class = "padding">
         <input placeholder="Please enter your question" [(ngModel)] = "question" 
-         class = "text" (keydown.enter)="enter(question)">
+          (keydown.enter)="enter(question)" class = "input">
     </div>
         <!--***************Question is diplayed instead of the input box*******************-->
             <div *ngIf = "messageOutput != null" [innerHTML] = "messageOutput" 
-                class = "question"></div>
-      </div>
+                class = "question padding"></div>
+      </div> 
       <!--************************Hardcode Section********************************-->
       <div class = "overFlow">
        <div>
@@ -36,7 +36,16 @@
               <div fxLayout = "column" class = "title">
                 <div fxLayout = "row">
                   <div class = "name" [innerHTML] = "array.user.firstName"></div>
-                  <div class = "date">{{array.modifiedDate | date : medium}}</div></div>
+                  <div class = "date">{{array.modifiedDate | date : medium}}</div>
+                  <div fxLayout = "row" (click) = "hideReplies()" *ngIf = "show"><i class="material-icons cursor" 
+                     matTooltip = "Hide">expand_less
+                      </i><div class = "viewReplies">Hide replies</div>
+                    </div>
+                    <div fxLayout = "row" (click) = "viewReplies()" *ngIf = "!show"><i class="material-icons cursor"
+                      matTooltip = "View">expand_more
+                        </i><div class = "viewReplies">View replies</div>
+                      </div>
+                </div>
                   <div class = "question" [innerHTML] = "messageOutput"></div>
               </div>
           </div>
@@ -53,7 +62,7 @@
           <div *ngIf="array.like.length != 0" [innerHTML]="array.like.length" class="count"></div>
         </div>
             <!--****************************Bar-rating icon************************-->
-          <div class = "bar1">
+          <div class = "bar1" fxLayout = "row">
               <div *ngIf = "newArray.length == 0">
                   <bar-rating *ngIf = "messageOutput != null" [(rate)]="rate" [max]="5"
                   (rateChange) = "rateValue(array,$event)">
@@ -64,23 +73,25 @@
                    (rateChange) = "rateValue(array,$event)">
                   </bar-rating>
                 </div>
+                <div class = "rating">{{averageRating(array.rate)}}</div>
           </div>
         <!--*****************************************************************-->
         </div>
           <!--********************************************************-->
         </div>
-       </div>
+       </div> 
        <!--*****************First reply section ***************************-->
        <!--************************First reply input section************************-->
        <div>
           <div *ngIf="replyVal == 1 && replyMessage == null">
               <input placeholder="Write a reply" [(ngModel)]="reply" 
-               (keydown.enter)="answer(reply)" class = "content">
+               (keydown.enter)="answer(reply)" class = "content" class = "firstInput">
               <button mat-button color="basic"  class="replies" (click)="answer(reply, array.id)">
                  Reply</button>
             </div>
           </div>
             <!--***********************First reply array*************************************-->
+            <div *ngIf = "showing == 0">
             <div *ngFor = "let value of repliesArray" class = "firstReply">
               <div *ngIf = "value.parentId == array.id">
                 <div fxLayout = "column">
@@ -116,6 +127,7 @@
                         </div>
                       </div>
                       <!--********************Bar rating of first reply division****************************-->
+                      <div fxLayout = "row">
                       <div *ngIf="value.rate.length == 0"  class = "bar2">
                         <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
                           (rateChange)="rateValue(value,$event)">
@@ -126,7 +138,8 @@
                           [max]="5" (rateChange)="rateValue(value,$event)">
                         </bar-rating>
                       </div>
-                    
+                      <div class = "rating0">{{averageRating(value.rate)}}</div>
+                      </div>
                       <!--**************************************************************************-->
                   </div>
                 </div>
@@ -136,7 +149,7 @@
      <div>
         <div *ngIf = "replyValDown == value.id && replyMessage == null">
             <input placeholder = "Write a reply" [(ngModel)] = "replyback"
-               class = "content">
+               class = "content"  class = "firstInput">
             <button mat-button color = "basic" (click) = "answer(replyback,value.id)"
               class="replies">Reply</button> 
           </div>
@@ -176,8 +189,8 @@
                        class="count1"></div>
                   </div>
               </div>
-
-              <div *ngIf="value1.rate.length == 0" class = "bar2">
+          <div fxLayout = "row">    
+            <div *ngIf="value1.rate.length == 0" class = "bar2">
                   <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
                    (rateChange)="rateValue(value1,$event)">
                   </bar-rating>
@@ -187,14 +200,17 @@
                    (rateChange)="rateValue(value1,$event)">
                   </bar-rating>
                 </div>
+                <div class = "rating0">{{averageRating(value1.rate)}}</div>
+            </div>
 <!--*******************************************************************-->
             </div>
           </div>
 <!--**********************Second reply section ends******************************-->
+<!--*******************third reply input section*************************-->
         <div>
           <div *ngIf = "replyValDown1 == value1.id && replyMessage == null">
               <input placeholder = "Write a reply" [(ngModel)] = "replyback1"
-              class = "content">
+              class = "content"  class = "firstInput">
                 <button mat-button color = "basic" (click) = "answer(replyback1,value1.id)"
                 class = "replies">
                   Reply</button> 
@@ -221,13 +237,14 @@
               </div>
             </div>
             <div fxLayout = "row" fxLayoutAlign = "end">
-                <div (click)="like(value2.id)">
+                <div (click)="like(value2.id)" fxLayout = "row">
                     <img src="../../../assets/images/baseline-thumb_up_alt-24px.svg">
                     <div *ngIf="value2.like.length != 0" [innerHTML]="value2.like.length" 
                     class="count1"></div>
                 </div>
     <!--***********************Bar-rating for third reply section*************************-->
-                  <div *ngIf="value2.rate.length == 0" class = "bar2">
+    <div fxLayout = "row">              
+    <div *ngIf="value2.rate.length == 0" class = "bar2">
                     <bar-rating *ngIf="messageOutput != null" [(rate)]="rate" [max]="5" 
                      (rateChange)="rateValue(value2,$event)">
                     </bar-rating>
@@ -237,6 +254,8 @@
                      [max]="5" (rateChange)="rateValue(value2,$event)">
                     </bar-rating>
                   </div>
+                  <div class = "rating0">{{averageRating(value2.rate)}}</div>
+</div>
             </div>
           </div>
         </div>
@@ -252,6 +271,7 @@
        
 <!--********************Main div end******************************-->
       </div>
+    </div>
 <!--************************************************************************-->
 
   </div>

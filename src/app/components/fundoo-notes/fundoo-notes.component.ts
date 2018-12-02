@@ -40,6 +40,7 @@ export class FundooNotesComponent implements OnDestroy{
   private id = localStorage.getItem('userId');
   private selectedFile = null;
   private flag = '';
+  private url;
   private image2 = localStorage.getItem('imageUrl');
   private img = environment.apiUrl + this.image2;
   @ViewChild('labelList') labelList: ElementRef;
@@ -68,7 +69,6 @@ export class FundooNotesComponent implements OnDestroy{
       },
       error => {
       })
-
   }
 /**Pop up to add labels */
   openDialog(): void {
@@ -202,10 +202,10 @@ nameChange(names)
       this.names = 'Archive'; 
       this.flag = 'Archive';
     }
-    if(this.router.url == '/home/questionAndAnswer/:notedetails')
+    else
     {
-      this.names = 'fundoo';
-      this.flag = 'fundoo'
+      this.names = 'fundoo'; 
+      this.flag = 'fundoo';
     }
   }
   colorChange(label)
