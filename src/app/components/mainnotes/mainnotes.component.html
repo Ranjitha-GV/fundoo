@@ -163,10 +163,10 @@
             <app-more [notedetails]="note" (eventEntry)="nextEntry($event)"></app-more>
           </div>
         </div>
-        <div *ngIf="note.questionAndAnswerNotes != null">
+        <div *ngIf="note.questionAndAnswerNotes.length != 0">
           <hr>
-          <span>
-            <div class="question"><b>Question Asked</b></div>
+          <span fxLayout = "column">
+            <div class="question" (click) = "question(note.id)"><b>Question Asked</b></div>
             <div *ngIf = "note.questionAndAnswerNotes[0] != null">
               <div [innerHTML]="note.questionAndAnswerNotes[0].message"></div>
             </div>

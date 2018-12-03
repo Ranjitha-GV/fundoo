@@ -51,7 +51,6 @@ export class MainnotesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getlabels();
     this.gridList();
-    this.question();
   }
 /**To check if the reminder time is greater than */
   remind(time)
@@ -191,9 +190,9 @@ export class MainnotesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/home/newlabel/' + labelsList]);
  }
 
- question()
+ question(id)
  {
-   
+  this.router.navigate(['/home/questionAndAnswer/'+ id]);
  }
 
  ngOnDestroy() {

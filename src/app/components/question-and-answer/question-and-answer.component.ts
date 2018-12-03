@@ -54,7 +54,6 @@ export class QuestionAndAnswerComponent implements OnInit {
     this.newHttpService.sendNoteDetails(this.noteId[3])
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
-        this.replyVal = 0;
 
         for (var i = 0; i < data['data']['data'][0].noteCheckLists.length; i++) {
           if (data['data']['data'][0].noteCheckLists[i].isDeleted == false) {
@@ -98,7 +97,6 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe((data) => {
         this.messageOutput = data['data']['details'].message;
         this.getNoteDetails();
-        this.replyVal = 0;
 
       },
         error => { })
@@ -132,7 +130,6 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe((data) => {
         this.replyMessage = data['data']['details'].message;
         this.getNoteDetails();
-        this.replyVal = 0;
       },
         error => {
         })

@@ -14,6 +14,11 @@
 {
     @include floatsRight();
 }
+.subContainer
+{
+    height: 200px;
+    overflow: auto;
+}
 .title
 {
     margin: 0px 0px 0px 9px;

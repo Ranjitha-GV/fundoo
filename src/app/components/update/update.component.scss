@@ -92,6 +92,8 @@
 .descriptionText
 {
     font-size: 15px;
+    min-height: 50px;
+    max-height: 100px;
     @include boxes();
 }
 .add 
