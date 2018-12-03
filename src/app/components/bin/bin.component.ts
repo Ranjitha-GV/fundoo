@@ -22,6 +22,7 @@ export class BinComponent implements OnInit, OnDestroy {
     public httpService: NotesServiceService) { }
 
    private toggle = true;
+   private show = true;
    private modifiedList;
    @Output() getTrashList = new EventEmitter();
   
@@ -81,6 +82,7 @@ openDialog(note): void {
             this.card.push(response[i]);
           }
         }
+        this.show = false;
       },
       error => {
     })

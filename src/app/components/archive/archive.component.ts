@@ -14,6 +14,7 @@ export class ArchiveComponent implements OnInit, OnDestroy {
   constructor(public data: SearchService, public httpService: NotesServiceService) { }
   private card = [];
   private toggle = true;
+  private show = true;
   @Input() noteDetails;
   @Output() addEntry = new EventEmitter();
 
@@ -34,6 +35,7 @@ export class ArchiveComponent implements OnInit, OnDestroy {
             this.card.push(data['data']['data'][i]);
           }
         }
+        this.show = false;
       },
       error => {
       })
@@ -48,6 +50,7 @@ export class ArchiveComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.getArchive();
+        this.show = false;
       },
         error => {
         })

@@ -10,6 +10,7 @@
 .cropper 
 {
     padding: 10px;
+    // width: 600px;
     @include scroll();
 }
 ::ng-deep.mat-dialog-container 

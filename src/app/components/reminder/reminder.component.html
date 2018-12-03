@@ -1,4 +1,5 @@
 <app-addnotes></app-addnotes>
+<div *ngIf = "!show">
 <div *ngIf = "reminderArray.length == 0">
     <h4 class = "reminder">No Reminders</h4>
 </div>
@@ -6,3 +7,19 @@
     <!-- <h4 class = "reminder"> Notes with upcoming reminders appear here </h4> -->
 <app-mainnotes [notesArray] = "reminderArray"></app-mainnotes>
 </div>
+</div>
+
+<div class="sk-circle" *ngIf = "show">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>

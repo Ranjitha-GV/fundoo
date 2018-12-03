@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
@@ -40,7 +40,11 @@ export class QuestionAndAnswerComponent implements OnInit {
   private show = false;
   private firstname = localStorage.getItem('firstname');
   private lastname = localStorage.getItem('lastname');
+  private checkList = [];
   @Output() onNewEntryAdded = new EventEmitter();
+  @ViewChild('answerReply') answerReply: ElementRef;
+
+
 
   ngOnInit() {
     this.getNoteDetails();
@@ -50,6 +54,13 @@ export class QuestionAndAnswerComponent implements OnInit {
     this.newHttpService.sendNoteDetails(this.noteId[3])
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
+        this.replyVal = 0;
+
+        for (var i = 0; i < data['data']['data'][0].noteCheckLists.length; i++) {
+          if (data['data']['data'][0].noteCheckLists[i].isDeleted == false) {
+          this.checkList.push(data['data']['data'][0].noteCheckLists[i])
+          }
+          }
 
         this.response = data['data']['data'][0]
         this.title = this.response.title;
@@ -86,14 +97,15 @@ export class QuestionAndAnswerComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.messageOutput = data['data']['details'].message;
-        this.onNewEntryAdded.emit({});
+        this.getNoteDetails();
+        this.replyVal = 0;
+
       },
         error => { })
   }
   /**Function for like */
   like(id) {
     this.liked = !this.liked;
-    console.log('in like', this.liked);
     // let id = this.response.questionAndAnswerNotes[0].id;
     this.newHttpService.like(id,
       {
@@ -103,26 +115,26 @@ export class QuestionAndAnswerComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         LoggerService.log('i am liked', data);
-        this.onNewEntryAdded.emit({});
+        this.getNoteDetails();
       },
         error => {
           LoggerService.log('i am not liked', error);
         })
   }
   /**Hitting API to reply */
-  answer(reply, id) {
-    // let id = this.response.questionAndAnswerNotes[0].id;
+  answer(id) {
+    let reply = this.answerReply.nativeElement.innerHTML;
     this.newHttpService.addAnswer(id,
       {
         'message': reply,
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
-        console.log('I am reply data', data);
         this.replyMessage = data['data']['details'].message;
+        this.getNoteDetails();
+        this.replyVal = 0;
       },
         error => {
-          console.log('I am reply error', error);
         })
   }
   /**Function to show reply section */
@@ -137,10 +149,9 @@ export class QuestionAndAnswerComponent implements OnInit {
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
-        console.log('I am rate data', data);
+        this.getNoteDetails();
       },
         error => {
-          console.log('I am rate error', error);
         })
   }
   /**Calculate rating */

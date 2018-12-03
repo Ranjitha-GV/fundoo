@@ -1,5 +1,5 @@
 <!-- <div style =  "width: 100%"><h3>Deleted notes appear here</h3></div> <br> -->
-<div fxLayout="row wrap" fxLayoutAlign="start" fxFlex=100>
+<div fxLayout="row wrap" fxLayoutAlign="start" fxFlex=100 *ngIf = "!show">
   <div class = "width"><h3>Deleted notes appear here</h3></div> 
   <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=10% fxFlex.xl=10%></div>
 
@@ -46,3 +46,18 @@
 </div>
 <div fxFlex = "row" fxFlex.xs=0% fxFlex.sm=0% fxFlex.md=5% fxFlex.lg=10% fxFlex.xl=10%></div>
 </div>
+
+<div class="sk-circle" *ngIf = "show">
+    <div class="sk-circle1 sk-child"></div>
+    <div class="sk-circle2 sk-child"></div>
+    <div class="sk-circle3 sk-child"></div>
+    <div class="sk-circle4 sk-child"></div>
+    <div class="sk-circle5 sk-child"></div>
+    <div class="sk-circle6 sk-child"></div>
+    <div class="sk-circle7 sk-child"></div>
+    <div class="sk-circle8 sk-child"></div>
+    <div class="sk-circle9 sk-child"></div>
+    <div class="sk-circle10 sk-child"></div>
+    <div class="sk-circle11 sk-child"></div>
+    <div class="sk-circle12 sk-child"></div>
+  </div>

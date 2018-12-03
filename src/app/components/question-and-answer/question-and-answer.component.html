@@ -7,6 +7,18 @@
     <button mat-button color = "disabled" class = "button" (click) = "close()">Close</button>
     <div [innerHTML]="title" class = "padding"></div>
     <div [innerHTML]="description" class = "padding"></div>
+    <div *ngFor="let list of checkList" class = "check">
+        <div>
+            <mat-checkbox [ngModel]="true" *ngIf="list.status=='close' && list.isDeleted==false">
+            </mat-checkbox>
+            <del *ngIf="list.status=='close' && list.isDeleted==false">{{list.itemName}}</del>
+            
+            <mat-checkbox [ngModel]="false" *ngIf="list.status=='open' && list.isDeleted==false">
+            </mat-checkbox>
+            <span *ngIf="list.status=='open' && list.isDeleted==false">{{list.itemName}}</span>
+            
+            </div>
+          </div>
     <hr>
         <!--****************************Input field to ask a question***********************-->
     <div class = "padding">Question Asked</div>
@@ -82,11 +94,11 @@
        </div> 
        <!--*****************First reply section ***************************-->
        <!--************************First reply input section************************-->
-       <div>
+       <div fxLayout = "column">
           <div *ngIf="replyVal == 1 && replyMessage == null">
-              <input placeholder="Write a reply" [(ngModel)]="reply" 
-               (keydown.enter)="answer(reply)" class = "content" class = "firstInput">
-              <button mat-button color="basic"  class="replies" (click)="answer(reply, array.id)">
+              <div contenteditable="true" data-text ="Write a reply" [textContent]="reply" 
+                class = "content" class = "firstInput" #answerReply></div>
+              <button mat-button color="basic"  class="replies" (click)="answer(array.id)">
                  Reply</button>
             </div>
           </div>
@@ -146,11 +158,11 @@
         <!--************************First reply array ends********************************-->
 
                  <!--**********************Second reply sections input box*******************************-->
-     <div>
+     <div fxLayout = "column">
         <div *ngIf = "replyValDown == value.id && replyMessage == null">
-            <input placeholder = "Write a reply" [(ngModel)] = "replyback"
-               class = "content"  class = "firstInput">
-            <button mat-button color = "basic" (click) = "answer(replyback,value.id)"
+            <div contenteditable="true" data-text =  "Write a reply" [textContent] = "replyback"
+               class = "content"  class = "firstInput" #answerReply></div>
+            <button mat-button color = "basic" (click) = "answer(value.id)"
               class="replies">Reply</button> 
           </div>
       </div>
@@ -207,11 +219,11 @@
           </div>
 <!--**********************Second reply section ends******************************-->
 <!--*******************third reply input section*************************-->
-        <div>
+        <div fxLayout = "column">
           <div *ngIf = "replyValDown1 == value1.id && replyMessage == null">
-              <input placeholder = "Write a reply" [(ngModel)] = "replyback1"
-              class = "content"  class = "firstInput">
-                <button mat-button color = "basic" (click) = "answer(replyback1,value1.id)"
+              <div contenteditable="true" data-text = "Write a reply" [textContent] = "replyback1"
+              class = "content"  class = "firstInput" #answerReply></div>
+                <button mat-button color = "basic" (click) = "answer(value1.id)"
                 class = "replies">
                   Reply</button> 
               </div>

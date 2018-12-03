@@ -15,6 +15,7 @@ export class NewLabelComponent implements OnInit, OnDestroy {
 
   private labelArray = [];
   private labelList;
+  private show = true;
 
   ngOnInit() {
     this.route.params
@@ -34,6 +35,7 @@ export class NewLabelComponent implements OnInit, OnDestroy {
     .subscribe(
         (data) => {
           this.labelArray = data['data'].data;
+          this.show = false;
         },
         error => {
         })

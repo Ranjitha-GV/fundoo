@@ -13,6 +13,7 @@ export class ReminderComponent implements OnInit, OnDestroy {
 
   constructor(public httpService: NotesServiceService) { }
   private reminderArray = [];
+  private show = true;
 
   ngOnInit() {
     this.reminders();
@@ -27,6 +28,7 @@ export class ReminderComponent implements OnInit, OnDestroy {
       this.reminderArray.sort((a: any, b: any) =>
         new Date(a.reminder).getTime() - new Date(b.reminder).getTime()
       );
+      this.show = false;
     },
       error => {
       })

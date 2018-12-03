@@ -17,6 +17,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   private response = [];
   private noteCard : Notes[] = [];
   private noteId = [];
+  private show = true;
   private notePinedCard : Notes[] = [];
   @Input() notedetails;
 
@@ -50,6 +51,7 @@ export class NotesComponent implements OnInit, OnDestroy {
             this.noteCard.push(response[i]);
           }
         }
+        this.show = false;
       },
       error => {
       })
@@ -68,6 +70,7 @@ export class NotesComponent implements OnInit, OnDestroy {
             this.notePinedCard.push(response[i]);
           }
         }
+        this.show = false;
       },
       error => {
       })

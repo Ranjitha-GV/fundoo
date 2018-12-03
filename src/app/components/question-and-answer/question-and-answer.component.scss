@@ -95,7 +95,7 @@
 }
 .firstInput
 {
-    @include widthFull();
+    width: 85%;
     padding: 30px;
     @include boxes();
 }
@@ -120,4 +120,8 @@
 .rating0
 {
     margin-right: 12px;
+}
+.check
+{
+    padding: 10px;
 }
