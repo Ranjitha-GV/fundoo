@@ -94,7 +94,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
         this.array = [];
         this.reminderArray = [];
         this.hide = 0;
-        this.listing = !this.listing;  
+        this.listing = true;  
         this.add = [];
         this.newList = [];
   },
@@ -103,7 +103,7 @@ export class AddnotesComponent implements OnInit, OnDestroy {
         this.reminderArray = [];
         this.array = [];
         this.hide = 0;
-        this.listing = !this.listing;
+        this.listing = true;
         this.add = [];
         this.newList = [];
       })

@@ -25,6 +25,7 @@
     <div *ngIf = "messageOutput == null" class = "padding">
         <input placeholder="Please enter your question" [(ngModel)] = "question" 
           (keydown.enter)="enter(question)" class = "input">
+          <!-- <div [froalaEditor] [(froalaModel)]="question" class = "input" (click)="enter(question)"></div> -->
     </div>
         <!--***************Question is diplayed instead of the input box*******************-->
             <div *ngIf = "messageOutput != null" [innerHTML] = "messageOutput" 
@@ -55,7 +56,7 @@
                     </div>
                     <div fxLayout = "row" (click) = "viewReplies()" *ngIf = "!show"><i class="material-icons cursor"
                       matTooltip = "View">expand_more
-                        </i><div class = "viewReplies">View replies</div>
+                        </i><div class = "viewReplies">View {{array.message.length}} Replies</div>
                       </div>
                 </div>
                   <div class = "question" [innerHTML] = "messageOutput"></div>
@@ -96,9 +97,10 @@
        <!--************************First reply input section************************-->
        <div fxLayout = "column">
           <div *ngIf="replyVal == 1 && replyMessage == null">
-              <div contenteditable="true" data-text ="Write a reply" [textContent]="reply" 
-                class = "content" class = "firstInput" #answerReply></div>
-              <button mat-button color="basic"  class="replies" (click)="answer(array.id)">
+              <!-- <div contenteditable="true" data-text ="Write a reply" [textContent]="reply" 
+                class = "content" class = "firstInput" #answerReply></div> -->
+                <div [froalaEditor] = "set" [(froalaModel)]="reply" class = "content firstInput"></div>
+                <button mat-button color="basic"  class="replies" (click)="answer(reply,array.id)">   
                  Reply</button>
             </div>
           </div>
@@ -160,15 +162,15 @@
                  <!--**********************Second reply sections input box*******************************-->
     <div fxLayout="column">
       <div *ngIf="replyValDown == value.id && replyMessage == null">
-        <div contenteditable="true" data-text="Write a reply" [textContent]="replyback" class="content" 
-        class="firstInput" #answerReply></div>
-        <button mat-button color="basic" (click)="answer(value.id)" class="replies">Reply</button>
+        <!-- <div contenteditable="true" data-text="Write a reply" [textContent]="replyback" class="content" 
+        class="firstInput" #answerReply></div> -->
+        <div [froalaEditor] = "set" [(froalaModel)]="replyback" class = "content firstInput"></div>
+        <button mat-button color="basic" (click)="answer(replyback,value.id)" class="replies">Reply</button>
       </div>
     </div>
     <!----*******************************Second reply section*********************************-->
-    
     <div *ngFor="let value1 of repliesArray" class="secondReply">
-      <div *ngIf='value1.parentId == value.id'>
+      <div *ngIf='value1.parentId == value.id && value1.isApproved'>
         <div fxLayout="column">
           <div fxLayout="row">
             <!--*********************Profile picture of second reply section************************-->
@@ -219,16 +221,17 @@
 <!--*******************third reply input section*************************-->
         <div fxLayout = "column">
           <div *ngIf = "replyValDown1 == value1.id && replyMessage == null">
-              <div contenteditable="true" data-text = "Write a reply" [textContent] = "replyback1"
-              class = "content"  class = "firstInput" #answerReply></div>
-                <button mat-button color = "basic" (click) = "answer(value1.id)"
-                class = "replies">
+              <!-- <div contenteditable="true" data-text = "Write a reply" [textContent] = "replyback1"
+              class = "content"  class = "firstInput" #answerReply></div> -->
+              <div [froalaEditor] = "set" [(froalaModel)]="replyback1" class = "content firstInput"></div>
+                <button mat-button color = "basic" (click) = "answer(replyback1,value1.id)"
+                class = "replies">     
                   Reply</button> 
               </div>
         </div>
 <!--**********************Thirsd reply array section*********************************-->
       <div *ngFor = "let value2 of repliesArray" class = "thirdReply">
-        <div *ngIf='value2.parentId == value1.id'>
+        <div *ngIf='value2.parentId == value1.id && value2.isApproved'>
           <div fxLayout = "column">
             <div fxLayout = "row">
               <button *ngIf = "img == ''" mat-mini-fab color="disabled" (click) = "toggle()">
@@ -265,7 +268,7 @@
                     </bar-rating>
                   </div>
                   <div class = "rating0">{{averageRating(value2.rate)}}</div>
-</div>
+              </div>
             </div>
           </div>
         </div>

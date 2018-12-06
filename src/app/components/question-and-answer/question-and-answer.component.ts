@@ -37,6 +37,7 @@ export class QuestionAndAnswerComponent implements OnInit {
   private rateArray;
   private avgRating;
   private showing = 1;
+  private replyCount;
   private show = false;
   private firstname = localStorage.getItem('firstname');
   private lastname = localStorage.getItem('lastname');
@@ -48,6 +49,7 @@ export class QuestionAndAnswerComponent implements OnInit {
 
   ngOnInit() {
     this.getNoteDetails();
+
   }
   /**Hitting API to get notedetails */
   getNoteDetails() {
@@ -67,6 +69,7 @@ export class QuestionAndAnswerComponent implements OnInit {
         this.userId = this.response.userId;
         this.id = this.response.id;
         this.img = environment.apiUrl;
+        console.log('id parent',this.response.questionAndAnswerNotes.length);
         if (this.response.questionAndAnswerNotes[0].length != 0) {
           this.messageOutput = this.response.questionAndAnswerNotes[0].message;
           this.repliesArray = this.response.questionAndAnswerNotes;
@@ -120,8 +123,7 @@ export class QuestionAndAnswerComponent implements OnInit {
         })
   }
   /**Hitting API to reply */
-  answer(id) {
-    let reply = this.answerReply.nativeElement.innerHTML;
+  answer(reply,id) {
     this.newHttpService.addAnswer(id,
       {
         'message': reply,
@@ -130,6 +132,8 @@ export class QuestionAndAnswerComponent implements OnInit {
       .subscribe((data) => {
         this.replyMessage = data['data']['details'].message;
         this.getNoteDetails();
+        this.replyVal = 0;
+
       },
         error => {
         })
@@ -174,6 +178,22 @@ export class QuestionAndAnswerComponent implements OnInit {
   close() {
     this.router.navigate(['/home/notes']);
   }
+  
+  /**Hide froala edit options */
+  
+    public set: Object = {
+      charCounterCount: false,
+      toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat','alert', 'fullscreen',
+      'fontSize','align', 'insertOrderedList','insertUnorderedList','undo', 'redo','createLink'],
+      toolbarButtonsXS: ['bold', 'italic', 'underline', 'paragraphFormat','alert','fullscreen',
+      'fontSize','align','insertOrderedList','insertUnorderedList','undo', 'redo','createLink'],
+      toolbarButtonsSM: ['bold', 'italic', 'underline', 'paragraphFormat','alert', 'fullscreen',
+      'fontSize','align','insertOrderedList','insertUnorderedList','undo', 'redo','createLink'],
+      toolbarButtonsMD: ['bold', 'italic', 'underline', 'paragraphFormat','alert', 'fullscreen',
+      'fontSize','align','insertOrderedList','insertUnorderedList','undo', 'redo','createLink'],
+    };
+  
+  
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

@@ -53,6 +53,8 @@ import { CollaberatorComponent } from './components/collaberator/collaberator.co
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
 import { QuestionAndAnswerService } from './core/services/questionAndAnswer/question-and-answer.service';
 import { BarRatingModule } from "ngx-bar-rating";
+import { EditorComponent } from './components/editor/editor.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     PinComponent,
     CollaberatorComponent,
     QuestionAndAnswerComponent,
+    EditorComponent,
   ],
   imports: [
 
@@ -117,7 +120,9 @@ import { BarRatingModule } from "ngx-bar-rating";
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    BarRatingModule
+    BarRatingModule,
+    FroalaEditorModule,
+    FroalaViewModule
   ],
   providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
     NotesServiceService, QuestionAndAnswerService, InterceptService,{ provide: HTTP_INTERCEPTORS,
