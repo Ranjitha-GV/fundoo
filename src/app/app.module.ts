@@ -55,6 +55,7 @@ import { QuestionAndAnswerService } from './core/services/questionAndAnswer/ques
 import { BarRatingModule } from "ngx-bar-rating";
 import { EditorComponent } from './components/editor/editor.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     CollaberatorComponent,
     QuestionAndAnswerComponent,
     EditorComponent,
+    ProductCartComponent,
   ],
   imports: [
 

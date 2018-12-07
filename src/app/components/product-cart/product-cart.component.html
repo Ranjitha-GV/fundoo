@@ -1,0 +1,35 @@
+<div fxLayout="column" class = "container" ngStyle.xs = "height : auto">
+  <div class="cart">
+    <div class="heading">fundooNotes</div>
+  </div>
+  <div class="question" fxLayoutAlign="center">Which fundooNotes service package do you want?</div>
+  <div fxLayout = "column" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 10 fxFlex.lg = 10 fxFlex.xl = 15></div>
+  <div fxLayout = "row" fxLayoutAlign="center" fxLayout.xs = "column" fxFlex.xs = 100 fxFlex.sm = 100 fxFlex.md = 80 
+  fxFlex.lg = 80 fxFlex.xl = 70>
+  <div *ngFor = "let card of cards">
+    <mat-card class="firstCard" ngStyle.xs = "margin-left: 62px;" (click) = "selectCards(card)" 
+    [ngClass]="card.firstCard ? 'firstCard' : 'firstCard1'">
+      <div class="firstText" style="margin-top: 254px" >
+        ADD TO CART
+      </div>
+      <div>
+        <mat-card class="secondCard" (click) = "selectCardsTwo(card)" 
+           [ngClass] = "card.secondCard ? 'secondCard' : 'secondCard1'">
+           <div class = "price">$ {{card.price}} per Month</div>
+         <div class = "name"> {{card.name | titlecase:0:1}} </div>
+         <ul class = "list">
+           <li>Unlimited Wall Space</li>
+           <li>Nice Interface</li>
+           <li>$ {{card.price}} per Month</li>
+         <li>{{card.description | titlecase:0:1}}</li>
+         </ul>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+
+<div fxFlex = 8></div>
+
+  </div>
+  <div fxLayout = "column" fxFlex.xs = 0 fxFlex.sm = 0 fxFlex.md = 10 fxFlex.lg = 10 fxFlex.xl = 15></div>
+</div>

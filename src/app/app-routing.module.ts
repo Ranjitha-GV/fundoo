@@ -16,17 +16,19 @@ import { LabelComponent } from './components/label/label.component';
 import { NewLabelComponent } from './components/new-label/new-label.component';
 import { SearchComponent } from './components/search/search.component';
 import { QuestionAndAnswerComponent } from './components/question-and-answer/question-and-answer.component';
+import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/productCart', pathMatch: 'full' },
 
   { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'resetpassword/:forgotToken', component: ResetComponent },
+  { path: 'productCart', component: ProductCartComponent },
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard],
     children: [
