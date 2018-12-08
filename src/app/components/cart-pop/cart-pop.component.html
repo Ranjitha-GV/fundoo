@@ -1,0 +1,16 @@
+<div>
+<div class = "name">{{data.name | titlecase:0:1}} Pack Detials</div>
+<span><div class = "price">$ {{data.price}}/ Month</div></span>
+<div>
+<mat-tab-group class = "first">
+  <mat-tab label="Feature 1" class = "content">Coffee is darkly colored, bitter, slightly acidic.</mat-tab>
+  <mat-tab label="Feature 2" class = "content">Coffee is darkly colored, bitter, slightly acidic.</mat-tab>
+  <mat-tab label="Feature 3" class = "content">Coffee is darkly colored, bitter, slightly acidic.</mat-tab>
+</mat-tab-group> 
+</div>
+<div fxLayout = "row" fxLayoutAlign = "space-between" fxLayout.xs = "column">
+<button mat-raised-button color = "primary" class = "button1" ngStyle.xs = "width:0px;">Remove</button>
+<button mat-raised-button color = "primary" class = "button2" ngStyle.xs = "margin: 16px 15px 10px 18px;" 
+   (click) = "proceedToCart()">Proceed To Checkout</button>
+</div>
+</div>

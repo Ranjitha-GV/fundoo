@@ -1,0 +1,30 @@
+@import '../../../scss/mixins.scss';
+@import '../../../scss/variables.scss';
+
+.name
+{
+    background-color: $fundooToolBar;
+    padding: 13px;
+}
+.price
+{
+    @include floatsRight();
+    font-size: 12px;
+    margin: -29px 10px 0px 0px;
+}
+.first
+{
+    padding: 10px;
+}
+.button1
+{
+    margin: 16px 0px 10px 17px;
+}
+.button2
+{
+    margin: 16px 15px 10px 0px;
+    width: 180px;
+}
+.content{
+    padding: 10px;
+}

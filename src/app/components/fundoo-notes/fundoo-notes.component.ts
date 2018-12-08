@@ -212,6 +212,11 @@ nameChange(names)
   {
      this.flag = label;
   }
+  /**shopping cart */
+  cart()
+  {
+    
+  }
   ngOnDestroy() {
     this.destroy$.next(true);
     // Now let's also unsubscribe from the subject itself:

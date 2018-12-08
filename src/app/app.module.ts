@@ -56,6 +56,10 @@ import { BarRatingModule } from "ngx-bar-rating";
 import { EditorComponent } from './components/editor/editor.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ProductCartComponent } from './components/product-cart/product-cart.component';
+import { CartPopComponent } from './components/cart-pop/cart-pop.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { CartService } from './core/services/cart/cart.service';
+
 
 @NgModule({
   declarations: [
@@ -92,6 +96,7 @@ import { ProductCartComponent } from './components/product-cart/product-cart.com
     QuestionAndAnswerComponent,
     EditorComponent,
     ProductCartComponent,
+    CartPopComponent,
   ],
   imports: [
 
@@ -124,16 +129,18 @@ import { ProductCartComponent } from './components/product-cart/product-cart.com
     MatSelectModule,
     BarRatingModule,
     FroalaEditorModule,
-    FroalaViewModule
+    FroalaViewModule,
+    MatTabsModule
+
   ],
-  providers: [HttpService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
+  providers: [HttpService, CartService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
     NotesServiceService, QuestionAndAnswerService, InterceptService,{ provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
       multi: true }, {
         provide: ErrorHandler,
         useClass: ErrorsHandler,
       }],
-  entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, 
+  entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, CartPopComponent,
   LabelpopComponent, DeletePopComponent, CollaberatorComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
