@@ -15,6 +15,12 @@ export class CartService {
   addToCart(body)
   {
     let url = this.baseUrl + 'productcarts/addToCart';
-    return this.http.postArchive(url, body);
+    return this.http.postArchive(url, body); //getNotes
+  }
+
+  getCartDetails(cartId)
+  {
+    let url = this.baseUrl + 'productcarts/getCartDetails/'+ cartId;
+    return this.http.getNotes(url);
   }
 }

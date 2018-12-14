@@ -48,12 +48,34 @@
       a mix of letters, numbers & symbols</div>
       <p><b><i>Packages</i></b></p>
       <div class="card2" fxLayout="row" fxLayoutAlign="space-between" fxLayout="row-wrap">
-        <span *ngFor="let card of cards" class = "cardPadding" fxLayout.xs = "column">
+        <!-- <span *ngFor="let card of cards" class = "cardPadding" fxLayout.xs = "column">
           <mat-card (click)="selectCards(card)" [ngClass]="card.select ? 'select' : 'notSelect'">
             <header class="header"><strong><i>{{card.name}}</i></strong></header> <br>
             <i>{{card.description}}</i>
           </mat-card>
-        </span>
+        </span> -->
+        <div *ngFor = "let card of cards">
+          <mat-card class="firstCard" ngStyle.xs = "margin-left: 62px;" (click) = "selectCards(card)" (dblclick)="openDialog(card)"
+          [ngClass]="card.firstCard ? 'firstCard' : 'firstCard1'">
+            <div style="margin-top: 254px" (click) = "openDialog(card)">
+              <!-- ADD TO CART -->
+            </div>
+            <div>
+              <mat-card class="secondCard" (click) = "selectCardsTwo(card)"
+                 [ngClass] = "card.secondCard ? 'secondCard' : 'secondCard1'">
+                 <div class = "price">$ {{card.price}} per Month</div>
+               <div class = "name"> {{card.name | titlecase:0:1}} </div>
+               <ul class = "list">
+                 <li>Unlimited Wall Space</li>
+                 <li>Nice Interface</li>
+                 <li>$ {{card.price}} per Month</li>
+                 <li>{{card.description | titlecase:0:1}}</li>
+               </ul>
+              </mat-card>
+            </div>
+          </mat-card>
+        </div>
+
       </div><br>
       <a href="/login">Sign in</a>
       <button mat-raised-button class="nextButton" color="primary" (click)="next()">

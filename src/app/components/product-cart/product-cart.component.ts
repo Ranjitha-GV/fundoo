@@ -44,7 +44,8 @@ export class ProductCartComponent implements OnInit {
       })
   }
 
-  selectCards(card) {
+  selectCards(card) 
+  {
     this.service = card.name;
     card.firstCard = false;
     for (var i = 0; i < this.cards.length; i++) {

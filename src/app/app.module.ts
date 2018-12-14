@@ -6,10 +6,12 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule, 
-MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule, MatExpansionModule,
-MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, 
-MatNativeDateModule, MatSelectModule } from '@angular/material';
+import {
+  MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule,
+  MatSnackBarModule, MatToolbarModule, MatSidenavModule, MatListModule, MatMenuModule, MatExpansionModule,
+  MatTooltipModule, MatDialogModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
+  MatNativeDateModule, MatSelectModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpService } from './core/services/http/http.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -57,7 +59,7 @@ import { EditorComponent } from './components/editor/editor.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ProductCartComponent } from './components/product-cart/product-cart.component';
 import { CartPopComponent } from './components/cart-pop/cart-pop.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CartService } from './core/services/cart/cart.service';
 
 
@@ -134,14 +136,16 @@ import { CartService } from './core/services/cart/cart.service';
 
   ],
   providers: [HttpService, CartService, AuthService, AuthGuard, LoggerService, MessagingService, UsersService,
-    NotesServiceService, QuestionAndAnswerService, InterceptService,{ provide: HTTP_INTERCEPTORS,
+    NotesServiceService, QuestionAndAnswerService, InterceptService, {
+      provide: HTTP_INTERCEPTORS,
       useClass: InterceptService,
-      multi: true }, {
-        provide: ErrorHandler,
-        useClass: ErrorsHandler,
-      }],
+      multi: true
+    }, {
+      provide: ErrorHandler,
+      useClass: ErrorsHandler,
+    }],
   entryComponents: [UpdateComponent, CropImageComponent, PopOverComponent, CartPopComponent,
-  LabelpopComponent, DeletePopComponent, CollaberatorComponent],
+    LabelpopComponent, DeletePopComponent, CollaberatorComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

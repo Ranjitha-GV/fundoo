@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from '../../core/services/users/users.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CartService } from 'src/app/core/services/cart/cart.service';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
 
 
 
@@ -82,12 +84,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   }
 
-  constructor(public router: Router, public myHttpService: UsersService, public snackBar:
+  constructor(public router: Router, public cartHttpService : CartService, public myHttpService: UsersService, public snackBar:
     MatSnackBar) { }
 
   ngOnInit() {
     this.users();
-   
+    this. cartDetails();
   }
 /**Hitting API to Add basic or advance service */
   users()
@@ -158,6 +160,22 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       }
       this.cards[i].select = false;
     }
+  }
+  /**Hitting API to get cart details */
+  cartDetails()
+  {
+    let cartId = localStorage.getItem('cartId');
+    console.log(cartId);
+    
+    this.cartHttpService.getCartDetails(cartId)
+    .subscribe((data)=>
+    {
+      LoggerService.log('cart details', data)
+    },
+    error=>
+    {
+      LoggerService.log(error);
+    })
   }
 
   ngOnDestroy() {

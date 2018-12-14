@@ -33,7 +33,8 @@ export class CartPopComponent implements OnInit {
       })
       .subscribe((data)=>
       {
-        LoggerService.log('added to cart', data);
+        LoggerService.log('added to cart', data);        
+        localStorage.setItem('cartId',data['data']['details'].id);
         this.router.navigate(['/registration']);
         this.dialogRef.close();
       },
